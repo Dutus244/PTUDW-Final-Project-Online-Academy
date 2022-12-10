@@ -53,6 +53,7 @@ CREATE TABLE courses (
     LecID varchar(36) NOT NULL,
     FOREIGN KEY (CatID) REFERENCES categories(CatID),
     FOREIGN KEY (LecID) REFERENCES lecturers(LecID),
+    FULLTEXT (CourseName,TinyDes,FullDes),
     PRIMARY KEY(CourseID)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
