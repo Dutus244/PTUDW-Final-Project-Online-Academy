@@ -1,4 +1,10 @@
 BEGIN;
+CREATE DATABASE ptudw_finalproject_onlineacademy;
+
+BEGIN;
+USE ptudw_finalproject_onlineacademy;
+
+BEGIN;
 DROP TABLE IF EXISTS categories;
 CREATE TABLE categories (
 	CatID varchar(36) NOT NULL,
@@ -42,14 +48,25 @@ CREATE TABLE courses (
 )ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 BEGIN;
-DROP TABLE IF EXISTS coursecontent;
-CREATE TABLE coursecontent (
+DROP TABLE IF EXISTS coursechapter;
+CREATE TABLE coursechapter (
 	CourseID varchar(36) NOT NULL,
-    Chapter nvarchar(100) COLLATE utf8_general_ci NOT NULL,
-    Preview bool,
-    Content text COLLATE utf8_general_ci,
+    ChapterID varchar(36) NOT NULL,
+    ChapterName nvarchar(100) COLLATE utf8_general_ci NOT NULL,
     FOREIGN KEY (CourseID) REFERENCES courses(CourseID),
-    PRIMARY KEY(CourseID, Chapter)
+    PRIMARY KEY(CourseID,ChapterID)
+)ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+BEGIN;
+DROP TABLE IF EXISTS chaptercontent;
+CREATE TABLE chaptercontent (
+	CourseID varchar(36) NOT NULL,
+    ChapterID varchar(36) NOT NULL,
+    ContentID varchar(36) NOT NULL,
+    Content text COLLATE utf8_general_ci NOT NULL,
+    UpdateTime datetime,
+    FOREIGN KEY (CourseID,ChapterID) REFERENCES coursechapter(CourseID,ChapterID),
+    PRIMARY KEY(CourseID, ChapterID,ContentID)
 )ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 BEGIN;
@@ -117,8 +134,12 @@ INSERT INTO courses values ('1c5ea4c0-4067-11e9-8bad-9b1deb4d3b7d','Lập trình
 INSERT INTO courses values ('2c5ea4c0-4067-11e9-8bad-9b1deb4d3b7d','Lập trình back end với Java','210b962e-041c-11e1-9234-0123456789ab','','','',0,0,0,1000000,999999,'',NULL,'2ec0bd7f-11c0-43da-975e-2a8ad9ebae0b');
 
 BEGIN;
-INSERT INTO coursecontent values ('1c5ea4c0-4067-11e9-8bad-9b1deb4d3b7d', 'Mở đầu về HTML',true,'');
-INSERT INTO coursecontent values ('2c5ea4c0-4067-11e9-8bad-9b1deb4d3b7d', 'Cách sử dụng tag',false,'');
+INSERT INTO coursechapter values ('1c5ea4c0-4067-11e9-8bad-9b1deb4d3b7d','12345678-4067-11e9-8bad-9b1deb4d3b7d','Mở đầu về HTML');
+INSERT INTO coursechapter values ('2c5ea4c0-4067-11e9-8bad-9b1deb4d3b7d','22345678-4067-11e9-8bad-9b1deb4d3b7d','Cách sử dụng tag');
+
+BEGIN;
+INSERT INTO chaptercontent values ('1c5ea4c0-4067-11e9-8bad-9b1deb4d3b7d','12345678-4067-11e9-8bad-9b1deb4d3b7d','12345678-c85f-11ea-87d0-0242ac130003','Bài 1',NULL);
+INSERT INTO chaptercontent values ('1c5ea4c0-4067-11e9-8bad-9b1deb4d3b7d','12345678-4067-11e9-8bad-9b1deb4d3b7d','22345678-c85f-11ea-87d0-0242ac130003','Bài 2',NULL);
 
 BEGIN;
 INSERT INTO students values ('15637ec4-c85f-11ea-87d0-0242ac130003', 'Trương Samuel','20127610@student.hcmus.edu.vn','$2y$10$VDZAxMaIgFZK1IHus9tC9eAJjsNF6Wr9U3cArbbHr6el64/RyuQka');
