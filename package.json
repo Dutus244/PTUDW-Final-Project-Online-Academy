@@ -1,0 +1,32 @@
+{
+  "name": "app",
+  "version": "1.0.0",
+  "description": "\"# PTUDW-Final-Project-Online-Academy\"",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Dutus244/PTUDW-Final-Project-Online-Academy.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Dutus244/PTUDW-Final-Project-Online-Academy/issues"
+  },
+  "homepage": "https://github.com/Dutus244/PTUDW-Final-Project-Online-Academy#readme",
+
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "express": "^4.18.2",
+    "express-handlebars": "^6.0.6",
+    "express-handlebars-sections": "^1.0.1",
+    "knex": "^2.3.0",
+    "moment": "^2.29.4",
+    "mysql2": "^2.3.3",
+    "numeral": "^2.0.6"
+  }
+}
