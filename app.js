@@ -1,33 +1,25 @@
 import express from 'express';
-import { engine } from 'express-handlebars';
-import hbs_sections from 'express-handlebars-sections';
+
+import activate_session from './middlewares/session.mdw.js';
+import activate_views from './middlewares/view.mdw.js';
+import activate_resLocals from './middlewares/locals.mdw.js';
+import activate_routes from './middlewares/routes.mdw.js';
+import activate_error_handlers from './middlewares/error.mdw.js';
 
 const app = express();
 app.use('/public', express.static('public'));
-
 // cho sử dụng req.body khi dùng POST
 app.use(express.urlencoded({
   extended: true
 }));
 
-app.engine('hbs', engine({
-  extname: 'hbs',
-  helpers: {
-    section: hbs_sections(),
-  }
-}));
-app.set('view engine', 'hbs');
-app.set('views', './views');
-
-app.get('/', function (req, res) {
-  res.render('home');
-})
-
-app.get('/category', function(req,res){
-  res.render('vwCategory/category');
-})
+activate_session(app);
+activate_views(app);
+activate_resLocals(app);
+activate_routes(app);
+activate_error_handlers(app);
 
 const PORT = 3000;
-app.listen(PORT, function () {
-  console.log(`http://localhost:${PORT}`);
+app.listen(process.env.PORT, function () {
+  console.log(`http://localhost:${process.env.PORT}`);
 });
