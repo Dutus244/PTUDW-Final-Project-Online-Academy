@@ -12,7 +12,6 @@ app.use(express.urlencoded({
 
 app.engine('hbs', engine({
   extname: 'hbs',
-  defaultLayout: 'bs4',
   helpers: {
     section: hbs_sections(),
   }
@@ -21,7 +20,11 @@ app.set('view engine', 'hbs');
 app.set('views', './views');
 
 app.get('/', function (req, res) {
-    res.send('test')
+  res.render('home');
+})
+
+app.get('/category', function(req,res){
+  res.render('vwCategory/category');
 })
 
 const PORT = 3000;
