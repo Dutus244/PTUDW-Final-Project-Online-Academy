@@ -19,7 +19,6 @@ activate_resLocals(app);
 activate_routes(app);
 activate_error_handlers(app);
 
-const PORT = 3000;
 app.listen(process.env.PORT, function () {
   console.log(`http://localhost:${process.env.PORT}`);
 });
