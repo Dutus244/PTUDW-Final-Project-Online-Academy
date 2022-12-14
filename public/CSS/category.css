@@ -1,0 +1,12 @@
+.card {
+    border-color: rgb(254, 106, 129)
+}
+
+.page-item.active > .page-link {
+    background-color: rgb(254, 106, 129); 
+    border-color: rgb(254, 106, 129)
+}
+
+.page-link:hover {
+    color: rgb(254, 106, 129)
+}
