@@ -1,12 +1,13 @@
 {{#section 'js'}}
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twbs-pagination/1.4.2/jquery.twbsPagination.min.js"></script>
 <script>
   const curPage = +$('#curPage').text()
   if (curPage === 1) {
     $('#prev').addClass('disabled')
+    $('#first').addClass('disabled')
   }
   if (curPage === {{{totalPages}}}) {
     $('#next').addClass('disabled')
+    $('#last').addClass('disabled')
   }
 </script>
 {{/section}}
@@ -23,9 +24,9 @@
           <li class="list-group-item">A second item</li>
           <li class="list-group-item">A third item</li>
         </ul>
-      </div> --}}
+      </div>
 
-      {{!-- <div class="card mt-3">
+      <div class="card mt-3">
         <h4 class="card-header">
           Featured
         </h4>
@@ -34,13 +35,21 @@
           <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
           <a href="#" class="btn btn-primary">Go somewhere</a>
         </div>
-      </div> --}}
-
-    </div>
+      </div>
+    </div> --}}
+    
     <div class="col-sm-12">
+      {{#if this.catName}}
       <p class="h1">{{this.catName}}</p>
+      {{else}}
+      <p class="h1">All</p>
+      {{/if}}
+      
+      {{#if this.empty}}
+      <h5>Không có dữ liệu</h5>
+      {{else}}
       <div class="card-body">
-        <div class="row">
+        <div class="row pb-5">
           {{#each this.courses}}
           <div class="col-sm-4 mb-4">
             <div class="card h-100">
@@ -62,14 +71,18 @@
           </div>
           {{/each}}
       </div>
+      {{/if}}
 
       <nav>
         <ul class="pagination pagination-lg" id="pagination" style="justify-content: center;">
+          <li class="page-item" id="first">
+            <a class="page-link" href="?page=1">First</a>
+          </li>
           <li class="page-item" id="prev">
             <a class="page-link" href="?page={{this.prevPage}}">Previous</a>
           </li>
 
-          {{#each this.pageNumbers}}
+          {{#each this.pages}}
             {{#if isCurrent}}
             <li class="page-item active" id="curPage">
               <a class="page-link" href="#">{{value}}</a>
@@ -81,6 +94,9 @@
 
           <li class="page-item" id="next">
             <a class="page-link" href="?page={{this.nextPage}}">Next</a>
+          </li>
+          <li class="page-item" id="last">
+            <a class="page-link" href="?page={{this.totalPages}}">Last</a>
           </li>
         </ul>
       </nav>

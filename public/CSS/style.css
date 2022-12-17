@@ -75,7 +75,7 @@ header{
 
 #navbarNav.collapse.navbar-collapse .navbar-nav li{
     background: pink;
-    padding-left: 5rem;
+    padding-left: 4rem;
 }
 
 .navbar a{
@@ -128,3 +128,10 @@ h1{
     font-size: 100px;
     letter-spacing: 5px;
 }
+
+.dropdown:hover .dropdown-menu {
+    display: block;
+    margin-top: 0;
+    padding: 0;
+ }
+
