@@ -20,6 +20,16 @@ export default {
         return list[0].amount
     },
 
+    async countByCatLevel(catlevel) {
+        const list = await db
+            .count({amount: 'courseid'})
+            .from('courses')
+            .join('categories', 'courses.catid', 'categories.catid')
+            .where('catlevel', '=', catlevel)
+            
+        return list[0].amount
+    },
+
     async findPageByAll(offset, limit) {
         const list = await db
             .select('courses.catid', 'coursename', 'lecname', 'rating', 'tuition', 'discount')
@@ -39,6 +49,19 @@ export default {
             .join('categories', 'courses.catid', 'categories.catid')
             .join('lecturers', 'courses.lecid', 'lecturers.lecid')
             .where('catname', '=', name)
+            .offset(offset)
+            .limit(limit)
+            
+        return list
+    },
+
+    async findPageByCatLevel(catlevel, offset, limit) {
+        const list = await db
+            .select('courses.catid', 'coursename', 'lecname', 'rating', 'tuition', 'discount')
+            .from('courses')
+            .join('categories', 'courses.catid', 'categories.catid')
+            .join('lecturers', 'courses.lecid', 'lecturers.lecid')
+            .where('catlevel', '=', catlevel)
             .offset(offset)
             .limit(limit)
             

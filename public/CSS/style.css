@@ -129,9 +129,16 @@ h1{
     letter-spacing: 5px;
 }
 
-.dropdown:hover .dropdown-menu {
+.dropdown:hover>.dropdown-menu {
     display: block;
     margin-top: 0;
     padding: 0;
  }
+
+.dropright:hover>.dropdown-menu {
+    display: block;
+    margin-top: 0;
+    padding: 0;
+}
+
 
