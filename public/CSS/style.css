@@ -129,7 +129,7 @@ h1{
     letter-spacing: 5px;
 }
 
-.dropdown:hover .dropdown-menu {
+.dropdown:hover>.dropdown-menu {
     display: block;
     margin-top: 0;
     padding: 0;
@@ -164,6 +164,13 @@ h1{
     width: 200px;
     height: 37px;
 }
+.dropright:hover>.dropdown-menu {
+    display: block;
+    margin-top: 0;
+    padding: 0;
+}
+
+
 
 .btnAdd:hover {
     border-color: pink;

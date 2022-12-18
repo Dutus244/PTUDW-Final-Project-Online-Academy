@@ -33,13 +33,21 @@
           <a class="nav-link" href="#">Pricing</a>
         </li> --}}
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown" href="#" id="navbarDropdown" 
+          <a class="nav-link dropdown" href="/course/byCat" id="navbarDropdown" 
             aria-haspopup="true" aria-expanded="false">
             Categories
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="#">Action</a>
-            <a class="dropdown-item" href="#">Another action</a>
+            {{#each lcCategories}}
+            <div class="dropright">
+              <a class="dropdown-item" href="/course/catLevel/{{@key}}">{{@key}} &raquo;</a>
+              <div class="dropdown-menu">
+                {{#each this}}
+                <a class="dropdown-item" href="/course/byCat/{{this}}">{{@this}}</a>
+                {{/each}}
+              </div>
+            </div>
+            {{/each}}
           </div>
         </li>
       </ul>
