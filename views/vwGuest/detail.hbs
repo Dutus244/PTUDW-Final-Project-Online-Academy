@@ -1,0 +1,20 @@
+<div class="card">
+  <h4 class="card-header">
+    {{this.courses.coursename}}
+  </h4>
+  <div class="card-body">
+    <img src="#">
+    <p class="card-text">
+      Học phí: <span class="text-danger font-weight-bold">{{format_number this.courses.tuition}}</span>
+    </p>
+    <p class="card-text">
+      Học viên: {{this.courses.students}}
+    </p>
+    <p class="card-text">
+      {{{this.product.FullDes}}}
+    </p>
+  </div>
+  <div class="card-footer text-muted">
+    Footer
+  </div>
+</div>

@@ -67,4 +67,14 @@ export default {
             
         return list
     },
+
+    async findById(id) {
+        const list = await db
+            .select('courses').where('courseid', id);
+        if (list.length === 0) {
+          return null;
+        }
+    
+        return list[0];
+      },
 }
