@@ -16,7 +16,6 @@ export default {
             .from('courses')
             .join('categories', 'courses.catid', 'categories.catid')
             .where('catname', '=', name)
-            
         return list[0].amount
     },
 

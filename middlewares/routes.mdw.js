@@ -8,4 +8,6 @@ export default function (app) {
 
   app.use('/category', categoryRoute)
   app.use('/course', courseRoute)
+
+  app.use('/admin/categories',categoryRoute)
 }

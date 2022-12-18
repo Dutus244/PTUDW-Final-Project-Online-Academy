@@ -1,0 +1,31 @@
+<form method="post">
+    <div class="card">
+        <h4 class="card-header">
+            New Category
+        </h4>
+        <div class="card-body">
+            <div class="form-group">
+                <label for="txtCatName">Category Name</label>
+                <input name="catname" type="text" class="form-control" id="txtCatName" autofocus placeholder="Front end">
+
+                <br>
+
+                <label for="txtCatLevel">Category Level</label>
+                <select name = "catlevel" class="form-control" id="txtCatLevel">
+                    <option value = "Lập trình Web" selected>Lập trình Web</option>
+                    <option value = "Lập trình thiết bị di động">Lập trình thiết bị di động</option>
+                </select>
+            </div>
+        </div>
+        <div class="card-footer text-muted">
+            <a class="btn btn-outline-success btnAdd" href="/admin/categories" role="button">
+                <i class="fa fa-backward" aria-hidden="true"></i>
+                Return to List
+            </a>
+            <button type="submit" class="btn btn-primary btnAdd">
+                <i class="fa fa-check" aria-hidden="true"></i>
+                Add new category
+            </button>
+        </div>
+    </div>
+</form>
