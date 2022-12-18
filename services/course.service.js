@@ -31,7 +31,7 @@ export default {
 
     async findPageByAll(offset, limit) {
         const list = await db
-            .select('courses.catid', 'coursename', 'lecname', 'rating', 'tuition', 'discount')
+            .select('courses.catid', 'coursename', 'lecname', 'rating', 'tuition', 'discount', 'courseid')
             .from('courses')
             .join('categories', 'courses.catid', 'categories.catid')
             .join('lecturers', 'courses.lecid', 'lecturers.lecid')
@@ -43,7 +43,7 @@ export default {
 
     async findPageByName(name, offset, limit) {
         const list = await db
-            .select('courses.catid', 'coursename', 'lecname', 'rating', 'tuition', 'discount')
+            .select('courses.catid', 'coursename', 'lecname', 'rating', 'tuition', 'discount', 'courseid')
             .from('courses')
             .join('categories', 'courses.catid', 'categories.catid')
             .join('lecturers', 'courses.lecid', 'lecturers.lecid')
@@ -56,7 +56,7 @@ export default {
 
     async findPageByCatLevel(catlevel, offset, limit) {
         const list = await db
-            .select('courses.catid', 'coursename', 'lecname', 'rating', 'tuition', 'discount')
+            .select('courses.catid', 'coursename', 'lecname', 'rating', 'tuition', 'discount', 'courseid')
             .from('courses')
             .join('categories', 'courses.catid', 'categories.catid')
             .join('lecturers', 'courses.lecid', 'lecturers.lecid')
@@ -68,12 +68,14 @@ export default {
     },
 
     async findById(id) {
-        const list = await db
-            .select('courses').where('courseid', id);
+        const list = await db.
+            select('courseavatar', 'coursename', 'tinydes', 'fulldes', 'lecname', 'rating', 'tuition', 'discount', 'reviews', 'updatetime')
+            .from('courses')
+            .join('lecturers', 'courses.lecid', 'lecturers.lecid')
+            .where('courseid', id);
         if (list.length === 0) {
           return null;
         }
-    
         return list[0];
       },
 }

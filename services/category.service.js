@@ -1,6 +1,17 @@
 import db from '../utils/db.js';
 
 export default {
+    async findAllForMenu() {
+        const categories = await db('categories')
+        var list = {}
+        for (const i in categories) {
+            if (!list[categories[i].CatLevel])
+                list[categories[i].CatLevel] = []
+            list[categories[i].CatLevel].push(categories[i].CatName)
+        }
+        return list
+    },
+
     async findAll() {
         const list = await db
             .select('categories.catid','catname','catlevel')

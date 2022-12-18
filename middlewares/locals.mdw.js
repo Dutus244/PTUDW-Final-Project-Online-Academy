@@ -10,8 +10,8 @@ export default function (app) {
   });
 
   app.use(async function (req, res, next) {
-    res.locals.lcCategories = await categoryService.findAll();
-    //console.log(res.locals.lcCategories);
+    res.locals.lcCategories = await categoryService.findAllForMenu();
+    // console.log(res.locals.lcCategories);
     next();
   });
 }
