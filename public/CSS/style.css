@@ -164,6 +164,12 @@ h1{
     width: 200px;
     height: 37px;
 }
+
+.btnAdd:hover {
+    border-color: pink;
+    background-color: pink;
+}
+
 .dropright:hover>.dropdown-menu {
     display: block;
     margin-top: 0;
@@ -172,7 +178,3 @@ h1{
 
 
 
-.btnAdd:hover {
-    border-color: pink;
-    background-color: pink;
-}
