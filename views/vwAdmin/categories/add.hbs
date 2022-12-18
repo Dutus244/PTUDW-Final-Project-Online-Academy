@@ -1,12 +1,16 @@
+{{#section 'css'}}
+    <link rel="stylesheet" href="/public/CSS/styleAdmin.css">
+{{/section}}
+
 <form method="post">
     <div class="card">
         <h4 class="card-header">
-            New Category
+            Add New Category
         </h4>
         <div class="card-body">
             <div class="form-group">
                 <label for="txtCatName">Category Name</label>
-                <input name="catname" type="text" class="form-control" id="txtCatName" autofocus placeholder="Front end">
+                <input name="catname" type="text" class="form-control" id="txtCatName" autofocus placeholder="Front end" required>
 
                 <br>
 
@@ -22,7 +26,7 @@
                 <i class="fa fa-backward" aria-hidden="true"></i>
                 Return to List
             </a>
-            <button type="submit" class="btn btn-primary btnAdd">
+            <button type="submit" class="btn btn-outline-success btnAdd">
                 <i class="fa fa-check" aria-hidden="true"></i>
                 Add new category
             </button>

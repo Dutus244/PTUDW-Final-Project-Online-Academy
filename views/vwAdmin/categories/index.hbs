@@ -1,3 +1,7 @@
+{{#section 'css'}}
+<link rel="stylesheet" href="/public/CSS/styleAdmin.css">
+{{/section}}
+
 <div class="card">
     <h4 class="card-header d-flex justify-content-between">
         <span><h3>Categories</h3></span>
@@ -9,7 +13,7 @@
     {{#if this.empty}}
         <div class="card-body">
             <h5 class="card-title">
-                Không có dữ liệu!
+                Không có lĩnh vực nào!
             </h5>
         </div>
     {{else}}
@@ -17,6 +21,7 @@
             <table class="table table-hover">
                 <thead>
                 <tr>
+                    <th>Category ID</th>
                     <th>Category Name</th>
                     <th>Category Level</th>
                     <th>Number Of Courses</th>
@@ -27,17 +32,13 @@
                 <tbody>
                 {{#each this.categories}}
                     <tr>
+                        <td>{{catid}}</td>
                         <td>{{catname}}</td>
                         <td>{{catlevel}}</td>
                         <td>{{amount}}</td>
                         <td class="text-right">
                             <a class="btn btn-sm btn-outline-primary btnAddAdmin" href="/admin/categories/edit?id={{catid}}" role="button" title="Edit">
                             <i class="bi bi-pencil-square" aria-hidden="true"></i>
-                            </a>
-                        </td>
-                        <td class="text-right">
-                            <a class="btn btn-sm btn-outline-primary btnAddAdmin" href="/admin/categories/seeDetails?id={{catid}}" role="button" title="See Details">
-                            <i class="bi bi-three-dots" aria-hidden="true"></i>
                             </a>
                         </td>
                     </tr>

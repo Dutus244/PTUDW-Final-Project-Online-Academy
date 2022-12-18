@@ -1,0 +1,117 @@
+{{#section 'css'}}
+    <link rel="stylesheet" href="/public/CSS/styleAdmin.css">
+{{/section}}
+
+<form method="post" id="editCategory">
+    <div class="card">
+        <h4 class="card-header">
+            Edit Category
+        </h4>
+        <div class="card-body">
+            <div class="form-group">
+                <label for="txtCatID">Category ID</label>
+                <input value="{{this.category.catid}}" name="catid" type="text" class="form-control" id="txtCatID" readonly>
+            </div>
+            <div class="form-group">
+                <label for="txtCatName">Category Name</label>
+                <input value="{{this.category.catname}}" name="catname" type="text" class="form-control" id="txtCatName" autofocus placeholder="Laptop">
+            </div>
+            <div class="form-group">
+                <label for="txtCatLevel">Category Level</label>
+                {{#ifEquals  this.category.catlevel "Lập trình Web"}}
+                    <select name = "catlevel" class="form-control" id="txtCatLevel">
+                        <option value = "Lập trình Web" selected>Lập trình Web</option>
+                        <option value = "Lập trình thiết bị di động">Lập trình thiết bị di động</option>
+                    </select>
+                {{else}}
+                    <select name = "catlevel" class="form-control" id="txtCatLevel">
+                        <option value = "Lập trình thiết bị di động" selected>Lập trình thiết bị di động</option>
+                        <option value = "Lập trình Web">Lập trình Web</option>
+                    </select>
+                {{/ifEquals}}
+            </div>
+            <div class="form-group">
+                <label for="txtCatID">Number Of Courses</label>
+                <input value="{{this.category.amount}}" name="amount" type="text" class="form-control" id="txtamount" readonly>
+            </div>
+        </div>
+        <div class="card-footer text-muted">
+            <a class="btn btn-outline-success btnAdd" href="/admin/categories" role="button">
+                <i class="fa fa-backward" aria-hidden="true"></i>
+                List
+            </a>
+            {{#ifEquals this.category.amount 0}}
+                <button type="submit" class="btn btn-danger btnAdd" formaction="/admin/categories/del">
+                    <i class="fa fa-trash" aria-hidden="true"></i>
+                    Delete
+                </button>
+            {{else}}
+                <button type="submit" class="btn btn-danger btnNotAccess" formaction="/admin/categories/del" disabled="disabled" title="This category already has courses cannot be deleted">
+                    <i class="fa fa-trash" aria-hidden="true"></i>
+                    Delete
+                </button>
+            {{/ifEquals}}
+            <button type="submit" class="btn btn-primary btnAdd" formaction="/admin/categories/patch" >
+                <i class="fa fa-check" aria-hidden="true"></i>
+                Save
+            </button>
+        </div>
+        <h4 class="card-header">
+            List of courses in this Category
+        </h4>
+        {{#if this.coursesEmpty}}
+            <div class="card-body">
+                <h5 class="card-title">
+                    Không có khóa học nào thuộc lĩnh vực này
+                </h5>
+            </div>
+        {{else}}
+            <div class="card-body" style="overflow-y: scroll; height:400px;">
+                <table class="table table-hover">
+                    <thead>
+                    <tr>
+                        <th>Course ID</th>
+                        <th>Course Name</th>
+                        <th>Category nae</th>
+                        <th>Tiny Description</th>
+                        <th>Full Description</th>
+                        <th>Rating</th>
+                        <th>Number Of Reviews</th>
+                        <th>Number Of Students</th>
+                        <th>Tuition</th>
+                        <th>Discount</th>
+                        <th>Discount Info</th>
+                        <th>Update Time</th>
+                        <th>Lecturer Name</th>
+                        <th>&nbsp;</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {{#each this.courses}}
+                        <tr>
+                            <td>{{courseid}}</td>
+                            <td>{{coursename}}</td>
+                            <td>{{catname}}</td>
+                            <td>{{tinydes}}</td>
+                            <td>{{fulldes}}</td>
+                            <td>{{rating}}</td>
+                            <td>{{reviews}}</td>
+                            <td>{{students}}</td>
+                            <td>{{format_number tuition}}</td>
+                            <td>{{format_number discount}}</td>
+                            <td>{{discountinfo}}</td>
+                            <td>{{updatetime}}</td>
+                            <td>{{lecname}}</td>
+                            <td class="text-right">
+                                <a class="btn btn-sm btn-outline-primary btnAddAdmin" href="/admin/categories/courses/del?id={{courseid}}" role="button" title="Delete">
+                                <i class="fa fa-trash" aria-hidden="true"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    {{/each}}
+                    </tbody>
+                </table>
+            </div>
+        {{/if}}
+    </div>
+</form>

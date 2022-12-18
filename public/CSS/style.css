@@ -135,6 +135,12 @@ h1{
     padding: 0;
  }
 
+.dropright:hover>.dropdown-menu {
+    display: block;
+    margin-top: 0;
+    padding: 0;
+}
+
 .btnHelloUserNameAdmin {
     background: pink;
     color:whitesmoke;
@@ -146,35 +152,5 @@ h1{
 .btnHelloUserNameAdmin:hover {
     background-color: palevioletred;
 }
-
-.btnAddAdmin {
-    border-color: pink;
-}
-
-.btnAddAdmin:hover {
-    border-color: pink;
-    background-color: pink;
-}
-
-.btnAdd {
-    border-color: pink;
-    background-color: white;
-    font-size: 17px;
-    vertical-align: middle;
-    width: 200px;
-    height: 37px;
-}
-
-.btnAdd:hover {
-    border-color: pink;
-    background-color: pink;
-}
-
-.dropright:hover>.dropdown-menu {
-    display: block;
-    margin-top: 0;
-    padding: 0;
-}
-
 
 
