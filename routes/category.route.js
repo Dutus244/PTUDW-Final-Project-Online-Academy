@@ -31,12 +31,27 @@ router.post('/add',async function (req, res) {
 router.get('/edit', async function (req, res) {
     const id = req.query.id || 0;
     const category = await categoryService.findById(id);
+    const courses = await categoryService.findAllCoursesByCatID(id);
     if (category === null)
         return res.redirect('/admin/categories');
 
-    res.render('vwCategory/edit', {
-        category: category
+    res.render('vwAdmin/categories/edit', {
+        layout: 'mainAdmin',
+        category: category,
+        courses: courses,
+        coursesEmpty: courses.length === 0
     });
-})
+});
+
+router.post('/del', async function (req, res) {
+    const id = req.body.catid;
+    await categoryService.del(id);
+    res.redirect('/admin/categories');
+});
+
+router.post('/patch', async function (req, res) {
+    await categoryService.patch(req.body);
+    res.redirect('/admin/categories/');
+});
 
 export default router

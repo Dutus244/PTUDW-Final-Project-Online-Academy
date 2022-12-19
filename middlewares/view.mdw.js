@@ -10,6 +10,18 @@ export default function (app) {
       format_number(val) {
         return numeral(val).format('0,0');
       },
+      ifEquals: function(v1, v2, options) {
+        if(v1 === v2) {
+          return options.fn(this);
+        }
+        return options.inverse(this);
+      },
+      ifCompare: function(v1, v2, options) {
+        if(v1 > v2) {
+          return options.fn(this);
+        }
+        return options.inverse(this);
+      },
     }
   }));
   app.set('view engine', 'hbs');

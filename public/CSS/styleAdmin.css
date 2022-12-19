@@ -1,0 +1,31 @@
+.btnAddAdmin {
+    border-color: pink;
+}
+
+.btnAddAdmin:hover {
+    border-color: pink;
+    background-color: pink;
+}
+
+.btnAdd {
+    border-color: pink;
+    background-color: white;
+    font-size: 17px;
+    vertical-align: middle;
+    width: 200px;
+    height: 37px;
+}
+
+.btnAdd:hover {
+    border-color: pink;
+    background-color: pink;
+}
+
+.btnNotAccess {
+    border-color: pink;
+    background-color: white;
+    font-size: 17px;
+    vertical-align: middle;
+    width: 200px;
+    height: 37px;
+}
