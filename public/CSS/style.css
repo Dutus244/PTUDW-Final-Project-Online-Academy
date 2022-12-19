@@ -10,7 +10,7 @@
     /* text-decoration: none; */
     outline: none;
     border: none;
-    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-family:'Courier New', Courier, monospace Geneva, Verdana, sans-serif;
     font-size: 1.25rem;
     box-sizing: border-box;
     transition: all .2s linear;
@@ -65,6 +65,7 @@ header{
 }
 
 .navbar{
+    font-weight: bold;
     background: pink;
 }
 
