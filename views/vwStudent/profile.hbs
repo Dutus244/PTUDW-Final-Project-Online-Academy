@@ -1,0 +1,50 @@
+{{#section 'css'}}
+<link rel="stylesheet" href="../../public/CSS/vwStudent/profile.css">
+{{/section}}
+
+<div class="profile">
+  <div class="row">
+    <div class="col-sm-3">
+      <div class="card">
+        <h4 class="card-header profile-item student-name">
+          Student's name
+        </h4>
+        <ul class="list-group list-group-flush">
+          <a href="/student/profile" class="profile-item">
+            <li class="list-group-item active-menu">Profile</li>
+          </a>
+          <a href="/student/security" class="profile-item">
+            <li class="list-group-item">Security</li>
+          </a>
+          <a href="/student/watchlist" class="profile-item">
+            <li class="list-group-item">Watchlist</li>
+          </a>
+          <a href="/student/my-courses" class="profile-item">
+            <li class="list-group-item">All courses</li>
+          </a>
+        </ul>
+      </div>
+    </div>
+
+    <div class="col-sm-9 pb-4">
+      <p class="title">Profile</p>
+      <p>Change your information here</p>
+
+      <form class="profile-form" method="post">
+        <div class="form-group">
+          <label for="txtName">Name</label>
+          <input name="name" type="text" class="form-control" id="txtName" placeholder="Old name">
+        </div>
+        <div class="form-group">
+          <label for="txtEmail">Email address</label>
+          <input name="email" type="email" class="form-control" id="txtEmail" placeholder="Old email">
+        </div>
+
+
+        <div class="submit-button">
+          <button type="submit" class="btn btn-profile">Save</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

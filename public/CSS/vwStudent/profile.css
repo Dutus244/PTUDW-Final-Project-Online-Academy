@@ -1,0 +1,84 @@
+* {
+    font-size: 1.5rem;
+}
+
+h4.card-header {
+    border-color: rgb(254, 106, 129)
+}
+
+a.profile-item {
+    text-decoration: none;
+}
+
+.student-name {
+    text-align: center;
+}
+
+.profile {
+    padding: 3rem 6rem;
+}
+
+.card,.col-sm-9 {
+    border: 1px solid rgb(254, 106, 129);
+    border-radius: 0.25rem;
+}
+
+p {
+    text-align: center;
+}
+
+.list-group-item:hover {
+    background-color: rgb(254, 106, 129); 
+    color: white;
+}
+
+.active-menu {
+    background-color: rgb(254, 106, 129); 
+    color: white;
+}
+
+.title, .profile-item {
+    font-family: Comic Sans MS;
+}
+
+.title {
+    font-size: 4rem;
+    font-weight: bold;
+    margin: 0;
+}
+
+.profile-form {
+    margin: 0rem auto;
+    max-width: 50rem;
+}
+
+.form-control {
+    height: 3.5rem;
+    font-size: 1.2rem;
+}
+
+.submit-button {
+    display: flex;
+    justify-content: center;
+}
+
+.btn-profile {
+    background-color: pink !important;
+    border-color: rgb(254, 106, 129);
+}
+
+.img-container {
+    position: relative;
+}
+
+.img-container img {
+    display: block;
+}
+
+.img-container #fav-icon {
+    position: absolute;
+    top: 0rem;
+    right: 0.5rem;
+    background: transparent;
+    font-size: 2rem;
+}

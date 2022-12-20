@@ -1,0 +1,36 @@
+.card {
+    border-color: rgb(254, 106, 129)
+}
+
+.page-item.active > .page-link {
+    background-color: rgb(254, 106, 129); 
+    border-color: rgb(254, 106, 129);
+}
+
+.page-link:hover {
+    background-color: rgb(254, 106, 129); 
+    color: white;
+}
+
+h4.card-header {
+    border-color: rgb(254, 106, 129);
+}
+
+.col-sm-4.mb-4>a {
+    text-decoration: none;
+}
+
+#coursename {
+    font-size: 2.2rem;
+}
+
+.rating-item {
+    display: inline;
+    font-size: 1.3rem;
+    color: rgb(221, 137, 28);
+}
+
+.bi.bi-star-fill {
+    font-size: 1.5rem;
+    color: orange;
+}

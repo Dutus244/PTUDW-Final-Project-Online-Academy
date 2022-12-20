@@ -13,28 +13,45 @@
 {{/section}}
 
 {{#section 'css'}}
+<link rel="stylesheet" href="../../public/CSS/vwStudent/profile.css">
 <link rel="stylesheet" href="../../public/CSS/vwCourse/byCat.css">
 {{/section}}
 
-<div class="p-5">
+<div class="profile">
   <div class="row">
-    <div class="col-sm-12">
-      {{#if this.catName}}
-      <p class="h1">{{this.catName}}</p>
-      {{else}}
-      <p class="h1">All</p>
-      {{/if}}
+    <div class="col-sm-3">
+      <div class="card">
+        <h4 class="card-header profile-item student-name">
+          Student's name
+        </h4>
+        <ul class="list-group list-group-flush">
+          <a href="/student/profile" class="profile-item">
+            <li class="list-group-item">Profile</li>
+          </a>
+          <a href="/student/security" class="profile-item">
+            <li class="list-group-item">Security</li>
+          </a>
+          <a href="/student/watchlist" class="profile-item">
+            <li class="list-group-item active-menu">Watchlist</li>
+          </a>
+          <a href="/student/my-courses" class="profile-item">
+            <li class="list-group-item">All courses</li>
+          </a>
+        </ul>
+      </div>
+    </div>
 
-      {{#if this.empty}}
-      <h5>Không có dữ liệu</h5>
-      {{else}}
+    <div class="col-sm-9">
+      <p class="title">Watchlist</p>
       <div class="card-body">
-        <div class="row pb-5">
-          {{#each this.courses}}
+        <div class="row">
           <div class="col-sm-4 mb-4">
             <a href="/course/detail/{{courseid}}">
               <div class="card h-100">
-                <img class="card-img-top" src="/public/img/category/yae.png" alt="courseTitle">
+                <div class="img-container">
+                  <img class="card-img-top" src="/public/img/category/yae.png" alt="courseTitle">
+                  <a href="#"><i class="bi bi-heart-fill" id="fav-icon"></i></a>
+                </div>
                 <div class="card-body">
                   <h4 class="card-title mb-0" id="coursename">{{coursename}}</h4>
                   <h5 class="card-title mb-0 font-italic">{{catname}}</h5>
@@ -54,10 +71,8 @@
               </div>
             </a>
           </div>
-          {{/each}}
         </div>
-        {{/if}}
-
+        
         <nav>
           <ul class="pagination pagination-lg" id="pagination" style="justify-content: center;">
             <li class="page-item" id="first">

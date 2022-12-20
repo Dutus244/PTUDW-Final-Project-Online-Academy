@@ -31,7 +31,7 @@ export default {
 
     async findPageByAll(offset, limit) {
         const list = await db
-            .select('courses.catid', 'coursename', 'lecname', 'rating', 'tuition', 'discount', 'courseid')
+            .select('courses.catid', 'catname', 'coursename', 'lecname', 'rating', 'reviews','tuition', 'discount', 'courseid')
             .from('courses')
             .join('categories', 'courses.catid', 'categories.catid')
             .join('lecturers', 'courses.lecid', 'lecturers.lecid')
@@ -43,7 +43,7 @@ export default {
 
     async findPageByName(name, offset, limit) {
         const list = await db
-            .select('courses.catid', 'coursename', 'lecname', 'rating', 'tuition', 'discount', 'courseid')
+            .select('courses.catid', 'catname', 'coursename', 'lecname', 'rating', 'reviews','tuition', 'discount', 'courseid')
             .from('courses')
             .join('categories', 'courses.catid', 'categories.catid')
             .join('lecturers', 'courses.lecid', 'lecturers.lecid')
@@ -56,7 +56,7 @@ export default {
 
     async findPageByCatLevel(catlevel, offset, limit) {
         const list = await db
-            .select('courses.catid', 'coursename', 'lecname', 'rating', 'tuition', 'discount', 'courseid')
+            .select('courses.catid', 'catname', 'coursename', 'lecname', 'rating', 'reviews','tuition', 'discount', 'courseid')
             .from('courses')
             .join('categories', 'courses.catid', 'categories.catid')
             .join('lecturers', 'courses.lecid', 'lecturers.lecid')
