@@ -1,5 +1,6 @@
 import express from 'express';
 import courseService from '../services/course.service.js';
+import categoryService from "../services/category.service.js";
 
 const router = express.Router()
 
@@ -161,5 +162,21 @@ router.get('/detail/:id', async function (req, res) {
       course: course
     })
 })
+
+// Amdin with authWithRequiredPermission
+router.get('/', async function (req, res) {
+    const list = await courseService.findAll();
+    res.render('vwAdmin/courses/index', {
+        layout: 'mainAdmin',
+        courses: list,
+        empty: list.length === 0
+    });
+})
+
+router.get('/del', async function (req, res) {
+    const id = req.query.id || 0;
+    await courseService.del(id);
+    res.redirect('/admin/courses/');
+});
 
 export default router

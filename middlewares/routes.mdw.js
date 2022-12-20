@@ -10,5 +10,9 @@ export default function (app) {
   // app.use('/category', categoryRoute)
   app.use('/course', courseRoute)
   app.use('/student', studentRoute)
+
+  // Amdin with authWithRequiredPermission
   app.use('/admin/categories',categoryRoute)
+  app.use('/admin/courses',courseRoute)
+  app.use('/admin/lecturers',courseRoute)
 }

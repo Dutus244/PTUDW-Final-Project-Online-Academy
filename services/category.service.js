@@ -68,4 +68,8 @@ export default {
     del(id) {
         return db('categories').where('catid', id).del();
     },
+
+    delCourse(id) {
+        return db('courses').where('courseid', id).del();
+    }
 }

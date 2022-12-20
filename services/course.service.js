@@ -78,4 +78,17 @@ export default {
         }
         return list[0];
       },
+
+    async findAll() {
+        const list = await db
+            .select('courseid','coursename','categories.catname','tinydes','fulldes','rating','reviews','students','tuition','discount','discountinfo','updatetime','lecturers.lecname')
+            .from('courses')
+            .leftJoin('categories','categories.catid','courses.catid')
+            .leftJoin('lecturers','courses.lecid','lecturers.lecid')
+        return list;
+    },
+
+    del(id) {
+        return db('courses').where('courseid', id).del();
+    },
 }

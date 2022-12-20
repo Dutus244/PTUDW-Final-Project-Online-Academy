@@ -18,15 +18,64 @@
             </div>
             <div class="form-group">
                 <label for="txtCatLevel">Category Level</label>
-                {{#ifEquals  this.category.catlevel "Lập trình Web"}}
+                {{#ifEquals  this.category.catlevel "IT"}}
                     <select name = "catlevel" class="form-control" id="txtCatLevel">
-                        <option value = "Lập trình Web" selected>Lập trình Web</option>
-                        <option value = "Lập trình thiết bị di động">Lập trình thiết bị di động</option>
+                        <option value = "IT" selected>IT</option>
+                        <option value = "Kinh Doanh">Kinh Doanh</option>
+                        <option value = "Thiết Kế">Thiết Kế</option>
+                        <option value = "Marketing">Marketing</option>
+                        <option value = "Sức khỏe & Đời sống">Sức khỏe & Đời sống</option>
+                        <option value = "Âm Nhạc">Âm Nhạc</option>
                     </select>
-                {{else}}
+                {{/ifEquals}}
+                {{#ifEquals  this.category.catlevel "Kinh Doanh"}}
                     <select name = "catlevel" class="form-control" id="txtCatLevel">
-                        <option value = "Lập trình thiết bị di động" selected>Lập trình thiết bị di động</option>
-                        <option value = "Lập trình Web">Lập trình Web</option>
+                        <option value = "IT">IT</option>
+                        <option value = "Kinh Doanh" selected>Kinh Doanh</option>
+                        <option value = "Thiết Kế">Thiết Kế</option>
+                        <option value = "Marketing">Marketing</option>
+                        <option value = "Sức khỏe & Đời sống">Sức khỏe & Đời sống</option>
+                        <option value = "Âm Nhạc">Âm Nhạc</option>
+                    </select>
+                {{/ifEquals}}
+                {{#ifEquals  this.category.catlevel "Thiết Kế"}}
+                    <select name = "catlevel" class="form-control" id="txtCatLevel">
+                        <option value = "IT">IT</option>
+                        <option value = "Kinh Doanh">Kinh Doanh</option>
+                        <option value = "Thiết Kế" selected>Thiết Kế</option>
+                        <option value = "Marketing">Marketing</option>
+                        <option value = "Sức khỏe & Đời sống">Sức khỏe & Đời sống</option>
+                        <option value = "Âm Nhạc">Âm Nhạc</option>
+                    </select>
+                {{/ifEquals}}
+                {{#ifEquals  this.category.catlevel "Marketing"}}
+                    <select name = "catlevel" class="form-control" id="txtCatLevel">
+                        <option value = "IT">IT</option>
+                        <option value = "Kinh Doanh">Kinh Doanh</option>
+                        <option value = "Thiết Kế">Thiết Kế</option>
+                        <option value = "Marketing" selected>Marketing</option>
+                        <option value = "Sức khỏe & Đời sống">Sức khỏe & Đời sống</option>
+                        <option value = "Âm Nhạc">Âm Nhạc</option>
+                    </select>
+                {{/ifEquals}}
+                {{#ifEquals  this.category.catlevel "Sức khỏe & Đời sống"}}
+                    <select name = "catlevel" class="form-control" id="txtCatLevel">
+                        <option value = "IT">IT</option>
+                        <option value = "Kinh Doanh">Kinh Doanh</option>
+                        <option value = "Thiết Kế">Thiết Kế</option>
+                        <option value = "Marketing">Marketing</option>
+                        <option value = "Sức khỏe & Đời sống" selected>Sức khỏe & Đời sống</option>
+                        <option value = "Âm Nhạc">Âm Nhạc</option>
+                    </select>
+                {{/ifEquals}}
+                {{#ifEquals  this.category.catlevel "Âm Nhạc"}}
+                    <select name = "catlevel" class="form-control" id="txtCatLevel">
+                        <option value = "IT">IT</option>
+                        <option value = "Kinh Doanh">Kinh Doanh</option>
+                        <option value = "Thiết Kế">Thiết Kế</option>
+                        <option value = "Marketing">Marketing</option>
+                        <option value = "Sức khỏe & Đời sống">Sức khỏe & Đời sống</option>
+                        <option value = "Âm Nhạc" selected>Âm Nhạc</option>
                     </select>
                 {{/ifEquals}}
             </div>
@@ -72,7 +121,7 @@
                     <tr>
                         <th>Course ID</th>
                         <th>Course Name</th>
-                        <th>Category nae</th>
+                        <th>Category Name</th>
                         <th>Tiny Description</th>
                         <th>Full Description</th>
                         <th>Rating</th>

@@ -54,4 +54,10 @@ router.post('/patch', async function (req, res) {
     res.redirect('/admin/categories/');
 });
 
+router.get('/courses/del', async function (req, res) {
+    const id = req.query.id || 0;
+    await categoryService.delCourse(id);
+    res.redirect('/admin/categories/');
+});
+
 export default router

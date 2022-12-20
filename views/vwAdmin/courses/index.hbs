@@ -1,0 +1,66 @@
+{{#section 'css'}}
+    <link rel="stylesheet" href="/public/CSS/styleAdmin.css">
+{{/section}}
+
+<div class="card">
+    <h4 class="card-header d-flex justify-content-between">
+        <span><h3>Courses</h3></span>
+    </h4>
+    {{#if this.coursesEmpty}}
+        <div class="card-body">
+            <h5 class="card-title">
+                Không có khóa học nào.
+            </h5>
+        </div>
+    {{else}}
+        <div class="card-body">
+            <table class="table table-hover">
+                <thead>
+                <tr>
+                    <th>Course ID</th>
+                    <th>Course Name</th>
+                    <th>Category Name</th>
+                    <th>Tiny Description</th>
+                    <th>Full Description</th>
+                    <th>Rating</th>
+                    <th>Number Of Reviews</th>
+                    <th>Number Of Students</th>
+                    <th>Tuition</th>
+                    <th>Discount</th>
+                    <th>Discount Info</th>
+                    <th>Update Time</th>
+                    <th>Lecturer Name</th>
+                    <th>&nbsp;</th>
+                </tr>
+                </thead>
+                <tbody>
+                {{#each this.courses}}
+                    <tr>
+                        <td>{{courseid}}</td>
+                        <td>{{coursename}}</td>
+                        <td>{{catname}}</td>
+                        <td>{{tinydes}}</td>
+                        <td>{{fulldes}}</td>
+                        <td>{{rating}}</td>
+                        <td>{{reviews}}</td>
+                        <td>{{students}}</td>
+                        <td>{{format_number tuition}}</td>
+                        <td>{{format_number discount}}</td>
+                        <td>{{discountinfo}}</td>
+                        <td>{{updatetime}}</td>
+                        <td>{{lecname}}</td>
+                        <td class="text-right">
+                            <a class="btn btn-sm btn-outline-primary btnAddAdmin" href="/admin/courses/del?id={{courseid}}" role="button" title="Delete">
+                            <i class="fa fa-trash" aria-hidden="true"></i>
+                            </a>
+                        </td>
+                    </tr>
+                {{/each}}
+                </tbody>
+            </table>
+        </div>
+    {{/if}}
+    <div class="card-footer text-muted">
+
+    </div>
+</div>
