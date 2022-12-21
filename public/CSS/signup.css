@@ -7,3 +7,26 @@ a.button:hover{
     color:white;
     text-decoration: none;
 }
+
+main {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 92vh;
+    width: 100%;
+    background: url(https://upload.wikimedia.org/wikipedia/commons/thumb/0/0b/Mountains-1412683.svg/1280px-Mountains-1412683.svg.png) no-repeat center center;
+    background-size: cover;
+}
+
+.form_class {
+    width: 500px;
+    padding: 40px;
+    border-radius: 8px;
+    background-color: whitesmoke;
+    box-shadow: 5px 5px 10px rgb(0,0,0,0.3);
+}
+
+.form_div {
+    text-transform: uppercase;
+    font-family:'Courier New', Courier, monospace Geneva, Verdana, sans-serif;
+}
