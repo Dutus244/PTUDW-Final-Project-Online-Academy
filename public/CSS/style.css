@@ -150,6 +150,10 @@ h1{
     padding: 0;
 }
 
+.dropdown-menu .dropdown-item {
+    font-weight: bold;
+}
+
 .btnHelloUserNameAdmin {
     background: pink;
     color:whitesmoke;

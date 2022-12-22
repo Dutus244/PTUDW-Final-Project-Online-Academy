@@ -1,3 +1,4 @@
+import authWithRequiredPermission from './auth.mdw.js';
 import categoryRoute from '../routes/category.route.js'
 import courseRoute from '../routes/course.route.js'
 import studentRoute from '../routes/student.route.js'
@@ -10,7 +11,7 @@ export default function (app) {
 
   // app.use('/category', categoryRoute)
   app.use('/course', courseRoute)
-  app.use('/student', studentRoute)
+  app.use('/student', authWithRequiredPermission(0), studentRoute)
 
   // Amdin with authWithRequiredPermission
   app.use('/admin/categories',categoryRoute)

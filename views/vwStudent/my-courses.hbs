@@ -42,7 +42,10 @@
     </div>
 
     <div class="col-sm-9">
-      <p class="title">Watchlist</p>
+      <p class="title">My course</p>
+      {{#if this.empty}}
+      <h5>Không có dữ liệu</h5>
+      {{else}}
       <div class="card-body">
         <div class="row">
           <div class="col-sm-4 mb-4">
@@ -92,6 +95,7 @@
           </ul>
         </nav>
       </div>
+      {{/if}}
     </div>
   </div>
 </div>

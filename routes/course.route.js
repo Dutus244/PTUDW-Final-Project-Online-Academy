@@ -1,6 +1,7 @@
 import express from 'express';
 import courseService from '../services/course.service.js';
 import categoryService from "../services/category.service.js";
+import { getVisiblePage } from '../utils/helper.js'
 
 const router = express.Router()
 
@@ -13,32 +14,8 @@ router.get('/byCat', async(req, res) => {
     const total = await courseService.countAll()
     const totalPages = Math.ceil(total / limit)
 
-    // Limit the visible page
-    var visiblePages = 5
-    if (visiblePages > totalPages) {
-        visiblePages = totalPages;
-    }
-    const half = Math.floor(visiblePages / 2);
-    var start = curPage - half + 1 - visiblePages % 2;
-    var end = curPage + half;
-
-    // handle boundary case
-    if (start <= 0) {
-        start = 1;
-        end = visiblePages;
-    }
-    if (end > totalPages) {
-        start = totalPages - visiblePages + 1;
-        end = totalPages;
-    }
-    
-    const pages = []
-    for (let i = start; i <= end; i++) {
-        pages.push({
-            value: i,
-            isCurrent: i === +curPage
-        })
-    }
+    const visiblePages = 5
+    const pages = getVisiblePage(totalPages, visiblePages, curPage)
     
     const list = await courseService.findPageByAll(offset, limit)
     res.render('vwCourse/byCat', {
@@ -63,32 +40,8 @@ router.get('/byCat/:catName', async(req, res) => {
     const total = await courseService.countByCatName(catName)
     const totalPages = Math.ceil(total / limit)
 
-    // Limit the visible page
-    var visiblePages = 5
-    if (visiblePages > totalPages) {
-        visiblePages = totalPages;
-    }
-    const half = Math.floor(visiblePages / 2);
-    var start = curPage - half + 1 - visiblePages % 2;
-    var end = curPage + half;
-
-    // handle boundary case
-    if (start <= 0) {
-        start = 1;
-        end = visiblePages;
-    }
-    if (end > totalPages) {
-        start = totalPages - visiblePages + 1;
-        end = totalPages;
-    }
-    
-    const pages = []
-    for (let i = start; i <= end; i++) {
-        pages.push({
-            value: i,
-            isCurrent: i === +curPage
-        })
-    }
+    const visiblePages = 5
+    const pages = getVisiblePage(totalPages, visiblePages, curPage)
     
     const list = await courseService.findPageByName(catName, offset, limit)
     res.render('vwCourse/byCat', {
@@ -113,32 +66,8 @@ router.get('/catLevel/:name', async(req, res) => {
     const total = await courseService.countByCatLevel(name)
     const totalPages = Math.ceil(total / limit)
 
-    // Limit the visible page
-    var visiblePages = 5
-    if (visiblePages > totalPages) {
-        visiblePages = totalPages;
-    }
-    const half = Math.floor(visiblePages / 2);
-    var start = curPage - half + 1 - visiblePages % 2;
-    var end = curPage + half;
-
-    // handle boundary case
-    if (start <= 0) {
-        start = 1;
-        end = visiblePages;
-    }
-    if (end > totalPages) {
-        start = totalPages - visiblePages + 1;
-        end = totalPages;
-    }
-    
-    const pages = []
-    for (let i = start; i <= end; i++) {
-        pages.push({
-            value: i,
-            isCurrent: i === +curPage
-        })
-    }
+    const visiblePages = 5
+    const pages = getVisiblePage(totalPages, visiblePages, curPage)
     
     const list = await courseService.findPageByCatLevel(name, offset, limit)
     res.render('vwCourse/byCat', {

@@ -1,4 +1,4 @@
-* {
+.profile * {
     font-size: 1.5rem;
 }
 
@@ -37,9 +37,9 @@ p {
     color: white;
 }
 
-.title, .profile-item {
+/* .title, .profile-item {
     font-family: Comic Sans MS;
-}
+} */
 
 .title {
     font-size: 4rem;
@@ -52,7 +52,7 @@ p {
     max-width: 50rem;
 }
 
-.form-control {
+.form-control.text-input {
     height: 3.5rem;
     font-size: 1.2rem;
 }
