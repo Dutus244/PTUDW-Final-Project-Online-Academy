@@ -96,6 +96,10 @@ header{
     color:whitesmoke;
 }
 
+div.butt a:hover{
+    background: pink;
+}
+
 form.form-inline{
     background: pink;
     font-size: 2rem;
