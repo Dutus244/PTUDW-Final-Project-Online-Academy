@@ -13,22 +13,18 @@ router.post('/register', async (req, res) => {
     const salt = bcrypt.genSaltSync(10);
     const hash = bcrypt.hashSync(req.body.password, salt);
 
-    const accountid = v4()
-
-    console.log(accountid)
+    const id = v4()
 
     const user = {
-        accountid,    
+        accountid: id,    
         email: req.body.email,
         pass: hash,
         accounttype: 0,
     }
 
-    console.log(accountid)
-
     const student={
-        accountid,
-        name:req.body.name,
+        studentid: id,
+        studentname:req.body.name,
     }
 
     await userServices.add(user)

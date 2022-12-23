@@ -2,51 +2,51 @@
     <link rel="stylesheet" href="../../public/CSS/signup.css">
 {{/section}}
 
-
 {{#section 'js'}}
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.full.min.js" integrity="sha512-AIOTidJAcHBH2G/oZv9viEGXRqDNmfdPVPYOYKGy3fti0xIplnlgMHUGfuNRzC6FkzIo0iIxgFnr9RikFxK+sw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-{{ <script>
-    $('#formRegister').on('submit', (e) => {
-        e.preventDefault()
+<script
+  src="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.full.min.js"></script>
+<script>
+  $('#formRegister').on('submit', function (e) {
+    e.preventDefault();
 
-        const email = $('#txtEmail').val()
-        if (email.length === 0) {
-            alert('Please input email')
-            return
-        }
+    const email = $('#txtEmail').val();
+    if (email.length === 0) {
+      alert('Please input a valid email');
+    }
 
-        const password = $('#txtPassword').val()
-        if (password.length === 0) {
-            alert('Please input password')
-            return
-        }
+    const password = $('#txtPassword').val()
+    if (password.length === 0) {
+        alert('Please input password')
+        return
+    }
 
-        const name = $('#txtName').val()
-        if (password.length === 0) {
-            alert('Please input name')
-            return
-        }
+    const name = $('#txtName').val()
+    if (name.length === 0) {
+        alert('Please input name')
+        return
+    }
 
-        $.getJSON(`/account/is-available?user=${username}`, function (data) {
-            if (data === false) {
-            alert(`${username} is not available.`);
-            } else {
-            $('#frmRegister').off('submit').submit();
-            }
-        });
-    })
+    const confirm = $('#txtConfirm').val()
+    if (confirm !== password){
+        alert('Password and password confirm is different')
+        return
+    }
 
+    $.getJSON(`/account/is-available?email=${email}`, function (data) {
+      if (data === false) {
+        alert(`${email} is not available.`);
+      } else {
+        $('#formRegister').off('submit').submit();
+      }
+    });
+  });
 
-</script> }}
+</script>
 {{/section}}
+
 
 <main>
 <form  method="post" id="formRegister" class="form_class">
-    {{#if err_message}}
-        <div class="alert alert-danger" role="alert">
-            {{err_message}}
-        </div>
-    {{/if}}
     <div class="form_dix">
     <h2> Account Information</h2>
     <div class="form-group">

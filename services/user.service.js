@@ -6,7 +6,7 @@ export default {
     },
 
     addStudent(entity){
-        return db('student').insert(entity)
+        return db('students').insert(entity)
     },
     
     async login(email){
