@@ -14,10 +14,17 @@ export default {
         return null;
     },
 
-    async findByUsername(email) {
+    async findByEmail(email) {
         const list = await db('accounts').where('email', email);
         if (list.length !== 0)
             return list[0]
         return null
     },
+
+    async updatePass(id, hash) {
+        await db('accounts')
+            .where('accountid', '=', id)
+            .update('pass', hash)
+        return
+    }
 }

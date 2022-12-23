@@ -8,6 +8,20 @@ export default {
       .join('students', 'accountid', 'studentid')
       .where('accounts.accountid', '=', id)
     
-    return student
+    return student[0]
+  },
+
+  async updateStudentProfile(id, name, email) {
+    if (email) {
+      await db('accounts')
+      .where('accountid', '=', id)
+      .update('email', email)
+    }
+    if (name) {
+      await db('students')
+      .where('studentid', '=', id)
+      .update('studentname', name)
+    }
+    return
   }
 }

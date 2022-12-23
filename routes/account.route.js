@@ -25,6 +25,7 @@ router.post('/register', async (req, res) => {
 })
 
 router.get('/signin', async function(req, res){
+    req.session.retUrl = req.headers.referer
     res.render('vwAccount/signin')
 });
 
@@ -60,5 +61,14 @@ router.post('/logout', function (req, res) {
   const url = req.headers.referer || '/';
   res.redirect(url);
 });
+
+router.get('/is-available', async function (req, res) {
+  const email = req.query.email;
+  const user = await userServices.findByEmail(email);
+  if (user === null)
+    return res.json(true);
+
+  res.json(false);
+})
 
 export default router
