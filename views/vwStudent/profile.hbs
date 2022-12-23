@@ -10,13 +10,17 @@
     const name = $('#txtName').val()
     const email = $('#txtEmail').val()
     if (name.length === 0 && email.length === 0) {
-      alert('Vui lòng nhập tên hoặc email')
+      alert('Please fill in name or email')
+      return
+    }
+    if (email.length === 0) {
+      $('#formUpdateProfile').off('submit').submit();
       return
     }
 
     $.getJSON(`/account/is-available?email=${email}`, function (data) {
       if (data === false) {
-        alert(`${email} không khả dụng.`);
+        alert(`${email} is unavailable.`);
       } else {
         $('#formUpdateProfile').off('submit').submit();
       }
