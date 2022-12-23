@@ -4,11 +4,6 @@
 
 <main>
     <form id="login_form" class="form_class" method="post">
-        {{#if err_message}}
-        <div class="alert alert-danger" role="alert">
-            {{err_message}}
-        </div>
-        {{/if}}
         <div class="form_div">
             <label>Email:</label>
             <input class="field_class" name="email" type="email" autofocus>

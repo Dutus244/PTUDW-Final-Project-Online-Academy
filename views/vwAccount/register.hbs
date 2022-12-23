@@ -5,7 +5,7 @@
 
 {{#section 'js'}}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.full.min.js" integrity="sha512-AIOTidJAcHBH2G/oZv9viEGXRqDNmfdPVPYOYKGy3fti0xIplnlgMHUGfuNRzC6FkzIo0iIxgFnr9RikFxK+sw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-{{!-- <script>
+{{ <script>
     $('#formRegister').on('submit', (e) => {
         e.preventDefault()
 
@@ -15,21 +15,38 @@
             return
         }
 
-        $.getJSON(`/account/is-available?user=${email}`, (data) => {
-            if(data === false) {
-                alert(`$(email) is not available`)
-            } else {
+        const password = $('#txtPassword').val()
+        if (password.length === 0) {
+            alert('Please input password')
+            return
+        }
 
-                $('#formRegister').off('submit').submit()
+        const name = $('#txtName').val()
+        if (password.length === 0) {
+            alert('Please input name')
+            return
+        }
+
+        $.getJSON(`/account/is-available?user=${username}`, function (data) {
+            if (data === false) {
+            alert(`${username} is not available.`);
+            } else {
+            $('#frmRegister').off('submit').submit();
             }
-        })
+        });
     })
 
-</script> --}}
+
+</script> }}
 {{/section}}
 
 <main>
 <form  method="post" id="formRegister" class="form_class">
+    {{#if err_message}}
+        <div class="alert alert-danger" role="alert">
+            {{err_message}}
+        </div>
+    {{/if}}
     <div class="form_dix">
     <h2> Account Information</h2>
     <div class="form-group">

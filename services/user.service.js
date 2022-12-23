@@ -5,6 +5,10 @@ export default {
         return db('accounts').insert(entity)
     },
 
+    addStudent(entity){
+        return db('student').insert(entity)
+    },
+    
     async login(email){
         const list = await db('accounts')
             .select('accountid', 'email', 'pass', 'accounttype as permission')
