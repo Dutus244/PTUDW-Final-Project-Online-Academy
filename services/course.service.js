@@ -3,16 +3,16 @@ import db from '../utils/db.js';
 export default {
     async countAll() {
         const list = await db
-            .count({amount: 'courseid'})
+            .count({ amount: 'courseid' })
             .from('courses')
             .join('categories', 'courses.catid', 'categories.catid')
-            
+
         return list[0].amount
     },
 
     async countByCatName(name) {
         const list = await db
-            .count({amount: 'courseid'})
+            .count({ amount: 'courseid' })
             .from('courses')
             .join('categories', 'courses.catid', 'categories.catid')
             .where('catname', '=', name)
@@ -21,49 +21,68 @@ export default {
 
     async countByCatLevel(catlevel) {
         const list = await db
-            .count({amount: 'courseid'})
+            .count({ amount: 'courseid' })
             .from('courses')
             .join('categories', 'courses.catid', 'categories.catid')
             .where('catlevel', '=', catlevel)
-            
+
+        return list[0].amount
+    },
+
+    async countByWatchlist(studentid) {
+        const list = await db
+            .count({ amount: 'watchlists.courseid' })
+            .from('courses')
+            .join('watchlists', 'courses.courseid', 'watchlists.courseid')
+            .where('watchlists.studentid', studentid)
+
+        return list[0].amount
+    },
+
+    async countByStudent(studentid) {
+        const list = await db
+            .count({ amount: 'studentcourses.courseid' })
+            .from('studentcourses')
+            .where('studentcourses.studentid', studentid)
+
         return list[0].amount
     },
 
     async findPageByAll(offset, limit) {
         const list = await db
-            .select('courses.catid', 'catname', 'coursename', 'lecname', 'rating', 'reviews','tuition', 'discount', 'courseid')
+            .select('catname', 'coursename', 'lecname', 'rating', 'reviews', 'tuition', 'discount', 'courseid')
             .from('courses')
             .join('categories', 'courses.catid', 'categories.catid')
             .join('lecturers', 'courses.lecid', 'lecturers.lecid')
             .offset(offset)
             .limit(limit)
-            
+
         return list
     },
 
     async findPageByName(name, offset, limit) {
         const list = await db
-            .select('courses.catid', 'catname', 'coursename', 'lecname', 'rating', 'reviews','tuition', 'discount', 'courseid')
+            .select('catname', 'coursename', 'lecname', 'rating', 'reviews', 'tuition', 'discount', 'courseid')
             .from('courses')
             .join('categories', 'courses.catid', 'categories.catid')
             .join('lecturers', 'courses.lecid', 'lecturers.lecid')
             .where('catname', '=', name)
             .offset(offset)
             .limit(limit)
-            
+
         return list
     },
 
     async findPageByCatLevel(catlevel, offset, limit) {
         const list = await db
-            .select('courses.catid', 'catname', 'coursename', 'lecname', 'rating', 'reviews','tuition', 'discount', 'courseid')
+            .select('catname', 'coursename', 'lecname', 'rating', 'reviews', 'tuition', 'discount', 'courseid')
             .from('courses')
             .join('categories', 'courses.catid', 'categories.catid')
             .join('lecturers', 'courses.lecid', 'lecturers.lecid')
             .where('catlevel', '=', catlevel)
             .offset(offset)
             .limit(limit)
-            
+
         return list
     },
 
@@ -74,17 +93,17 @@ export default {
             .join('lecturers', 'courses.lecid', 'lecturers.lecid')
             .where('courseid', id);
         if (list.length === 0) {
-          return null;
+            return null;
         }
         return list[0];
-      },
+    },
 
     async findAll() {
         const list = await db
-            .select('courseid','coursename','categories.catname','tinydes','fulldes','rating','reviews','students','tuition','discount','discountinfo','updatetime','lecturers.lecname')
+            .select('courseid', 'coursename', 'categories.catname', 'tinydes', 'fulldes', 'rating', 'reviews', 'students', 'tuition', 'discount', 'discountinfo', 'updatetime', 'lecturers.lecname')
             .from('courses')
-            .leftJoin('categories','categories.catid','courses.catid')
-            .leftJoin('lecturers','courses.lecid','lecturers.lecid')
+            .leftJoin('categories', 'categories.catid', 'courses.catid')
+            .leftJoin('lecturers', 'courses.lecid', 'lecturers.lecid')
         return list;
     },
 

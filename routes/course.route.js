@@ -73,7 +73,7 @@ router.get('/catLevel/:name', async(req, res) => {
     res.render('vwCourse/byCat', {
         courses: list,
         empty: list.length === 0,
-        catName: null,
+        catName: name,
         pages: pages,
         totalPages: totalPages,
         prevPage: curPage - 1,

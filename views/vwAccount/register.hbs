@@ -11,7 +11,8 @@
 
     const email = $('#txtEmail').val();
     if (email.length === 0) {
-      alert('Please input a valid email');
+      alert('Please input email');
+      return
     }
 
     const password = $('#txtPassword').val()

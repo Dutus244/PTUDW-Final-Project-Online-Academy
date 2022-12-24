@@ -1,5 +1,5 @@
 .profile * {
-    font-size: 1.5rem;
+    font-size: 1.3rem;
 }
 
 h4.card-header {
@@ -21,10 +21,6 @@ a.profile-item {
 .card,.col-sm-9 {
     border: 1px solid rgb(254, 106, 129);
     border-radius: 0.25rem;
-}
-
-p {
-    text-align: center;
 }
 
 .list-group-item:hover {
@@ -75,10 +71,15 @@ p {
     display: block;
 }
 
-.img-container #fav-icon {
+.img-container .fav-icon {
     position: absolute;
-    top: 0rem;
-    right: 0.5rem;
+    top: 0;
+    right: 0;
+    padding: 0 0.5rem;
     background: transparent;
     font-size: 2rem;
+}
+
+.bi-heart-fill {
+    color: rgb(254, 106, 129);
 }
