@@ -83,3 +83,7 @@ a.profile-item {
 .bi-heart-fill {
     color: rgb(254, 106, 129);
 }
+
+.bg-inherit {
+    background-color: inherit;
+}

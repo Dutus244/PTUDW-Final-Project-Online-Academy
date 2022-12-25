@@ -92,6 +92,12 @@ router.get('/detail/:id', async function (req, res) {
     })
 })
 
+router.get('/:id/learn', async function (req, res) {
+    res.render('vwCourse/learn', {
+
+    })
+})
+
 // Amdin with authWithRequiredPermission
 router.get('/', async function (req, res) {
     const list = await courseService.findAll();

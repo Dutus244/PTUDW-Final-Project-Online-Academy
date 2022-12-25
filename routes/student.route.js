@@ -46,7 +46,6 @@ router.post('/security', async (req, res) => {
   var msg
   var err_msg
 
-  console.log(ret);
   if (ret === false) {
     err_msg = 'Current password is incorrect'
   }

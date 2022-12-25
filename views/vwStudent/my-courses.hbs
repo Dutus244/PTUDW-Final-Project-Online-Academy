@@ -52,7 +52,7 @@
         <div class="row">
           {{#each this.courses}}
           <div class="col-sm-4 mb-4">
-            <a href="/course/detail/{{courseid}}">
+            <a href="#/">
               <div class="card h-100">
                 <img class="card-img-top" src="/public/img/category/yae.png" alt="courseTitle">
                 <div class="card-body">
@@ -64,12 +64,6 @@
                     <i class="bi bi-star-fill"></i>
                     <p class="text-secondary rating-item">({{format_number reviews}})</p>
                   </div>
-                  {{!-- {{#if this.discount}}
-                  <h5 class="card-text mb-0" style="display: inline;">₫{{format_number discount}}</h5>
-                  <del class="text-secondary">₫{{format_number tuition}}</del>
-                  {{else}}
-                  <h5 class="card-text mb-0">₫{{format_number tuition}}</h5>
-                  {{/if}} --}}
                 </div>
               </div>
             </a>

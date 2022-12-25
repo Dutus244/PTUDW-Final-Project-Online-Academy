@@ -62,13 +62,19 @@
 
       <form class="profile-form" method="post" id="formChangePassword">
         {{#if msg}}
-        <div class="alert alert-success text-center" role="alert">
+        <div class="alert alert-success alert-dismissible fade show text-center pr-0" role="alert">
           {{msg}}
+          <button type="button" class="close h-100" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true" class="bg-inherit">&times;</span>
+          </button>
         </div>
         {{/if}}
         {{#if err_msg}}
-        <div class="alert alert-danger text-center" role="alert">
+        <div class="alert alert-danger alert-dismissible fade show text-center pr-0" role="alert">
           {{err_msg}}
+          <button type="button" class="close h-100" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true" class="bg-inherit">&times;</span>
+          </button>
         </div>
         {{/if}}
         <div class="form-group">
