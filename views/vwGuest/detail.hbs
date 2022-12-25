@@ -1,99 +1,18 @@
-{{#section 'css'}}
-<link rel="stylesheet" href="../../public/CSS/course.css">
-{{/section}}
-
-<div class="container">
-  <div class="course-discription">
-    <div class="course-img">
-      <img src="/public/img/category/yae.png" width="100%">
-    </div>
-    <div class="course-detail">
-      <div class="course-title">
-        <h3>{{this.course.coursename}}</h3>
-      </div>
-      <div class="discription">
-        <p>{{this.course.tinydes}}</p>
-      </div>
-      <div class="student">
-        <p>Học viên: {{this.course.students}}</p>
-      </div>
-      <div class="tuition">
-        {{#if this.course.discount}}
-        <p>Học phí: <del class="text-secondary">{{this.course.tuition}}₫</del> <span class="text-danger font-weight-bold" style="display: inline">{{this.course.discount}}₫</span></p>
-        {{else}}
-        <p>Học phí: <span class="text-danger font-weight-bold" style="display: inline">{{this.course.tuition}}</span></p>
-        {{/if}}
-      </div>
-      <div class="rating">
-        <p class="rating-item">{{this.course.rating}}</p>
-        <i class="bi bi-star-fill"></i>
-        <p class="text-secondary rating-item">({{this.course.reviews}})</p>
-      </div>
-      <div class="last-updated">
-        <p>Cập nhật lần cuối: {{this.course.updatetime}}</p>
-      </div>
-    </div>
+<div class="card">
+  <h4 class="card-header">
+    CourseName
+  </h4>
+  <div class="card-body">
+    <img src="#">
+    <p class="card-text">
+      Học phí: <span class="text-danger font-weight-bold">10000000</span>
+    </p>
+    <p class="card-text">
+      Học viên: 246457
+    </p>
+    <p class="card-text">
+      FullDes
+    </p>
   </div>
-
-  <div class="course-content">
-    <h4 class="content-header">Nội dung khóa học</h4>
-    <p>{{this.course.fulldes}}</p>
-  </div>
-
-  <div class="course-menu">
-    <h4 class="menu-header">Mục lục</h4>
-    <table>
-      <tr>
-        <th colspan="2">{{this.course.chaptername}}</th>
-      </tr>
-      {{#each this.course}}
-      <tr>
-        <td>{{this.course.content}}</td>
-        <td>{{this.course.updatetime}}</td>
-      </tr>
-      {{/each}}
-    </table>
-  </div>
-
-  <div class="similar-courses"></div>
-{{!-- {{#each this.courses}}
-          <div class="col-sm-4 mb-4">
-            <a href="/course/detail/{{courseid}}">
-              <div class="card h-100">
-                <img class="card-img-top" src="/public/img/category/yae.png" alt="courseTitle">
-                <div class="card-body">
-                  <h4 class="card-title mb-0" id="coursename">{{coursename}}</h4>
-                  <p class="card-title mb-0 font-italic">{{catname}}</p>
-                  <p class="card-text text-secondary mb-0">{{lecname}}</p>
-                  <div class="rating">
-                    <p class="rating-item">{{rating}}</p>
-                    <i class="bi bi-star-fill"></i>
-                    <p class="text-secondary rating-item">({{format_number reviews}})</p>
-                  </div>
-                  {{#if this.discount}}
-                  <h5 class="card-text mb-0" style="display: inline;">₫{{format_number discount}}</h5>
-                  <del class="text-secondary">₫{{format_number tuition}}</del>
-                  {{else}}
-                  <h5 class="card-text mb-0">₫{{format_number tuition}}</h5>
-                  {{/if}}
-                </div>
-              </div>
-            </a>
-          </div>
-          {{/each}} --}}
-  <div class="lecturer">
-    <h4 class="lecturer-header">Thông tin giảng viên</h4>
-    <h5>{{this.course.lecname}}</h5>
-    <p>{{this.course.experience}}</p>
-    <p>{{this.course.aboutme}}</p>
-  </div>
-
-  <div class="feedback">
-    <h4 class="feedback-header">Đánh giá về khóa học</h4>
-    {{#each this.course}}
-      <h6>{{this.course.studentname}}</h6>
-      <p>{{this.course.feedback}}</p>
-      <p>{{this.course.updatetime}}</p>
-      {{/each}}
-  </div>
+  <img src="/public/img/category/yae.png">
 </div>

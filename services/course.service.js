@@ -87,15 +87,11 @@ export default {
     },
 
     async findById(id) {
-        const list = await db
-            .select('courseavatar', 'coursename', 'tinydes', 'fulldes', 'lecname', 'rating', 'tuition', 'discount', 'reviews', 'courses.updatetime', 'students', 'experience', 'aboutme', 'chaptername', 'content', 'chaptercontent.updatetime', 'feedback', 'feedbacks.updatetime', 'studentname')
+        const list = await db.
+            select('courseavatar', 'coursename', 'tinydes', 'fulldes', 'lecname', 'rating', 'tuition', 'discount', 'reviews', 'updatetime')
             .from('courses')
             .join('lecturers', 'courses.lecid', 'lecturers.lecid')
-            .join('chaptercontent', 'chaptercontent.courseid', 'courses.courseid')
-            .join('coursechapter', 'coursechapter.courseid', 'courses.courseid')
-            .join('feedbacks', 'feedbacks.courseid', 'courses.courseid')
-            .join('students', 'students.studentid', 'feedbacks.studentid')
-            .where('courses.courseid', id);
+            .where('courseid', id);
         if (list.length === 0) {
             return null;
         }

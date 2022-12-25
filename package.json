@@ -20,7 +20,7 @@
   "homepage": "https://github.com/Dutus244/PTUDW-Final-Project-Online-Academy#readme",
   "dependencies": {
     "bcryptjs": "^2.4.3",
-    "connect-session-knex": "^1.6.0",
+    "connect-session-knex": "^3.0.0",
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
     "express-async-errors": "^3.1.1",
@@ -30,6 +30,7 @@
     "knex": "^2.3.0",
     "moment": "^2.29.4",
     "mysql2": "^2.3.3",
-    "numeral": "^2.0.6"
+    "numeral": "^2.0.6",
+    "uuidv4": "^6.2.13"
   }
 }
