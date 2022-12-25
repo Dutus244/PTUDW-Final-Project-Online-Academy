@@ -1,0 +1,33 @@
+.container{
+    display: flex;
+    flex-direction: column;
+}
+
+.course-discription{
+    display: flex;
+    justify-items: space-between;
+}
+
+.course-img { 
+    width: 200px;
+    height: 200px;
+    flex: 25%;
+}
+
+.course-detail{
+    padding-left: 50px;
+    flex: 70%;
+}
+
+.rating-item{
+    display: inline;
+    color: rgb(254, 200, 23);
+}
+
+.bi.bi-star-fill{
+    color: rgb(228, 168, 16);
+}
+
+.course-content{
+    
+}
