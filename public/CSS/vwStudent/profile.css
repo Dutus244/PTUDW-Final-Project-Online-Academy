@@ -1,5 +1,5 @@
-* {
-    font-size: 1.5rem;
+.profile * {
+    font-size: 1.3rem;
 }
 
 h4.card-header {
@@ -23,10 +23,6 @@ a.profile-item {
     border-radius: 0.25rem;
 }
 
-p {
-    text-align: center;
-}
-
 .list-group-item:hover {
     background-color: rgb(254, 106, 129); 
     color: white;
@@ -37,9 +33,9 @@ p {
     color: white;
 }
 
-.title, .profile-item {
+/* .title, .profile-item {
     font-family: Comic Sans MS;
-}
+} */
 
 .title {
     font-size: 4rem;
@@ -52,7 +48,7 @@ p {
     max-width: 50rem;
 }
 
-.form-control {
+.form-control.text-input {
     height: 3.5rem;
     font-size: 1.2rem;
 }
@@ -75,10 +71,19 @@ p {
     display: block;
 }
 
-.img-container #fav-icon {
+.img-container .fav-icon {
     position: absolute;
-    top: 0rem;
-    right: 0.5rem;
+    top: 0;
+    right: 0;
+    padding: 0 0.5rem;
     background: transparent;
     font-size: 2rem;
+}
+
+.bi-heart-fill {
+    color: rgb(254, 106, 129);
+}
+
+.bg-inherit {
+    background-color: inherit;
 }

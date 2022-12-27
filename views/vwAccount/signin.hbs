@@ -1,20 +1,24 @@
 {{#section 'css'}}
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.css" integrity="sha512-bYPO5jmStZ9WI2602V2zaivdAnbAhtfzmxnEGh9RwtlI00I9s8ulGe4oBa5XxiC6tCITJH/QG70jswBhbLkxPw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="../../public/CSS/signin.css">
+<link rel="stylesheet" href="../../public/CSS/signin.css">
 {{/section}}
 
 <main>
-<form id="login_form" class="form_class" action="login/login-access.php" method="post">
-    <div class="form_div">
-        <label>Username:</label>
-        <input class="field_class" name="login_txt" type="text" autofocus>
-        <label>Password:</label>
-        <input id="pass" class="field_class" name="password_txt" type="password">
-        <button class="submit_class" type="submit" form="login_form" onclick="return validarLogin()">Đăng nhập</button>
-    </div>
-    <div class="info_div">
-        <p>Chưa có tài khoản? <a href="/account/register">Đăng kí ngay</a></p>
-    </div>
-</form>
+    <form id="login_form" class="form_class" method="post">
+        {{#if err_message}}
+            <div class="alert alert-danger" role="alert">
+                {{err_message}}
+            </div>
+        {{/if}}
+        <div class="form_div">
+            <label>Email:</label>
+            <input class="field_class" name="email" type="email" autofocus>
+            <label>Password:</label>
+            <input id="pass" class="field_class" name="password" type="password">
+            <button class="submit_class" type="submit" form="login_form" onclick="return validarLogin()">Đăng
+                nhập</button>
+        </div>
+        <div class="info_div">
+            <p>Chưa có tài khoản? <a href="/account/register">Đăng kí ngay</a></p>
+        </div>
+    </form>
 </main>
- 

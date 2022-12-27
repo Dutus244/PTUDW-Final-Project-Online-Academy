@@ -1,66 +1,81 @@
 {{#section 'css'}}
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.css" integrity="sha512-bYPO5jmStZ9WI2602V2zaivdAnbAhtfzmxnEGh9RwtlI00I9s8ulGe4oBa5XxiC6tCITJH/QG70jswBhbLkxPw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="../../public/CSS/signup.css">
 {{/section}}
 
-
 {{#section 'js'}}
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.full.min.js" integrity="sha512-AIOTidJAcHBH2G/oZv9viEGXRqDNmfdPVPYOYKGy3fti0xIplnlgMHUGfuNRzC6FkzIo0iIxgFnr9RikFxK+sw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script
+  src="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.full.min.js"></script>
 <script>
-    $('#formRegister').on('submit', (e) => {
-        e.preventDefault()
+  $('#formRegister').on('submit', function (e) {
+    e.preventDefault();
 
-        const email = $('#txtEmail').val()
-        if (email.length === 0) {
-            alert('Please input email')
-            return
-        }
+    const email = $('#txtEmail').val();
+    if (email.length === 0) {
+      alert('Please input email');
+      return
+    }
 
-        $.getJSON(`/account/is-available?user=${email}`, (data) => {
-            if(data === false) {
-                alert(`$(email) is not available`)
-            } else {
+    const password = $('#txtPassword').val()
+    if (password.length === 0) {
+        alert('Please input password')
+        return
+    }
 
-                $('#formRegister').off('submit').submit()
-            }
-        })
-    })
+    const name = $('#txtName').val()
+    if (name.length === 0) {
+        alert('Please input name')
+        return
+    }
+
+    const confirm = $('#txtConfirm').val()
+    if (confirm !== password){
+        alert('Password and password confirm is different')
+        return
+    }
+
+    $.getJSON(`/account/is-available?email=${email}`, function (data) {
+      if (data === false) {
+        alert(`${email} is not available.`);
+      } else {
+        $('#formRegister').off('submit').submit();
+      }
+    });
+  });
 
 </script>
 {{/section}}
 
-<div class="card">
-    <div class="card-header">
 
-        <form  method="post" id="formRegister">
-            <h2> Account Information</h2>
-            <div class="form-group">
-                <label for="txtEmail">Email</label>
-                <input type="text" name="email" id="txtEmail" class="form-control" placeholder="" aria-describedby="helpId" autofocus>
-            </div>
-            <div class="form-group">
-                <label for="txtPassword">Password</label>
-                <input type="password" name="password" id="txtPassword" class="form-control" placeholder="" aria-describedby="helpId">
-            </div>
-            <div class="form-group">
-                <label for="txtConfirm">Password confirm</label>
-                <input type="password" id="txtConfirm" class="form-control" placeholder="" aria-describedby="helpId">
-            </div>
-
-
-            <h2 class="mt-5">User Information</h2>
-                <div class="form-group">
-                    <label for="txtName">Name</label>
-                    <input type="text" name="name" id="txtName" class="form-control" placeholder="" aria-describedby="helpId" autofocus>
-                </div>
-            <button type="button" class="btn btn-primary">
-                <a href="/" class="button">
-                    <i class="bi bi-skip-backward-fill bg-transparent"></i>
-                    Back
-                </a>
-            </button>
-            <button type="submit" class="btn btn-primary">Submit</button>
-        </form>
+<main>
+<form  method="post" id="formRegister" class="form_class">
+    <div class="form_dix">
+    <h2> Account Information</h2>
+    <div class="form-group">
+        <label for="txtEmail">Email</label>
+        <input type="email" name="email" id="txtEmail" class="form-control" placeholder="" aria-describedby="helpId" autofocus>
     </div>
-</div>
+    <div class="form-group">
+        <label for="txtPassword">Password</label>
+        <input type="password" name="password" id="txtPassword" class="form-control" placeholder="" aria-describedby="helpId">
+    </div>
+    <div class="form-group">
+        <label for="txtConfirm">Password confirm</label>
+        <input type="password" id="txtConfirm" class="form-control" placeholder="" aria-describedby="helpId">
+    </div>
 
+
+    <h2 class="mt-5">User Information</h2>
+        <div class="form-group">
+            <label for="txtName">Name</label>
+            <input type="text" name="name" id="txtName" class="form-control" placeholder="" aria-describedby="helpId" autofocus>
+        </div>
+    <button type="button" class="btn btn-primary">
+        <a href="/" class="button">
+            <i class="bi bi-skip-backward-fill bg-transparent"></i>
+            Back
+        </a>
+    </button>
+    <button type="submit" class="btn btn-primary">Submit</button>
+    </div>
+</form>
+</main>

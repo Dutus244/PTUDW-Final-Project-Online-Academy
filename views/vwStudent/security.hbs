@@ -2,12 +2,44 @@
 <link rel="stylesheet" href="../../public/CSS/vwStudent/profile.css">
 {{/section}}
 
+{{#section 'js'}}
+<script>
+  $(document).ready(function () {
+    $('#formChangePassword').on('submit', function (e) {
+      e.preventDefault()
+
+      const pass = $('#txtPass').val()
+      const newPass = $('#txtNewPass').val()
+      const newPassConfirm = $('#txtNewPassConfirm').val()
+      if (pass.length === 0) {
+        alert('Please fill in current password')
+        return
+      }
+      else if (newPass.length === 0) {
+        alert('Please fill in new password')
+        return
+      }
+      else if (newPassConfirm.length === 0) {
+        alert('Please fill in new password confirm')
+        return
+      }
+      else if (newPass != newPassConfirm) {
+        alert('New password and new password confirm is different')
+        return
+      }
+
+      $('#formChangePassword').off('submit').submit();
+    })
+  })
+</script>
+{{/section}}
+
 <div class="profile">
   <div class="row">
     <div class="col-sm-3">
       <div class="card">
         <h4 class="card-header profile-item student-name">
-          Student's name
+          {{this.name}}
         </h4>
         <ul class="list-group list-group-flush">
           <a href="/student/profile" class="profile-item">
@@ -20,20 +52,36 @@
             <li class="list-group-item">Watchlist</li>
           </a>
           <a href="/student/my-courses" class="profile-item">
-            <li class="list-group-item">All courses</li>
+            <li class="list-group-item">My courses</li>
           </a>
         </ul>
       </div>
     </div>
 
     <div class="col-sm-9 pb-4">
-      <p class="title">Security</p>
-      <p>Change your password here</p>
+      <p class="title text-center">Security</p>
+      {{!-- <p>Change your password here</p> --}}
 
-      <form class="profile-form" method="post">
+      <form class="profile-form" method="post" id="formChangePassword">
+        {{#if msg}}
+        <div class="alert alert-success alert-dismissible fade show text-center pr-0" role="alert">
+          {{msg}}
+          <button type="button" class="close h-100" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true" class="bg-inherit">&times;</span>
+          </button>
+        </div>
+        {{/if}}
+        {{#if err_msg}}
+        <div class="alert alert-danger alert-dismissible fade show text-center pr-0" role="alert">
+          {{err_msg}}
+          <button type="button" class="close h-100" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true" class="bg-inherit">&times;</span>
+          </button>
+        </div>
+        {{/if}}
         <div class="form-group">
-          <label for="txtCurPass">Current password</label>
-          <input name="curPass" type="password" class="form-control" id="txtCurPass">
+          <label for="txtPass">Current password</label>
+          <input name="pass" type="password" class="form-control" id="txtPass">
         </div>
         <div class="form-group">
           <label for="txtNewPass">New password</label>

@@ -1,14 +1,16 @@
 {{#section 'js'}}
 <script>
-  const curPage = +$('#curPage').text()
-  if (curPage === 1 || curPage === 0) {
-    $('#prev').addClass('disabled')
-    $('#first').addClass('disabled')
-  }
-  if (curPage === {{{totalPages}}}) {
-    $('#next').addClass('disabled')
-    $('#last').addClass('disabled')
-  }
+  $(document).ready(function () {
+    const curPage = +$('#curPage').text()
+    if (curPage === 1 || curPage === 0) {
+      $('#prev').addClass('disabled')
+      $('#first').addClass('disabled')
+    }
+    if (curPage === {{{totalPages}}}) {
+      $('#next').addClass('disabled')
+      $('#last').addClass('disabled')
+    }
+  })
 </script>
 {{/section}}
 
@@ -35,23 +37,27 @@
             <li class="list-group-item">Watchlist</li>
           </a>
           <a href="/student/my-courses" class="profile-item">
-            <li class="list-group-item active-menu">All courses</li>
+            <li class="list-group-item active-menu">My courses</li>
           </a>
         </ul>
       </div>
     </div>
 
     <div class="col-sm-9">
-      <p class="title">Watchlist</p>
+      <p class="title text-center">My course</p>
+      {{#if this.empty}}
+      <h5>Không có dữ liệu</h5>
+      {{else}}
       <div class="card-body">
         <div class="row">
+          {{#each this.courses}}
           <div class="col-sm-4 mb-4">
-            <a href="/course/detail/{{courseid}}">
+            <a href="#/">
               <div class="card h-100">
                 <img class="card-img-top" src="/public/img/category/yae.png" alt="courseTitle">
                 <div class="card-body">
                   <h4 class="card-title mb-0" id="coursename">{{coursename}}</h4>
-                  <h5 class="card-title mb-0 font-italic">{{catname}}</h5>
+                  <p class="card-title mb-0 font-italic">{{catname}}</p>
                   <p class="card-text text-secondary mb-0">{{lecname}}</p>
                   <div class="rating">
                     <p class="rating-item">{{rating}}</p>
@@ -62,8 +68,9 @@
               </div>
             </a>
           </div>
+          {{/each}}
         </div>
-        
+
         <nav>
           <ul class="pagination pagination-lg" id="pagination" style="justify-content: center;">
             <li class="page-item" id="first">
@@ -92,6 +99,7 @@
           </ul>
         </nav>
       </div>
+      {{/if}}
     </div>
   </div>
 </div>

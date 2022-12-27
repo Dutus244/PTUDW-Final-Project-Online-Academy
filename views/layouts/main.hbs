@@ -51,11 +51,18 @@
       </form>
     </div>
 
-
-    <div style="background-color: pink;">
-      <a href="/account/signin"><button class="login">Log In</button></a>
-      <a href="/account/register"><button class="signin">Sign In</button></a>
+    {{#if auth}}
+    <div class="butt" style="background-color: pink;">
+      <form id="frmLogout" action="/account/logout" method="post"></form>
+      <a href="javascript: $('#frmLogout').submit();"><button class="login">Sign out</button></a>
+      <a href="/student/profile"><button class="signin"><i class="bi bi-person-circle bg-transparent"></i></button></a>
     </div>
+    {{else}}
+    <div class="butt" style="background-color: pink;">
+      <a href="/account/signin"><button class="login">Sign in</button></a>
+      <a href="/account/register"><button class="signin">Sign up</button></a>
+    </div>
+    {{/if}}
   </nav>
 
   {{{body}}}

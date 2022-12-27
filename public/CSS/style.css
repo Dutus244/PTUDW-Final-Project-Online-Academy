@@ -66,7 +66,6 @@ header{
 
 .navbar{
     font-weight: bold;
-    font-family: Comic Sans MS;
     background: pink;
 }
 
@@ -85,7 +84,6 @@ header{
 }
 
 .navbar a{
-    font-family: Comic Sans MS;
     background: pink;
     font-size: 2rem;
     padding: .5rem 1.5rem;
@@ -96,6 +94,10 @@ header{
 .navbar a:hover{
     background-color: palevioletred;
     color:whitesmoke;
+}
+
+div.butt a:hover{
+    background: pink;
 }
 
 form.form-inline{
@@ -146,6 +148,10 @@ h1{
     display: block;
     margin-top: 0;
     padding: 0;
+}
+
+.dropdown-menu .dropdown-item {
+    font-weight: bold;
 }
 
 .btnHelloUserNameAdmin {

@@ -37,7 +37,7 @@
                 <img class="card-img-top" src="/public/img/category/yae.png" alt="courseTitle">
                 <div class="card-body">
                   <h4 class="card-title mb-0" id="coursename">{{coursename}}</h4>
-                  <h5 class="card-title mb-0 font-italic">{{catname}}</h5>
+                  <p class="card-title mb-0 font-italic">{{catname}}</p>
                   <p class="card-text text-secondary mb-0">{{lecname}}</p>
                   <div class="rating">
                     <p class="rating-item">{{rating}}</p>
@@ -56,7 +56,7 @@
           </div>
           {{/each}}
         </div>
-        {{/if}}
+        
 
         <nav>
           <ul class="pagination pagination-lg" id="pagination" style="justify-content: center;">
@@ -86,6 +86,7 @@
           </ul>
         </nav>
       </div>
+      {{/if}}
     </div>
   </div>
 </div>

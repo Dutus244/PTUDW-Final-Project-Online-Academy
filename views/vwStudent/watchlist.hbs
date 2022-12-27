@@ -1,14 +1,24 @@
 {{#section 'js'}}
 <script>
-  const curPage = +$('#curPage').text()
-  if (curPage === 1 || curPage === 0) {
-    $('#prev').addClass('disabled')
-    $('#first').addClass('disabled')
-  }
-  if (curPage === {{{totalPages}}}) {
-    $('#next').addClass('disabled')
-    $('#last').addClass('disabled')
-  }
+  $(document).ready(function () {
+    const curPage = +$('#curPage').text()
+    if (curPage === 1 || curPage === 0) {
+      $('#prev').addClass('disabled')
+      $('#first').addClass('disabled')
+    }
+    if (curPage === {{{totalPages}}}) {
+      $('#next').addClass('disabled')
+      $('#last').addClass('disabled')
+    }
+
+    $('.fav-icon').on('click', function(e) {
+      if ($('#' + e.target.id).hasClass('bi-heart-fill')) {
+        console.log(e.target.id)
+        $('#' + e.target.id).addClass('bi-heart').removeClass('bi-heart-fill')
+        $.post('/student/removeFromWatchlist/' + e.target.id)
+      }
+    })
+  })
 </script>
 {{/section}}
 
@@ -35,26 +45,31 @@
             <li class="list-group-item active-menu">Watchlist</li>
           </a>
           <a href="/student/my-courses" class="profile-item">
-            <li class="list-group-item">All courses</li>
+            <li class="list-group-item">My courses</li>
           </a>
         </ul>
       </div>
     </div>
 
     <div class="col-sm-9">
-      <p class="title">Watchlist</p>
+      <p class="title text-center">Watchlist</p>
+      {{#if this.empty}}
+      <h5>Không có dữ liệu</h5>
+      {{else}}
       <div class="card-body">
         <div class="row">
+          {{#each this.courses}}
           <div class="col-sm-4 mb-4">
             <a href="/course/detail/{{courseid}}">
               <div class="card h-100">
                 <div class="img-container">
                   <img class="card-img-top" src="/public/img/category/yae.png" alt="courseTitle">
-                  <a href="#"><i class="bi bi-heart-fill" id="fav-icon"></i></a>
+                  <form id="frmFav" action="/student/removeFromWatchlist/{{courseid}}" method="post"></form>
+                  <a href="#/"><i class="bi bi-heart-fill fav-icon" id="{{courseid}}"></i></a>
                 </div>
                 <div class="card-body">
                   <h4 class="card-title mb-0" id="coursename">{{coursename}}</h4>
-                  <h5 class="card-title mb-0 font-italic">{{catname}}</h5>
+                  <p class="card-title mb-0 font-italic">{{catname}}</p>
                   <p class="card-text text-secondary mb-0">{{lecname}}</p>
                   <div class="rating">
                     <p class="rating-item">{{rating}}</p>
@@ -71,6 +86,7 @@
               </div>
             </a>
           </div>
+          {{/each}}
         </div>
         
         <nav>
@@ -101,6 +117,7 @@
           </ul>
         </nav>
       </div>
+      {{/if}}
     </div>
   </div>
 </div>
