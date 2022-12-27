@@ -4,28 +4,30 @@
 
 {{#section 'js'}}
 <script>
-  $('#formUpdateProfile').on('submit', function (e) {
-    e.preventDefault()
+  $(document).ready(function () {
+    $('#formUpdateProfile').on('submit', function (e) {
+      e.preventDefault()
 
-    const name = $('#txtName').val()
-    const email = $('#txtEmail').val()
-    if (name.length === 0 && email.length === 0) {
-      alert('Please fill in name or email')
-      return
-    }
-    if (email.length === 0) {
-      $('#formUpdateProfile').off('submit').submit();
-      return
-    }
-
-    $.getJSON(`/account/is-available?email=${email}`, function (data) {
-      if (data === false) {
-        alert(`${email} is unavailable.`);
-      } else {
-        $('#formUpdateProfile').off('submit').submit();
+      const name = $('#txtName').val()
+      const email = $('#txtEmail').val()
+      if (name.length === 0 && email.length === 0) {
+        alert('Please fill in name or email')
+        return
       }
-    });
+      if (email.length === 0) {
+        $('#formUpdateProfile').off('submit').submit();
+        return
+      }
 
+      $.getJSON(`/account/is-available?email=${email}`, function (data) {
+        if (data === false) {
+          alert(`${email} is unavailable.`);
+        } else {
+          $('#formUpdateProfile').off('submit').submit();
+        }
+      });
+
+    })
   })
 </script>
 {{/section}}
@@ -48,7 +50,7 @@
             <li class="list-group-item">Watchlist</li>
           </a>
           <a href="/student/my-courses" class="profile-item">
-            <li class="list-group-item">All courses</li>
+            <li class="list-group-item">My courses</li>
           </a>
         </ul>
       </div>

@@ -93,8 +93,10 @@ router.get('/detail/:id', async function (req, res) {
 })
 
 router.get('/:id/learn', async function (req, res) {
+    const courseid = req.params.id
+    const course = await courseService.getCourseContent(courseid)
     res.render('vwCourse/learn', {
-
+        
     })
 })
 

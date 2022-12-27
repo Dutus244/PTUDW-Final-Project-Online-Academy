@@ -1,28 +1,98 @@
 {{#section 'js'}}
+<script src="https://cdn.plyr.io/3.7.3/plyr.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/kartik-v/bootstrap-star-rating@4.1.2/js/star-rating.min.js"
+  type="text/javascript"></script>
+<script>
+  const player = new Plyr('#player', {
+    controls: [
+      'play-large', // The large play button in the center
+      'play', // Play/pause playback
+      'progress', // The progress bar and scrubber for playback and buffering
+      'current-time', // The current time of playback
+      'duration', // The full duration of the media
+      'mute', // Toggle mute
+      'volume', // Volume control
+      'settings', // Settings menu
+      'airplay', // Airplay (currently Safari only)
+      'fullscreen', // Toggle fullscreen
+    ],
+    settings: ['speed'],
+    speed: { selected: 1, options: [0.5, 0.75, 1, 1.25, 1.5, 1.75, 2] },
+  });
+</script>
 
+<script>
+  $(document).ready(function () {
+
+
+  })
+</script>
 {{/section}}
 
 {{#section 'css'}}
-
+<link rel="stylesheet" href="https://cdn.plyr.io/3.7.3/plyr.css" />
+<link rel="stylesheet" href="../../public/CSS/vwCourse/learn.css">
+<link href="https://cdn.jsdelivr.net/gh/kartik-v/bootstrap-star-rating@4.1.2/css/star-rating.min.css" media="all"
+  rel="stylesheet" type="text/css" />
+<link href="https://cdn.jsdelivr.net/gh/kartik-v/bootstrap-star-rating@4.1.2/themes/krajee-svg/theme.css" media="all"
+  rel="stylesheet" type="text/css" />
 {{/section}}
 
-<ul class="nav nav-tabs" role="tablist">
-  <li class="active"><a data-toggle="tab" href="#home">Home</a></li>
-  <li><a data-toggle="tab" href="#menu1">Menu 1</a></li>
-  <li><a data-toggle="tab" href="#menu2">Menu 2</a></li>
-</ul>
+<div class="course-video">
+  <div class="row">
+    <div class="col-sm-9 pr-0">
+      <div class="video">
+        <video id="player" playsinline data-poster="/public/img/category/yae.png">
+          <source src="/public/vid/course-vid.mp4" type="video/mp4" />
+          <!-- Có tùy chọn thêm phụ đề -->
+          {{!--
+          <track kind="captions" label="English captions" src="/path/to/captions.vtt" srclang="en" default /> --}}
+        </video>
+      </div>
 
-<div class="tab-content">
-  <div id="home" class="tab-pane fade show active">
-    <h3>HOME</h3>
-    <p>Some content.</p>
-  </div>
-  <div id="menu1" class="tab-pane fade">
-    <h3>Menu 1</h3>
-    <p>Some content in menu 1.</p>
-  </div>
-  <div id="menu2" class="tab-pane fade">
-    <h3>Menu 2</h3>
-    <p>Some content in menu 2.</p>
+      <div class="review p-5">
+        <p class="h1">Course's name</p>
+        <p class="h1 text-center">Your feedback</p>
+        <form action="">
+          <input id="inputRating" name="rating" type="text" class="rating rating-loading" data-size="xl" data-min="0"
+            data-max="5" data-step="0.5" data-show-clear="false" data-show-caption="false">
+
+          <textarea id="txtReview" name="txtReview" rows="10"
+            placeholder="Share your experience about this course"></textarea>
+
+          <div class="submit-button">
+            <button type="submit" class="btn btn-review">Submit</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <div class="col-sm-3 pl-0">
+      <div class="card-header">
+        Course content
+      </div>
+      <div class="course-content-menu">
+        <a data-toggle="collapse" href="#chapterid" role="button" aria-expanded="false" aria-controls="collapseExample">
+          <div class="card-body chapter">
+            <div class="chapter-name">
+              Chapter 1
+            </div>
+            <div class="chapter-icon">
+              <i class="bi bi-caret-down-fill"></i>
+              <i class="bi bi-caret-up-fill"></i>
+            </div>
+          </div>
+        </a>
+
+        <div class="collapse chapter-content" id="chapterid">
+          <div class="card card-body">
+            Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim
+            keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
+          </div>
+        </div>
+
+
+      </div>
+    </div>
   </div>
 </div>

@@ -4,30 +4,32 @@
 
 {{#section 'js'}}
 <script>
-  $('#formChangePassword').on('submit', function (e) {
-    e.preventDefault()
+  $(document).ready(function () {
+    $('#formChangePassword').on('submit', function (e) {
+      e.preventDefault()
 
-    const pass = $('#txtPass').val()
-    const newPass = $('#txtNewPass').val()
-    const newPassConfirm = $('#txtNewPassConfirm').val()
-    if (pass.length === 0) {
-      alert('Please fill in current password')
-      return
-    }
-    else if (newPass.length === 0) {
-      alert('Please fill in new password')
-      return
-    }
-    else if (newPassConfirm.length === 0) {
-      alert('Please fill in new password confirm')
-      return
-    }
-    else if (newPass != newPassConfirm) {
-      alert('New password and new password confirm is different')
-      return
-    }
+      const pass = $('#txtPass').val()
+      const newPass = $('#txtNewPass').val()
+      const newPassConfirm = $('#txtNewPassConfirm').val()
+      if (pass.length === 0) {
+        alert('Please fill in current password')
+        return
+      }
+      else if (newPass.length === 0) {
+        alert('Please fill in new password')
+        return
+      }
+      else if (newPassConfirm.length === 0) {
+        alert('Please fill in new password confirm')
+        return
+      }
+      else if (newPass != newPassConfirm) {
+        alert('New password and new password confirm is different')
+        return
+      }
 
-    $('#formChangePassword').off('submit').submit();
+      $('#formChangePassword').off('submit').submit();
+    })
   })
 </script>
 {{/section}}
@@ -50,7 +52,7 @@
             <li class="list-group-item">Watchlist</li>
           </a>
           <a href="/student/my-courses" class="profile-item">
-            <li class="list-group-item">All courses</li>
+            <li class="list-group-item">My courses</li>
           </a>
         </ul>
       </div>

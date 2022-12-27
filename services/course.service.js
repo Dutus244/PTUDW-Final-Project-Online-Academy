@@ -114,4 +114,15 @@ export default {
     del(id) {
         return db('courses').where('courseid', id).del();
     },
+
+    async getCourseContent(id) {
+        const list = await db
+            .select('courses.coursename', 'chaptername')
+            .from('courses')
+            .join('coursechapter', 'courses.courseid', 'coursechapter.courseid')
+            .leftJoin('chaptercontent', 'coursechapter.chapterid', 'chaptercontent.chapterid')
+            .where('courses.courseid', id)
+        
+        console.log(list);
+    }
 }

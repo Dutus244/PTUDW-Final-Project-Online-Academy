@@ -1,0 +1,79 @@
+.course-video {
+    padding: 0rem 0rem;
+}
+
+.video {
+    --plyr-color-main: rgb(254, 106, 129);
+}
+
+#txtReview {
+    border: 1px solid rgb(254, 106, 129);
+    height: 100%;
+    width: 100%;
+    -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+    -moz-box-sizing: border-box;    /* Firefox, other Gecko */
+    box-sizing: border-box;         /* Opera/IE 8+ */
+    resize: none;
+    padding: 1rem;
+    margin-bottom: 1rem;
+}
+
+.submit-button {
+    display: flex;
+    justify-content: center;
+}
+
+.btn-review {
+    background-color: pink !important;
+    border-color: rgb(254, 106, 129);
+}
+
+.course-content-menu {
+    position: -webkit-sticky;
+    /* Safari */
+    position: sticky;
+    top: 0;
+    overflow-y: auto;
+    height: 100vh;
+}
+
+.card-header,.card-body {
+    padding: 1.6rem;
+    /* border-top-color: rgb(254, 106, 129); */
+    border-bottom-color: rgb(254, 106, 129);
+}
+
+.card-header {
+    font-weight: bold;
+    background-color: white;
+}
+
+.chapter {
+    background-color: whitesmoke;
+    display: flex;
+}
+
+.chapter-name {
+    width: 90%;
+}
+
+.chapter-icon {
+    width: 10%;
+}
+
+a, a:visited, a:hover {
+    color: black;
+    text-decoration: none;
+}
+
+a[aria-expanded=true] .bi-caret-down-fill {
+    display: none;
+}
+
+a[aria-expanded=false] .bi-caret-up-fill {
+    display: none;
+}
+
+.chapter-content {
+    background-color: white;
+}
