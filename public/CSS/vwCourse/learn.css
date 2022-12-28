@@ -6,13 +6,16 @@
     --plyr-color-main: rgb(254, 106, 129);
 }
 
-#txtReview {
+#textReview {
     border: 1px solid rgb(254, 106, 129);
     height: 100%;
     width: 100%;
-    -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
-    -moz-box-sizing: border-box;    /* Firefox, other Gecko */
-    box-sizing: border-box;         /* Opera/IE 8+ */
+    -webkit-box-sizing: border-box;
+    /* Safari/Chrome, other WebKit */
+    -moz-box-sizing: border-box;
+    /* Firefox, other Gecko */
+    box-sizing: border-box;
+    /* Opera/IE 8+ */
     resize: none;
     padding: 1rem;
     margin-bottom: 1rem;
@@ -28,40 +31,47 @@
     border-color: rgb(254, 106, 129);
 }
 
-.course-content-menu {
+/* .course-content-menu {
     position: -webkit-sticky;
-    /* Safari */
     position: sticky;
     top: 0;
-    overflow-y: auto;
-    height: 100vh;
-}
+    overflow-y: scroll;
+    height: 90vh;
+} */
 
-.card-header,.card-body {
+.card-header,
+.card-body {
     padding: 1.6rem;
     /* border-top-color: rgb(254, 106, 129); */
-    border-bottom-color: rgb(254, 106, 129);
+    /* border-bottom-color: rgb(254, 106, 129); */
+    border: none;
 }
 
 .card-header {
     font-weight: bold;
     background-color: white;
+    /* border-bottom: 1px solid rgb(254, 106, 129); */
 }
 
 .chapter {
-    background-color: whitesmoke;
+    background-color: pink;
     display: flex;
+
+    /* border-bottom: 1px solid rgb(254, 106, 129); */
 }
 
 .chapter-name {
     width: 90%;
+
 }
 
 .chapter-icon {
     width: 10%;
 }
 
-a, a:visited, a:hover {
+a,
+a:visited,
+a:hover {
     color: black;
     text-decoration: none;
 }
@@ -74,6 +84,16 @@ a[aria-expanded=false] .bi-caret-up-fill {
     display: none;
 }
 
+/* a[aria-expanded=true] .chapter {
+    border-top: 1px solid rgb(254, 106, 129);
+    border-bottom: none;
+
+} */
+
 .chapter-content {
     background-color: white;
+}
+
+.chapter-content:hover {
+    background-color: rgb(254, 106, 129);
 }

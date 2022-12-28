@@ -115,14 +115,67 @@ export default {
         return db('courses').where('courseid', id).del();
     },
 
+    async getCourseName(id) {
+        const coursename = await db
+            .select('coursename')
+            .from('courses')
+            .where('courseid', id)
+        return coursename[0]
+    },
+
     async getCourseContent(id) {
         const list = await db
-            .select('courses.coursename', 'chaptername')
+            .select('coursechapter.chapterid', 'chaptername', 'contentid', 'contentname', 'content')
             .from('courses')
             .join('coursechapter', 'courses.courseid', 'coursechapter.courseid')
             .leftJoin('chaptercontent', 'coursechapter.chapterid', 'chaptercontent.chapterid')
             .where('courses.courseid', id)
+
+        var coursecontent = []
+        var curChapterId = list[0].chapterid
+        var curChapterName = list[0].chaptername
+        var contentList = []
+        for (const i in list) {
+            const { chapterid, chaptername, contentid, contentname, content } = list[i]
+            if (curChapterId != chapterid) {
+                coursecontent.push({
+                    chapterid: curChapterId,
+                    chaptername: curChapterName,
+                    chaptercontent: contentList
+                })
+                curChapterId = chapterid
+                curChapterName = chaptername
+                contentList = []
+            }
+
+            contentList.push({ contentid: contentid, contentname: contentname, content: content })
+
+        }
+        coursecontent.push({
+            chapterid: curChapterId,
+            chaptername: curChapterName,
+            chaptercontent: contentList
+        })
+
+        // console.log(coursecontent[0].chaptercontent);
+        return coursecontent
+    },
+
+    async getFeedback(studentid, courseid) {
+        const fb = await db('feedbacks')
+            .select('feedback as text', 'rating')
+            .where('studentid', studentid)
+            .andWhere('courseid', courseid)
         
-        console.log(list);
-    }
+        return fb[0]
+    },
+
+    async postFeedback(studentid, courseid, text, rating) {
+        const sql = `insert into feedbacks values ('${studentid}', '${courseid}', '${text}', '${rating}', now())`
+        try {
+            await db.raw(sql)
+        } catch (error) {
+            console.log(error);
+        }
+    },
 }

@@ -19,12 +19,36 @@
     settings: ['speed'],
     speed: { selected: 1, options: [0.5, 0.75, 1, 1.25, 1.5, 1.75, 2] },
   });
+
+  // Expose
+  window.player = player;
 </script>
 
 <script>
   $(document).ready(function () {
+    $('#ratingForm').on('submit', function (e) {
+      e.preventDefault()
 
+      const rating = $('#inputRating').val()
+      const text = $('#textReview').val()
+      if (rating.length === 0) {
+        alert('Please fill in the rating star')
+        return
+      }
+      if (text.length === 0) {
+        alert('Please fill in the rating text')
+        return
+      }
 
+      $('#ratingForm').off('submit').submit();
+    })
+
+    $('a.content').on('click', function (e) {
+      src = $(this).data("vid-src")
+      console.log(src)
+      
+      
+    })
   })
 </script>
 {{/section}}
@@ -44,38 +68,46 @@
       <div class="video">
         <video id="player" playsinline data-poster="/public/img/category/yae.png">
           <source src="/public/vid/course-vid.mp4" type="video/mp4" />
-          <!-- Có tùy chọn thêm phụ đề -->
-          {{!--
-          <track kind="captions" label="English captions" src="/path/to/captions.vtt" srclang="en" default /> --}}
         </video>
       </div>
 
-      <div class="review p-5">
-        <p class="h1">Course's name</p>
+      <div class="review px-5 py-3">
+        <p class="h1">{{this.coursename}}</p>
         <p class="h1 text-center">Your feedback</p>
-        <form action="">
-          <input id="inputRating" name="rating" type="text" class="rating rating-loading" data-size="xl" data-min="0"
-            data-max="5" data-step="0.5" data-show-clear="false" data-show-caption="false">
+        {{#if this.feedback}}
+        <input id="inputRating" name="rating" type="text" class="rating rating-loading" data-size="xl" data-min="0"
+          data-max="5" value="{{this.feedback.rating}}" data-show-clear="false" data-show-caption="false"
+          data-readonly="true">
 
-          <textarea id="txtReview" name="txtReview" rows="10"
+        <textarea id="textReview" name="textReview" rows="10" spellcheck="false"
+          readonly>{{this.feedback.text}}</textarea>
+        {{else}}
+        <form action="/course/{{courseid}}/rating" method="post" id="ratingForm">
+          <input id="inputRating" name="rating" type="text" class="rating rating-loading" data-size="xl" data-min="0"
+            data-max="5" data-step="1" data-show-clear="false" data-show-caption="false">
+
+          <textarea id="textReview" name="textReview" rows="10" spellcheck="false"
             placeholder="Share your experience about this course"></textarea>
 
           <div class="submit-button">
             <button type="submit" class="btn btn-review">Submit</button>
           </div>
         </form>
+        {{/if}}
       </div>
     </div>
 
-    <div class="col-sm-3 pl-0">
+    <div class="col-sm-3 p-0">
       <div class="card-header">
         Course content
       </div>
       <div class="course-content-menu">
-        <a data-toggle="collapse" href="#chapterid" role="button" aria-expanded="false" aria-controls="collapseExample">
-          <div class="card-body chapter">
+        {{#each this.coursecontent}}
+        <a data-toggle="collapse" href="#chapterid_{{chapterid}}" role="button" aria-expanded="false"
+          aria-controls="chapterid_{{chapterid}}">
+          <div class="card-header chapter">
             <div class="chapter-name">
-              Chapter 1
+              {{chaptername}}
             </div>
             <div class="chapter-icon">
               <i class="bi bi-caret-down-fill"></i>
@@ -84,14 +116,17 @@
           </div>
         </a>
 
-        <div class="collapse chapter-content" id="chapterid">
-          <div class="card card-body">
-            Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim
-            keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
-          </div>
+
+        <div class="collapse" id="chapterid_{{chapterid}}">
+          {{#each this.chaptercontent}}
+          <a id="contentid_{{contentid}}" href="#/" class="content" data-vid-src="{{content}}">
+            <div class="card card-body chapter-content">
+              {{contentname}}
+            </div>
+          </a>
+          {{/each}}
         </div>
-
-
+        {{/each}}
       </div>
     </div>
   </div>

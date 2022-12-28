@@ -2,6 +2,7 @@ import express from 'express';
 import courseService from '../services/course.service.js';
 import categoryService from "../services/category.service.js";
 import { getVisiblePage } from '../utils/helper.js'
+import authWithRequiredPermission from '../middlewares/auth.mdw.js';
 
 const router = express.Router()
 
@@ -92,12 +93,28 @@ router.get('/detail/:id', async function (req, res) {
     })
 })
 
-router.get('/:id/learn', async function (req, res) {
+router.get('/:id/learn', authWithRequiredPermission(0), async function (req, res) {
+    const studentid = res.locals.authUser.accountid
     const courseid = req.params.id
-    const course = await courseService.getCourseContent(courseid)
+    const { coursename } = await courseService.getCourseName(courseid)
+    const coursecontent = await courseService.getCourseContent(courseid)
+    const feedback = await courseService.getFeedback(studentid, courseid)
+
     res.render('vwCourse/learn', {
-        
+        courseid: courseid,
+        coursename: coursename,
+        coursecontent: coursecontent,
+        feedback: feedback,
     })
+})
+
+router.post('/:id/rating', authWithRequiredPermission(0), async function (req, res) {
+    const studentid = res.locals.authUser.accountid
+    const courseid = req.params.id
+    const { rating, textReview } = req.body
+
+    await courseService.postFeedback(studentid, courseid, textReview, rating)
+    res.redirect(`/course/${courseid}/learn`)
 })
 
 // Amdin with authWithRequiredPermission

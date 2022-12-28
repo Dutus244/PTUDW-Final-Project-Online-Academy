@@ -5,7 +5,7 @@ export default function authWithRequiredPermission(requiredPermission) {
       return res.redirect('/account/signin');
     }
 
-    if (req.session.authUser && req.session.authUser.permission < requiredPermission) {
+    if (req.session.authUser && req.session.authUser.permission != requiredPermission) {
       return res.render('403', { layout: false });
     }
 
