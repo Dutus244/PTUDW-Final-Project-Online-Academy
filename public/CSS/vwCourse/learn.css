@@ -42,22 +42,17 @@
 .card-header,
 .card-body {
     padding: 1.6rem;
-    /* border-top-color: rgb(254, 106, 129); */
-    /* border-bottom-color: rgb(254, 106, 129); */
     border: none;
 }
 
 .card-header {
     font-weight: bold;
     background-color: white;
-    /* border-bottom: 1px solid rgb(254, 106, 129); */
 }
 
 .chapter {
     background-color: pink;
     display: flex;
-
-    /* border-bottom: 1px solid rgb(254, 106, 129); */
 }
 
 .chapter-name {
@@ -84,16 +79,27 @@ a[aria-expanded=false] .bi-caret-up-fill {
     display: none;
 }
 
-/* a[aria-expanded=true] .chapter {
-    border-top: 1px solid rgb(254, 106, 129);
-    border-bottom: none;
-
-} */
-
 .chapter-content {
     background-color: white;
+    display: flex;
+    flex-direction: row;
 }
 
-.chapter-content:hover {
+.chapter-content:hover,.is-watching {
     background-color: rgb(254, 106, 129);
+}
+
+.content-icon {
+    width: 10%;
+}
+
+.bi-check-circle-fill {
+    font-size: 2rem;
+    color: rgb(5, 87, 5);
+}
+
+.content-name {
+    padding-left: 1rem;
+    width: 90%;
+    margin: auto;
 }

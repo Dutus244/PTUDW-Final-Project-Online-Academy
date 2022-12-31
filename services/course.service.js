@@ -120,6 +120,7 @@ export default {
             .select('coursename')
             .from('courses')
             .where('courseid', id)
+
         return coursename[0]
     },
 
@@ -130,6 +131,9 @@ export default {
             .join('coursechapter', 'courses.courseid', 'coursechapter.courseid')
             .leftJoin('chaptercontent', 'coursechapter.chapterid', 'chaptercontent.chapterid')
             .where('courses.courseid', id)
+
+        if (list.length === 0)
+            return null
 
         var coursecontent = []
         var curChapterId = list[0].chapterid
@@ -157,7 +161,7 @@ export default {
             chaptercontent: contentList
         })
 
-        // console.log(coursecontent[0].chaptercontent);
+        // console.log(coursecontent);
         return coursecontent
     },
 
@@ -177,5 +181,35 @@ export default {
         } catch (error) {
             console.log(error);
         }
+    },
+
+    async isBought(courseid, studentid) {
+        const list = await db
+            .select('*')
+            .from('studentcourses')
+            .where('courseid', courseid)
+            .andWhere('studentid', studentid)
+        
+        return list.length === 0 ? false : true
+    },
+
+    async hasWatched(studentid, contentid) {
+        await db('studentwatchcontent')
+            .insert({
+                'studentid': studentid,
+                'contentid': contentid,
+            })
+    },
+
+    async watchedContentByCourse(studentid, courseid) {
+        const list = await db
+            .select('studentwatchcontent.contentid')
+            .from('studentwatchcontent')
+            .join('chaptercontent', 'studentwatchcontent.contentid', 'chaptercontent.contentid')
+            .where('studentid', studentid)
+            .andWhere('chaptercontent.courseid', courseid)
+        
+        // console.log(list);
+        return list
     },
 }

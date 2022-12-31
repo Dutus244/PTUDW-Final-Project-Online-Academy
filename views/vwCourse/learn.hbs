@@ -3,29 +3,46 @@
 <script src="https://cdn.jsdelivr.net/gh/kartik-v/bootstrap-star-rating@4.1.2/js/star-rating.min.js"
   type="text/javascript"></script>
 <script>
-  const player = new Plyr('#player', {
-    controls: [
-      'play-large', // The large play button in the center
-      'play', // Play/pause playback
-      'progress', // The progress bar and scrubber for playback and buffering
-      'current-time', // The current time of playback
-      'duration', // The full duration of the media
-      'mute', // Toggle mute
-      'volume', // Volume control
-      'settings', // Settings menu
-      'airplay', // Airplay (currently Safari only)
-      'fullscreen', // Toggle fullscreen
-    ],
-    settings: ['speed'],
-    speed: { selected: 1, options: [0.5, 0.75, 1, 1.25, 1.5, 1.75, 2] },
-  });
+  document.addEventListener('DOMContentLoaded', () => {
+    const player = new Plyr('#player', {
+      controls: [
+        'play-large', // The large play button in the center
+        'play', // Play/pause playback
+        'progress', // The progress bar and scrubber for playback and buffering
+        'current-time', // The current time of playback
+        'duration', // The full duration of the media
+        'mute', // Toggle mute
+        'volume', // Volume control
+        'settings', // Settings menu
+        'airplay', // Airplay (currently Safari only)
+        'fullscreen', // Toggle fullscreen
+      ],
+      settings: ['speed'],
+      speed: { selected: 1, options: [0.5, 0.75, 1, 1.25, 1.5, 1.75, 2] },
+    });
 
-  // Expose
-  window.player = player;
+    player.on('ended', function (e) {
+      const contentid = $('.is-watching').parent().attr('id').replace('contentid_', '')
+      const icon = $('.is-watching').find('i')
+
+      if (!icon.hasClass('bi-check-circle-fill')) {
+        icon.addClass('bi-check-circle-fill')
+        $.post('/course/' + contentid + '/hasWatched')
+      }
+    })
+
+    // Expose
+    window.player = player;
+  })
 </script>
 
 <script>
   $(document).ready(function () {
+    const watchedContentId = {{{watchedContent}}}
+    for (const i in watchedContentId) {
+      $('a#contentid_' + watchedContentId[i].contentid).find('i').addClass('bi-check-circle-fill')
+    }
+
     $('#ratingForm').on('submit', function (e) {
       e.preventDefault()
 
@@ -44,10 +61,22 @@
     })
 
     $('a.content').on('click', function (e) {
+      $('.content').find('.is-watching').removeClass('is-watching')
+      $(this).children().addClass('is-watching')
+
       src = $(this).data("vid-src")
-      console.log(src)
-      
-      
+      player.source = {
+        type: 'video',
+        sources: [
+          {
+            src: src,
+            type: 'video/mp4',
+          }
+        ],
+      };
+
+      player.play()
+      window.scrollTo(0, 0)
     })
   })
 </script>
@@ -60,6 +89,19 @@
   rel="stylesheet" type="text/css" />
 <link href="https://cdn.jsdelivr.net/gh/kartik-v/bootstrap-star-rating@4.1.2/themes/krajee-svg/theme.css" media="all"
   rel="stylesheet" type="text/css" />
+<style>
+  .plyr__controls .plyr__controls__item.plyr__time {
+    color: white;
+  }
+
+  .plyr__control--overlaid {
+    background: rgb(254, 106, 129);
+  }
+
+  .plyr__control svg {
+    fill: white;
+  }
+</style>
 {{/section}}
 
 <div class="course-video">
@@ -67,7 +109,7 @@
     <div class="col-sm-9 pr-0">
       <div class="video">
         <video id="player" playsinline data-poster="/public/img/category/yae.png">
-          <source src="/public/vid/course-vid.mp4" type="video/mp4" />
+          {{!-- <source src="/public/vid/course-vid.mp4" type="video/mp4"/> --}}
         </video>
       </div>
 
@@ -75,17 +117,21 @@
         <p class="h1">{{this.coursename}}</p>
         <p class="h1 text-center">Your feedback</p>
         {{#if this.feedback}}
+        <label for="inputRating"></label>
         <input id="inputRating" name="rating" type="text" class="rating rating-loading" data-size="xl" data-min="0"
           data-max="5" value="{{this.feedback.rating}}" data-show-clear="false" data-show-caption="false"
           data-readonly="true">
 
+        <label for="textReview"></label>
         <textarea id="textReview" name="textReview" rows="10" spellcheck="false"
           readonly>{{this.feedback.text}}</textarea>
         {{else}}
         <form action="/course/{{courseid}}/rating" method="post" id="ratingForm">
+          <label for="inputRating"></label>
           <input id="inputRating" name="rating" type="text" class="rating rating-loading" data-size="xl" data-min="0"
             data-max="5" data-step="1" data-show-clear="false" data-show-caption="false">
 
+          <label for="textReview"></label>
           <textarea id="textReview" name="textReview" rows="10" spellcheck="false"
             placeholder="Share your experience about this course"></textarea>
 
@@ -120,8 +166,10 @@
         <div class="collapse" id="chapterid_{{chapterid}}">
           {{#each this.chaptercontent}}
           <a id="contentid_{{contentid}}" href="#/" class="content" data-vid-src="{{content}}">
+            {{!-- Is watching --}}
             <div class="card card-body chapter-content">
-              {{contentname}}
+              <div class="content-icon"><i class="bi"></i></div>
+              <div class="content-name">{{contentname}}</div>
             </div>
           </a>
           {{/each}}

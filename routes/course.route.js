@@ -96,14 +96,31 @@ router.get('/detail/:id', async function (req, res) {
 router.get('/:id/learn', authWithRequiredPermission(0), async function (req, res) {
     const studentid = res.locals.authUser.accountid
     const courseid = req.params.id
-    const { coursename } = await courseService.getCourseName(courseid)
+
+    const flag = await courseService.isBought(courseid, studentid)
+    if (!flag) {
+        res.render('403', {
+            layout: false
+        })
+        return
+    }
+
+    const course  = await courseService.getCourseName(courseid)
+    if (!course) {
+        res.render('404', {
+            layout: false
+        })
+        return
+    }
     const coursecontent = await courseService.getCourseContent(courseid)
+    const watchedContent = await courseService.watchedContentByCourse(studentid, courseid)
     const feedback = await courseService.getFeedback(studentid, courseid)
 
     res.render('vwCourse/learn', {
         courseid: courseid,
-        coursename: coursename,
+        coursename: course.coursename,
         coursecontent: coursecontent,
+        watchedContent: JSON.stringify(watchedContent),
         feedback: feedback,
     })
 })
@@ -115,6 +132,13 @@ router.post('/:id/rating', authWithRequiredPermission(0), async function (req, r
 
     await courseService.postFeedback(studentid, courseid, textReview, rating)
     res.redirect(`/course/${courseid}/learn`)
+})
+
+router.post('/:id/hasWatched', authWithRequiredPermission(0), async function (req, res) {
+    const studentid = res.locals.authUser.accountid
+    const contentid = req.params.id
+
+    await courseService.hasWatched(studentid, contentid)
 })
 
 // Amdin with authWithRequiredPermission
