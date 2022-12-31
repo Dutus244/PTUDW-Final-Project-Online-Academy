@@ -178,4 +178,34 @@ export default {
             console.log(error);
         }
     },
+    
+    async featured(){
+        const sql = `SELECT * FROM courses order by rating desc limit 3`;
+        try{
+            const list = await db.raw(sql);
+            return list;
+        } catch(error){
+            console.log(error);
+        }
+    },
+
+    async viewed(){
+        const sql = `SELECT * FROM courses order by view desc limit 10`;
+        try{
+            const list = await db.raw(sql);
+            return list;
+        } catch(error){
+            console.log(error);
+        }
+    },
+
+    async created(){
+        const sql = `SELECT * FROM courses order by createtime desc limit 10`;
+        try{
+            const list = await db.raw(sql);
+            return list;
+        } catch(error){
+            console.log(error);
+        }
+    },
 }

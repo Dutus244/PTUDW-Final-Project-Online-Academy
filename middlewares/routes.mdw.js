@@ -5,9 +5,21 @@ import studentRoute from '../routes/student.route.js'
 import teacherRoute from '../routes/teacher.route.js'
 import accountRoute from '../routes/account.route.js'
 
+import courseService from '../services/course.service.js';
+
 export default function (app) {
-  app.get('/', function (req, res) {
-    res.render('vwGuest/home')
+  app.get('/', async (req, res)=> {
+    const listFeatured = await courseService.featured();
+    //console.log(listFeatured)
+    const a = listFeatured[0][1]
+    console.log(a)
+    res.render('vwGuest/home', {
+        first: listFeatured[0][0],
+        second: listFeatured[0][1],
+        third: listFeatured[0][2],
+        
+    })
+    
   })
 
   // app.use('/category', categoryRoute)
