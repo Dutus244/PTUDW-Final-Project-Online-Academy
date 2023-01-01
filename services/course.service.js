@@ -88,18 +88,28 @@ export default {
 
     async findById(id) {
         const list = await db
-            .select('courseavatar', 'coursename', 'tinydes', 'fulldes', 'lecname', 'rating', 'tuition', 'discount', 'reviews', 'courses.updatetime', 'students', 'experience', 'aboutme', 'chaptername', 'content', 'chaptercontent.updatetime', 'feedback', 'feedbacks.updatetime', 'studentname')
+            .select('courseavatar', 'coursename', 'tinydes', 'fulldes', 'lecname', 'courses.rating as courserating', 'tuition', 'discount', 'reviews', 'courses.updatetime as courseudt', 'students', 'experience', 'aboutme', 'chaptername', 'feedback', 'feedbacks.updatetime as feedbackudt', 'studentname', 'feedbacks.rating as fbrating')
             .from('courses')
-            .join('lecturers', 'courses.lecid', 'lecturers.lecid')
-            .join('chaptercontent', 'chaptercontent.courseid', 'courses.courseid')
-            .join('coursechapter', 'coursechapter.courseid', 'courses.courseid')
-            .join('feedbacks', 'feedbacks.courseid', 'courses.courseid')
-            .join('students', 'students.studentid', 'feedbacks.studentid')
+            .leftJoin('lecturers', 'courses.lecid', 'lecturers.lecid')
+            .leftJoin('coursechapter', 'coursechapter.courseid', 'courses.courseid')
+            .leftJoin('feedbacks', 'feedbacks.courseid', 'courses.courseid')
+            .leftJoin('students', 'students.studentid', 'feedbacks.studentid')
             .where('courses.courseid', id);
         if (list.length === 0) {
             return null;
         }
         return list[0];
+    },
+
+    async findChapter(id) {
+        const list = await db
+            .select('contentname', 'content', 'updatetime')
+            .from('chaptercontent')
+            .where('courseid', id);
+        if (list.length === 0) {
+            return null;
+        }
+        return list;
     },
 
     async findAll() {
