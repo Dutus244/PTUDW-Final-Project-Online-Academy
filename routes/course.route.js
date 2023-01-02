@@ -86,13 +86,15 @@ router.get('/detail/:id', async function (req, res) {
     const id = req.params.id || 0;
     const course = await courseService.findById(id);
     const chapter = await courseService.findChapter(id);
-    //console.log(chapter);
+    const feedback = await courseService.findFeedbacks(id);
+    console.log(chapter);
     if (course === null)
       return res.redirect('/');
 
     res.render('vwGuest/detail', {
       course: course,
-      chapter: chapter
+      chapter: chapter,
+      feedback: feedback
     })
 })
 

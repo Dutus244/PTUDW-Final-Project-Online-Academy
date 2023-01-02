@@ -88,12 +88,10 @@ export default {
 
     async findById(id) {
         const list = await db
-            .select('courseavatar', 'coursename', 'tinydes', 'fulldes', 'lecname', 'courses.rating as courserating', 'tuition', 'discount', 'reviews', 'courses.updatetime as courseudt', 'students', 'experience', 'aboutme', 'chaptername', 'feedback', 'feedbacks.updatetime as feedbackudt', 'studentname', 'feedbacks.rating as fbrating')
+            .select('courseavatar', 'coursename', 'tinydes', 'fulldes', 'lecname', 'rating', 'tuition', 'discount', 'reviews', 'updatetime', 'students', 'experience', 'aboutme', 'chaptername')
             .from('courses')
             .leftJoin('lecturers', 'courses.lecid', 'lecturers.lecid')
             .leftJoin('coursechapter', 'coursechapter.courseid', 'courses.courseid')
-            .leftJoin('feedbacks', 'feedbacks.courseid', 'courses.courseid')
-            .leftJoin('students', 'students.studentid', 'feedbacks.studentid')
             .where('courses.courseid', id);
         if (list.length === 0) {
             return null;
@@ -105,6 +103,18 @@ export default {
         const list = await db
             .select('contentname', 'content', 'updatetime')
             .from('chaptercontent')
+            .where('courseid', id);
+        if (list.length === 0) {
+            return null;
+        }
+        return list;
+    },
+
+    async findFeedbacks(id) {
+        const list = await db
+            .select('feedback', 'rating', 'updatetime', 'studentname')
+            .from('feedbacks')
+            .leftJoin('students', 'students.studentid', 'feedbacks.studentid')
             .where('courseid', id);
         if (list.length === 0) {
             return null;
@@ -141,7 +151,6 @@ export default {
             .join('coursechapter', 'courses.courseid', 'coursechapter.courseid')
             .leftJoin('chaptercontent', 'coursechapter.chapterid', 'chaptercontent.chapterid')
             .where('courses.courseid', id)
-
         if (list.length === 0)
             return null
 

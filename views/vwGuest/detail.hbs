@@ -25,12 +25,12 @@
         {{/if}}
       </div>
       <div class="rating">
-        <p class="rating-item">{{this.course.courserating}}</p>
+        <p class="rating-item">{{this.course.rating}}</p>
         <i class="bi bi-star-fill"></i>
         <p class="text-secondary rating-item">({{this.course.reviews}})</p>
       </div>
       <div class="last-updated">
-        <p>Cập nhật lần cuối: {{this.course.courseudt}}</p>
+        <p>Cập nhật lần cuối: {{this.course.updatetime}}</p>
       </div>
     </div>
   </div>
@@ -45,10 +45,10 @@
     <div class="chapter">
       <p class="chapter-header">{{this.course.chaptername}}</p>
       <div class="chapter-menu">
-        {{!-- {{#each this.chapter}}
-        {{/each}} --}}
-          <p>Bài 1</p>
-          <p>0/0/0</p>
+        {{#each this.chapter}}
+        <p>{{this.chapter.contentname}}</p>
+        <p>{{this.chapter.updatetime}}</p>
+        {{/each}}
       </div>
     </div>
   </div>
@@ -92,10 +92,12 @@
 
   <div class="feedback">
     <h4 class="header">Đánh giá về khóa học</h4>
-    {{!-- {{#each this.course}}
-      <h6>{{this.course.studentname}}</h6>
-      <p>{{this.course.feedback}}</p>
-      <p>{{this.course.feedbackudt}}</p>
-      {{/each}} --}}
+    <div class="information">
+      {{#each this.feedback}}
+      <h6>{{this.feedback.studentname}}</h6>
+      <p>{{this.feedback.feedback}}</p>
+      <p>{{this.feedback.updatetime}}</p>
+      {{/each}}
+    </div>
   </div>
 </div>
