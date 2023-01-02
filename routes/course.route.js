@@ -98,9 +98,20 @@ router.get('/detail/:id', async function (req, res) {
     })
 })
 
+router.post('/detail/:id/addToWatchlist', authWithRequiredPermission(0), async (req, res) => {
+    // const courseid = '2c5ea4c0-4067-11e9-8bad-9b1deb4d3b7d'
+    const courseid = req.params.id || 0
+    await courseService.addToWatchlist(res.locals.authUser.accountid, courseid)
+  })
+  
+router.post('/detail/:id/buy', authWithRequiredPermission(0), async (req, res) => {
+    const courseid = req.params.id || 0
+    await courseService.buyCourse(res.locals.authUser.accountid, courseid)
+})
+
 router.get('/:id/learn', authWithRequiredPermission(0), async function (req, res) {
-    const studentid = res.locals.authUser.accountid
-    const courseid = req.params.id
+    const studentid = res.locals.authUser.accountid || 0
+    const courseid = req.params.id || 0
 
     const flag = await courseService.isBought(courseid, studentid)
     if (!flag) {
@@ -131,8 +142,8 @@ router.get('/:id/learn', authWithRequiredPermission(0), async function (req, res
 })
 
 router.post('/:id/rating', authWithRequiredPermission(0), async function (req, res) {
-    const studentid = res.locals.authUser.accountid
-    const courseid = req.params.id
+    const studentid = res.locals.authUser.accountid || 0
+    const courseid = req.params.id || 0
     const { rating, textReview } = req.body
 
     await courseService.postFeedback(studentid, courseid, textReview, rating)
@@ -140,8 +151,8 @@ router.post('/:id/rating', authWithRequiredPermission(0), async function (req, r
 })
 
 router.post('/:id/hasWatched', authWithRequiredPermission(0), async function (req, res) {
-    const studentid = res.locals.authUser.accountid
-    const contentid = req.params.id
+    const studentid = res.locals.authUser.accountid || 0
+    const contentid = req.params.id || 0
 
     await courseService.hasWatched(studentid, contentid)
 })

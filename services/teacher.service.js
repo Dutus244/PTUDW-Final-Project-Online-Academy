@@ -3,10 +3,10 @@ import db from '../utils/db.js';
 export default {
     async getTeacherProfile(id) {
         const teacher = await db
-            .select('teachername', 'email')
+            .select('LecName', 'email')
             .from('accounts')
-            .join('teachers', 'accountid', 'teacherid')
-            .where('accounts.accountid', '=', id)
+            .join('lecturers', 'AccountID', 'LecID')
+            .where('accounts.AccountID', '=', id)
 
         return teacher[0]
     },
@@ -14,13 +14,13 @@ export default {
     async updateTeacherProfile(id, name, email) {
         if (email) {
             await db('accounts')
-                .where('accountid', '=', id)
+                .where('AccountID', '=', id)
                 .update('email', email)
         }
         if (name) {
             await db('teachers')
-                .where('teacherid', '=', id)
-                .update('teachername', name)
+                .where('LecID', '=', id)
+                .update('LecName', name)
         }
         return
     },
@@ -33,18 +33,18 @@ export default {
             .join('courses', 'watchlists.courseid', 'courses.courseid')
             .join('categories', 'courses.catid', 'categories.catid')
             .join('lecturers', 'courses.lecid', 'lecturers.lecid')
-            .where('watchlists.teacherid', id)
+            .where('watchlists.lecid', id)
             .offset(offset)
             .limit(limit)
     },
 
-    async removeFromWatchlist(teacherid, courseid) {
-        return await db('watchlists').where('teacherid', studentid).where('courseid', courseid).del()
+    async removeFromWatchlist(LecID, courseid) {
+        return await db('watchlists').where('LecID', studentid).where('courseid', courseid).del()
     },
 
-    async addToWatchlist(teacherid, courseid) {
+    async addToWatchlist(LecID, courseid) {
         return await db('watchlists')
-            .insert({'teacherid': teacherid, 'courseid': courseid})
+            .insert({'LecID': LecID, 'courseid': courseid})
     },
 
     async getTeacherCourses(id, offset, limit) {
@@ -55,7 +55,7 @@ export default {
             .join('courses', 'teachercourses.courseid', 'courses.courseid')
             .join('categories', 'courses.catid', 'categories.catid')
             .join('lecturers', 'courses.lecid', 'lecturers.lecid')
-            .where('teachercourses.teacherid', id)
+            .where('studentcourses.LecID', id)
             .offset(offset)
             .limit(limit)
     },

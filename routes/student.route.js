@@ -77,6 +77,7 @@ router.get('/watchlist', async (req, res) => {
   const list = await studentService.getStudentWatchlist(res.locals.authUser.accountid, offset, limit)
 
   res.render('vwStudent/watchlist', {
+    name: res.locals.authUser.name,
     courses: list,
     empty: list.length === 0,
     pages: pages,
@@ -101,6 +102,7 @@ router.get('/my-courses', async (req, res) => {
   const list = await studentService.getStudentCourses(res.locals.authUser.accountid, offset, limit)
 
   res.render('vwStudent/my-courses', {
+    name: res.locals.authUser.name,
     courses: list,
     empty: list.length === 0,
     pages: pages,
@@ -113,11 +115,6 @@ router.get('/my-courses', async (req, res) => {
 router.post('/removeFromWatchlist/:id', async (req, res) => {
   const courseid = req.params.id
   await studentService.removeFromWatchlist(res.locals.authUser.accountid, courseid)
-})
-
-router.post('/addToWatchlist', async (req, res) => {
-  // const courseid = '2c5ea4c0-4067-11e9-8bad-9b1deb4d3b7d'
-  // await studentService.addToWatchlist(res.locals.authUser.accountid, courseid)
 })
 
 export default router

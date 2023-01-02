@@ -42,11 +42,6 @@ export default {
     return await db('watchlists').where('studentid', studentid).where('courseid', courseid).del()
   },
 
-  async addToWatchlist(studentid, courseid) {
-    return await db('watchlists')
-      .insert({'studentid': studentid, 'courseid': courseid})
-  },
-
   async getStudentCourses(id, offset, limit) {
     return await db
       .select('catname', 'coursename', 'lecname', 'rating',
