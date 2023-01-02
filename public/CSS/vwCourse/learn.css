@@ -89,6 +89,10 @@ a[aria-expanded=false] .bi-caret-up-fill {
     background-color: rgb(254, 106, 129);
 }
 
+.chapter-content:hover .content-name, .is-watching .content-name {
+    color: white;
+}
+
 .content-icon {
     width: 10%;
 }

@@ -77,6 +77,7 @@ router.get('/watchlist', async (req, res) => {
   const list = await studentService.getStudentWatchlist(res.locals.authUser.accountid, offset, limit)
 
   res.render('vwStudent/watchlist', {
+    name: res.locals.authUser.name,
     courses: list,
     empty: list.length === 0,
     pages: pages,
@@ -101,6 +102,7 @@ router.get('/my-courses', async (req, res) => {
   const list = await studentService.getStudentCourses(res.locals.authUser.accountid, offset, limit)
 
   res.render('vwStudent/my-courses', {
+    name: res.locals.authUser.name,
     courses: list,
     empty: list.length === 0,
     pages: pages,
