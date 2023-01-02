@@ -3,14 +3,24 @@
     flex-direction: column;
 }
 
+.header, .chapter-header, .chapter-menu, .information{
+    display: block;
+    width: 100%;
+    background-color: #ffffff;
+    padding: 5px 5px 5px 5px;
+}
+
+.header{
+    font-weight: bold;
+}
+
 .course-discription{
     display: flex;
-    justify-items: space-between;
+    justify-content: space-between;
 }
 
 .course-img { 
-    width: 200px;
-    height: 200px;
+    padding-left: 30px;
     flex: 25%;
 }
 
@@ -28,6 +38,30 @@
     color: rgb(228, 168, 16);
 }
 
-.course-content{
-    
+.course-menu, .course-content, .similar-courses, .lecturer, .feedback{
+    display: block;
+    padding: 10px;
+    width: 100%;
+    margin: 30px auto 20px;
+    background: #fff4f9;
+    overflow: hidden;
 }
+
+.chapter, .information{
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.chapter-header{
+    font-size: 16px;
+    font-weight: 700;
+}
+
+.chapter-menu{
+    font-size: 13px;
+    padding-left: 15px;
+    padding-right: 15px;
+    display: flex;
+    justify-content: space-between;
+}
+
