@@ -115,9 +115,4 @@ router.post('/removeFromWatchlist/:id', async (req, res) => {
   await studentService.removeFromWatchlist(res.locals.authUser.accountid, courseid)
 })
 
-router.post('/addToWatchlist', async (req, res) => {
-  // const courseid = '2c5ea4c0-4067-11e9-8bad-9b1deb4d3b7d'
-  // await studentService.addToWatchlist(res.locals.authUser.accountid, courseid)
-})
-
 export default router

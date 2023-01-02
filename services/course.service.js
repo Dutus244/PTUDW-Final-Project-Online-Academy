@@ -180,7 +180,7 @@ export default {
             .select('feedback as text', 'rating')
             .where('studentid', studentid)
             .andWhere('courseid', courseid)
-        
+
         return fb[0]
     },
 
@@ -192,33 +192,33 @@ export default {
             console.log(error);
         }
     },
-    
-    async featured(){
+
+    async featured() {
         const sql = `SELECT * FROM courses order by rating desc limit 3`;
-        try{
+        try {
             const list = await db.raw(sql);
             return list;
-        } catch(error){
+        } catch (error) {
             console.log(error);
         }
     },
 
-    async viewed(){
+    async viewed() {
         const sql = `SELECT * FROM courses order by views desc limit 10`;
-        try{
+        try {
             const list = await db.raw(sql);
             return list;
-        } catch(error){
+        } catch (error) {
             console.log(error);
         }
     },
 
-    async created(){
+    async created() {
         const sql = `SELECT * FROM courses order by createtime desc limit 10`;
-        try{
+        try {
             const list = await db.raw(sql);
             return list;
-        } catch(error){
+        } catch (error) {
             console.log(error);
         }
     },
@@ -229,7 +229,7 @@ export default {
             .from('studentcourses')
             .where('courseid', courseid)
             .andWhere('studentid', studentid)
-        
+
         return list.length === 0 ? false : true
     },
 
@@ -248,8 +248,35 @@ export default {
             .join('chaptercontent', 'studentwatchcontent.contentid', 'chaptercontent.contentid')
             .where('studentid', studentid)
             .andWhere('chaptercontent.courseid', courseid)
-        
+
         // console.log(list);
         return list
+    },
+
+    async isInWatchlist(studentid, courseid) {
+        const list = await db('watchlists')
+            .where('studentid', studentid)
+            .andWhere('courseid', courseid)
+
+        return list.length === 0 ? false : true
+    },
+
+    async addToWatchlist(studentid, courseid) {
+        try {
+            return await db('watchlists')
+                .insert({ 'studentid': studentid, 'courseid': courseid })
+        } catch (error) {
+            console.log(error);
+        }
+
+    },
+
+    async buyCourse(studentid, courseid) {
+        try {
+            return await db('studentcourses')
+                .insert({ 'studentid': studentid, 'courseid': courseid })
+        } catch (error) {
+            console.log(error);
+        }
     },
 }
