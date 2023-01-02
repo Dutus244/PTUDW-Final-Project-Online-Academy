@@ -194,7 +194,7 @@ export default {
     },
 
     async viewed(){
-        const sql = `SELECT * FROM courses order by view desc limit 10`;
+        const sql = `SELECT * FROM courses order by views desc limit 10`;
         try{
             const list = await db.raw(sql);
             return list;

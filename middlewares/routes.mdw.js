@@ -10,14 +10,18 @@ import courseService from '../services/course.service.js';
 export default function (app) {
   app.get('/', async (req, res)=> {
     const listFeatured = await courseService.featured();
-    //console.log(listFeatured)
-    const a = listFeatured[0][1]
-    console.log(a)
+    const listCreated = await courseService.created();
+    const listViewed = await courseService.viewed();
+
+    console.log(listCreated[0]);
+    
     res.render('vwGuest/home', {
         first: listFeatured[0][0],
         second: listFeatured[0][1],
         third: listFeatured[0][2],
         
+        created: listCreated[0],
+        viewed: listViewed[0],
     })
     
   })
