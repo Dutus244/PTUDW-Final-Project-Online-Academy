@@ -4,26 +4,42 @@
 
 <div class="container">
   <div class="course-discription">
-      <div class="course-detail">
-        <h2 class="course-title">{{this.course.coursename}}</h2>
-        <p class="discription">{{this.course.tinydes}}</p>
-        <p class="student">Học viên: {{this.course.students}}</p>
-        <div class="tuition">
-          {{#if this.course.discount}}
-          <p>Học phí: <del class="text-secondary">{{this.course.tuition}}₫</del> <span class="text-danger font-weight-bold" style="display: inline">{{this.course.discount}}₫</span></p>
-          {{else}}
-          <p>Học phí: <span class="text-danger font-weight-bold" style="display: inline">{{this.course.tuition}}</span></p>
-          {{/if}}
-        </div>        
-        <p class="last-updated">Cập nhật lần cuối: {{this.course.updatetime}}</p>
-        <div class="rating">
-          <p class="rating-item">{{this.course.rating}}</p>
-          <i class="bi bi-star-fill"></i>
-          <p class="text-secondary rating-item">({{this.course.reviews}})</p>
-        </div>
-        <a class="button" href="#" role="button">Add to watchlist</a>
-        <a class="button" href="#" role="button">Buy now</a>
+    <div class="course-detail">
+      <h2 class="course-title">{{this.course.coursename}}</h2>
+      <p class="discription">{{this.course.tinydes}}</p>
+      <p class="student">Học viên: {{this.course.students}}</p>
+      <div class="tuition">
+        {{#if this.course.discount}}
+        <p>Học phí: <del class="text-secondary">{{format_number this.course.tuition}}₫</del> <span
+            class="text-danger font-weight-bold" style="display: inline">{{format_number this.course.discount}}₫</span>
+        </p>
+        {{else}}
+        <p>Học phí: <span class="text-danger font-weight-bold" style="display: inline">{{format_number
+            this.course.tuition}}</span></p>
+        {{/if}}
       </div>
+      <p class="last-updated">Cập nhật lần cuối: {{this.course.updatetime}}</p>
+      <div class="rating">
+        <p class="rating-item">{{this.course.rating}}</p>
+        <i class="bi bi-star-fill"></i>
+        <p class="text-secondary rating-item">({{this.course.reviews}})</p>
+      </div>
+      <form id="formAddToWatchlist" action="/course/detail/{{this.course.courseid}}/addToWatchlist" method="post">
+      </form>
+      <form id="formBuyCourse" action="/course/detail/{{this.course.courseid}}/buy" method="post"></form>
+      {{#if this.isBought}}
+      <a class="btn button" href="/course/{{this.course.courseid}}/learn" role="button">Go to course</a>
+      {{else}}
+      {{#if this.isInWatchlist}}
+      <a class="btn button disabled" href="#/" role="button">Already in watchlist</a>
+      {{else}}
+      <a class="btn button" href="javascript: $('#formAddToWatchlist').submit();" role="button">Add to watchlist</a>
+      {{/if}}
+      <a class="btn button" href="javascript: $('#formBuyCourse').submit();" role="button">Buy now</a>
+      {{/if}}
+
+
+    </div>
     <div class="course-img">
       <img src="/public/img/category/yae.png" width="200px">
     </div>

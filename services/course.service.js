@@ -88,7 +88,7 @@ export default {
 
     async findById(id) {
         const list = await db
-            .select('courseavatar', 'coursename', 'tinydes', 'fulldes', 'lecname', 'rating', 'tuition', 'discount', 'reviews', 'updatetime', 'students', 'experience', 'aboutme', 'chaptername')
+            .select('courses.courseid', 'courseavatar', 'coursename', 'tinydes', 'fulldes', 'lecname', 'rating', 'tuition', 'discount', 'reviews', 'updatetime', 'students', 'experience', 'aboutme', 'chaptername')
             .from('courses')
             .leftJoin('lecturers', 'courses.lecid', 'lecturers.lecid')
             .leftJoin('coursechapter', 'coursechapter.courseid', 'courses.courseid')
@@ -232,7 +232,7 @@ export default {
         }
     },
 
-    async isBought(courseid, studentid) {
+    async isBought(studentid, courseid) {
         const list = await db
             .select('*')
             .from('studentcourses')
