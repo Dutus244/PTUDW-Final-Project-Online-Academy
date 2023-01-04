@@ -4,34 +4,28 @@
 
 <div class="container">
   <div class="course-discription">
+      <div class="course-detail">
+        <h2 class="course-title">{{this.course.coursename}}</h2>
+        <p class="discription">{{this.course.tinydes}}</p>
+        <p class="student">Học viên: {{this.course.students}}</p>
+        <div class="tuition">
+          {{#if this.course.discount}}
+          <p>Học phí: <del class="text-secondary">{{this.course.tuition}}₫</del> <span class="text-danger font-weight-bold" style="display: inline">{{this.course.discount}}₫</span></p>
+          {{else}}
+          <p>Học phí: <span class="text-danger font-weight-bold" style="display: inline">{{this.course.tuition}}</span></p>
+          {{/if}}
+        </div>        
+        <p class="last-updated">Cập nhật lần cuối: {{this.course.updatetime}}</p>
+        <div class="rating">
+          <p class="rating-item">{{this.course.rating}}</p>
+          <i class="bi bi-star-fill"></i>
+          <p class="text-secondary rating-item">({{this.course.reviews}})</p>
+        </div>
+        <a class="button" href="#" role="button">Add to watchlist</a>
+        <a class="button" href="#" role="button">Buy now</a>
+      </div>
     <div class="course-img">
-      <img src="/public/img/category/yae.png" width="250px">
-    </div>
-    <div class="course-detail">
-      <div class="course-title">
-        <h3>{{this.course.coursename}}</h3>
-      </div>
-      <div class="discription">
-        <p>{{this.course.tinydes}}</p>
-      </div>
-      <div class="student">
-        <p>Học viên: {{this.course.students}}</p>
-      </div>
-      <div class="tuition">
-        {{#if this.course.discount}}
-        <p>Học phí: <del class="text-secondary">{{this.course.tuition}}₫</del> <span class="text-danger font-weight-bold" style="display: inline">{{this.course.discount}}₫</span></p>
-        {{else}}
-        <p>Học phí: <span class="text-danger font-weight-bold" style="display: inline">{{this.course.tuition}}</span></p>
-        {{/if}}
-      </div>
-      <div class="rating">
-        <p class="rating-item">{{this.course.rating}}</p>
-        <i class="bi bi-star-fill"></i>
-        <p class="text-secondary rating-item">({{this.course.reviews}})</p>
-      </div>
-      <div class="last-updated">
-        <p>Cập nhật lần cuối: {{this.course.updatetime}}</p>
-      </div>
+      <img src="/public/img/category/yae.png" width="200px">
     </div>
   </div>
 
@@ -53,48 +47,28 @@
     </div>
   </div>
 
-  <div class="similar-courses">
-    <h4 class="header">Các khóa học tương tự</h4>
-  </div>
-{{!-- {{#each this.courses}}
-          <div class="col-sm-4 mb-4">
-            <a href="/course/detail/{{courseid}}">
-              <div class="card h-100">
-                <img class="card-img-top" src="/public/img/category/yae.png" alt="courseTitle">
-                <div class="card-body">
-                  <h4 class="card-title mb-0" id="coursename">{{coursename}}</h4>
-                  <p class="card-title mb-0 font-italic">{{catname}}</p>
-                  <p class="card-text text-secondary mb-0">{{lecname}}</p>
-                  <div class="rating">
-                    <p class="rating-item">{{rating}}</p>
-                    <i class="bi bi-star-fill"></i>
-                    <p class="text-secondary rating-item">({{format_number reviews}})</p>
-                  </div>
-                  {{#if this.discount}}
-                  <h5 class="card-text mb-0" style="display: inline;">₫{{format_number discount}}</h5>
-                  <del class="text-secondary">₫{{format_number tuition}}</del>
-                  {{else}}
-                  <h5 class="card-text mb-0">₫{{format_number tuition}}</h5>
-                  {{/if}}
-                </div>
-              </div>
-            </a>
-          </div>
-          {{/each}} --}}
   <div class="lecturer">
     <h4 class="header">Thông tin giảng viên</h4>
     <div class="information">
       <h5>Họ và tên: {{this.course.lecname}}</h5>
       <p>Kinh nghiệm: {{this.course.experience}}</p>
-      <p>Giới thiệu: {{this.course.aboutme}}</p>
+      <p>About me: {{this.course.aboutme}}</p>
     </div>
+  </div>
+
+  <div class="similar-courses">
+    <h4 class="header">Các khóa học tương tự</h4>
   </div>
 
   <div class="feedback">
     <h4 class="header">Đánh giá về khóa học</h4>
     <div class="information">
       {{#each this.feedback}}
-      <h6>{{this.feedback.studentname}}</h6>
+      <div class="rating">
+        <h6 class="text-secondary rating-item">{{this.feedback.studentname}}</h6>
+        <p class="rating-item">{{this.feedback.rating}}</p>
+        <i class="bi bi-star-fill"></i>
+      </div>
       <p>{{this.feedback.feedback}}</p>
       <p>{{this.feedback.updatetime}}</p>
       {{/each}}

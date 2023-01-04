@@ -3,30 +3,38 @@
     flex-direction: column;
 }
 
-.header, .chapter-header, .chapter-menu, .information{
+.header, .chapter-header, .chapter-menu, .information, .content{
     display: block;
     width: 100%;
     background-color: #ffffff;
     padding: 5px 5px 5px 5px;
 }
 
+.content{
+    word-break: break-all;
+}
+
 .header{
     font-weight: bold;
 }
 
-.course-discription{
-    display: flex;
-    justify-content: space-between;
+.discription, .tuition, .student, .last-updated, .rating, .button{
+    margin-left: 5px;
 }
 
 .course-img { 
+    margin-top: 10px;
     padding-left: 30px;
-    flex: 25%;
+    flex: 20%;
+    display: block;
+    overflow: hidden;
 }
 
 .course-detail{
-    padding-left: 50px;
-    flex: 70%;
+    padding-left: 20px;
+    flex: 75%;
+    display: block;
+    width: 75%;
 }
 
 .rating-item{
@@ -38,13 +46,58 @@
     color: rgb(228, 168, 16);
 }
 
+.button{
+    display: block;
+    background-color: #ffdeec;
+    border-radius: 15px;
+    padding: 7px 10px;
+    text-align: center;
+    display: inline-block;
+    font-size: 16px;
+    margin-top:5px;
+    cursor: pointer;
+}
+
+a:link {
+    text-decoration: none;
+    color: black;
+}
+  
+a:visited {
+    text-decoration: none;
+    color: black;
+}
+  
+a:hover {
+    text-decoration: none;
+    color: #7fe3ff;
+}
+  
+a:active {
+    text-decoration: none;
+    color: black;
+}
+
 .course-menu, .course-content, .similar-courses, .lecturer, .feedback{
     display: block;
     padding: 10px;
     width: 100%;
-    margin: 30px auto 20px;
+    margin: 30px auto 30px;
     background: #fff4f9;
     overflow: hidden;
+}
+
+.course-discription{
+    display: flex;
+    border-style: solid;
+    border-width: 5px;
+    border-color: #e6fdff;
+    background-color: #e6fdff;
+    border-radius:15px;
+    padding: 10px;
+    margin-top:10px;
+    margin-left: 20px;
+    margin-right: 20px;
 }
 
 .chapter, .information{

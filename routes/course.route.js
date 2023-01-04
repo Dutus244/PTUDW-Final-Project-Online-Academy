@@ -87,7 +87,7 @@ router.get('/detail/:id', async function (req, res) {
     const course = await courseService.findById(id);
     const chapter = await courseService.findChapter(id);
     const feedback = await courseService.findFeedbacks(id);
-    console.log(chapter);
+    //console.log(chapter);
     if (course === null)
       return res.redirect('/');
 
