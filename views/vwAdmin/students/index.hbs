@@ -1,19 +1,15 @@
 {{#section 'css'}}
-<link rel="stylesheet" href="/public/CSS/styleAdmin.css">
+    <link rel="stylesheet" href="/public/CSS/styleAdmin.css">
 {{/section}}
 
 <div class="card">
     <h4 class="card-header d-flex justify-content-between">
-        <span><h3>Categories</h3></span>
-        <a class="btn btn-sm btn-outline-primary btnAddAdmin" style="height: 30px; width: 200px" href="/admin/categories/add" role="button">
-            <i class="bi bi-plus-circle bg-transparent" aria-hidden="true"></i>
-            ADD CATEGORY
-        </a>
+        <span><h3>Students</h3></span>
     </h4>
     {{#if this.empty}}
         <div class="card-body">
             <h5 class="card-title">
-                Không có lĩnh vực nào!
+                Không có học sinh nào!
             </h5>
         </div>
     {{else}}
@@ -21,22 +17,24 @@
             <table class="table table-hover">
                 <thead>
                 <tr>
-                    <th>Category ID</th>
-                    <th>Category Name</th>
-                    <th>Category Level</th>
-                    <th>Number Of Courses</th>
+                    <th>Student ID</th>
+                    <th>Email</th>
+                    <th>Student Name</th>
+                    <th>Number of courses enrolls in</th>
+                    <th>Number of courses like</th>
                     <th>&nbsp;</th>
                 </tr>
                 </thead>
                 <tbody>
-                {{#each this.categories}}
+                {{#each this.students}}
                     <tr>
-                        <td>{{catid}}</td>
-                        <td>{{catname}}</td>
-                        <td>{{catlevel}}</td>
+                        <td>{{studentid}}</td>
+                        <td>{{email}}</td>
+                        <td>{{studentname}}</td>
                         <td>{{amount}}</td>
+                        <td>{{}}</td>
                         <td class="text-right">
-                            <a class="btn btn-sm btn-outline-primary btnAddAdmin" href="/admin/categories/edit?id={{catid}}" role="button" title="Edit">
+                            <a class="btn btn-sm btn-outline-primary btnAddAdmin" href="/admin/students/edit?id={{lecid}}" role="button" title="Edit">
                             <i class="bi bi-pencil-square bg-transparent" aria-hidden="true"></i>
                             </a>
                         </td>

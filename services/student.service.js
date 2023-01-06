@@ -58,5 +58,27 @@ export default {
       .where('studentcourses.studentid', id)
       .offset(offset)
       .limit(limit)
-  }, 
+  },
+
+  async findAll() {
+    const list = await db
+        .select('students.studentid','accounts.email','studentname')
+        .count({amount: 'studentcourses.studentid'})
+        // .count({amountwatchlists: 'watchlists.studentid'})
+        .from('students')
+        .leftJoin('studentcourses', 'students.studentid', 'studentcourses.studentid')
+        // .leftJoin('watchlists', 'students.studentid', 'watchlists.studentid')
+        .join('accounts','students.studentid','accounts.accountid')
+        .groupBy('students.studentid')
+    return list;
+  },
+
+  async countCourseInWatchLists(id) {
+    const list = await db
+        .count({amount: 'studentid'})
+        .from('watchlists')
+        .groupBy('studentid')
+        .where('studentid', id);
+    return list[0].amount;
+  }
 }

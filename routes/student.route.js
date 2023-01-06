@@ -4,6 +4,8 @@ import studentService from '../services/student.service.js';
 import userService from '../services/user.service.js';
 import courseService from '../services/course.service.js';
 import { getVisiblePage } from '../utils/helper.js'
+import authWithRequiredPermission from "../middlewares/auth.mdw.js";
+import lecturerService from "../services/lecturer.service.js";
 
 
 const router = express.Router()
@@ -118,6 +120,17 @@ router.post('/removeFromWatchlist/:id', async (req, res) => {
 router.post('/addToWatchlist', async (req, res) => {
   // const courseid = '2c5ea4c0-4067-11e9-8bad-9b1deb4d3b7d'
   // await studentService.addToWatchlist(res.locals.authUser.accountid, courseid)
+})
+
+// Amdin with authWithRequiredPermission
+router.get('/', authWithRequiredPermission(2), async function (req, res) {
+  const list = await studentService.findAll();
+
+  res.render('vwAdmin/students/index', {
+    layout: 'mainAdmin',
+    students: list,
+    empty: list.length === 0
+  });
 })
 
 export default router

@@ -8,6 +8,10 @@ export default {
     addStudent(entity){
         return db('students').insert(entity)
     },
+
+    addLecturer(entity) {
+        return db('lecturers').insert(entity)
+    },
     
     async login(email){
         const list = await db('accounts')

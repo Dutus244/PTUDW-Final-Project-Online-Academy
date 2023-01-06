@@ -1,0 +1,44 @@
+{{#section 'css'}}
+    <link rel="stylesheet" href="/public/CSS/styleAdmin.css">
+{{/section}}
+
+<form method="post">
+    <div class="card">
+        <h4 class="card-header">
+            Add New Lecturer
+        </h4>
+        <div class="card-body">
+            <div class="form-group">
+                <label for="txtCatName">Email</label>
+                <input name="email" type="text" class="form-control" id="txtLecName" autofocus placeholder="" required>
+
+                <br>
+
+                <label for="txtCatName">Password</label>
+                <input name="password" type="text" class="form-control" id="txtLecName" autofocus placeholder="" required>
+
+                <br>
+
+                <label for="txtCatName">Lecturer Name</label>
+                <input name="lecname" type="text" class="form-control" id="txtLecName" autofocus placeholder="" required>
+
+                <br>
+
+                <label for="txtCatName">Experience</label>
+                <input name="experience" type="text" class="form-control" id="txtLecName" autofocus placeholder="" required>
+
+                <br>
+            </div>
+        </div>
+        <div class="card-footer text-muted">
+            <a class="btn btn-outline-success btnAdd" href="/admin/lecturers" role="button">
+                <i class="fa fa-backward bg-transparent" aria-hidden="true"></i>
+                Return to List
+            </a>
+            <button type="submit" class="btn btn-outline-success btnAdd">
+                <i class="fa fa-check bg-transparent" aria-hidden="true"></i>
+                Add new lecturer
+            </button>
+        </div>
+    </div>
+</form>

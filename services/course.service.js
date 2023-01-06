@@ -88,13 +88,13 @@ export default {
 
     async findById(id) {
         const list = await db
-            .select('courseavatar', 'coursename', 'tinydes', 'fulldes', 'lecname', 'rating', 'tuition', 'discount', 'reviews', 'courses.updatetime', 'students', 'experience', 'aboutme', 'chaptername', 'content', 'chaptercontent.updatetime', 'feedback', 'feedbacks.updatetime', 'studentname')
+            .select('courseavatar', 'coursename', 'tinydes', 'fulldes', 'lecname', 'courses.rating', 'tuition', 'discount', 'reviews', 'courses.updatetime', 'students', 'experience', 'aboutme', 'chaptername', 'content', 'chaptercontent.updatetime', 'feedback', 'feedbacks.updatetime', 'studentname')
             .from('courses')
-            .join('lecturers', 'courses.lecid', 'lecturers.lecid')
-            .join('chaptercontent', 'chaptercontent.courseid', 'courses.courseid')
-            .join('coursechapter', 'coursechapter.courseid', 'courses.courseid')
-            .join('feedbacks', 'feedbacks.courseid', 'courses.courseid')
-            .join('students', 'students.studentid', 'feedbacks.studentid')
+            .leftJoin('lecturers', 'courses.lecid', 'lecturers.lecid')
+            .leftJoin('chaptercontent', 'chaptercontent.courseid', 'courses.courseid')
+            .leftJoin('coursechapter', 'coursechapter.courseid', 'courses.courseid')
+            .leftJoin('feedbacks', 'feedbacks.courseid', 'courses.courseid')
+            .leftJoin('students', 'students.studentid', 'feedbacks.studentid')
             .where('courses.courseid', id);
         if (list.length === 0) {
             return null;
@@ -104,7 +104,7 @@ export default {
 
     async findAll() {
         const list = await db
-            .select('courseid', 'coursename', 'categories.catname', 'tinydes', 'fulldes', 'rating', 'reviews', 'students', 'tuition', 'discount', 'discountinfo', 'updatetime', 'lecturers.lecname')
+            .select('courseid', 'coursename', 'categories.catname', 'tinydes', 'fulldes', 'rating', 'reviews', 'views', 'students', 'tuition', 'discount', 'discountinfo', 'updatetime', 'lecturers.lecname')
             .from('courses')
             .leftJoin('categories', 'categories.catid', 'courses.catid')
             .leftJoin('lecturers', 'courses.lecid', 'lecturers.lecid')

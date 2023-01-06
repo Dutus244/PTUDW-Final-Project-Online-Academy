@@ -24,6 +24,7 @@
                     <th>Full Description</th>
                     <th>Rating</th>
                     <th>Number Of Reviews</th>
+                    <th>Number Of Views</th>
                     <th>Number Of Students</th>
                     <th>Tuition</th>
                     <th>Discount</th>
@@ -43,6 +44,7 @@
                         <td>{{fulldes}}</td>
                         <td>{{rating}}</td>
                         <td>{{reviews}}</td>
+                        <td>{{views}}</td>
                         <td>{{students}}</td>
                         <td>{{format_number tuition}}</td>
                         <td>{{format_number discount}}</td>
@@ -51,7 +53,7 @@
                         <td>{{lecname}}</td>
                         <td class="text-right">
                             <a class="btn btn-sm btn-outline-primary btnAddAdmin" href="/admin/courses/del?id={{courseid}}" role="button" title="Delete">
-                            <i class="fa fa-trash" aria-hidden="true"></i>
+                            <i class="fa fa-trash bg-transparent" aria-hidden="true"></i>
                             </a>
                         </td>
                     </tr>

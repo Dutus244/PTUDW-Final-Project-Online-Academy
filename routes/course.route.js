@@ -118,7 +118,7 @@ router.post('/:id/rating', authWithRequiredPermission(0), async function (req, r
 })
 
 // Amdin with authWithRequiredPermission
-router.get('/', async function (req, res) {
+router.get('/', authWithRequiredPermission(2),async function (req, res) {
     const list = await courseService.findAll();
     res.render('vwAdmin/courses/index', {
         layout: 'mainAdmin',
@@ -127,7 +127,7 @@ router.get('/', async function (req, res) {
     });
 })
 
-router.get('/del', async function (req, res) {
+router.get('/del',authWithRequiredPermission(2), async function (req, res) {
     const id = req.query.id || 0;
     await courseService.del(id);
     res.redirect('/admin/courses/');

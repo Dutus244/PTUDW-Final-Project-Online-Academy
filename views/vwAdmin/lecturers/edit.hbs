@@ -1,0 +1,119 @@
+{{#section 'css'}}
+    <link rel="stylesheet" href="/public/CSS/styleAdmin.css">
+{{/section}}
+
+<form method="post" id="editCategory">
+    <div class="card">
+        <h4 class="card-header">
+            Edit Lecturer
+        </h4>
+        <div class="card-body">
+            <div class="form-group">
+                <label for="txtCatID">Lecturer ID</label>
+                <input value="{{this.lecturer.lecid}}" name="lecid" type="text" class="form-control" id="txtLecID" readonly>
+            </div>
+            <div class="form-group">
+                <label for="txtCatID">Email</label>
+                <input value="{{this.lecturer.email}}" name="email" type="text" class="form-control" id="txtLecID">
+            </div>
+            <div class="form-group">
+                <label for="txtCatID">Password</label>
+                <input value="" name="password" type="text" class="form-control" id="txtLecID">
+            </div>
+            <div class="form-group">
+                <label for="txtCatName">Lecturer Name</label>
+                <input value="{{this.lecturer.lecname}}" name="lecname" type="text" class="form-control" id="txtCatName">
+            </div>
+            <div class="form-group">
+                <label for="txtCatName">Experience</label>
+                <input value="{{this.lecturer.experience}}" name="experience" type="text" class="form-control" id="txtCatName">
+            </div>
+            <div class="form-group">
+                <label for="txtCatName">About Me</label>
+                <input value="{{this.lecturer.aboutme}}" name="aboutme" type="text" class="form-control" id="txtCatName">
+            </div>
+            <div class="form-group">
+                <label for="txtCatID">Number Of Courses</label>
+                <input value="{{this.lecturer.amount}}" name="amount" type="text" class="form-control" id="txtamount" readonly>
+            </div>
+        </div>
+        <div class="card-footer text-muted">
+            <a class="btn btn-outline-success btnAdd" href="/admin/lecturers" role="button">
+                <i class="fa fa-backward bg-transparent" aria-hidden="true"></i>
+                List
+            </a>
+            {{#ifEquals this.lecturer.amount 0}}
+                <button type="submit" class="btn btn-danger btnAdd" formaction="/admin/lecturers/del">
+                    <i class="fa fa-trash bg-transparent" aria-hidden="true"></i>
+                    Delete
+                </button>
+            {{else}}
+                <button type="submit" class="btn btn-danger btnNotAccess" formaction="/admin/lecturers/del" disabled="disabled" title="This lecturer already has courses cannot be deleted">
+                    <i class="fa fa-trash bg-transparent" aria-hidden="true"></i>
+                    Delete
+                </button>
+            {{/ifEquals}}
+            <button type="submit" class="btn btn-primary btnAdd " formaction="/admin/lecturers/patch" >
+                <i class="fa fa-check bg-transparent" aria-hidden="true"></i>
+                Save
+            </button>
+        </div>
+        <h4 class="card-header">
+            List of courses taught by this lecturer
+        </h4>
+        {{#if this.coursesEmpty}}
+            <div class="card-body">
+                <h5 class="card-title">
+                    Giảng viên này không dạy khóa học nào
+                </h5>
+            </div>
+        {{else}}
+            <div class="card-body" style="overflow-y: scroll; height:400px;">
+                <table class="table table-hover">
+                    <thead>
+                    <tr>
+                        <th>Course ID</th>
+                        <th>Course Name</th>
+                        <th>Category Name</th>
+                        <th>Tiny Description</th>
+                        <th>Full Description</th>
+                        <th>Rating</th>
+                        <th>Number Of Reviews</th>
+                        <th>Number Of Students</th>
+                        <th>Tuition</th>
+                        <th>Discount</th>
+                        <th>Discount Info</th>
+                        <th>Update Time</th>
+                        <th>Lecturer Name</th>
+                        <th>&nbsp;</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {{#each this.courses}}
+                        <tr>
+                            <td>{{courseid}}</td>
+                            <td>{{coursename}}</td>
+                            <td>{{catname}}</td>
+                            <td>{{tinydes}}</td>
+                            <td>{{fulldes}}</td>
+                            <td>{{rating}}</td>
+                            <td>{{reviews}}</td>
+                            <td>{{students}}</td>
+                            <td>{{format_number tuition}}</td>
+                            <td>{{format_number discount}}</td>
+                            <td>{{discountinfo}}</td>
+                            <td>{{updatetime}}</td>
+                            <td>{{lecname}}</td>
+                            <td class="text-right">
+                                <a class="btn btn-sm btn-outline-primary btnAddAdmin" href="/admin/lecturers/courses/del?id={{courseid}}" role="button" title="Delete">
+                                <i class="fa fa-trash bg-transparent" aria-hidden="true"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    {{/each}}
+                    </tbody>
+                </table>
+            </div>
+        {{/if}}
+    </div>
+</form>

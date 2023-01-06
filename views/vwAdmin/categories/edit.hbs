@@ -86,22 +86,22 @@
         </div>
         <div class="card-footer text-muted">
             <a class="btn btn-outline-success btnAdd" href="/admin/categories" role="button">
-                <i class="fa fa-backward" aria-hidden="true"></i>
+                <i class="fa fa-backward bg-transparent" aria-hidden="true"></i>
                 List
             </a>
             {{#ifEquals this.category.amount 0}}
                 <button type="submit" class="btn btn-danger btnAdd" formaction="/admin/categories/del">
-                    <i class="fa fa-trash" aria-hidden="true"></i>
+                    <i class="fa fa-trash bg-transparent" aria-hidden="true"></i>
                     Delete
                 </button>
             {{else}}
                 <button type="submit" class="btn btn-danger btnNotAccess" formaction="/admin/categories/del" disabled="disabled" title="This category already has courses cannot be deleted">
-                    <i class="fa fa-trash" aria-hidden="true"></i>
+                    <i class="fa fa-trash bg-transparent" aria-hidden="true"></i>
                     Delete
                 </button>
             {{/ifEquals}}
-            <button type="submit" class="btn btn-primary btnAdd" formaction="/admin/categories/patch" >
-                <i class="fa fa-check" aria-hidden="true"></i>
+            <button type="submit" class="btn btn-primary btnAdd " formaction="/admin/categories/patch" >
+                <i class="fa fa-check bg-transparent" aria-hidden="true"></i>
                 Save
             </button>
         </div>
@@ -153,7 +153,7 @@
                             <td>{{lecname}}</td>
                             <td class="text-right">
                                 <a class="btn btn-sm btn-outline-primary btnAddAdmin" href="/admin/categories/courses/del?id={{courseid}}" role="button" title="Delete">
-                                <i class="fa fa-trash" aria-hidden="true"></i>
+                                <i class="fa fa-trash bg-transparent" aria-hidden="true"></i>
                                 </a>
                             </td>
                         </tr>
