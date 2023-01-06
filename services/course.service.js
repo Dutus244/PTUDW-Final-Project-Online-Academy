@@ -286,11 +286,15 @@ export default {
     },
 
     async hasWatched(studentid, contentid) {
-        await db('studentwatchcontent')
+        try {
+            await db('studentwatchcontent')
             .insert({
                 'studentid': studentid,
                 'contentid': contentid,
             })
+        } catch (error) {
+            console.log(error);
+        }
     },
 
     async watchedContentByCourse(studentid, courseid) {

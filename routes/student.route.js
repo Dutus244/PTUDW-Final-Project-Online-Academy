@@ -101,7 +101,7 @@ router.get('/my-courses', async (req, res) => {
   const visiblePages = 5
   const pages = getVisiblePage(totalPages, visiblePages, curPage)
 
-  const list = await studentService.getStudentCourses(res.locals.authUser.accountid, offset, limit)
+  const list = await studentService.getStudentCourses(res.locals.authUser.accountid, offset, limit, res.locals.authUser.accountid)
 
   res.render('vwStudent/my-courses', {
     name: res.locals.authUser.name,

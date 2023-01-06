@@ -36,14 +36,14 @@ export default {
       .where('watchlists.studentid', id)
       .offset(offset)
       .limit(limit)
-  }, 
-  
+  },
+
   async removeFromWatchlist(studentid, courseid) {
     return await db('watchlists').where('studentid', studentid).where('courseid', courseid).del()
   },
 
-  async getStudentCourses(id, offset, limit) {
-    return await db
+  async getStudentCourses(id, offset, limit, studentid) {
+    const list = await db
       .select('catname', 'coursename', 'lecname', 'rating',
         'reviews', 'courses.courseid')
       .from('studentcourses')
@@ -53,27 +53,45 @@ export default {
       .where('studentcourses.studentid', id)
       .offset(offset)
       .limit(limit)
+
+    for (const i in list) {
+      const sql = `select * from 
+        (select count(*) as sum from chaptercontent where courseid = '${list[i].courseid}') as l join
+        (select count(*) as watchedSum from studentwatchcontent 
+        join chaptercontent on chaptercontent.contentid = studentwatchcontent.contentid
+        where studentid = '${studentid}' and courseid = '${list[i].courseid}') as m
+        where l.sum = m.watchedSum`
+      const flag = await db.raw(sql)
+      if (flag[0].length === 1)
+        list[i]['iscompleted'] = true
+      else
+        list[i]['iscompleted'] = false
+    }
+
+    return list
   },
 
   async findAll() {
     const list = await db
-        .select('students.studentid','accounts.email','studentname')
-        .count({amount: 'studentcourses.studentid'})
-        // .count({amountwatchlists: 'watchlists.studentid'})
-        .from('students')
-        .leftJoin('studentcourses', 'students.studentid', 'studentcourses.studentid')
-        // .leftJoin('watchlists', 'students.studentid', 'watchlists.studentid')
-        .join('accounts','students.studentid','accounts.accountid')
-        .groupBy('students.studentid')
+      .select('students.studentid', 'accounts.email', 'studentname')
+      .count({ amount: 'studentcourses.studentid' })
+      // .count({amountwatchlists: 'watchlists.studentid'})
+      .from('students')
+      .leftJoin('studentcourses', 'students.studentid', 'studentcourses.studentid')
+      // .leftJoin('watchlists', 'students.studentid', 'watchlists.studentid')
+      .join('accounts', 'students.studentid', 'accounts.accountid')
+      .groupBy('students.studentid')
     return list;
   },
 
   async countCourseInWatchLists(id) {
     const list = await db
-        .count({amount: 'studentid'})
-        .from('watchlists')
-        .groupBy('studentid')
-        .where('studentid', id);
+      .count({ amount: 'studentid' })
+      .from('watchlists')
+      .groupBy('studentid')
+      .where('studentid', id);
     return list[0].amount;
   }
+
+
 }

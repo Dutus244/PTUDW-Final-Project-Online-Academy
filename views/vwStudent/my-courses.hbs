@@ -52,9 +52,14 @@
         <div class="row">
           {{#each this.courses}}
           <div class="col-sm-4 mb-4">
-            <a href="/course/{{courseid}}/learn">
+            <a href="/course/detail/{{courseid}}">
               <div class="card h-100">
-                <img class="card-img-top" src="/public/img/category/yae.png" alt="courseTitle">
+                <div class="img-container">
+                  <img class="card-img-top" src="/public/img/category/yae.png" alt="courseTitle">
+                  {{#if iscompleted}}
+                  <i class="bi bi-check-circle-fill complete-icon"></i>
+                  {{/if}}
+                </div>
                 <div class="card-body">
                   <h4 class="card-title mb-0" id="coursename">{{coursename}}</h4>
                   <p class="card-title mb-0 font-italic">{{catname}}</p>
