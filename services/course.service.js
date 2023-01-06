@@ -122,6 +122,49 @@ export default {
         return list;
     },
 
+    async findSimilarCourses(id) {
+        const courseid = await db
+            .select('course2.courseid')
+            .from('courses as course1')
+            .join('courses as course2', 'course1.catid', 'course2.catid')
+            .where('course1.courseid', id);
+
+        if (courseid.length === 0) {
+            return null;
+        }
+
+        var bought = []
+
+        for (let i in courseid){
+            let amount = await this.countByBought(courseid[i])
+            bought.push({courseid: courseid[i], amount: amount})
+        }
+
+        bought.sort(function(a, b){return b.amount - a.amount});
+        
+        if(bought.length > 5){
+            bought = bought.slice(0, 5)
+        }
+
+        var courses = []
+
+        for (let x in bought){
+            var list = await this.findAll(bought[x].courseid)
+            courses.push(list[0])
+        }
+
+        return courses;
+    },
+
+    async countByBought(courseid) {
+        const list = await db
+            .count({ amount: 'studentid' })
+            .from('studentcourses')
+            .where('courseid', courseid)
+
+        return list[0].amount
+    },
+
     async findAll() {
         const list = await db
             .select('courseid', 'coursename', 'categories.catname', 'tinydes', 'fulldes', 'rating', 'reviews', 'students', 'tuition', 'discount', 'discountinfo', 'updatetime', 'lecturers.lecname')

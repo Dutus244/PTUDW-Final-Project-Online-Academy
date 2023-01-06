@@ -78,7 +78,7 @@ a:active {
     color: black;
 }
 
-.course-menu, .course-content, .similar-courses, .lecturer, .feedback{
+.course-menu, .course-content, .lecturer, .feedback{
     display: block;
     padding: 10px;
     width: 100%;

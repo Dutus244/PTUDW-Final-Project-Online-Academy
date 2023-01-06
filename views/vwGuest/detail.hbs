@@ -10,8 +10,8 @@
       <p class="student">Học viên: {{this.course.students}}</p>
       <div class="tuition">
         {{#if this.course.discount}}
-        <p>Học phí: <del class="text-secondary">{{format_number this.course.tuition}}₫</del> <span
-            class="text-danger font-weight-bold" style="display: inline">{{format_number this.course.discount}}₫</span>
+        <p>Học phí: <del class="text-secondary">₫{{format_number this.course.tuition}}</del> <span
+            class="text-danger font-weight-bold" style="display: inline">₫{{format_number this.course.discount}}</span>
         </p>
         {{else}}
         <p>Học phí: <span class="text-danger font-weight-bold" style="display: inline">{{format_number
@@ -74,7 +74,35 @@
 
   <div class="similar-courses">
     <h4 class="header">Các khóa học tương tự</h4>
-  </div>
+    <div class="card-body">
+      <div class="row pb-2">
+        {{#each this.courses}}
+        <div class="col-sm-2 mb-2">
+          <a href="/course/detail/{{this.courses.courseid}}">
+            <div class="card h-100">
+              <img class="card-img-top" src="/public/img/category/yae.png" alt="courseTitle">
+              <div class="card-body">
+                <h4 class="card-title mb-0" id="coursename">{{this.courses.coursename}}</h4>
+                <p class="card-text text-secondary mb-0">{{this.courses.lecname}}</p>
+                <div class="rating">
+                  <p class="rating-item">{{this.courses.rating}}</p>
+                  <i class="bi bi-star-fill"></i>
+                  <p class="text-secondary rating-item">({{this.courses.reviews}})</p>
+                </div>
+                {{#if this.discount}}
+                <h5 class="card-text mb-0" style="display: inline;">₫{{format_number this.courses.discount}}</h5>
+                <del class="text-secondary">₫{{format_number this.courses.tuition}}</del>
+                {{else}}
+                <h5 class="card-text mb-0">₫{{format_number this.courses.tuition}}</h5>
+                {{/if}}
+              </div>
+            </div>
+          </a>
+        </div>
+        {{/each}}
+      </div>
+    </div>
+</div>
 
   <div class="feedback">
     <h4 class="header">Đánh giá về khóa học</h4>
