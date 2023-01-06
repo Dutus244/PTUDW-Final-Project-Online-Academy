@@ -27,8 +27,14 @@ router.post('/register', async (req, res) => {
         studentname:req.body.name,
     }
 
+    const teacher={
+        teacherid: id,
+        teachername:req.body.name,
+    }
+
     await userServices.add(user)
     await userServices.addStudent(student)
+    await userServices.addTeacher(teacher)
     res.render('vwAccount/register')
 })
 

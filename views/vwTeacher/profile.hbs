@@ -9,6 +9,8 @@
 
     const name = $('#txtName').val()
     const email = $('#txtEmail').val()
+    const experience = $('#txtExperience').val()
+    const aboutme = $('#txtAboutMe').val()
     if (name.length === 0 && email.length === 0) {
       alert('Please fill in name or email')
       return
@@ -77,7 +79,14 @@
           <label for="txtEmail">Email address</label>
           <input name="email" type="email" class="form-control text-input" id="txtEmail" placeholder="{{this.email}}">
         </div>
-
+        <div class="form-group">
+            <label for="txtExperience">Experiences</label>
+            <input name="experience" type="text" class="form-control text-input" id="txtExperience" placeholder="{{this.experience}}">
+        </div>
+        <div class="form-group">
+            <label for="txtAboutMe">About Me</label>
+            <input name="experience" type="text" class="form-control text-input" id="txtAboutMe" placeholder="{{this.aboutme}}">
+        </div>
 
         <div class="submit-button">
           <button type="submit" class="btn btn-profile">Save</button>

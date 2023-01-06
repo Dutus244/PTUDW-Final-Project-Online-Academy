@@ -1,0 +1,108 @@
+<div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+        <div class="d-block w-100" style="text-align: center; background-color:black">
+      <img src="/public/img/category/yae.png" height="300" alt="First slide">
+      <div class="carousel-caption d-none d-md-block">
+        <span class="Featured">{{first.CourseName}}</span>
+        <br>
+        <p class="rating-item">{{first.Rating}}</p>
+        <i class="bi bi-star-fill"></i>
+      </div>
+        </div>
+    </div>
+    <div class="carousel-item">
+        <div class="d-block w-100" style="text-align: center; background-color:black">
+      <img src="/public/img/category/yae.png" height="300" alt="Second slide">
+      <div class="carousel-caption d-none d-md-block">
+        <span class="Featured">{{second.CourseName}}</span>
+        <br>
+        <p class="rating-item">{{second.Rating}}</p>
+        <i class="bi bi-star-fill"></i>
+      </div>
+        </div>
+    </div>
+    <div class="carousel-item">
+        <div class="d-block w-100" style="text-align: center; background-color:black">
+      <img src="/public/img/category/yae.png" height="300" alt="Third slide">
+      <div class="carousel-caption d-none d-md-block">
+        <span class="Featured">{{third.CourseName}}</span>
+        <br>
+        <p class="rating-item">{{third.Rating}}</p>
+        <i class="bi bi-star-fill"></i>
+      </div>
+         </div>
+    </div>
+  </div>
+  <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="sr-only">Previous</span>
+  </a>
+  <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="sr-only">Next</span>
+  </a>
+</div>
+
+<h1>Khóa học mới đăng gần đây</h1>
+<div class="card-body">
+  <div class="row pb-2">
+    {{#each this.created}}
+    <div class="col-sm-2 mb-2">
+      <a href="/course/detail/{{CourseId}}">
+        <div class="card h-100">
+          <img class="card-img-top" src="/public/img/category/yae.png" alt="courseTitle">
+          <div class="card-body">
+            <h4 class="card-title mb-0" id="coursename">{{CourseName}}</h4>
+            <p class="card-title mb-0 font-italic">{{CatName}}</p>
+            <p class="card-text text-secondary mb-0">{{LecName}}</p>
+            <div class="rating">
+              <p class="rating-item">{{Rating}}</p>
+              <i class="bi bi-star-fill"></i>
+              <p class="text-secondary rating-item">({{format_number Reviews}})</p>
+            </div>
+            {{#if this.discount}}
+            <h5 class="card-text mb-0" style="display: inline;">₫{{format_number Discount}}</h5>
+            <del class="text-secondary">₫{{format_number Tuition}}</del>
+            {{else}}
+            <h5 class="card-text mb-0">₫{{format_number Tuition}}</h5>
+            {{/if}}
+          </div>
+        </div>
+      </a>
+    </div>
+    {{/each}}
+  </div>
+</div>
+
+<br>
+<h1>Khóa học xem nhiều nhất</h1>
+<div class="card-body">
+  <div class="row pb-2">
+    {{#each this.viewed}}
+    <div class="col-sm-2 mb-2">
+      <a href="/course/detail/{{CourseId}}">
+        <div class="card h-100">
+          <img class="card-img-top" src="/public/img/category/yae.png" alt="courseTitle">
+          <div class="card-body">
+            <h4 class="card-title mb-0" id="coursename">{{CourseName}}</h4>
+            <p class="card-title mb-0 font-italic">{{CatName}}</p>
+            <p class="card-text text-secondary mb-0">{{LecName}}</p>
+            <div class="rating">
+              <p class="rating-item">{{Rating}}</p>
+              <i class="bi bi-star-fill"></i>
+              <p class="text-secondary rating-item">({{format_number Reviews}})</p>
+            </div>
+            {{#if this.discount}}
+            <h5 class="card-text mb-0" style="display: inline;">₫{{format_number Discount}}</h5>
+            <del class="text-secondary">₫{{format_number Tuition}}</del>
+            {{else}}
+            <h5 class="card-text mb-0">₫{{format_number Tuition}}</h5>
+            {{/if}}
+          </div>
+        </div>
+      </a>
+    </div>
+    {{/each}}
+  </div>
+</div>

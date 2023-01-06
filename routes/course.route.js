@@ -1,6 +1,7 @@
 import express from 'express';
 import courseService from '../services/course.service.js';
 import categoryService from "../services/category.service.js";
+import studentService from '../services/student.service.js';
 import { getVisiblePage } from '../utils/helper.js'
 import authWithRequiredPermission from '../middlewares/auth.mdw.js';
 
@@ -83,38 +84,87 @@ router.get('/catLevel/:name', async(req, res) => {
 })
 
 router.get('/detail/:id', async function (req, res) {
-    const id = req.params.id || 0;
+    const id = req.params.id || '0';
+    const accountid = res.locals.auth ? res.locals.authUser.accountid : '0'
     const course = await courseService.findById(id);
+    const chapter = await courseService.findChapter(id);
+    const feedback = await courseService.findFeedbacks(id);
+    const isBought = await courseService.isBought(accountid, id)
+    const isInWatchlist = await courseService.isInWatchlist(accountid, id)
+    const similarCourses = await courseService.findSimilarCourses(id);
+
     if (course === null)
       return res.redirect('/');
 
     res.render('vwGuest/detail', {
-      course: course
+      course: course,
+      chapter: chapter,
+      feedback: feedback,
+      isBought: isBought,
+      isInWatchlist: isInWatchlist,
+      courses: similarCourses,
     })
 })
 
+router.post('/detail/:id/addToWatchlist', authWithRequiredPermission(0), async (req, res) => {
+    const courseid = req.params.id || '0'
+    await courseService.addToWatchlist(res.locals.authUser.accountid, courseid)
+    res.redirect('/course/detail/' + courseid)
+  })
+  
+router.post('/detail/:id/buy', authWithRequiredPermission(0), async (req, res) => {
+    const courseid = req.params.id || '0'
+    await courseService.buyCourse(res.locals.authUser.accountid, courseid)
+    await studentService.removeFromWatchlist(res.locals.authUser.accountid, courseid)
+    res.redirect('/course/detail/' + courseid)
+})
+
 router.get('/:id/learn', authWithRequiredPermission(0), async function (req, res) {
-    const studentid = res.locals.authUser.accountid
-    const courseid = req.params.id
-    const { coursename } = await courseService.getCourseName(courseid)
+    const studentid = res.locals.authUser.accountid || '0'
+    const courseid = req.params.id || '0'
+
+    const flag = await courseService.isBought(studentid, courseid)
+    if (!flag) {
+        res.render('403', {
+            layout: false
+        })
+        return
+    }
+
+    const course  = await courseService.getCourseName(courseid)
+    if (!course) {
+        res.render('404', {
+            layout: false
+        })
+        return
+    }
     const coursecontent = await courseService.getCourseContent(courseid)
+    const watchedContent = await courseService.watchedContentByCourse(studentid, courseid)
     const feedback = await courseService.getFeedback(studentid, courseid)
 
     res.render('vwCourse/learn', {
         courseid: courseid,
-        coursename: coursename,
+        coursename: course.coursename,
         coursecontent: coursecontent,
+        watchedContent: JSON.stringify(watchedContent),
         feedback: feedback,
     })
 })
 
 router.post('/:id/rating', authWithRequiredPermission(0), async function (req, res) {
-    const studentid = res.locals.authUser.accountid
-    const courseid = req.params.id
+    const studentid = res.locals.authUser.accountid || '0'
+    const courseid = req.params.id || '0'
     const { rating, textReview } = req.body
 
     await courseService.postFeedback(studentid, courseid, textReview, rating)
     res.redirect(`/course/${courseid}/learn`)
+})
+
+router.post('/:id/hasWatched', authWithRequiredPermission(0), async function (req, res) {
+    const studentid = res.locals.authUser.accountid || '0'
+    const contentid = req.params.id || '0'
+
+    await courseService.hasWatched(studentid, contentid)
 })
 
 // Amdin with authWithRequiredPermission

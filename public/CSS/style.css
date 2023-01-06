@@ -3,7 +3,6 @@
 }
 
 *{
-    background-color: whitesmoke;
     color:black;
     margin:0; padding:0;
     text-align: left;
@@ -14,6 +13,11 @@
     font-size: 1.25rem;
     box-sizing: border-box;
     transition: all .2s linear;
+}
+
+h1{
+    text-align: center;
+    font-weight: bold;
 }
 
 html{
@@ -166,4 +170,51 @@ h1{
     background-color: palevioletred;
 }
 
+.Featured{
+    color: palevioletred;
+    font-weight: bold;
+    font-size:1.5rem;
+    text-shadow:         /* first layer at 1px */
+    -1px -1px 0px pink,
+     0px -1px 0px pink,
+     1px -1px 0px pink,
+    -1px  0px 0px pink,
+     1px  0px 0px pink,
+    -1px  1px 0px pink,
+     0px  1px 0px pink,
+     1px  1px 0px pink,
+    /* second layer at 2px */
+    -2px -2px 0px pink,
+    -1px -2px 0px pink,
+     0px -2px 0px pink,
+     1px -2px 0px pink,
+     2px -2px 0px pink,
+     2px -1px 0px pink,
+     2px  0px 0px pink,
+     2px  1px 0px pink,
+     2px  2px 0px pink,
+     1px  2px 0px pink,
+     0px  2px 0px pink,
+    -1px  2px 0px pink,
+    -2px  2px 0px pink,
+    -2px  1px 0px pink,
+    -2px  0px 0px pink,
+    -2px -1px 0px pink;
+}
 
+.carousel-caption {
+    position: absolute;
+    top:220px;
+ }
+
+.rating-item {
+    display: inline;
+    font-size: 1.3rem;
+    font-weight: bold;
+    color: rgb(221, 137, 28);
+}
+
+.bi.bi-star-fill {
+    font-size: 1.5rem;
+    color: orange;
+}

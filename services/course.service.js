@@ -88,18 +88,81 @@ export default {
 
     async findById(id) {
         const list = await db
-            .select('courseavatar', 'coursename', 'tinydes', 'fulldes', 'lecname', 'courses.rating', 'tuition', 'discount', 'reviews', 'courses.updatetime', 'students', 'experience', 'aboutme', 'chaptername', 'content', 'chaptercontent.updatetime', 'feedback', 'feedbacks.updatetime', 'studentname')
+            .select('courses.courseid', 'courseavatar', 'coursename', 'tinydes', 'fulldes', 'lecname', 'rating', 'tuition', 'discount', 'reviews', 'updatetime', 'students', 'experience', 'aboutme', 'chaptername')
             .from('courses')
             .leftJoin('lecturers', 'courses.lecid', 'lecturers.lecid')
-            .leftJoin('chaptercontent', 'chaptercontent.courseid', 'courses.courseid')
             .leftJoin('coursechapter', 'coursechapter.courseid', 'courses.courseid')
-            .leftJoin('feedbacks', 'feedbacks.courseid', 'courses.courseid')
-            .leftJoin('students', 'students.studentid', 'feedbacks.studentid')
             .where('courses.courseid', id);
         if (list.length === 0) {
             return null;
         }
         return list[0];
+    },
+
+    async findChapter(id) {
+        const list = await db
+            .select('contentname', 'content', 'updatetime')
+            .from('chaptercontent')
+            .where('courseid', id);
+        if (list.length === 0) {
+            return null;
+        }
+        return list;
+    },
+
+    async findFeedbacks(id) {
+        const list = await db
+            .select('feedback', 'rating', 'updatetime', 'studentname')
+            .from('feedbacks')
+            .leftJoin('students', 'students.studentid', 'feedbacks.studentid')
+            .where('courseid', id);
+        if (list.length === 0) {
+            return null;
+        }
+        return list;
+    },
+
+    async findSimilarCourses(id) {
+        const courseid = await db
+            .select('course2.courseid')
+            .from('courses as course1')
+            .join('courses as course2', 'course1.catid', 'course2.catid')
+            .where('course1.courseid', id);
+
+        if (courseid.length === 0) {
+            return null;
+        }
+
+        var bought = []
+
+        for (let i in courseid){
+            let amount = await this.countByBought(courseid[i])
+            bought.push({courseid: courseid[i], amount: amount})
+        }
+
+        bought.sort(function(a, b){return b.amount - a.amount});
+        
+        if(bought.length > 5){
+            bought = bought.slice(0, 5)
+        }
+
+        var courses = []
+
+        for (let x in bought){
+            var list = await this.findAll(bought[x].courseid)
+            courses.push(list[0])
+        }
+
+        return courses;
+    },
+
+    async countByBought(courseid) {
+        const list = await db
+            .count({ amount: 'studentid' })
+            .from('studentcourses')
+            .where('courseid', courseid)
+
+        return list[0].amount
     },
 
     async findAll() {
@@ -120,6 +183,7 @@ export default {
             .select('coursename')
             .from('courses')
             .where('courseid', id)
+
         return coursename[0]
     },
 
@@ -130,6 +194,8 @@ export default {
             .join('coursechapter', 'courses.courseid', 'coursechapter.courseid')
             .leftJoin('chaptercontent', 'coursechapter.chapterid', 'chaptercontent.chapterid')
             .where('courses.courseid', id)
+        if (list.length === 0)
+            return null
 
         var coursecontent = []
         var curChapterId = list[0].chapterid
@@ -157,7 +223,7 @@ export default {
             chaptercontent: contentList
         })
 
-        // console.log(coursecontent[0].chaptercontent);
+        // console.log(coursecontent);
         return coursecontent
     },
 
@@ -166,7 +232,7 @@ export default {
             .select('feedback as text', 'rating')
             .where('studentid', studentid)
             .andWhere('courseid', courseid)
-        
+
         return fb[0]
     },
 
@@ -174,6 +240,93 @@ export default {
         const sql = `insert into feedbacks values ('${studentid}', '${courseid}', '${text}', '${rating}', now())`
         try {
             await db.raw(sql)
+        } catch (error) {
+            console.log(error);
+        }
+    },
+
+    async featured() {
+        const sql = `SELECT * FROM courses order by rating desc limit 3`;
+        try {
+            const list = await db.raw(sql);
+            return list;
+        } catch (error) {
+            console.log(error);
+        }
+    },
+
+    async viewed() {
+        const sql = `SELECT * FROM courses order by views desc limit 10`;
+        try {
+            const list = await db.raw(sql);
+            return list;
+        } catch (error) {
+            console.log(error);
+        }
+    },
+
+    async created() {
+        const sql = `SELECT * FROM courses order by createtime desc limit 10`;
+        try {
+            const list = await db.raw(sql);
+            return list;
+        } catch (error) {
+            console.log(error);
+        }
+    },
+
+    async isBought(studentid, courseid) {
+        const list = await db
+            .select('*')
+            .from('studentcourses')
+            .where('courseid', courseid)
+            .andWhere('studentid', studentid)
+
+        return list.length === 0 ? false : true
+    },
+
+    async hasWatched(studentid, contentid) {
+        await db('studentwatchcontent')
+            .insert({
+                'studentid': studentid,
+                'contentid': contentid,
+            })
+    },
+
+    async watchedContentByCourse(studentid, courseid) {
+        const list = await db
+            .select('studentwatchcontent.contentid')
+            .from('studentwatchcontent')
+            .join('chaptercontent', 'studentwatchcontent.contentid', 'chaptercontent.contentid')
+            .where('studentid', studentid)
+            .andWhere('chaptercontent.courseid', courseid)
+
+        // console.log(list);
+        return list
+    },
+
+    async isInWatchlist(studentid, courseid) {
+        const list = await db('watchlists')
+            .where('studentid', studentid)
+            .andWhere('courseid', courseid)
+
+        return list.length === 0 ? false : true
+    },
+
+    async addToWatchlist(studentid, courseid) {
+        try {
+            return await db('watchlists')
+                .insert({ 'studentid': studentid, 'courseid': courseid })
+        } catch (error) {
+            console.log(error);
+        }
+
+    },
+
+    async buyCourse(studentid, courseid) {
+        try {
+            return await db('studentcourses')
+                .insert({ 'studentid': studentid, 'courseid': courseid })
         } catch (error) {
             console.log(error);
         }
