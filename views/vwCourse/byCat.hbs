@@ -34,7 +34,12 @@
           <div class="col-sm-4 mb-4">
             <a href="/course/detail/{{courseid}}">
               <div class="card h-100">
-                <img class="card-img-top" src="{{courseavatar}}" alt="courseAvatar">
+                <div class="img-container">
+                  <img class="card-img-top" src="{{courseavatar}}" alt="courseAvatar">
+                  {{#ifCompare students ../this.bestsellerquota}}
+                  <i class="bi bi-fire fire-icon"></i>
+                  {{/ifCompare}}
+                </div>
                 <div class="card-body">
                   <h4 class="card-title mb-0 coursename">{{coursename}}</h4>
                   <p class="card-title mb-0 font-italic">{{catname}}</p>

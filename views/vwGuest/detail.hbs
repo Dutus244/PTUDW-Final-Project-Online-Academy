@@ -79,8 +79,12 @@
 
   <div class="course-content">
     <h3 class="header">Mô tả khóa học</h3>
-    <p id="tinydes">{{this.course.tinydes}}</p>
-    <p id="fulldes">{{this.course.fulldes}}</p>
+    <div class="card h-100">
+      <div class="card-body">
+        <p class="m-auto" id="tinydes">{{this.course.tinydes}}</p>
+        <p class="m-auto" id="fulldes">{{this.course.fulldes}}</p>
+      </div>
+    </div>
     <a class="btn button" href="#/" id="moreDetail">Chi tiết</a>
   </div>
 
@@ -117,10 +121,12 @@
 
   <div class="lecturer">
     <h3 class="header">Thông tin giảng viên</h3>
-    <div class="information">
-      <p>Họ và tên: {{this.course.lecname}}</p>
-      <p>Kinh nghiệm: {{this.course.experience}}</p>
-      <p>About me: {{this.course.aboutme}}</p>
+    <div class="card h-100">
+      <div class="card-body">
+        <p class="m-auto">Họ và tên: {{this.course.lecname}}</p>
+        <p class="m-auto">Kinh nghiệm: {{this.course.experience}}</p>
+        <p class="m-auto">About me: {{this.course.aboutme}}</p>
+      </div>
     </div>
   </div>
 
