@@ -127,12 +127,93 @@ router.post('/addToWatchlist', async (req, res) => {
 // Amdin with authWithRequiredPermission
 router.get('/', authWithRequiredPermission(2), async function (req, res) {
   const list = await studentService.findAll();
-
+  let student = []
+  for (let temp of list) {
+    const countlike = await studentService.countCourseLike(temp['studentid']);
+    const stu = {
+      studentid: temp['studentid'],
+      email: temp['email'],
+      studentname: temp['studentname'],
+      countenroll: temp['amount'],
+      countlike: countlike[0].amount,
+      lockaccount: temp['lockaccount'],
+    }
+    student.push(stu);
+  }
   res.render('vwAdmin/students/index', {
     layout: 'mainAdmin',
-    students: list,
+    students: student,
     empty: list.length === 0
   });
 })
+
+router.get('/lock', authWithRequiredPermission(2), async function (req, res) {
+  const id = req.query.id || 0;
+  await studentService.lock(id);
+
+  res.redirect('/admin/students');
+});
+
+router.get('/unlock', authWithRequiredPermission(2), async function (req, res) {
+  const id = req.query.id || 0;
+  await studentService.unlock(id);
+
+  res.redirect('/admin/students');
+});
+
+router.get('/edit', authWithRequiredPermission(2), async function (req, res) {
+  const id = req.query.id || 0;
+  const temp = await studentService.findById(id);
+  const countlike = await studentService.countCourseLike(id);
+  const student = {
+    studentid: temp['studentid'],
+    email: temp['email'],
+    studentname: temp['studentname'],
+    countenroll: temp['amount'],
+    countlike: countlike[0].amount,
+    lockaccount: temp['lockaccount'],
+  }
+
+  const enrollcourses = await studentService.findAllCoursesEnrollByStudentID(id);
+  const likecourses = await studentService.findAllCoursesLikeByStudentID(id);
+  if (student === null)
+    return res.redirect('/admin/students');
+
+  res.render('vwAdmin/students/edit', {
+    layout: 'mainAdmin',
+    student: student,
+    enrollcourses: enrollcourses,
+    enrollcoursesEmpty: enrollcourses.length === 0,
+    likecourses: likecourses,
+    likecoursesEmpty: likecourses.length === 0,
+  });
+});
+
+router.post('/del', authWithRequiredPermission(2), async function (req, res) {
+  const id = req.body.lecid;
+  await studentService.del(id);
+  await studentService.delAccount(id);
+  res.redirect('/admin/students');
+});
+
+router.post('/patch', authWithRequiredPermission(2),async function (req, res) {
+  const salt = bcrypt.genSaltSync(10);
+  const hash = bcrypt.hashSync(req.body.password, salt);
+
+  const account = {
+    accountid: req.body.studentid,
+    email: req.body.email,
+    pass: hash,
+  }
+
+  const student = {
+    studentid: req.body.studentid,
+    studentname: req.body.studentname,
+  }
+
+  await studentService.patchAccount(account);
+  await studentService.patch(student);
+  res.redirect('/admin/students/');
+});
 
 export default router

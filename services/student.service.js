@@ -73,25 +73,87 @@ export default {
 
   async findAll() {
     const list = await db
-      .select('students.studentid', 'accounts.email', 'studentname')
+      .select('students.studentid', 'accounts.email', 'studentname','lockaccount')
       .count({ amount: 'studentcourses.studentid' })
-      // .count({amountwatchlists: 'watchlists.studentid'})
       .from('students')
       .leftJoin('studentcourses', 'students.studentid', 'studentcourses.studentid')
-      // .leftJoin('watchlists', 'students.studentid', 'watchlists.studentid')
       .join('accounts', 'students.studentid', 'accounts.accountid')
       .groupBy('students.studentid')
     return list;
   },
 
-  async countCourseInWatchLists(id) {
+  lock(id) {
+    const student = {
+      lockaccount: 1,
+    }
+    return db('accounts').where('accountid', id).update(student);
+  },
+
+  unlock(id) {
+    const student = {
+      lockaccount: 0,
+    }
+    return db('accounts').where('accountid', id).update(student);
+  },
+
+  async findById(id) {
     const list = await db
-      .count({ amount: 'studentid' })
-      .from('watchlists')
-      .groupBy('studentid')
-      .where('studentid', id);
-    return list[0].amount;
-  }
+        .select('students.studentid', 'accounts.email', 'studentname','lockaccount')
+        .count({ amount: 'studentcourses.studentid' })
+        .from('students')
+        .leftJoin('studentcourses', 'students.studentid', 'studentcourses.studentid')
+        .join('accounts', 'students.studentid', 'accounts.accountid')
+        .groupBy('students.studentid')
+        .where('students.studentid', id);
+    if (list.length === 0) {
+      return null;
+    }
+    return list[0];
+  },
 
+  async findAllCoursesEnrollByStudentID(id) {
+    const sql = `select courses.courseid,coursename,categories.catname,tinydes,fulldes,rating,reviews,students,tuition,discount,discountinfo,updatetime,lecturers.lecname from courses left join categories on categories.catid = courses.catid left join lecturers on lecturers.lecid = courses.lecid join studentcourses on (studentcourses.courseid = courses.courseid and studentcourses.studentid='${id}')`;
+    try {
+      const list = await db.raw(sql);
+      return list[0];
+    } catch (error) {
+      console.log(error);
+    }
+  },
 
+  async findAllCoursesLikeByStudentID(id) {
+    const sql = `select courses.courseid,coursename,categories.catname,tinydes,fulldes,rating,reviews,students,tuition,discount,discountinfo,updatetime,lecturers.lecname from courses left join categories on categories.catid = courses.catid left join lecturers on lecturers.lecid = courses.lecid join watchlists on watchlists.courseid = courses.courseid and watchlists.studentid='${id}'`;
+    try {
+      const list = await db.raw(sql);
+      return list[0];
+    } catch (error) {
+      console.log(error);
+    }
+  },
+
+  async countCourseLike(id) {
+    const sql = `SELECT COUNT(watchlists.studentid) as amount FROM watchlists right join students on watchlists.studentid = students.studentid where students.studentid='${id}' group by students.studentid`
+    try {
+      const list = await db.raw(sql);
+      return list[0];
+    } catch (error) {
+      console.log(error);
+    }
+  },
+
+  del(id) {
+    return db('students').where('studentid', id).del();
+  },
+
+  delAccount(id) {
+    return db('accounts').where('accountid', id).del();
+  },
+
+  patch(entity) {
+    return db('students').where('studentid', entity.studentid).update(entity);
+  },
+
+  patchAccount(entity) {
+    return db('accounts').where('accountid', entity.accountid).update(entity);
+  },
 }

@@ -252,6 +252,20 @@ router.get('/edit', authWithRequiredPermission(2), async function (req, res) {
     });
 });
 
+router.get('/lock', authWithRequiredPermission(2), async function (req, res) {
+    const id = req.query.id || 0;
+    await lecturerService.lock(id);
+
+    res.redirect('/admin/lecturers');
+});
+
+router.get('/unlock', authWithRequiredPermission(2), async function (req, res) {
+    const id = req.query.id || 0;
+    await lecturerService.unlock(id);
+
+    res.redirect('/admin/lecturers');
+});
+
 router.post('/del', authWithRequiredPermission(2), async function (req, res) {
     const id = req.body.lecid;
     await lecturerService.del(id);

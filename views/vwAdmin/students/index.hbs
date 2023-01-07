@@ -21,7 +21,8 @@
                     <th>Email</th>
                     <th>Student Name</th>
                     <th>Number of courses enrolls in</th>
-                    <th>Number of courses like</th>
+                    <th>Number of courses in watchlist</th>
+                    <th>&nbsp;</th>
                     <th>&nbsp;</th>
                 </tr>
                 </thead>
@@ -31,10 +32,24 @@
                         <td>{{studentid}}</td>
                         <td>{{email}}</td>
                         <td>{{studentname}}</td>
-                        <td>{{amount}}</td>
-                        <td>{{}}</td>
+                        <td>{{countenroll}}</td>
+                        <td>{{countlike}}</td>
+                        {{#ifEquals lockaccount 0}}
+                            <td class="text-right">
+                                <a class="btn btn-sm btn-outline-primary btnAddAdmin" href="/admin/students/lock?id={{studentid}}" role="button" title="Lock Account">
+                                <i class="bi bi-lock bg-transparent" aria-hidden="true"></i>
+                                </a>
+                            </td>
+                        {{/ifEquals}}
+                        {{#ifEquals lockaccount 1}}
+                            <td class="text-right">
+                                <a class="btn btn-sm btn-outline-primary btnAddAdmin" href="/admin/students/unlock?id={{studentid}}" role="button" title="Unlock Account">
+                                <i class="bi bi-unlock bg-transparent" aria-hidden="true"></i>
+                                </a>
+                            </td>
+                        {{/ifEquals}}
                         <td class="text-right">
-                            <a class="btn btn-sm btn-outline-primary btnAddAdmin" href="/admin/students/edit?id={{lecid}}" role="button" title="Edit">
+                            <a class="btn btn-sm btn-outline-primary btnAddAdmin" href="/admin/students/edit?id={{studentid}}" role="button" title="Edit">
                             <i class="bi bi-pencil-square bg-transparent" aria-hidden="true"></i>
                             </a>
                         </td>

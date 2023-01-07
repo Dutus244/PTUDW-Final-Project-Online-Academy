@@ -28,6 +28,7 @@
                     <th>About Me</th>
                     <th>Number Of Courses</th>
                     <th>&nbsp;</th>
+                    <th>&nbsp;</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -39,6 +40,20 @@
                         <td>{{experience}}</td>
                         <td>{{aboutme}}</td>
                         <td>{{amount}}</td>
+                        {{#ifEquals lockaccount 0}}
+                            <td class="text-right">
+                                <a class="btn btn-sm btn-outline-primary btnAddAdmin" href="/admin/lecturers/lock?id={{lecid}}" role="button" title="Lock Account">
+                                <i class="bi bi-lock bg-transparent" aria-hidden="true"></i>
+                                </a>
+                            </td>
+                        {{/ifEquals}}
+                        {{#ifEquals lockaccount 1}}
+                            <td class="text-right">
+                                <a class="btn btn-sm btn-outline-primary btnAddAdmin" href="/admin/lecturers/unlock?id={{lecid}}" role="button" title="Unlock Account">
+                                <i class="bi bi-unlock bg-transparent" aria-hidden="true"></i>
+                                </a>
+                            </td>
+                        {{/ifEquals}}
                         <td class="text-right">
                             <a class="btn btn-sm btn-outline-primary btnAddAdmin" href="/admin/lecturers/edit?id={{lecid}}" role="button" title="Edit">
                             <i class="bi bi-pencil-square bg-transparent" aria-hidden="true"></i>

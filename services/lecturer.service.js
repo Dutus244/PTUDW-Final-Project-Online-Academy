@@ -62,7 +62,7 @@ export default {
 
     async findAll() {
         const list = await db
-            .select('lecturers.lecid', 'accounts.email','lecname','experience','aboutme')
+            .select('lecturers.lecid', 'accounts.email','lecname','experience','aboutme','lockaccount')
             .count({amount: 'courseid'})
             .from('lecturers')
             .leftJoin('courses', 'courses.lecid', 'lecturers.lecid')
@@ -73,7 +73,7 @@ export default {
 
     async findById(id) {
         const list = await db
-            .select('lecturers.lecid','accounts.email','lecname','experience','aboutme')
+            .select('lecturers.lecid','accounts.email','lecname','experience','aboutme','lockaccount')
             .count({amount: 'courseid'})
             .from('lecturers')
             .leftJoin('courses', 'courses.lecid', 'lecturers.lecid')
@@ -118,5 +118,19 @@ export default {
 
     delCourse(id) {
         return db('courses').where('courseid', id).del();
-    }
+    },
+
+    lock(id) {
+        const lecturer = {
+            lockaccount: 1,
+        }
+        return db('accounts').where('accountid', id).update(lecturer);
+    },
+
+    unlock(id) {
+        const lecturer = {
+            lockaccount: 0,
+        }
+        return db('accounts').where('accountid', id).update(lecturer);
+    },
 }
