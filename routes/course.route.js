@@ -94,7 +94,6 @@ router.get('/detail/:id', async function (req, res) {
     const isInWatchlist = await courseService.isInWatchlist(accountid, id)
     const similarCourses = await courseService.findSimilarCourses(id);
 
-    // console.log(course);
 
     if (course === null)
       return res.redirect('/');
@@ -105,7 +104,7 @@ router.get('/detail/:id', async function (req, res) {
       feedback: feedback,
       isBought: isBought,
       isInWatchlist: isInWatchlist,
-      courses: similarCourses,
+      similarCourses: similarCourses,
     })
 })
 

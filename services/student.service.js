@@ -27,7 +27,7 @@ export default {
 
   async getStudentWatchlist(id, offset, limit) {
     return await db
-      .select('catname', 'coursename', 'lecname', 'rating',
+      .select('courseavatar', 'catname', 'coursename', 'lecname', 'rating',
         'reviews', 'tuition', 'discount', 'courses.courseid')
       .from('watchlists')
       .join('courses', 'watchlists.courseid', 'courses.courseid')
@@ -44,7 +44,7 @@ export default {
 
   async getStudentCourses(id, offset, limit, studentid) {
     const list = await db
-      .select('catname', 'coursename', 'lecname', 'rating',
+      .select('courseavatar', 'catname', 'coursename', 'lecname', 'rating',
         'reviews', 'courses.courseid')
       .from('studentcourses')
       .join('courses', 'studentcourses.courseid', 'courses.courseid')

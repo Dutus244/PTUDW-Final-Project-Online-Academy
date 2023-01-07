@@ -3,7 +3,7 @@
     <div class="carousel-item active">
       <a href="/course/detail/{{first.CourseID}}">
         <div class="d-block w-100" style="text-align: center; background-color:black">
-      <img src="/public/img/category/yae.png" height="300" alt="First slide">
+      <img src=src="{{first.CourseAvatar}}" height="300" alt="First slide">
       <div class="carousel-caption d-none d-md-block">
         <span class="Featured">{{first.CourseName}}</span>
         <br>
@@ -16,7 +16,7 @@
     <div class="carousel-item">
       <a href="/course/detail/{{second.CourseID}}">
         <div class="d-block w-100" style="text-align: center; background-color:black">
-      <img src="/public/img/category/yae.png" height="300" alt="Second slide">
+      <img src=src="{{second.CourseAvatar}}" height="300" alt="Second slide">
       <div class="carousel-caption d-none d-md-block">
         <span class="Featured">{{second.CourseName}}</span>
         <br>
@@ -29,7 +29,7 @@
     <div class="carousel-item">
       <a href="/course/detail/{{third.CourseID}}">
         <div class="d-block w-100" style="text-align: center; background-color:black">
-      <img src="/public/img/category/yae.png" height="300" alt="Third slide">
+      <img src=src="{{third.CourseAvatar}}" height="300" alt="Third slide">
       <div class="carousel-caption d-none d-md-block">
         <span class="Featured">{{third.CourseName}}</span>
         <br>
@@ -57,7 +57,7 @@
     <div class="col-sm-2 mb-2">
       <a href="/course/detail/{{CourseID}}">
         <div class="card h-100">
-          <img class="card-img-top" src="/public/img/category/yae.png" alt="courseTitle">
+          <img class="card-img-top" src="{{CourseAvatar}}" alt="courseAvatar">
           <div class="card-body">
             <h4 class="card-title mb-0" id="coursename">{{CourseName}}</h4>
             <p class="card-title mb-0 font-italic">{{CatName}}</p>
@@ -89,7 +89,7 @@
     <div class="col-sm-2 mb-2">
       <a href="/course/detail/{{CourseID}}">
         <div class="card h-100">
-          <img class="card-img-top" src="/public/img/category/yae.png" alt="courseTitle">
+          <img class="card-img-top" src="{{CourseAvatar}}" alt="courseAvatar">
           <div class="card-body">
             <h4 class="card-title mb-0" id="coursename">{{CourseName}}</h4>
             <p class="card-title mb-0 font-italic">{{CatName}}</p>
