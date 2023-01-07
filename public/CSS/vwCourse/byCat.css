@@ -20,7 +20,7 @@ h4.card-header {
     text-decoration: none;
 }
 
-#coursename {
+.coursename {
     font-size: 2.2rem;
 }
 
@@ -33,4 +33,9 @@ h4.card-header {
 .bi.bi-star-fill {
     font-size: 1.5rem;
     color: orange;
+}
+
+.discount-text {
+    display: inline;
+    color: red;
 }

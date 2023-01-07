@@ -1,6 +1,7 @@
 import { engine } from 'express-handlebars';
 import hbs_sections from 'express-handlebars-sections';
 import numeral from 'numeral';
+import moment from 'moment';
 
 export default function (app) {
   app.engine('hbs', engine({
@@ -21,6 +22,12 @@ export default function (app) {
           return options.fn(this);
         }
         return options.inverse(this);
+      },
+      format_date_ddmmyyyy(val) {
+        if (val)
+          return moment(val).format('DD-MM-YYYY')
+        else 
+          return null
       },
     }
   }));

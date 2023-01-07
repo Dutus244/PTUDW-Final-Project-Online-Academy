@@ -36,7 +36,7 @@
               <div class="card h-100">
                 <img class="card-img-top" src="/public/img/category/yae.png" alt="courseTitle">
                 <div class="card-body">
-                  <h4 class="card-title mb-0" id="coursename">{{coursename}}</h4>
+                  <h4 class="card-title mb-0 coursename">{{coursename}}</h4>
                   <p class="card-title mb-0 font-italic">{{catname}}</p>
                   <p class="card-text text-secondary mb-0">{{lecname}}</p>
                   <div class="rating">
@@ -45,7 +45,7 @@
                     <p class="text-secondary rating-item">({{format_number reviews}})</p>
                   </div>
                   {{#if this.discount}}
-                  <h5 class="card-text mb-0" style="display: inline;">₫{{format_number discount}}</h5>
+                  <h5 class="card-text mb-0 discount-text">₫{{format_number discount}}</h5>
                   <del class="text-secondary">₫{{format_number tuition}}</del>
                   {{else}}
                   <h5 class="card-text mb-0">₫{{format_number tuition}}</h5>

@@ -123,37 +123,46 @@ export default {
     },
 
     async findSimilarCourses(id) {
-        const courseid = await db
-            .select('course2.courseid')
-            .from('courses as course1')
-            .join('courses as course2', 'course1.catid', 'course2.catid')
-            .where('course1.courseid', id);
+        // const courseid = await db
+        //     .select('course2.courseid')
+        //     .from('courses as course1')
+        //     .join('courses as course2', 'course1.catid', 'course2.catid')
+        //     .where('course1.courseid', id);
 
-        if (courseid.length === 0) {
-            return null;
-        }
+        // if (courseid.length === 0) {
+        //     return null;
+        // }
 
-        var bought = []
+        // var bought = []
 
-        for (let i in courseid){
-            let amount = await this.countByBought(courseid[i])
-            bought.push({courseid: courseid[i], amount: amount})
-        }
+        // for (let i in courseid){
+        //     let amount = await this.countByBought(courseid[i])
+        //     bought.push({courseid: courseid[i], amount: amount})
+        // }
 
-        bought.sort(function(a, b){return b.amount - a.amount});
-        
-        if(bought.length > 5){
-            bought = bought.slice(0, 5)
-        }
+        // bought.sort(function(a, b){return b.amount - a.amount});
 
-        var courses = []
+        // if(bought.length > 5){
+        //     bought = bought.slice(0, 5)
+        // }
 
-        for (let x in bought){
-            var list = await this.findAll(bought[x].courseid)
-            courses.push(list[0])
-        }
+        // var courses = []
 
-        return courses;
+        // for (let x in bought){
+        //     var list = await this.findAll(bought[x].courseid)
+        //     courses.push(list[0])
+        // }
+
+        const sql = `select courseid, coursename, rating, reviews, tuition, discount, lecname from courses 
+            join lecturers on courses.lecid = lecturers.lecid
+            where catid =
+            (select catid from courses
+            where courseid = '${id}') and courseid != '${id}'
+            order by students desc
+            limit 5`
+        const courses = await db.raw(sql)
+
+        return courses[0];
     },
 
     async countByBought(courseid) {
@@ -288,10 +297,10 @@ export default {
     async hasWatched(studentid, contentid) {
         try {
             await db('studentwatchcontent')
-            .insert({
-                'studentid': studentid,
-                'contentid': contentid,
-            })
+                .insert({
+                    'studentid': studentid,
+                    'contentid': contentid,
+                })
         } catch (error) {
             console.log(error);
         }

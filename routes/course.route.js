@@ -4,6 +4,7 @@ import categoryService from "../services/category.service.js";
 import studentService from '../services/student.service.js';
 import { getVisiblePage } from '../utils/helper.js'
 import authWithRequiredPermission from '../middlewares/auth.mdw.js';
+import moment from 'moment';
 
 const router = express.Router()
 
@@ -87,18 +88,20 @@ router.get('/detail/:id', async function (req, res) {
     const id = req.params.id || '0';
     const accountid = res.locals.auth ? res.locals.authUser.accountid : '0'
     const course = await courseService.findById(id);
-    const chapter = await courseService.findChapter(id);
+    const coursecontent = await courseService.getCourseContent(id);
     const feedback = await courseService.findFeedbacks(id);
     const isBought = await courseService.isBought(accountid, id)
     const isInWatchlist = await courseService.isInWatchlist(accountid, id)
     const similarCourses = await courseService.findSimilarCourses(id);
+
+    // console.log(course);
 
     if (course === null)
       return res.redirect('/');
 
     res.render('vwGuest/detail', {
       course: course,
-      chapter: chapter,
+      coursecontent: coursecontent,
       feedback: feedback,
       isBought: isBought,
       isInWatchlist: isInWatchlist,

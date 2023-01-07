@@ -1,24 +1,56 @@
+{{#section 'js'}}
+<script src="https://cdn.jsdelivr.net/gh/kartik-v/bootstrap-star-rating@4.1.2/js/star-rating.min.js"
+  type="text/javascript"></script>
+<script>
+  $(document).ready(function() {
+    $('#moreDetail').on('click', function(e) {
+      const tinydes = $('#tinydes')
+      const fulldes = $('#fulldes')
+      const btnText = $('#moreDetail')
+      
+      console.log(fulldes.css('display'))
+      if (fulldes.css('display') === 'none') {
+        tinydes.css('display', 'none')
+        fulldes.css('display', 'block')
+        btnText.text('Thu gọn')
+      } else {
+        tinydes.css('display', 'block')
+        fulldes.css('display', 'none')
+        btnText.text('Chi tiết')
+      }
+    })
+  })
+</script>
+{{/section}}
+
 {{#section 'css'}}
 <link rel="stylesheet" href="../../public/CSS/course.css">
+<link href="https://cdn.jsdelivr.net/gh/kartik-v/bootstrap-star-rating@4.1.2/css/star-rating.min.css" media="all"
+  rel="stylesheet" type="text/css" />
+<link href="https://cdn.jsdelivr.net/gh/kartik-v/bootstrap-star-rating@4.1.2/themes/krajee-svg/theme.css" media="all"
+  rel="stylesheet" type="text/css" />
 {{/section}}
 
 <div class="container">
   <div class="course-discription">
     <div class="course-detail">
       <h2 class="course-title">{{this.course.coursename}}</h2>
-      <p class="discription">{{this.course.tinydes}}</p>
+      {{!-- <p class="discription">{{this.course.tinydes}}</p> --}}
       <p class="student">Học viên: {{this.course.students}}</p>
       <div class="tuition">
         {{#if this.course.discount}}
-        <p>Học phí: <del class="text-secondary">₫{{format_number this.course.tuition}}</del> <span
-            class="text-danger font-weight-bold" style="display: inline">₫{{format_number this.course.discount}}</span>
+        <p>
+          Học phí:
+          <span class="text-danger font-weight-bold" style="display: inline">₫{{format_number
+            this.course.discount}}</span>
+          <del class="text-secondary">₫{{format_number this.course.tuition}}</del>
         </p>
         {{else}}
         <p>Học phí: <span class="text-danger font-weight-bold" style="display: inline">{{format_number
             this.course.tuition}}</span></p>
         {{/if}}
       </div>
-      <p class="last-updated">Cập nhật lần cuối: {{this.course.updatetime}}</p>
+      <p class="last-updated">Cập nhật lần cuối: {{format_date_ddmmyyyy this.course.updatetime}}</p>
       <div class="rating">
         <p class="rating-item">{{this.course.rating}}</p>
         <i class="bi bi-star-fill"></i>
@@ -46,54 +78,74 @@
   </div>
 
   <div class="course-content">
-    <h4 class="header">Nội dung khóa học</h4>
-    <p class="content">{{this.course.fulldes}}</p>
+    <h3 class="header">Mô tả khóa học</h3>
+    <p id="tinydes">{{this.course.tinydes}}</p>
+    <p id="fulldes">{{this.course.fulldes}}</p>
+    <a class="btn button" href="#/" id="moreDetail">Chi tiết</a>
   </div>
 
   <div class="course-menu">
-    <h4 class="header">Mục lục</h4>
-    <div class="chapter">
-      <p class="chapter-header">{{this.course.chaptername}}</p>
-      <div class="chapter-menu">
-        {{#each this.chapter}}
-        <p>{{this.chapter.contentname}}</p>
-        <p>{{this.chapter.updatetime}}</p>
+    <h3 class="header">Mục lục</h3>
+    <div class="course-content-menu">
+      {{#each this.coursecontent}}
+      <a data-toggle="collapse" href="#chapterid_{{chapterid}}" role="button" aria-expanded="false"
+        aria-controls="chapterid_{{chapterid}}">
+        <div class="card-header chapter">
+          <div class="chapter-name">
+            {{chaptername}}
+          </div>
+          <div class="chapter-icon">
+            <i class="bi bi-caret-down-fill"></i>
+            <i class="bi bi-caret-up-fill"></i>
+          </div>
+        </div>
+      </a>
+
+
+      <div class="collapse" id="chapterid_{{chapterid}}">
+        {{#each this.chaptercontent}}
+        <div class="content">
+          <div class="card card-body chapter-content">
+            <div class="content-name">{{contentname}}</div>
+          </div>
+        </div>
         {{/each}}
       </div>
+      {{/each}}
     </div>
   </div>
 
   <div class="lecturer">
-    <h4 class="header">Thông tin giảng viên</h4>
+    <h3 class="header">Thông tin giảng viên</h3>
     <div class="information">
-      <h5>Họ và tên: {{this.course.lecname}}</h5>
+      <p>Họ và tên: {{this.course.lecname}}</p>
       <p>Kinh nghiệm: {{this.course.experience}}</p>
       <p>About me: {{this.course.aboutme}}</p>
     </div>
   </div>
 
   <div class="similar-courses">
-    <h4 class="header">Các khóa học tương tự</h4>
+    <h3 class="header">Top 5 khóa học được mua nhiều nhất ở cùng lĩnh vực</h3>
     <div class="card-body">
       <div class="row pb-2">
         {{#each this.courses}}
-        <div class="col-sm-2 mb-2">
-          <a href="/course/detail/{{this.courses.courseid}}">
+        <div class="col">
+          <a href="/course/detail/{{courseid}}">
             <div class="card h-100">
               <img class="card-img-top" src="/public/img/category/yae.png" alt="courseTitle">
               <div class="card-body">
-                <h4 class="card-title mb-0" id="coursename">{{this.courses.coursename}}</h4>
-                <p class="card-text text-secondary mb-0">{{this.courses.lecname}}</p>
+                <h4 class="card-title mb-0" id="coursename">{{coursename}}</h4>
+                <p class="card-text text-secondary mb-0">{{lecname}}</p>
                 <div class="rating">
-                  <p class="rating-item">{{this.courses.rating}}</p>
+                  <p class="rating-item">{{rating}}</p>
                   <i class="bi bi-star-fill"></i>
-                  <p class="text-secondary rating-item">({{this.courses.reviews}})</p>
+                  <p class="text-secondary rating-item">({{reviews}})</p>
                 </div>
                 {{#if this.discount}}
-                <h5 class="card-text mb-0" style="display: inline;">₫{{format_number this.courses.discount}}</h5>
-                <del class="text-secondary">₫{{format_number this.courses.tuition}}</del>
+                <h5 class="card-text mb-0 discount-text">₫{{format_number discount}}</h5>
+                <del class="text-secondary">₫{{format_number tuition}}</del>
                 {{else}}
-                <h5 class="card-text mb-0">₫{{format_number this.courses.tuition}}</h5>
+                <h5 class="card-text mb-0">₫{{format_number tuition}}</h5>
                 {{/if}}
               </div>
             </div>
@@ -102,19 +154,29 @@
         {{/each}}
       </div>
     </div>
-</div>
+  </div>
 
   <div class="feedback">
-    <h4 class="header">Đánh giá về khóa học</h4>
-    <div class="information">
+    <h3 class="header">Đánh giá về khóa học</h3>
+    <div class="row pb-5">
       {{#each this.feedback}}
-      <div class="rating">
-        <h6 class="text-secondary rating-item">{{this.feedback.studentname}}</h6>
-        <p class="rating-item">{{this.feedback.rating}}</p>
-        <i class="bi bi-star-fill"></i>
+      <div class="col-sm-4 mb-4">
+        <div class="card h-100">
+          <div class="card-body">
+            <h4 class="card-title mb-0">{{studentname}}</h4>
+            <div class="rate">
+              <span style="display: inline-flex;">
+                <input id="inputRating" name="rating" type="text" class="rating rating-loading" data-size="sm"
+                  data-min="0" data-max="5" value="{{rating}}" data-show-clear="false" data-show-caption="false"
+                  data-readonly="true">
+              </span>
+              <label class="text-secondary mb-0" style="height: 100%;" for="inputRating">{{format_date_ddmmyyyy
+                updatetime}}</label>
+            </div>
+            <p class="card-title mb-0">{{feedback}}</p>
+          </div>
+        </div>
       </div>
-      <p>{{this.feedback.feedback}}</p>
-      <p>{{this.feedback.updatetime}}</p>
       {{/each}}
     </div>
   </div>

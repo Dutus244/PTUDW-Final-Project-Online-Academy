@@ -18,8 +18,13 @@
     font-weight: bold;
 }
 
-.discription, .tuition, .student, .last-updated, .rating, .button{
+.discription, .tuition, .student, .last-updated, .button{
     margin-left: 5px;
+}
+
+.rate {
+    display: flex;
+    align-items: center;
 }
 
 .course-img { 
@@ -83,7 +88,7 @@ a:active {
     padding: 10px;
     width: 100%;
     margin: 30px auto 30px;
-    background: #fff4f9;
+    /* background: #fff4f9; */
     overflow: hidden;
 }
 
@@ -118,3 +123,41 @@ a:active {
     justify-content: space-between;
 }
 
+.card {
+    border-color: rgb(254, 106, 129);
+}
+
+.discount-text {
+    display: inline;
+    color: red;
+}
+
+a[aria-expanded=true] .bi-caret-down-fill {
+    display: none;
+}
+
+a[aria-expanded=false] .bi-caret-up-fill {
+    display: none;
+}
+
+.chapter {
+    background-color: pink;
+    display: flex;
+}
+
+.chapter-name {
+    width: 90%;
+
+}
+
+.chapter-icon {
+    width: 10%;
+}
+
+#tinydes, #fulldes {
+    padding: 5px 5px 5px 5px;
+}
+
+#fulldes {
+    display: none;
+}

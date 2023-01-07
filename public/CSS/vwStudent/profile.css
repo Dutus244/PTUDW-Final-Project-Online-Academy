@@ -100,3 +100,8 @@ a.profile-item {
 .bg-inherit {
     background-color: inherit;
 }
+
+.discount-text {
+    display: inline;
+    color: red;
+}
