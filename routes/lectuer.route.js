@@ -8,9 +8,80 @@ import authWithRequiredPermission from "../middlewares/auth.mdw.js";
 import categoryService from "../services/category.service.js";
 import {v4, v4 as uuidv4} from "uuid";
 import userServices from "../services/user.service.js";
-
+import multer from 'multer';
+import bodyParser from 'body-parser';
 
 const router = express.Router()
+
+
+// apply them
+
+router.use(bodyParser.json())
+router.use(bodyParser.urlencoded({extended: true}))
+//router.use(multer().array())
+export const config = {
+    api: {
+      bodyParser: false
+    }
+  }
+
+router.get('/addcourse', authWithRequiredPermission(1), async function (req, res) {
+    const categorylist = await categoryService.findAllForAddCourse()
+    res.render('vwTeacher/add-courses', {
+        categorylist: categorylist
+    })
+})
+    
+router.post('/addcourse', authWithRequiredPermission(1), async function (req, res) {
+    const id = v4()
+
+    const storage = multer.diskStorage({
+      destination: function (req, file, cb) {
+        cb(null, './public/img/')
+      },
+      filename: function (req, file, cb) {
+        // const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9)
+        cb(null, id + '.png')
+      }
+    })
+  
+    const upload = multer({ storage: storage }) 
+    upload.array('fuMain', 5)(req, res, async function (err) {
+        const name = req.body.coursename
+        const smalldetail = req.body.coursesmalldetail
+        const detail = req.body.coursedetail
+        const cat = req.body.coursecat
+        const tuition = req.body.courseprice
+        const imagelink = './public/img/' + id + '.png'
+
+        const course = {
+            courseid: id,
+            coursename: name,
+            courseavatar: imagelink,
+            catid: cat,
+            tinydes: smalldetail,
+            fulldes: detail,
+            tuition: tuition,
+            lecid: res.locals.authUser.accountid
+        }
+
+        await courseService.addcourse(course)        
+      if (err instanceof multer.MulterError) {
+        // A Multer error occurred when uploading.
+        console.error(err);
+      } else if (err) {
+        // An unknown error occurred when uploading.
+        console.error(err);
+      }
+      res.redirect("/teacher/addchapter")
+    })
+})
+
+router.get('addchapter', authWithRequiredPermission(1), async function (req, res){
+    res.render('vwTeacher/add-chapter', {
+
+    })
+})
 
 router.get('/profile', async (req, res) => {
     const teacher = await lecturerService.getTeacherProfile(res.locals.authUser.accountid)

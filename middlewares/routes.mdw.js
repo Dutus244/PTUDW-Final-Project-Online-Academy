@@ -11,8 +11,6 @@ export default function (app) {
     const listFeatured = await courseService.featured();
     const listCreated = await courseService.created();
     const listViewed = await courseService.viewed();
-
-    console.log(listCreated[0]);
     
     res.render('vwGuest/home', {
         first: listFeatured[0][0],
@@ -37,4 +35,5 @@ export default function (app) {
   app.use('/admin/students',studentRoute)
 
   app.use('/account', accountRoute)
+
 }

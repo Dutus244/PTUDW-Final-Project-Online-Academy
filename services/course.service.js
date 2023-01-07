@@ -1,6 +1,10 @@
 import db from '../utils/db.js';
 
 export default {
+    async addcourse(entity){
+        return db('courses').insert(entity)
+    },
+
     async countAll() {
         const list = await db
             .count({ amount: 'courseid' })

@@ -1,6 +1,7 @@
 <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
   <div class="carousel-inner">
     <div class="carousel-item active">
+      <a href="/course/detail/{{first.CourseID}}">
         <div class="d-block w-100" style="text-align: center; background-color:black">
       <img src="/public/img/category/yae.png" height="300" alt="First slide">
       <div class="carousel-caption d-none d-md-block">
@@ -10,8 +11,10 @@
         <i class="bi bi-star-fill"></i>
       </div>
         </div>
+      </a>
     </div>
     <div class="carousel-item">
+      <a href="/course/detail/{{second.CourseID}}">
         <div class="d-block w-100" style="text-align: center; background-color:black">
       <img src="/public/img/category/yae.png" height="300" alt="Second slide">
       <div class="carousel-caption d-none d-md-block">
@@ -21,8 +24,10 @@
         <i class="bi bi-star-fill"></i>
       </div>
         </div>
+      </a>
     </div>
     <div class="carousel-item">
+      <a href="/course/detail/{{third.CourseID}}">
         <div class="d-block w-100" style="text-align: center; background-color:black">
       <img src="/public/img/category/yae.png" height="300" alt="Third slide">
       <div class="carousel-caption d-none d-md-block">
@@ -32,6 +37,7 @@
         <i class="bi bi-star-fill"></i>
       </div>
          </div>
+        </a>
     </div>
   </div>
   <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
@@ -49,7 +55,7 @@
   <div class="row pb-2">
     {{#each this.created}}
     <div class="col-sm-2 mb-2">
-      <a href="/course/detail/{{CourseId}}">
+      <a href="/course/detail/{{CourseID}}">
         <div class="card h-100">
           <img class="card-img-top" src="/public/img/category/yae.png" alt="courseTitle">
           <div class="card-body">
@@ -61,7 +67,7 @@
               <i class="bi bi-star-fill"></i>
               <p class="text-secondary rating-item">({{format_number Reviews}})</p>
             </div>
-            {{#if this.discount}}
+            {{#if Discount}}
             <h5 class="card-text mb-0" style="display: inline;">₫{{format_number Discount}}</h5>
             <del class="text-secondary">₫{{format_number Tuition}}</del>
             {{else}}
@@ -81,7 +87,7 @@
   <div class="row pb-2">
     {{#each this.viewed}}
     <div class="col-sm-2 mb-2">
-      <a href="/course/detail/{{CourseId}}">
+      <a href="/course/detail/{{CourseID}}">
         <div class="card h-100">
           <img class="card-img-top" src="/public/img/category/yae.png" alt="courseTitle">
           <div class="card-body">
@@ -93,7 +99,7 @@
               <i class="bi bi-star-fill"></i>
               <p class="text-secondary rating-item">({{format_number Reviews}})</p>
             </div>
-            {{#if this.discount}}
+            {{#if Discount}}
             <h5 class="card-text mb-0" style="display: inline;">₫{{format_number Discount}}</h5>
             <del class="text-secondary">₫{{format_number Tuition}}</del>
             {{else}}

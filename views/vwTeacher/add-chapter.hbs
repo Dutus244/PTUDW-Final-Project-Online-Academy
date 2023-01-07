@@ -1,0 +1,36 @@
+{{#section 'css'}}
+ <link rel="stylesheet" href="../../public/CSS/vwTeacher/add.css">
+<link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.5.2/css/fileinput.min.css" integrity="sha512-sHiVTDN234pgseKqjDwH39VjS9DkyffX4S00kuAWWq+FrTq7HlFjPoWbfX/QFAxkdG9i9/1ftdG2sS+XWLcJmw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+{{/section}}
+
+{{#section 'js'}}
+<script src="https://cdn.tiny.cloud/1/ut87clx77zh22eesveqc4ey4stvbymbvcyk53hq4xplc0nmy/tinymce/6/tinymce.min.js"referrerpolicy="origin"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.5.2/js/plugins/buffer.min.js" integrity="sha512-UwceJzw/HmnX6PtXeqS50Xt41ixKrJGJan+tGR6ZPQ++t1GeIWktNCuQ+WMvHZQrAroRexAk3nM/aRLTrsylwA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.5.2/js/plugins/filetype.min.js" integrity="sha512-YhQROJQqESKhmQy7Tfukx+6WkTj+63GLPBvXFY6Nk8z1oYueG6JT0ExJtuypAsU635rUE4+QBhJ4tdYSl5GBMg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.5.2/js/plugins/piexif.min.js" integrity="sha512-7Gal4k+2XP+jya460hB5G4UouinZAr3iTagzd8evV/QRcxHJevyrU1tnzfVWAlWQmI9fd2nnmtaBMsEqjJN6Yw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.5.2/js/plugins/sortable.min.js" integrity="sha512-zYXldzJsDrNKV+odAwFYiDXV2Cy37cwizT+NkuiPGsa9X1dOz04eHvUWVuxaJ299GvcJT31ug2zO4itXBjFx4w==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.5.2/js/fileinput.min.js" integrity="sha512-XxRivO6jA7xU9a0ozATMIFQFdNySyRrB8uE1QctFmjTTGSGUj9tC7CpnVf7xq1e/QeVhbY9ZLbxEzPFIWpW+xA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.5.2/themes/fa4/theme.min.js" integrity="sha512-UbkgE5pR814vuQ2RSsNF+JNXXNjoQ3Ga1TSvup74ZOb1ETqRwQ1fGplsa5yoPX8vZU/Qo37VD4HbYWb7aDU34w==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.5.2/js/locales/vi.min.js" integrity="sha512-52ps7Exi2MgjCHJYotpowuwRpsHHsL0Moj9ZIJp1FapRfE4/4XQ1QRb9LLmQE2L1M43MljVDMcxPlfAsbuoFeQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script>
+    $('#fuMain').fileinput({
+        language: 'vi',
+        theme: 'fa4',
+        dropZoneEnabled: false,
+        maxFileCount: 5,
+        allowedFileExtension: ['mp3', 'mp4'],
+
+    });
+</script>
+
+{{/section}}
+
+<form method="post" id="frmRegister" enctype="multipart/form-data">
+    <div class="form-group">
+                <label for="fuMain">Ảnh đại diện</label>
+                <input type="file" multiple name="fuMain" id="fuMain">
+    </div>
+</form>

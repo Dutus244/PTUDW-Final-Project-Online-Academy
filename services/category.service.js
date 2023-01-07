@@ -1,6 +1,13 @@
 import db from '../utils/db.js';
 
 export default {
+    async findAllForAddCourse(){
+        const list = await db
+            .select('categories.catid','catname')
+            .from('categories')
+        return list;
+    },
+
     async findAllForMenu() {
         const categories = await db('categories')
         var list = {}
