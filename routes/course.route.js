@@ -6,6 +6,7 @@ import { getVisiblePage } from '../utils/helper.js'
 import authWithRequiredPermission from '../middlewares/auth.mdw.js';
 import moment from 'moment';
 import lecturerService from "../services/lecturer.service.js";
+import {v4 as uuidv4} from "uuid";
 
 const router = express.Router()
 
@@ -206,5 +207,34 @@ router.get('/enable', authWithRequiredPermission(2), async function (req, res) {
 
     res.redirect('/admin/courses/');
 });
+
+router.post('/', authWithRequiredPermission(2),async function (req, res) {
+    const searchby = req.body.searchby;
+    const search = req.body.search;
+    if (search.length === 0) {
+        const list = await courseService.findAll();
+        res.render('vwAdmin/courses/index', {
+            layout: 'mainAdmin',
+            courses: list,
+            empty: list.length === 0
+        });
+    }
+    else if (searchby === "Category") {
+        const list = await courseService.findByCategoryName(search);
+        res.render('vwAdmin/courses/index', {
+            layout: 'mainAdmin',
+            courses: list,
+            empty: list.length === 0
+        });
+    }
+    else {
+        const list = await courseService.findByLecturerName(search);
+        res.render('vwAdmin/courses/index', {
+            layout: 'mainAdmin',
+            courses: list,
+            empty: list.length === 0
+        });
+    }
+})
 
 export default router

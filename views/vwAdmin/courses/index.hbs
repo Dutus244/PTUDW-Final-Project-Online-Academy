@@ -3,8 +3,19 @@
 {{/section}}
 
 <div class="card">
-    <h4 class="card-header d-flex justify-content-between">
+    <h4 class="card-header d-flex">
         <span><h3>Courses</h3></span>
+        <span>
+            <form class="form-inline" style="background: white" method="post">
+                 <select name = "searchby" class="form-control" id="txtCatLevel" style="width: 200px">
+                     <option value = "Category" selected>Category</option>
+                     <option value = "Lecturer">Lecturer</option>
+                 </select>
+
+                <input name = "search" style="margin-left: 20px; width: 400px" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                <button style="margin-left: 20px; width: 200px" class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+            </form>
+        </span>
     </h4>
     {{#if this.coursesEmpty}}
         <div class="card-body">

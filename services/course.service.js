@@ -368,4 +368,24 @@ export default {
         const quota = await db.raw(sql)
         return quota[0][0].quota
     },
+
+    async findByCategoryName(name) {
+        const list = await db
+            .select('courseid', 'coursename', 'categories.catname', 'tinydes', 'fulldes', 'rating', 'reviews', 'views', 'students', 'tuition', 'discount', 'discountinfo', 'updatetime','createtime', 'lecturers.lecname','disable','complete')
+            .from('courses')
+            .join('categories', 'categories.catid', 'courses.catid')
+            .leftJoin('lecturers', 'courses.lecid', 'lecturers.lecid')
+            .where('categories.catname',name)
+        return list;
+    },
+
+    async findByLecturerName(name) {
+        const list = await db
+            .select('courseid', 'coursename', 'categories.catname', 'tinydes', 'fulldes', 'rating', 'reviews', 'views', 'students', 'tuition', 'discount', 'discountinfo', 'updatetime','createtime', 'lecturers.lecname','disable','complete')
+            .from('courses')
+            .leftJoin('categories', 'categories.catid', 'courses.catid')
+            .join('lecturers', 'courses.lecid', 'lecturers.lecid')
+            .where('lecturers.lecname',name)
+        return list;
+    },
 }
