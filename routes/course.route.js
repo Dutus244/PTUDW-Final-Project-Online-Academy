@@ -19,6 +19,7 @@ router.get('/byCat', async(req, res) => {
 
     const visiblePages = 5
     const pages = getVisiblePage(totalPages, visiblePages, curPage)
+    const bestsellerquota = await courseService.getBestSellerMinQuota()
     
     const list = await courseService.findPageByAll(offset, limit)
     res.render('vwCourse/byCat', {
@@ -29,6 +30,7 @@ router.get('/byCat', async(req, res) => {
         totalPages: totalPages,
         prevPage: curPage - 1,
         nextPage: curPage + 1,
+        bestsellerquota: bestsellerquota,
     })
 })
 
@@ -45,6 +47,7 @@ router.get('/byCat/:catName', async(req, res) => {
 
     const visiblePages = 5
     const pages = getVisiblePage(totalPages, visiblePages, curPage)
+    const bestsellerquota = await courseService.getBestSellerMinQuota()
     
     const list = await courseService.findPageByName(catName, offset, limit)
     res.render('vwCourse/byCat', {
@@ -55,6 +58,7 @@ router.get('/byCat/:catName', async(req, res) => {
         totalPages: totalPages,
         prevPage: curPage - 1,
         nextPage: curPage + 1,
+        bestsellerquota: bestsellerquota,
     })
 })
 
@@ -71,6 +75,7 @@ router.get('/catLevel/:name', async(req, res) => {
 
     const visiblePages = 5
     const pages = getVisiblePage(totalPages, visiblePages, curPage)
+    const bestsellerquota = await courseService.getBestSellerMinQuota()
     
     const list = await courseService.findPageByCatLevel(name, offset, limit)
     res.render('vwCourse/byCat', {
@@ -81,6 +86,7 @@ router.get('/catLevel/:name', async(req, res) => {
         totalPages: totalPages,
         prevPage: curPage - 1,
         nextPage: curPage + 1,
+        bestsellerquota: bestsellerquota,
     })
 })
 
@@ -94,6 +100,7 @@ router.get('/detail/:id', async function (req, res) {
     const isInWatchlist = await courseService.isInWatchlist(accountid, id)
     const similarCourses = await courseService.findSimilarCourses(id);
 
+    console.log(res.locals.authUser.permission);
 
     if (course === null)
       return res.redirect('/');

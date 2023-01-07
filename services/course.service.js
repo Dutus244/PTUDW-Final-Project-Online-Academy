@@ -54,7 +54,7 @@ export default {
 
     async findPageByAll(offset, limit) {
         const list = await db
-            .select('courseavatar', 'catname', 'coursename', 'lecname', 'rating', 'reviews', 'tuition', 'discount', 'courseid')
+            .select('students', 'courseavatar', 'catname', 'coursename', 'lecname', 'rating', 'reviews', 'tuition', 'discount', 'courseid')
             .from('courses')
             .join('categories', 'courses.catid', 'categories.catid')
             .join('lecturers', 'courses.lecid', 'lecturers.lecid')
@@ -66,7 +66,7 @@ export default {
 
     async findPageByName(name, offset, limit) {
         const list = await db
-            .select('courseavatar', 'catname', 'coursename', 'lecname', 'rating', 'reviews', 'tuition', 'discount', 'courseid')
+            .select('students', 'courseavatar', 'catname', 'coursename', 'lecname', 'rating', 'reviews', 'tuition', 'discount', 'courseid')
             .from('courses')
             .join('categories', 'courses.catid', 'categories.catid')
             .join('lecturers', 'courses.lecid', 'lecturers.lecid')
@@ -79,7 +79,7 @@ export default {
 
     async findPageByCatLevel(catlevel, offset, limit) {
         const list = await db
-            .select('courseavatar', 'catname', 'coursename', 'lecname', 'rating', 'reviews', 'tuition', 'discount', 'courseid')
+            .select('students', 'courseavatar', 'catname', 'coursename', 'lecname', 'rating', 'reviews', 'tuition', 'discount', 'courseid')
             .from('courses')
             .join('categories', 'courses.catid', 'categories.catid')
             .join('lecturers', 'courses.lecid', 'lecturers.lecid')
@@ -348,4 +348,10 @@ export default {
             console.log(error);
         }
     },
+
+    async getBestSellerMinQuota() {
+        const sql = `select (sum(students) / count(*)) as quota from courses`
+        const quota = await db.raw(sql)
+        return quota[0][0].quota
+    }
 }

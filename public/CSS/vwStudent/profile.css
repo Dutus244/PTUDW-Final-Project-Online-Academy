@@ -93,8 +93,8 @@ a.profile-item {
     color: rgb(254, 106, 129);
 }
 
-.bi-check-circle-fill {
-    color: rgb(5, 87, 5);
+.bi-clipboard2-x {
+    color: red;
 }
 
 .bg-inherit {

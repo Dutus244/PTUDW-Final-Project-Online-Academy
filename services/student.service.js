@@ -44,7 +44,7 @@ export default {
 
   async getStudentCourses(id, offset, limit, studentid) {
     const list = await db
-      .select('courseavatar', 'catname', 'coursename', 'lecname', 'rating',
+      .select('complete', 'courseavatar', 'catname', 'coursename', 'lecname', 'rating',
         'reviews', 'courses.courseid')
       .from('studentcourses')
       .join('courses', 'studentcourses.courseid', 'courses.courseid')
@@ -54,20 +54,20 @@ export default {
       .offset(offset)
       .limit(limit)
 
-    for (const i in list) {
-      const sql = `select * from 
-        (select count(*) as sum from chaptercontent where courseid = '${list[i].courseid}') as l join
-        (select count(*) as watchedSum from studentwatchcontent 
-        join chaptercontent on chaptercontent.contentid = studentwatchcontent.contentid
-        where studentid = '${studentid}' and courseid = '${list[i].courseid}') as m
-        where l.sum = m.watchedSum`
-      const flag = await db.raw(sql)
-      if (flag[0].length === 1)
-        list[i]['iscompleted'] = true
-      else
-        list[i]['iscompleted'] = false
-    }
-
+    // for (const i in list) {
+    //   const sql = `select * from 
+    //     (select count(*) as sum from chaptercontent where courseid = '${list[i].courseid}') as l join
+    //     (select count(*) as watchedSum from studentwatchcontent 
+    //     join chaptercontent on chaptercontent.contentid = studentwatchcontent.contentid
+    //     where studentid = '${studentid}' and courseid = '${list[i].courseid}') as m
+    //     where l.sum = m.watchedSum`
+    //   const flag = await db.raw(sql)
+    //   if (flag[0].length === 1)
+    //     list[i]['complete'] = true
+    //   else
+    //     list[i]['complete'] = false
+    // }
+    
     return list
   },
 

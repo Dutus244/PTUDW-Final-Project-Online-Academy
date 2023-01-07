@@ -36,7 +36,7 @@
               <div class="card h-100">
                 <div class="img-container">
                   <img class="card-img-top" src="{{courseavatar}}" alt="courseAvatar">
-                  {{#ifCompare rating 4}}
+                  {{#ifCompare students ../this.bestsellerquota}}
                   <i class="bi bi-fire fire-icon"></i>
                   {{/ifCompare}}
                 </div>

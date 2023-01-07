@@ -56,8 +56,9 @@
               <div class="card h-100">
                 <div class="img-container">
                   <img class="card-img-top" src="{{courseavatar}}" alt="courseAvatar">
-                  {{#if iscompleted}}
-                  <i class="bi bi-check-circle-fill complete-icon"></i>
+                  {{#if complete}}
+                  {{else}}
+                  <i class="bi bi-clipboard2-x complete-icon"></i>
                   {{/if}}
                 </div>
                 <div class="card-body">
