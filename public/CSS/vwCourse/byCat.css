@@ -39,3 +39,24 @@ h4.card-header {
     display: inline;
     color: red;
 }
+
+.img-container {
+    position: relative;
+}
+
+.img-container img {
+    display: block;
+}
+
+.img-container .fire-icon {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 0 0.5rem;
+    background: transparent;
+    font-size: 3rem;
+}
+
+.bi-fire {
+    color: red;
+}
