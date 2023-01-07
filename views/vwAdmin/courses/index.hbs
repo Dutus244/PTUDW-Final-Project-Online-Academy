@@ -32,6 +32,7 @@
                     <th>Update Time</th>
                     <th>Lecturer Name</th>
                     <th>&nbsp;</th>
+                    <th>&nbsp;</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -51,6 +52,20 @@
                         <td>{{discountinfo}}</td>
                         <td>{{updatetime}}</td>
                         <td>{{lecname}}</td>
+                        {{#ifEquals disable 0}}
+                            <td class="text-right">
+                                <a class="btn btn-sm btn-outline-primary btnAddAdmin" href="/admin/courses/disable?id={{courseid}}" role="button" title="Disable Course">
+                                <i class="bi bi-eye-slash bg-transparent" aria-hidden="true"></i>
+                                </a>
+                            </td>
+                        {{/ifEquals}}
+                        {{#ifEquals disable 1}}
+                            <td class="text-right">
+                                <a class="btn btn-sm btn-outline-primary btnAddAdmin" href="/admin/courses/enable?id={{courseid}}" role="button" title="Enable Course">
+                                <i class="bi bi-eye bg-transparent" aria-hidden="true"></i>
+                                </a>
+                            </td>
+                        {{/ifEquals}}
                         <td class="text-right">
                             <a class="btn btn-sm btn-outline-primary btnAddAdmin" href="/admin/courses/del?id={{courseid}}" role="button" title="Delete">
                             <i class="fa fa-trash bg-transparent" aria-hidden="true"></i>

@@ -180,7 +180,7 @@ export default {
 
     async findAll() {
         const list = await db
-            .select('courseid', 'coursename', 'categories.catname', 'tinydes', 'fulldes', 'rating', 'reviews', 'views', 'students', 'tuition', 'discount', 'discountinfo', 'updatetime', 'lecturers.lecname')
+            .select('courseid', 'coursename', 'categories.catname', 'tinydes', 'fulldes', 'rating', 'reviews', 'views', 'students', 'tuition', 'discount', 'discountinfo', 'updatetime','createtime', 'lecturers.lecname','disable','complete')
             .from('courses')
             .leftJoin('categories', 'categories.catid', 'courses.catid')
             .leftJoin('lecturers', 'courses.lecid', 'lecturers.lecid')
@@ -347,5 +347,19 @@ export default {
         } catch (error) {
             console.log(error);
         }
+    },
+
+    disable(id) {
+        const course = {
+            disable: 1,
+        }
+        return db('courses').where('courseid', id).update(course);
+    },
+
+    enable(id) {
+        const course = {
+            disable: 0,
+        }
+        return db('courses').where('courseid', id).update(course);
     },
 }

@@ -5,6 +5,7 @@ import studentService from '../services/student.service.js';
 import { getVisiblePage } from '../utils/helper.js'
 import authWithRequiredPermission from '../middlewares/auth.mdw.js';
 import moment from 'moment';
+import lecturerService from "../services/lecturer.service.js";
 
 const router = express.Router()
 
@@ -182,6 +183,20 @@ router.get('/', authWithRequiredPermission(2),async function (req, res) {
 router.get('/del',authWithRequiredPermission(2), async function (req, res) {
     const id = req.query.id || 0;
     await courseService.del(id);
+    res.redirect('/admin/courses/');
+});
+
+router.get('/disable', authWithRequiredPermission(2), async function (req, res) {
+    const id = req.query.id || 0;
+    await courseService.disable(id);
+
+    res.redirect('/admin/courses/');
+});
+
+router.get('/enable', authWithRequiredPermission(2), async function (req, res) {
+    const id = req.query.id || 0;
+    await courseService.enable(id);
+
     res.redirect('/admin/courses/');
 });
 
