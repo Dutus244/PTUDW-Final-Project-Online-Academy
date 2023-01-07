@@ -25,9 +25,6 @@
     <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav">
             <li class="nav-item active">
-                <a class="nav-link" href="/admin/home">Home <span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item active">
                 <a class="nav-link" href="/admin/categories">Categories <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item active">
@@ -43,8 +40,9 @@
     </div>
 
 
-    <div style="background-color: pink;">
-        <button class="btnHelloUserNameAdmin">Hello Admin</button>
+    <div>
+        <form id="frmLogout" action="/account/logout" method="post"></form>
+        <a href="javascript: $('#frmLogout').submit();"><button class="login">Sign out</button></a>
     </div>
 </nav>
 

@@ -63,8 +63,11 @@ router.post('/signin', async (req,res)=>{
     req.session.auth = true;
     req.session.authUser = user;
 
-    const url = req.session.retUrl || '/';
+    let url = req.session.retUrl || '/';
     delete req.session.retUrl;
+    if (user.permission == 2) {
+        url = "/admin/categories";
+    }
     res.redirect(url);
 });
 
