@@ -1,0 +1,37 @@
+{{#section 'css'}}
+    <link rel="stylesheet" href="/public/CSS/styleAdmin.css">
+{{/section}}
+
+<form method="post">
+    <div class="card">
+        <h4 class="card-header">
+            Add New Student
+        </h4>
+        <div class="card-body">
+            <div class="form-group">
+                <label for="txtCatName">Email</label>
+                <input name="email" type="text" class="form-control" id="txtLecName" autofocus placeholder="" required>
+
+                <br>
+
+                <label for="txtCatName">Password</label>
+                <input name="password" type="text" class="form-control" id="txtLecName" autofocus placeholder="" required>
+
+                <br>
+
+                <label for="txtCatName">Student Name</label>
+                <input name="studentname" type="text" class="form-control" id="txtLecName" autofocus placeholder="" required>
+            </div>
+        </div>
+        <div class="card-footer text-muted">
+            <a class="btn btn-outline-success btnAdd" href="/admin/students" role="button">
+                <i class="fa fa-backward bg-transparent" aria-hidden="true"></i>
+                Return to List
+            </a>
+            <button type="submit" class="btn btn-outline-success btnAdd">
+                <i class="fa fa-check bg-transparent" aria-hidden="true"></i>
+                Add new student
+            </button>
+        </div>
+    </div>
+</form>

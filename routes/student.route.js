@@ -6,6 +6,8 @@ import courseService from '../services/course.service.js';
 import { getVisiblePage } from '../utils/helper.js'
 import authWithRequiredPermission from "../middlewares/auth.mdw.js";
 import lecturerService from "../services/lecturer.service.js";
+import {v4} from "uuid";
+import userServices from "../services/user.service.js";
 
 
 const router = express.Router()
@@ -190,7 +192,7 @@ router.get('/edit', authWithRequiredPermission(2), async function (req, res) {
 });
 
 router.post('/del', authWithRequiredPermission(2), async function (req, res) {
-  const id = req.body.lecid;
+  const id = req.body.studentid;
   await studentService.del(id);
   await studentService.delAccount(id);
   res.redirect('/admin/students');
@@ -215,5 +217,36 @@ router.post('/patch', authWithRequiredPermission(2),async function (req, res) {
   await studentService.patch(student);
   res.redirect('/admin/students/');
 });
+
+router.get('/add', authWithRequiredPermission(2),async function (req, res) {
+  res.render('vwAdmin/students/add', {
+    layout: 'mainAdmin',
+  });
+})
+
+router.post('/add', authWithRequiredPermission(2),async function (req, res) {
+  const salt = bcrypt.genSaltSync(10);
+  const hash = bcrypt.hashSync(req.body.password, salt);
+
+  const id = v4()
+
+  const account = {
+    accountid: id,
+    email: req.body.email,
+    pass: hash,
+    accounttype: 0,
+  }
+
+  const student = {
+    studentid: id,
+    studentname:req.body.studentname,
+  }
+
+  await userServices.add(account)
+  await userServices.addStudent(student)
+  res.render('vwAdmin/students/add', {
+    layout: 'mainAdmin',
+  });
+})
 
 export default router
