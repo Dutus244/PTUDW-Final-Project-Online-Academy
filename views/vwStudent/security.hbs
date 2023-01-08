@@ -12,19 +12,19 @@
       const newPass = $('#txtNewPass').val()
       const newPassConfirm = $('#txtNewPassConfirm').val()
       if (pass.length === 0) {
-        alert('Please fill in current password')
+        alert('Vui lòng nhập mật khẩu hiện tại')
         return
       }
       else if (newPass.length === 0) {
-        alert('Please fill in new password')
+        alert('Vui lòng nhập mật khẩu mới')
         return
       }
       else if (newPassConfirm.length === 0) {
-        alert('Please fill in new password confirm')
+        alert('Vui lòng nhập xác nhận mật khẩu mới')
         return
       }
       else if (newPass != newPassConfirm) {
-        alert('New password and new password confirm is different')
+        alert('Mật khẩu mới và xác nhận mật khẩu mới không giống nhau')
         return
       }
 
@@ -43,23 +43,23 @@
         </h4>
         <ul class="list-group list-group-flush">
           <a href="/student/profile" class="profile-item">
-            <li class="list-group-item">Profile</li>
+            <li class="list-group-item">Hồ sơ</li>
           </a>
           <a href="/student/security" class="profile-item">
-            <li class="list-group-item active-menu">Security</li>
+            <li class="list-group-item active-menu">Bảo mật</li>
           </a>
           <a href="/student/watchlist" class="profile-item">
             <li class="list-group-item">Watchlist</li>
           </a>
           <a href="/student/my-courses" class="profile-item">
-            <li class="list-group-item">My courses</li>
+            <li class="list-group-item">Khóa học đã mua</li>
           </a>
         </ul>
       </div>
     </div>
 
     <div class="col-sm-9 pb-4">
-      <p class="title text-center">Security</p>
+      <p class="title text-center">Bảo mật</p>
       {{!-- <p>Change your password here</p> --}}
 
       <form class="profile-form" method="post" id="formChangePassword">
@@ -80,20 +80,20 @@
         </div>
         {{/if}}
         <div class="form-group">
-          <label for="txtPass">Current password</label>
+          <label for="txtPass">Mật khẩu hiện tại</label>
           <input name="pass" type="password" class="form-control" id="txtPass">
         </div>
         <div class="form-group">
-          <label for="txtNewPass">New password</label>
+          <label for="txtNewPass">Mật khẩu mới</label>
           <input name="newPass" type="password" class="form-control" id="txtNewPass">
         </div>
         <div class="form-group">
-          <label for="txtNewPass">New password confirm</label>
+          <label for="txtNewPass">Xác nhận mật khẩu mới</label>
           <input type="password" class="form-control" id="txtNewPassConfirm">
         </div>
 
         <div class="submit-button">
-          <button type="submit" class="btn btn-profile">Change password</button>
+          <button type="submit" class="btn btn-profile">Lưu</button>
         </div>
       </form>
     </div>

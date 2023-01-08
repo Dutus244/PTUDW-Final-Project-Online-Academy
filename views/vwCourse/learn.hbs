@@ -115,7 +115,7 @@
 
       <div class="review px-5 py-3">
         <p class="h1">{{this.coursename}}</p>
-        <p class="h1 text-center">Your feedback</p>
+        <p class="h1 text-center">Đánh giá</p>
         {{#if this.feedback}}
         <label for="inputRating"></label>
         <input id="inputRating" name="rating" type="text" class="rating rating-loading" data-size="xl" data-min="0"
@@ -136,7 +136,7 @@
             placeholder="Share your experience about this course"></textarea>
 
           <div class="submit-button">
-            <button type="submit" class="btn btn-review">Submit</button>
+            <button type="submit" class="btn btn-review">Gửi</button>
           </div>
         </form>
         {{/if}}
@@ -145,7 +145,7 @@
 
     <div class="col-sm-3 p-0">
       <div class="card-header">
-        Course content
+        Nội dung bài giảng
       </div>
       <div class="course-content-menu">
         {{#each this.coursecontent}}

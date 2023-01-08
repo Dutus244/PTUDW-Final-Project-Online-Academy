@@ -102,7 +102,7 @@ router.get('/detail/:id', async function (req, res) {
     const isInWatchlist = await courseService.isInWatchlist(accountid, id)
     const similarCourses = await courseService.findSimilarCourses(id);
 
-    console.log(res.locals.authUser.permission);
+    // console.log(res.locals.authUser.permission);
 
     if (course === null)
       return res.redirect('/');

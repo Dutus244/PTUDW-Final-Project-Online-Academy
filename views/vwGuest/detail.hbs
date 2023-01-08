@@ -59,16 +59,19 @@
       <form id="formAddToWatchlist" action="/course/detail/{{this.course.courseid}}/addToWatchlist" method="post">
       </form>
       <form id="formBuyCourse" action="/course/detail/{{this.course.courseid}}/buy" method="post"></form>
+      {{#ifEquals authUser.permission 1}}
+      {{else}}
       {{#if this.isBought}}
-      <a class="btn button" href="/course/{{this.course.courseid}}/learn" role="button">Go to course</a>
+      <a class="btn button" href="/course/{{this.course.courseid}}/learn" role="button">Đi đến bài giảng</a>
       {{else}}
       {{#if this.isInWatchlist}}
-      <a class="btn button disabled" href="#/" role="button">Already in watchlist</a>
+      <a class="btn button disabled" href="#/" role="button">Đã ở trong watchlist</a>
       {{else}}
-      <a class="btn button" href="javascript: $('#formAddToWatchlist').submit();" role="button">Add to watchlist</a>
+      <a class="btn button" href="javascript: $('#formAddToWatchlist').submit();" role="button">Thêm vào watchlist</a>
       {{/if}}
-      <a class="btn button" href="javascript: $('#formBuyCourse').submit();" role="button">Buy now</a>
+      <a class="btn button" href="javascript: $('#formBuyCourse').submit();" role="button">Mua ngay</a>
       {{/if}}
+      {{/ifEquals}}
 
 
     </div>

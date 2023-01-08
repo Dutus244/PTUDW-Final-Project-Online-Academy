@@ -33,7 +33,7 @@ router.post('/profile', async (req, res) => {
   res.render('vwStudent/profile', {
     name: res.locals.authUser.name,
     email: res.locals.authUser.email,
-    msg: 'Update successfully',
+    msg: 'Cập nhật thành công',
   })
 })
 
@@ -51,13 +51,13 @@ router.post('/security', async (req, res) => {
   var err_msg
 
   if (ret === false) {
-    err_msg = 'Current password is incorrect'
+    err_msg = 'Sai mật khẩu hiện tại'
   }
   else {
     const salt = bcrypt.genSaltSync(10);
     const hash = bcrypt.hashSync(req.body.newPass, salt);
     await userService.updatePass(req.session.authUser.accountid, hash)
-    msg = 'Change password successfully'
+    msg = 'Đổi mật khẩu thành công'
   }
   res.render('vwStudent/security', {
     name: res.locals.authUser.name,
