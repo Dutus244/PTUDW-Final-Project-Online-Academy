@@ -1,43 +1,56 @@
+{{#section 'css'}}
+<style>
+  a:hover {
+    text-decoration: none;
+  }
+
+  .discount-text {
+    color: red;
+    display: inline;
+  }
+</style>
+{{/section}}
+
 <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
   <div class="carousel-inner">
     <div class="carousel-item active">
       <a href="/course/detail/{{first.CourseID}}">
         <div class="d-block w-100" style="text-align: center; background-color:black">
-      <img src=src="{{first.CourseAvatar}}" height="300" alt="First slide">
-      <div class="carousel-caption d-none d-md-block">
-        <span class="Featured">{{first.CourseName}}</span>
-        <br>
-        <p class="rating-item">{{first.Rating}}</p>
-        <i class="bi bi-star-fill"></i>
-      </div>
+          <img src=src="{{first.CourseAvatar}}" height="300" alt="First slide">
+          <div class="carousel-caption d-none d-md-block">
+            <span class="Featured">{{first.CourseName}}</span>
+            <br>
+            <p class="rating-item">{{first.Rating}}</p>
+            <i class="bi bi-star-fill"></i>
+          </div>
         </div>
       </a>
     </div>
     <div class="carousel-item">
       <a href="/course/detail/{{second.CourseID}}">
         <div class="d-block w-100" style="text-align: center; background-color:black">
-      <img src=src="{{second.CourseAvatar}}" height="300" alt="Second slide">
-      <div class="carousel-caption d-none d-md-block">
-        <span class="Featured">{{second.CourseName}}</span>
-        <br>
-        <p class="rating-item">{{second.Rating}}</p>
-        <i class="bi bi-star-fill"></i>
-      </div>
+          <img src=src="{{second.CourseAvatar}}" height="300" alt="Second slide">
+          <div class="carousel-caption d-none d-md-block">
+            <span class="Featured">{{second.CourseName}}</span>
+            <br>
+            <p class="rating-item">{{second.Rating}}</p>
+            <i class="bi bi-star-fill"></i>
+          </div>
         </div>
       </a>
     </div>
     <div class="carousel-item">
       <a href="/course/detail/{{third.CourseID}}">
         <div class="d-block w-100" style="text-align: center; background-color:black">
-      <img src=src="{{third.CourseAvatar}}" height="300" alt="Third slide">
-      <div class="carousel-caption d-none d-md-block">
-        <span class="Featured">{{third.CourseName}}</span>
-        <br>
-        <p class="rating-item">{{third.Rating}}</p>
-        <i class="bi bi-star-fill"></i>
-      </div>
-         </div>
-        </a>
+          <img src=src="{{third.CourseAvatar}}" height="300" alt="Third slide">
+          <div class="carousel-caption d-none d-md-block">
+            <span class="Featured">{{third.CourseName}}</span>
+            <br>
+            <p class="rating-item">{{third.Rating}}</p>
+            <i class="bi bi-star-fill"></i>
+          </div>
+        </div>
+      </a>
     </div>
   </div>
   <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
@@ -68,7 +81,7 @@
               <p class="text-secondary rating-item">({{format_number Reviews}})</p>
             </div>
             {{#if Discount}}
-            <h5 class="card-text mb-0" style="display: inline;">₫{{format_number Discount}}</h5>
+            <h5 class="card-text mb-0 discount-text">₫{{format_number Discount}}</h5>
             <del class="text-secondary">₫{{format_number Tuition}}</del>
             {{else}}
             <h5 class="card-text mb-0">₫{{format_number Tuition}}</h5>
@@ -100,11 +113,29 @@
               <p class="text-secondary rating-item">({{format_number Reviews}})</p>
             </div>
             {{#if Discount}}
-            <h5 class="card-text mb-0" style="display: inline;">₫{{format_number Discount}}</h5>
+            <h5 class="card-text mb-0 discount-text">₫{{format_number Discount}}</h5>
             <del class="text-secondary">₫{{format_number Tuition}}</del>
             {{else}}
             <h5 class="card-text mb-0">₫{{format_number Tuition}}</h5>
             {{/if}}
+          </div>
+        </div>
+      </a>
+    </div>
+    {{/each}}
+  </div>
+</div>
+
+<br>
+<h1>Danh sách lĩnh vực được đăng ký học nhiều nhất trong tuần qua</h1>
+<div class="card-body">
+  <div class="row pb-2">
+    {{#each this.mostBoughtCategories}}
+    <div class="col-sm-2 mb-2">
+      <a href="/course/byCat/{{catname}}">
+        <div class="card h-100">
+          <div class="card-body">
+            <h4 class="card-title mb-0" id="coursename">{{catname}}</h4>
           </div>
         </div>
       </a>

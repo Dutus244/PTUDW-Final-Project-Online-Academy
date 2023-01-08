@@ -13,6 +13,7 @@ export default function (app) {
     const listFeatured = await courseService.featured();
     const listCreated = await courseService.created();
     const listViewed = await courseService.viewed();
+    const mostBoughtCategories = await courseService.mostBoughtCategories()
     
     res.render('vwGuest/home', {
         first: listFeatured[0][0],
@@ -21,6 +22,7 @@ export default function (app) {
         
         created: listCreated[0],
         viewed: listViewed[0],
+        mostBoughtCategories,
     })
     
   })

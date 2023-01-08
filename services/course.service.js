@@ -371,7 +371,11 @@ export default {
     },
 
     async viewed() {
-        const sql = `SELECT * FROM courses order by views desc limit 10`;
+        const sql = `SELECT courses.CourseID, CourseAvatar, CourseName, CatName, LecName, Rating, Reviews, Discount, Tuition
+        FROM courses
+        join categories on courses.catid = categories.catid
+        join lecturers on lecturers.lecid = courses.lecid
+        order by views desc limit 10`;
         try {
             const list = await db.raw(sql);
             return list;
@@ -381,10 +385,29 @@ export default {
     },
 
     async created() {
-        const sql = `SELECT * FROM courses order by createtime desc limit 10`;
+        const sql = `SELECT courses.CourseID, CourseAvatar, CourseName, CatName, LecName, Rating, Reviews, Discount, Tuition
+        FROM courses 
+        join categories on courses.catid = categories.catid
+        join lecturers on lecturers.lecid = courses.lecid
+        order by createtime desc limit 10`;
         try {
             const list = await db.raw(sql);
             return list;
+        } catch (error) {
+            console.log(error);
+        }
+    },
+
+    async mostBoughtCategories() {
+        const sql = `select catname
+            from categories join courses on courses.catid = categories.catid
+            join lecturers on lecturers.lecid = courses.lecid
+            group by courses.catid
+            order by sum(students) desc
+            limit 5`
+        try {
+            const list = await db.raw(sql)
+            return list[0]
         } catch (error) {
             console.log(error);
         }
