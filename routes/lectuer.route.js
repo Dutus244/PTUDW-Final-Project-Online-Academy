@@ -11,6 +11,9 @@ import userServices from "../services/user.service.js";
 import multer from 'multer';
 import bodyParser from 'body-parser';
 
+
+
+
 const router = express.Router()
 
 
@@ -24,6 +27,10 @@ export const config = {
       bodyParser: false
     }
   }
+
+router.use(async function (req, res, next){
+    res.locals.countchap=0;
+})
 
 router.get('/addcourse', authWithRequiredPermission(1), async function (req, res) {
     const categorylist = await categoryService.findAllForAddCourse()
@@ -77,9 +84,34 @@ router.post('/addcourse', authWithRequiredPermission(1), async function (req, re
     })
 })
 
-router.get('addchapter', authWithRequiredPermission(1), async function (req, res){
+router.get('/addchapter', authWithRequiredPermission(1), async function (req, res){
+    const courselist = await lecturerService.getTeacherCourses();
+    console.log(courselist)
     res.render('vwTeacher/add-chapter', {
 
+    })
+})
+
+router.post('/addchapter', authWithRequiredPermission(1), async function (req, res){
+    const storage = multer.diskStorage({
+        destination: function (req, file, cb) {
+          cb(null, './public/img/')
+        },
+        filename: function (req, file, cb) {
+          // const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9)
+          cb(null, 'test.mp4')
+        }
+      })
+
+      const upload = multer({ storage: storage }) 
+    upload.array('fuMain', 5)(req, res, async function (err){
+        if (err instanceof multer.MulterError) {
+            // A Multer error occurred when uploading.
+            console.error(err);
+          } else if (err) {
+            // An unknown error occurred when uploading.
+            console.error(err);
+          }
     })
 })
 
