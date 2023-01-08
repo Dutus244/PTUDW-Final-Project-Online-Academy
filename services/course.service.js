@@ -33,6 +33,16 @@ export default {
         return list[0].amount
     },
 
+    async countByLecName(lecname) {
+        const list = await db
+            .count({ amount: 'courseid' })
+            .from('courses')
+            .join('lecturers', 'courses.lecid', 'lecturers.lecid')
+            .where('lecname', '=', lecname)
+
+        return list[0].amount
+    },
+
     async countByWatchlist(studentid) {
         const list = await db
             .count({ amount: 'watchlists.courseid' })
@@ -52,6 +62,16 @@ export default {
         return list[0].amount
     },
 
+    async countByCourseName(coursename) {
+        const sql = `SELECT count(*) as amount FROM courses WHERE MATCH (coursename) AGAINST ('${coursename}' IN NATURAL LANGUAGE MODE)`;
+        try {
+            const list = await db.raw(sql);
+            return list[0][0].amount;
+        } catch (error) {
+            console.log(error);
+        }
+    },
+
     async findPageByAll(offset, limit) {
         const list = await db
             .select('students', 'courseavatar', 'catname', 'coursename', 'lecname', 'rating', 'reviews', 'tuition', 'discount', 'courseid')
@@ -60,6 +80,19 @@ export default {
             .join('lecturers', 'courses.lecid', 'lecturers.lecid')
             .offset(offset)
             .limit(limit)
+
+        return list
+    },
+
+    async findPageByAllSort(offset, limit,sortBy,sortTheo) {
+        const list = await db
+            .select('students', 'courseavatar', 'catname', 'coursename', 'lecname', 'rating', 'reviews', 'tuition', 'discount', 'courseid')
+            .from('courses')
+            .join('categories', 'courses.catid', 'categories.catid')
+            .join('lecturers', 'courses.lecid', 'lecturers.lecid')
+            .offset(offset)
+            .limit(limit)
+            .orderBy(sortBy,sortTheo)
 
         return list
     },
@@ -77,6 +110,20 @@ export default {
         return list
     },
 
+    async findPageByNameSort(name, offset, limit,sortBy,sortTheo) {
+        const list = await db
+            .select('students', 'courseavatar', 'catname', 'coursename', 'lecname', 'rating', 'reviews', 'tuition', 'discount', 'courseid')
+            .from('courses')
+            .join('categories', 'courses.catid', 'categories.catid')
+            .join('lecturers', 'courses.lecid', 'lecturers.lecid')
+            .where('catname', '=', name)
+            .offset(offset)
+            .limit(limit)
+            .orderBy(sortBy,sortTheo)
+
+        return list
+    },
+
     async findPageByCatLevel(catlevel, offset, limit) {
         const list = await db
             .select('students', 'courseavatar', 'catname', 'coursename', 'lecname', 'rating', 'reviews', 'tuition', 'discount', 'courseid')
@@ -88,6 +135,57 @@ export default {
             .limit(limit)
 
         return list
+    },
+
+    async findPageByCatLevelSort(catlevel, offset, limit,sortBy,sortTheo) {
+        const list = await db
+            .select('students', 'courseavatar', 'catname', 'coursename', 'lecname', 'rating', 'reviews', 'tuition', 'discount', 'courseid')
+            .from('courses')
+            .join('categories', 'courses.catid', 'categories.catid')
+            .join('lecturers', 'courses.lecid', 'lecturers.lecid')
+            .where('catlevel', '=', catlevel)
+            .offset(offset)
+            .limit(limit)
+            .orderBy(sortBy,sortTheo)
+
+        return list
+    },
+
+    async findPageByLecName(lecname, offset, limit) {
+        const list = await db
+            .select('students', 'courseavatar', 'catname', 'coursename', 'lecname', 'rating', 'reviews', 'tuition', 'discount', 'courseid')
+            .from('courses')
+            .join('categories', 'courses.catid', 'categories.catid')
+            .join('lecturers', 'courses.lecid', 'lecturers.lecid')
+            .where('lecname', '=', lecname)
+            .offset(offset)
+            .limit(limit)
+
+        return list
+    },
+
+    async findPageByLecNameSort(lecname, offset, limit,sortBy,sortTheo) {
+        const list = await db
+            .select('students', 'courseavatar', 'catname', 'coursename', 'lecname', 'rating', 'reviews', 'tuition', 'discount', 'courseid')
+            .from('courses')
+            .join('categories', 'courses.catid', 'categories.catid')
+            .join('lecturers', 'courses.lecid', 'lecturers.lecid')
+            .where('lecname', '=', lecname)
+            .offset(offset)
+            .limit(limit)
+            .orderBy(sortBy,sortTheo)
+
+        return list
+    },
+
+    async findPageByCourseNameSort(coursename,offset, limit,sortBy,sortTheo) {
+        const sql = `SELECT students,courseavatar,catname,coursename,lecname,rating,reviews,tuition,discount,courseid FROM courses join categories on courses.catid=categories.catid join lecturers on courses.lecid=lecturers.lecid  WHERE MATCH (coursename) AGAINST ('${coursename}' IN NATURAL LANGUAGE MODE) limit ${limit} offset ${offset} order by ${sortBy} ${sortTheo} `;
+        try {
+            const list = await db.raw(sql);
+            return list[0];
+        } catch (error) {
+            console.log(error);
+        }
     },
 
     async findById(id) {

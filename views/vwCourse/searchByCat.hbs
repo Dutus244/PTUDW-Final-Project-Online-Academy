@@ -1,0 +1,113 @@
+{{#section 'js'}}
+<script>
+  const curPage = +$('#curPage').text()
+  if (curPage === 1 || curPage === 0) {
+    $('#prev').addClass('disabled')
+    $('#first').addClass('disabled')
+  }
+  if (curPage === {{{totalPages}}}) {
+    $('#next').addClass('disabled')
+    $('#last').addClass('disabled')
+  }
+</script>
+{{/section}}
+
+{{#section 'css'}}
+<link rel="stylesheet" href="../../public/CSS/vwCourse/byCat.css">
+{{/section}}
+
+<div class="p-5">
+  <div class="row">
+    <div class="col-sm-12">
+      {{#if this.searchEmpty}}
+          <p class="h1">Toàn bộ</p>
+      {{else}}
+          <p class="h1">Tìm kiếm trong {{this.searchBy}} với {{this.search}}</p>
+      {{/if}}
+
+        <form class="form-inline" style="background: white" method="GET" action="/search">
+            <input name = "searchBy" style="display: none" value="{{this.searchBy}}">
+            <input name = "search" style="display: none" value="{{this.search}}">
+            <select name = "sortBy" class="form-control" id="txtCatLevel" style="width: 200px">
+                <option value = "coursename" selected>Course Name</option>
+                <option value = "catlevel">Category Level</option>
+                <option value = "catname">Category</option>
+                <option value = "lecname">Lecturer</option>
+            </select>
+            <select name = "sortTheo" class="form-control" id="txtCatLevel" style="margin-left: 20px; width: 200px">
+                <option value = "asc" selected>Accending</option>
+                <option value = "desc">Descending</option>
+            </select>
+            <button class="btn" type="submit" style="margin-left: 20px; width: 200px">Sort</button>
+        </form>
+
+      {{#if this.empty}}
+      <h5>Không có dữ liệu</h5>
+      {{else}}
+      <div class="card-body">
+        <div class="row pb-5">
+          {{#each this.courses}}
+          <div class="col-sm-4 mb-4">
+            <a href="/course/detail/{{courseid}}">
+              <div class="card h-100">
+                <div class="img-container">
+                  <img class="card-img-top" src="{{courseavatar}}" alt="courseAvatar">
+                  {{#ifCompare students ../this.bestsellerquota}}
+                  <i class="bi bi-fire fire-icon"></i>
+                  {{/ifCompare}}
+                </div>
+                <div class="card-body">
+                  <h4 class="card-title mb-0 coursename">{{coursename}}</h4>
+                  <p class="card-title mb-0 font-italic">{{catname}}</p>
+                  <p class="card-text text-secondary mb-0">{{lecname}}</p>
+                  <div class="rating">
+                    <p class="rating-item">{{rating}}</p>
+                    <i class="bi bi-star-fill"></i>
+                    <p class="text-secondary rating-item">({{format_number reviews}})</p>
+                  </div>
+                  {{#if this.discount}}
+                  <h5 class="card-text mb-0 discount-text">₫{{format_number discount}}</h5>
+                  <del class="text-secondary">₫{{format_number tuition}}</del>
+                  {{else}}
+                  <h5 class="card-text mb-0">₫{{format_number tuition}}</h5>
+                  {{/if}}
+                </div>
+              </div>
+            </a>
+          </div>
+          {{/each}}
+        </div>
+
+
+        <nav>
+          <ul class="pagination pagination-lg" id="pagination" style="justify-content: center;">
+            <li class="page-item" id="first">
+              <a class="page-link" href="?page=1">First</a>
+            </li>
+            <li class="page-item" id="prev">
+              <a class="page-link" href="?page={{this.prevPage}}&searchBy={{this.searchBy}}&search={{this.search}}&sortBy={{this.sortBy}}&sortTheo={{this.sortTheo}}">Previous</a>
+            </li>
+
+            {{#each this.pages}}
+            {{#if isCurrent}}
+            <li class="page-item active" id="curPage">
+              <a class="page-link" href="#">{{value}}</a>
+            </li>
+            {{else}}
+            <li class="page-item"><a class="page-link" href="?page={{value}}&searchBy={{../this.searchBy}}&search={{../this.search}}&sortBy={{../this.sortBy}}&sortTheo={{../this.sortTheo}}">{{value}}</a></li>
+            {{/if}}
+            {{/each}}
+
+            <li class="page-item" id="next">
+              <a class="page-link" href="?page={{this.nextPage}}&searchBy={{this.searchBy}}&search={{this.search}}&sortBy={{this.sortBy}}&sortTheo={{this.sortTheo}}">Next</a>
+            </li>
+            <li class="page-item" id="last">
+              <a class="page-link" href="?page={{this.totalPages}}&searchBy={{this.searchBy}}&search={{this.search}}&sortBy={{this.sortBy}}&sortTheo={{this.sortTheo}}">Last</a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+      {{/if}}
+    </div>
+  </div>
+</div>

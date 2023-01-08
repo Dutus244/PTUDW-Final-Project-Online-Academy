@@ -45,9 +45,15 @@
         </li>
       </ul>
 
-      <form class="form-inline">
-        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn" type="submit">Search</button>
+      <form class="form-inline" method="GET" action="/search">
+          <select name = "searchBy" class="form-control" id="txtCatLevel" style="width: 200px">
+              <option value = "CourseName" selected>Course Name</option>
+              <option value = "Category Level">Category Level</option>
+              <option value = "Category">Category</option>
+              <option value = "Lecturer">Lecturer</option>
+          </select>
+          <input name = "search" style="margin-left: 20px" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+          <button class="btn" type="submit">Search</button>
       </form>
     </div>
 
