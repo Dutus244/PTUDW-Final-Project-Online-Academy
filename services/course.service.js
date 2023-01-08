@@ -300,7 +300,7 @@ export default {
 
     async getCourseContent(id) {
         const list = await db
-            .select('coursechapter.chapterid', 'chaptername', 'contentid', 'contentname', 'content')
+            .select('coursechapter.chapterid', 'chaptername', 'contentid', 'contentname', 'content', 'preview')
             .from('courses')
             .join('coursechapter', 'courses.courseid', 'coursechapter.courseid')
             .leftJoin('chaptercontent', 'coursechapter.chapterid', 'chaptercontent.chapterid')
@@ -311,17 +311,20 @@ export default {
         var coursecontent = []
         var curChapterId = list[0].chapterid
         var curChapterName = list[0].chaptername
+        var curPreview = list[0].preview
         var contentList = []
         for (const i in list) {
-            const { chapterid, chaptername, contentid, contentname, content } = list[i]
+            const { chapterid, chaptername, contentid, contentname, content, preview } = list[i]
             if (curChapterId != chapterid) {
                 coursecontent.push({
                     chapterid: curChapterId,
                     chaptername: curChapterName,
-                    chaptercontent: contentList
+                    chaptercontent: contentList,
+                    preview: curPreview,
                 })
                 curChapterId = chapterid
                 curChapterName = chaptername
+                curPreview = preview
                 contentList = []
             }
 
@@ -331,7 +334,8 @@ export default {
         coursecontent.push({
             chapterid: curChapterId,
             chaptername: curChapterName,
-            chaptercontent: contentList
+            chaptercontent: contentList,
+            preview: curPreview,
         })
 
         // console.log(coursecontent);

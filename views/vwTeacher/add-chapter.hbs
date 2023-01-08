@@ -20,7 +20,7 @@
         language: 'vi',
         theme: 'fa4',
         dropZoneEnabled: false,
-        maxFileCount: 5,
+        maxFileCount: 1,
         allowedFileExtension: ['mp3', 'mp4'],
 
     });
@@ -30,7 +30,17 @@
 
 <form method="post" id="frmRegister" enctype="multipart/form-data">
     <div class="form-group">
-                <label for="fuMain">Ảnh đại diện</label>
-                <input type="file" multiple name="fuMain" id="fuMain">
+            <label for="txtCourse">Khóa học đã tạo</label>
+            <select name="course">
+                {{#each this.courselist}}
+                    <option value="{{courseid}}">{{coursename}}</option>
+                {{/each}}
+            </select>
+            <label id="course"></label>
+    </div>
+
+    <div class="form-group">
+        <label for="txtChapname">Tên chương</label>
+        <input name="chapname" type="text" class="form-control" id="txtChapname" autofocus>
     </div>
 </form>

@@ -21,7 +21,7 @@
         theme: 'fa4',
         dropZoneEnabled: false,
         maxFileCount: 1,
-        allowedFileExtension: ['jpg', 'png', 'gif'],
+        allowedFileExtension: ['mp3', 'mp4'],
 
     });
 </script>
@@ -29,55 +29,15 @@
 {{/section}}
 
 <form method="post" id="frmRegister" enctype="multipart/form-data">
-    <div class="card mb-3">
-        <h4 class="card-header">
-            Thêm khóa học mới
-        </h4>
-        <div class="card-body">
-            <h5>Thông tin khóa học</h5>
-            <div class="form-group">
-                <label for="txtCoursename">Tên khóa học</label>
-                <input name="coursename" type="text" class="form-control" id="txtCoursename" autofocus>
-            </div>
 
-            <div class="form-group">
-                <label for="txtCoursesmalldetail">Giới thiệu khóa học</label>
-                <textarea name="coursesmalldetail" type="text" class="form-control" id="txtCoursesmalldetail"></textarea>
-            </div>
-
-            <div class="form-group">
-                <label for="txtCoursedetail">Chi tiết khóa học</label>
-                <textarea name="coursedetail" type="text" class="form-control" id="txtCoursedetail"></textarea>
-            </div>
-
-            <div class="form-group">
-                <label for="txtCoursecat">Lĩnh vực khóa học</label>
-                <select name="coursecat">
-                    {{#each this.categorylist}}
-                        <option value="{{catid}}">{{catname}}</option>
-                    {{/each}}
-                </select>
-                <label id="coursecat"></label>
-            </div>
-
-            <div class="form-group">
-                <label for="txtPrice">Giá tiền</label>
-                <input name="courseprice" type="number" class="form-control" id="txtCourseprice">
-            </div>
-
-            <div class="form-group">
-                <label for="fuMain">Ảnh đại diện</label>
-                <input type="file" multiple name="fuMain" id="fuMain">
-            </div>
-
-        </div>
-
-        
-        <div class="card-footer text-muted">
-            <button type="submit" class="btn btn-primary">
-                <i class="fa fa-check" aria-hidden="true"></i>
-                Save
-            </button>
-        </div>
+    <div class="form-group">
+        <label for="txtContentname">Tên bài giảng</label>
+        <input name="contentname" type="text" class="form-control" id="txtContentname" autofocus>
     </div>
+
+    <div class="form-group">
+        <label for="fuMain">Video bài giảng</label>
+        <input type="file" multiple name="fuMain" id="fuMain">
+    </div>
+
 </form>
