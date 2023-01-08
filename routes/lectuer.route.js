@@ -28,9 +28,6 @@ export const config = {
     }
   }
 
-router.use(async function (req, res, next){
-    res.locals.countchap=0;
-})
 
 router.get('/addcourse', authWithRequiredPermission(1), async function (req, res) {
     const categorylist = await categoryService.findAllForAddCourse()
@@ -85,10 +82,10 @@ router.post('/addcourse', authWithRequiredPermission(1), async function (req, re
 })
 
 router.get('/addchapter', authWithRequiredPermission(1), async function (req, res){
-    const courselist = await lecturerService.getTeacherCourses();
+    const courselist = await lecturerService.getTeacherCourses(res.locals.authUser.accountid);
     console.log(courselist)
     res.render('vwTeacher/add-chapter', {
-
+        courselist: courselist
     })
 })
 
