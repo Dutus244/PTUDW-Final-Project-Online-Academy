@@ -47,19 +47,6 @@ export default {
             .insert({'LecID': LecID, 'courseid': courseid})
     },
 
-    async getTeacherCourses(id, offset, limit) {
-        return await db
-            .select('catname', 'coursename', 'lecname', 'rating',
-                'reviews', 'courses.courseid')
-            .from('teachercourses')
-            .join('courses', 'teachercourses.courseid', 'courses.courseid')
-            .join('categories', 'courses.catid', 'categories.catid')
-            .join('lecturers', 'courses.lecid', 'lecturers.lecid')
-            .where('studentcourses.LecID', id)
-            .offset(offset)
-            .limit(limit)
-    },
-
     async findAll() {
         const list = await db
             .select('lecturers.lecid', 'accounts.email','lecname','experience','aboutme','lockaccount')
