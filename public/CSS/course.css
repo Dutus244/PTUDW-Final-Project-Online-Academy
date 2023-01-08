@@ -1,24 +1,32 @@
-.container{
+.container {
     display: flex;
     flex-direction: column;
 }
 
-.header, .chapter-header, .chapter-menu, .information, .content{
+.header,
+.chapter-header,
+.chapter-menu,
+.information,
+.content {
     display: block;
     width: 100%;
     background-color: #ffffff;
     padding: 5px 5px 5px 5px;
 }
 
-.content{
+.content {
     word-break: break-all;
 }
 
-.header{
+.header {
     font-weight: bold;
 }
 
-.discription, .tuition, .student, .last-updated, .button{
+.discription,
+.tuition,
+.student,
+.last-updated,
+.button {
     margin-left: 5px;
 }
 
@@ -27,7 +35,7 @@
     align-items: center;
 }
 
-.course-img { 
+.course-img {
     margin-top: 10px;
     padding-left: 30px;
     flex: 20%;
@@ -35,23 +43,23 @@
     overflow: hidden;
 }
 
-.course-detail{
+.course-detail {
     padding-left: 20px;
     flex: 75%;
     display: block;
     width: 75%;
 }
 
-.rating-item{
+.rating-item {
     display: inline;
     color: rgb(254, 200, 23);
 }
 
-.bi.bi-star-fill{
+.bi.bi-star-fill {
     color: rgb(228, 168, 16);
 }
 
-.button{
+.button {
     display: block;
     background-color: #ffdeec;
     border-radius: 15px;
@@ -59,7 +67,7 @@
     text-align: center;
     display: inline-block;
     font-size: 16px;
-    margin-top:5px;
+    margin-top: 5px;
     cursor: pointer;
 }
 
@@ -67,23 +75,26 @@ a:link {
     text-decoration: none;
     color: black;
 }
-  
+
 a:visited {
     text-decoration: none;
     color: black;
 }
-  
+
 a:hover {
     text-decoration: none;
     color: #7fe3ff;
 }
-  
+
 a:active {
     text-decoration: none;
     color: black;
 }
 
-.course-menu, .course-content, .lecturer, .feedback{
+.course-menu,
+.course-content,
+.lecturer,
+.feedback {
     display: block;
     padding: 10px;
     width: 100%;
@@ -92,30 +103,31 @@ a:active {
     overflow: hidden;
 }
 
-.course-discription{
+.course-discription {
     display: flex;
     border-style: solid;
     border-width: 5px;
     border-color: #e6fdff;
     background-color: #e6fdff;
-    border-radius:15px;
+    border-radius: 15px;
     padding: 10px;
-    margin-top:10px;
+    margin-top: 10px;
     margin-left: 20px;
     margin-right: 20px;
 }
 
-.chapter, .information{
+.chapter,
+.information {
     padding-left: 15px;
     padding-right: 15px;
 }
 
-.chapter-header{
+.chapter-header {
     font-size: 16px;
     font-weight: 700;
 }
 
-.chapter-menu{
+.chapter-menu {
     font-size: 13px;
     padding-left: 15px;
     padding-right: 15px;
@@ -152,12 +164,65 @@ a[aria-expanded=false] .bi-caret-up-fill {
 
 .chapter-icon {
     width: 10%;
+    display: flex;
+    flex-direction: row-reverse;
 }
 
-#tinydes, #fulldes {
+#tinydes,
+#fulldes {
     padding: 5px 5px 5px 5px;
 }
 
 #fulldes {
     display: none;
 }
+
+#fade {
+    display: none;
+    position: fixed;
+    top: 0%;
+    left: 0%;
+    width: 100%;
+    height: 100%;
+    background-color: black;
+    z-index: 1001;
+    -moz-opacity: 0.8;
+    opacity: .80;
+    filter: alpha(opacity=80);
+}
+
+#light {
+    display: none;
+    position: fixed;
+    top: 45%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    z-index: 1002;
+    overflow: visible;
+    width: 80%;
+    height: 80%;
+    --plyr-color-main: rgb(254, 106, 129);
+}
+
+.button:hover {
+    background-color: rgb(254, 106, 129);;
+    color: white
+}
+
+a[data-vid-src]:hover .chapter-content {
+    background-color: rgb(254, 106, 129);
+    cursor: pointer;
+}
+
+a[data-vid-src]:hover .content-name {
+    color: white;
+}
+
+.video {
+    --plyr-color-main: rgb(254, 106, 129);
+    position: relative;
+    width: 80%;
+    height: 80%;
+    /* z-index: 1002; */
+}
+
