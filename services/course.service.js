@@ -179,7 +179,7 @@ export default {
     },
 
     async findPageByCourseNameSort(coursename,offset, limit,sortBy,sortTheo) {
-        const sql = `SELECT students,courseavatar,catname,coursename,lecname,rating,reviews,tuition,discount,courseid FROM courses join categories on courses.catid=categories.catid join lecturers on courses.lecid=lecturers.lecid  WHERE MATCH (coursename) AGAINST ('${coursename}' IN NATURAL LANGUAGE MODE) limit ${limit} offset ${offset} order by ${sortBy} ${sortTheo} `;
+        const sql = `SELECT students,courseavatar,catname,coursename,lecname,rating,reviews,tuition,discount,courseid FROM courses join categories on courses.catid=categories.catid join lecturers on courses.lecid=lecturers.lecid  WHERE MATCH (coursename) AGAINST ('${coursename}' IN NATURAL LANGUAGE MODE)  order by ${sortBy} ${sortTheo} limit ${limit} offset ${offset}`;
         try {
             const list = await db.raw(sql);
             return list[0];
