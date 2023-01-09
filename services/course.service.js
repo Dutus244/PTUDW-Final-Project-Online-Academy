@@ -570,4 +570,12 @@ export default {
             .where('courseid', courseid)
             .update('updatetime', new Date())
     },
+
+    async countByLecturer(accountid) {
+        const list = await db
+            .count({ amount: 'courseid' })
+            .from('courses')
+            .where('lecid', accountid)
+        return list[0].amount
+    },
 }

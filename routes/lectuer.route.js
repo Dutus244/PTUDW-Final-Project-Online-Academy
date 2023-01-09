@@ -264,7 +264,7 @@ router.get('/my-courses', async (req, res) => {
     const curPage = +req.query.page || 1
     const offset = (curPage - 1) * limit
 
-    const total = await courseService.countByStudent(res.locals.authUser.accountid)
+    const total = await courseService.countByLecturer(res.locals.authUser.accountid)
     const totalPages = Math.ceil(total / limit)
 
     const visiblePages = 5
