@@ -103,6 +103,8 @@ router.get('/detail/:id', async function (req, res) {
     const similarCourses = await courseService.findSimilarCourses(courseid);
     const isLecturerCourse = await courseService.isLecturerCourse(courseid, accountid)
 
+    const views = await courseService.getViews(courseid) + 1
+    await courseService.updateViews(courseid, views)
     // console.log(isLecturerCourse);
 
     if (course === null)
@@ -129,6 +131,9 @@ router.post('/detail/:id/addToWatchlist', authWithRequiredPermission(0), async (
 router.post('/detail/:id/buy', authWithRequiredPermission(0), async (req, res) => {
     const courseid = req.params.id || '0'
     await courseService.buyCourse(res.locals.authUser.accountid, courseid)
+
+    const students = await courseService.countStudents(courseid)
+    await courseService.updateStudents(courseid,students)
 
     await studentService.removeFromWatchlist(res.locals.authUser.accountid, courseid)
     res.redirect('/course/detail/' + courseid)
@@ -172,6 +177,13 @@ router.post('/:id/rating', authWithRequiredPermission(0), async function (req, r
     const { rating, textReview } = req.body
 
     await courseService.postFeedback(studentid, courseid, textReview, rating)
+
+    const reviews = await courseService.countReviews(courseid)
+    await courseService.updateReviews(courseid,reviews)
+    const sumRating = await courseService.sumRating(courseid)
+    const userrating = sumRating / reviews
+    await courseService.updateRating(courseid,userrating)
+
     res.redirect(`/course/${courseid}/learn`)
 })
 

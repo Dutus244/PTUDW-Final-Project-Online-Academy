@@ -9,8 +9,8 @@ export default {
         return db('coursechapter').insert(entity)
     },
 
-    async countStudent(courseid) {
-        const sql = `select count(*) as amount from studentcourses where courseid = ${courseid} group by courseid`
+    async countStudents(courseid) {
+        const sql = `select count(*) as amount from studentcourses where courseid = '${courseid}' group by courseid`
         try {
             const list = await db.raw(sql);
             return list[0][0].amount;
@@ -20,7 +20,7 @@ export default {
     },
 
     async updateStudents(courseid,students) {
-        const sql = `update courses set students = ${students} where courseid = ${courseid}`
+        const sql = `update courses set students = ${students} where courseid ='${courseid}'`
         try{
             await db.raw(sql)
         } catch(error){
@@ -28,7 +28,63 @@ export default {
         }
     },
 
-    
+    async countReviews(courseid) {
+        const sql = `select count(*) as amount from feedbacks where courseid = '${courseid}' group by courseid`
+        try {
+            const list = await db.raw(sql);
+            return list[0][0].amount;
+        } catch (error) {
+            console.log(error);
+        }
+    },
+
+    async updateReviews(courseid,reviews) {
+        const sql = `update courses set reviews = ${reviews} where courseid = '${courseid}'`
+        try{
+            await db.raw(sql)
+        } catch(error){
+            console.log(error)
+        }
+    },
+
+    async sumRating(courseid) {
+        const sql = `select sum(rating) as amount from feedbacks where courseid = '${courseid}' group by courseid`
+        try {
+            const list = await db.raw(sql);
+            return list[0][0].amount;
+        } catch (error) {
+            console.log(error);
+        }
+    },
+
+    async updateRating(courseid,rating) {
+        const sql = `update courses set rating = ${rating} where courseid = '${courseid}'`
+        try{
+            await db.raw(sql)
+        } catch(error){
+            console.log(error)
+        }
+    },
+
+    async getViews(courseid) {
+        const sql = `select views from courses where courseid = '${courseid}'`
+        try {
+            const list = await db.raw(sql);
+            return list[0][0].views;
+        } catch (error) {
+            console.log(error);
+        }
+    },
+
+    async updateViews(courseid,views) {
+        const sql = `update courses set views = ${views} where courseid = '${courseid}'`
+        try{
+            await db.raw(sql)
+        } catch(error){
+            console.log(error)
+        }
+    },
+
     async addContent(courseid, chapterid, contentid, contentname, content){
         const sql = `insert into chaptercontent values('${courseid}','${chapterid}','${contentid}','${contentname}','${content}', now())`
         try{
