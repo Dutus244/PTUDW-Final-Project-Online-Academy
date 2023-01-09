@@ -191,7 +191,7 @@
       {{#each this.coursecontent}}
       <a data-toggle="collapse" href="#chapterid_{{chapterid}}" role="button" aria-expanded="false"
         aria-controls="chapterid_{{chapterid}}">
-        <div class="card-header chapter mb-3">
+        <div class="card-header chapter my-3">
           <div class="chapter-name">
             {{chaptername}}
           </div>
@@ -222,8 +222,14 @@
           {{/if}}
         </div>
         {{/each}}
-        <a class="btn button m-3 ml-5" href="/teacher/addcontent/{{../this.course.courseid}}/{{chapterid}}" role="button">Thêm bài giảng cho
+        {{#if ../this.isLecturerCourse}}
+        {{#if ../this.course.complete}}
+        {{else}}
+        <a class="btn button m-3 ml-5" href="/teacher/addcontent/{{../this.course.courseid}}/{{chapterid}}"
+          role="button">Thêm bài giảng cho
           chương này</a>
+        {{/if}}
+        {{/if}}
       </div>
       {{/each}}
     </div>
