@@ -38,6 +38,7 @@ router.get('/addcourse', authWithRequiredPermission(1), async function (req, res
 
 router.post('/addcourse', authWithRequiredPermission(1), async function (req, res) {
     const id = v4()
+    console.log('dsa');
 
     const storage = multer.diskStorage({
         destination: function (req, file, cb) {
@@ -68,6 +69,8 @@ router.post('/addcourse', authWithRequiredPermission(1), async function (req, re
             tuition: tuition,
             lecid: res.locals.authUser.accountid
         }
+
+        console.log(course)
 
         await courseService.addcourse(course)        
       if (err instanceof multer.MulterError) {
