@@ -6,6 +6,7 @@ import activate_resLocals from './middlewares/locals.mdw.js';
 import activate_routes from './middlewares/routes.mdw.js';
 import activate_error_handlers from './middlewares/error.mdw.js';
 import {fileURLToPath} from "url";
+import path, {dirname} from "path";
 
 
 const __dirname = dirname(fileURLToPath(import.meta.url));

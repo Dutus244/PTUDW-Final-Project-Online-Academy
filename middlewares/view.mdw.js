@@ -33,5 +33,5 @@ export default function (app,__dirname) {
     }
   }));
   app.set('view engine', 'hbs');
-  app.set('views', __dirname +'./views');
+  app.set('views', __dirname +'/views');
 }
