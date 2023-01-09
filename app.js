@@ -52,6 +52,12 @@ app.engine('hbs', engine({
       else
         return null
     },
+    format_datetime(val) {
+      if (val)
+        return moment(val).format('DD-MM-YYYY, HH:mm:ss')
+      else
+        return null
+    },
   }
 }));
 app.set('view engine', 'hbs');
