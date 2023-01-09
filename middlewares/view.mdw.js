@@ -7,6 +7,7 @@ import moment from 'moment';
 export default function (app,__dirname) {
   app.engine('hbs', engine({
     extname: 'hbs',
+    defaultLayout: 'main.hbs',
     helpers: {
       section: hbs_sections(),
       format_number(val) {
@@ -32,6 +33,7 @@ export default function (app,__dirname) {
       },
     }
   }));
+  console.log(__dirname)
   app.set('view engine', 'hbs');
   app.set('views', __dirname +'/views');
 }

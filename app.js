@@ -10,6 +10,7 @@ import path, {dirname} from "path";
 
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
+
 const app = express();
 app.use('/public', express.static(path.join(__dirname, 'public')));
 // cho sử dụng req.body khi dùng POST
