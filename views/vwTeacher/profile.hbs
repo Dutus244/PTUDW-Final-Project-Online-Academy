@@ -12,7 +12,7 @@
     const experience = $('#txtExperience').val()
     const aboutme = $('#txtAboutMe').val()
     if (name.length === 0 && email.length === 0 && experience.length === 0 & aboutme.length === 0) {
-      alert('Please fill in at least one field')
+      alert('Vui lòng nhập ít nhất một trường dữ liệu')
       return
     }
     if (email.length === 0) {
@@ -22,7 +22,7 @@
 
     $.getJSON(`/account/is-available?email=${email}`, function (data) {
       if (data === false) {
-        alert(`${email} is unavailable.`);
+        alert(`${email} đã tồn tại.`);
       } else {
         $('#formUpdateProfile').off('submit').submit();
       }
@@ -41,23 +41,23 @@
         </h4>
         <ul class="list-group list-group-flush">
           <a href="/teacher/profile" class="profile-item">
-            <li class="list-group-item active-menu">Profile</li>
+            <li class="list-group-item active-menu">Hồ sơ</li>
           </a>
           <a href="/teacher/security" class="profile-item">
-            <li class="list-group-item">Security</li>
+            <li class="list-group-item">Bảo mật</li>
           </a>
           <a href="/teacher/addcourse" class="profile-item">
-            <li class="list-group-item">Add course</li>
+            <li class="list-group-item">Tạo khóa học mới</li>
           </a>
           <a href="/teacher/my-courses" class="profile-item">
-            <li class="list-group-item">My courses</li>
+            <li class="list-group-item">Khóa học đã tạo</li>
           </a>
         </ul>
       </div>
     </div>
 
     <div class="col-sm-9 pb-4">
-      <p class="title text-center">Profile</p>
+      <p class="title text-center">Hồ sơ</p>
       {{!-- <p>Change your information here</p> --}}
 
 
@@ -72,24 +72,24 @@
         </div>
         {{/if}}
         <div class="form-group">
-          <label for="txtName">Name</label>
+          <label for="txtName">Tên</label>
           <input name="name" type="text" class="form-control text-input" id="txtName" placeholder="{{this.name}}">
         </div>
         <div class="form-group">
-          <label for="txtEmail">Email address</label>
+          <label for="txtEmail">Email</label>
           <input name="email" type="email" class="form-control text-input" id="txtEmail" placeholder="{{this.email}}">
         </div>
         <div class="form-group">
-            <label for="txtExperience">Experiences</label>
+            <label for="txtExperience">Kinh nghiệm</label>
             <input name="experience" type="text" class="form-control text-input" id="txtExperience" placeholder="{{this.experience}}">
         </div>
         <div class="form-group">
-            <label for="txtAboutMe">About Me</label>
+            <label for="txtAboutMe">Về tôi</label>
             <input name="aboutme" type="text" class="form-control text-input" id="txtAboutMe" placeholder="{{this.aboutme}}">
         </div>
 
         <div class="submit-button">
-          <button type="submit" class="btn btn-profile">Save</button>
+          <button type="submit" class="btn btn-profile">Lưu</button>
         </div>
       </form>
     </div>
