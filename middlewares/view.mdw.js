@@ -3,7 +3,8 @@ import hbs_sections from 'express-handlebars-sections';
 import numeral from 'numeral';
 import moment from 'moment';
 
-export default function (app) {
+
+export default function (app,__dirname) {
   app.engine('hbs', engine({
     extname: 'hbs',
     helpers: {
@@ -32,5 +33,5 @@ export default function (app) {
     }
   }));
   app.set('view engine', 'hbs');
-  app.set('views', './views');
+  app.set('views', __dirname +'./views');
 }
