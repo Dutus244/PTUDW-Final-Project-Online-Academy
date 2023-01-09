@@ -1,12 +1,13 @@
 import db from '../utils/db.js';
 
 export default {
-    async addcourse(entity){
-        return db('courses').insert(entity)
+    async addcourse(entity) {
+        return await db('courses').insert(entity)
     },
 
-    async addchapter(entity){
-        return db('coursechapter').insert(entity)
+    async addchapter(entity) {
+        await this.updateCourseUpdateTime(entity.courseid)
+        return await db('coursechapter').insert(entity)
     },
 
     async countStudents(courseid) {
@@ -19,11 +20,11 @@ export default {
         }
     },
 
-    async updateStudents(courseid,students) {
+    async updateStudents(courseid, students) {
         const sql = `update courses set students = ${students} where courseid ='${courseid}'`
-        try{
+        try {
             await db.raw(sql)
-        } catch(error){
+        } catch (error) {
             console.log(error)
         }
     },
@@ -38,11 +39,11 @@ export default {
         }
     },
 
-    async updateReviews(courseid,reviews) {
+    async updateReviews(courseid, reviews) {
         const sql = `update courses set reviews = ${reviews} where courseid = '${courseid}'`
-        try{
+        try {
             await db.raw(sql)
-        } catch(error){
+        } catch (error) {
             console.log(error)
         }
     },
@@ -57,11 +58,11 @@ export default {
         }
     },
 
-    async updateRating(courseid,rating) {
+    async updateRating(courseid, rating) {
         const sql = `update courses set rating = ${rating} where courseid = '${courseid}'`
-        try{
+        try {
             await db.raw(sql)
-        } catch(error){
+        } catch (error) {
             console.log(error)
         }
     },
@@ -76,20 +77,22 @@ export default {
         }
     },
 
-    async updateViews(courseid,views) {
+    async updateViews(courseid, views) {
         const sql = `update courses set views = ${views} where courseid = '${courseid}'`
-        try{
+        try {
             await db.raw(sql)
-        } catch(error){
+        } catch (error) {
             console.log(error)
         }
     },
 
-    async addContent(courseid, chapterid, contentid, contentname, content){
+
+    async addContent(courseid, chapterid, contentid, contentname, content) {
+        await this.updateCourseUpdateTime(courseid)
         const sql = `insert into chaptercontent values('${courseid}','${chapterid}','${contentid}','${contentname}','${content}', now())`
-        try{
+        try {
             await db.raw(sql)
-        } catch(error){
+        } catch (error) {
             console.log(error)
         }
     },
@@ -171,7 +174,7 @@ export default {
         }
     },
 
-    async findPageByAllSort(offset, limit,sortBy,sortTheo) {
+    async findPageByAllSort(offset, limit, sortBy, sortTheo) {
         const sql = `SELECT students,courseavatar,catname,coursename,lecname,rating,reviews,tuition,discount,courseid FROM courses join categories on courses.catid=categories.catid join lecturers on courses.lecid=lecturers.lecid  WHERE disable = 0 order by ${sortBy} ${sortTheo} limit ${limit} offset ${offset}`;
         try {
             const list = await db.raw(sql);
@@ -191,7 +194,7 @@ export default {
         }
     },
 
-    async findPageByNameSort(name, offset, limit,sortBy,sortTheo) {
+    async findPageByNameSort(name, offset, limit, sortBy, sortTheo) {
         const sql = `SELECT students,courseavatar,catname,coursename,lecname,rating,reviews,tuition,discount,courseid FROM courses join categories on courses.catid=categories.catid join lecturers on courses.lecid=lecturers.lecid  WHERE catname LIKE '%${name}' and disable = 0 order by ${sortBy} ${sortTheo} limit ${limit} offset ${offset}`;
         try {
             const list = await db.raw(sql);
@@ -211,7 +214,7 @@ export default {
         }
     },
 
-    async findPageByCatLevelSort(catlevel, offset, limit,sortBy,sortTheo) {
+    async findPageByCatLevelSort(catlevel, offset, limit, sortBy, sortTheo) {
         const sql = `SELECT students,courseavatar,catname,coursename,lecname,rating,reviews,tuition,discount,courseid FROM courses join categories on courses.catid=categories.catid join lecturers on courses.lecid=lecturers.lecid  WHERE catlevel LIKE '%${catlevel}' and disable = 0 order by ${sortBy} ${sortTheo} limit ${limit} offset ${offset}`;
         try {
             const list = await db.raw(sql);
@@ -231,7 +234,7 @@ export default {
         }
     },
 
-    async findPageByLecNameSort(lecname, offset, limit,sortBy,sortTheo) {
+    async findPageByLecNameSort(lecname, offset, limit, sortBy, sortTheo) {
         const sql = `SELECT students,courseavatar,catname,coursename,lecname,rating,reviews,tuition,discount,courseid FROM courses join categories on courses.catid=categories.catid join lecturers on courses.lecid=lecturers.lecid  WHERE lecname LIKE '%${lecname}' and disable = 0 order by ${sortBy} ${sortTheo} limit ${limit} offset ${offset}`;
         try {
             const list = await db.raw(sql);
@@ -241,7 +244,7 @@ export default {
         }
     },
 
-    async findPageByCourseNameSort(coursename,offset, limit,sortBy,sortTheo) {
+    async findPageByCourseNameSort(coursename, offset, limit, sortBy, sortTheo) {
         const sql = `SELECT students,courseavatar,catname,coursename,lecname,rating,reviews,tuition,discount,courseid FROM courses join categories on courses.catid=categories.catid join lecturers on courses.lecid=lecturers.lecid  WHERE MATCH (coursename) AGAINST ('${coursename}' IN NATURAL LANGUAGE MODE) and disable = 0 order by ${sortBy} ${sortTheo} limit ${limit} offset ${offset}`;
         try {
             const list = await db.raw(sql);
@@ -311,7 +314,7 @@ export default {
 
     async findAll() {
         const list = await db
-            .select('courseid', 'coursename', 'categories.catname', 'tinydes', 'fulldes', 'rating', 'reviews', 'views', 'students', 'tuition', 'discount', 'discountinfo', 'updatetime','createtime', 'lecturers.lecname','disable','complete')
+            .select('courseid', 'coursename', 'categories.catname', 'tinydes', 'fulldes', 'rating', 'reviews', 'views', 'students', 'tuition', 'discount', 'discountinfo', 'updatetime', 'createtime', 'lecturers.lecname', 'disable', 'complete')
             .from('courses')
             .leftJoin('categories', 'categories.catid', 'courses.catid')
             .leftJoin('lecturers', 'courses.lecid', 'lecturers.lecid')
@@ -338,6 +341,8 @@ export default {
             .join('coursechapter', 'courses.courseid', 'coursechapter.courseid')
             .leftJoin('chaptercontent', 'coursechapter.chapterid', 'chaptercontent.chapterid')
             .where('courses.courseid', id)
+            .orderBy('coursechapter.createtime', 'asc')
+            .orderBy('chaptercontent.updatetime', 'asc')
         if (list.length === 0)
             return null
 
@@ -360,8 +365,8 @@ export default {
                 curPreview = preview
                 contentList = []
             }
-
-            contentList.push({ contentid: contentid, contentname: contentname, content: content })
+            if (contentid)
+                contentList.push({ contentid: contentid, contentname: contentname, content: content })
 
         }
         coursecontent.push({
@@ -529,21 +534,21 @@ export default {
 
     async findByCategoryName(name) {
         const list = await db
-            .select('courseid', 'coursename', 'categories.catname', 'tinydes', 'fulldes', 'rating', 'reviews', 'views', 'students', 'tuition', 'discount', 'discountinfo', 'updatetime','createtime', 'lecturers.lecname','disable','complete')
+            .select('courseid', 'coursename', 'categories.catname', 'tinydes', 'fulldes', 'rating', 'reviews', 'views', 'students', 'tuition', 'discount', 'discountinfo', 'updatetime', 'createtime', 'lecturers.lecname', 'disable', 'complete')
             .from('courses')
             .join('categories', 'categories.catid', 'courses.catid')
             .leftJoin('lecturers', 'courses.lecid', 'lecturers.lecid')
-            .where('categories.catname',name)
+            .where('categories.catname', name)
         return list;
     },
 
     async findByLecturerName(name) {
         const list = await db
-            .select('courseid', 'coursename', 'categories.catname', 'tinydes', 'fulldes', 'rating', 'reviews', 'views', 'students', 'tuition', 'discount', 'discountinfo', 'updatetime','createtime', 'lecturers.lecname','disable','complete')
+            .select('courseid', 'coursename', 'categories.catname', 'tinydes', 'fulldes', 'rating', 'reviews', 'views', 'students', 'tuition', 'discount', 'discountinfo', 'updatetime', 'createtime', 'lecturers.lecname', 'disable', 'complete')
             .from('courses')
             .leftJoin('categories', 'categories.catid', 'courses.catid')
             .join('lecturers', 'courses.lecid', 'lecturers.lecid')
-            .where('lecturers.lecname',name)
+            .where('lecturers.lecname', name)
         return list;
     },
 
@@ -558,5 +563,11 @@ export default {
         await db('courses')
             .where('courseid', courseid)
             .update('complete', 1)
+    },
+
+    async updateCourseUpdateTime(courseid) {
+        await db('courses')
+            .where('courseid', courseid)
+            .update('updatetime', new Date())
     },
 }

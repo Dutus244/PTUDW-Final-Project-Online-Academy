@@ -38,7 +38,6 @@ router.get('/addcourse', authWithRequiredPermission(1), async function (req, res
 
 router.post('/addcourse', authWithRequiredPermission(1), async function (req, res) {
     const id = v4()
-    console.log('dsa');
 
     const storage = multer.diskStorage({
         destination: function (req, file, cb) {
@@ -59,6 +58,8 @@ router.post('/addcourse', authWithRequiredPermission(1), async function (req, re
         const tuition = req.body.courseprice
         const imagelink = '/public/img/' + id + '.png'
 
+        const timestamp = new Date()
+
         const course = {
             courseid: id,
             coursename: name,
@@ -67,67 +68,68 @@ router.post('/addcourse', authWithRequiredPermission(1), async function (req, re
             tinydes: smalldetail,
             fulldes: detail,
             tuition: tuition,
-            lecid: res.locals.authUser.accountid
+            lecid: res.locals.authUser.accountid,
+            createtime: timestamp,
+            updatetime: timestamp,
         }
 
-        console.log(course)
+        await courseService.addcourse(course)
+        if (err instanceof multer.MulterError) {
+            // A Multer error occurred when uploading.
+            console.error(err);
+        } else if (err) {
+            // An unknown error occurred when uploading.
+            console.error(err);
+        }
+        const categorylist = await categoryService.findAllForAddCourse()
+        res.render("vwTeacher/add-courses", {
+            categorylist: categorylist,
+            msg: 'Thêm khóa học thành công'
+        })
 
-        await courseService.addcourse(course)        
-      if (err instanceof multer.MulterError) {
-        // A Multer error occurred when uploading.
-        console.error(err);
-      } else if (err) {
-        // An unknown error occurred when uploading.
-        console.error(err);
-      }
-      const categorylist = await categoryService.findAllForAddCourse()
-      res.render("vwTeacher/add-courses",{
-        categorylist: categorylist,
-        msg:'Thêm khóa học thành công'
-      })
-      
     })
 })
 
-router.get('/addchapter/:id', authWithRequiredPermission(1), async function (req, res){
+router.get('/addchapter/:id', authWithRequiredPermission(1), async function (req, res) {
     const courseid = req.params.id
     const course = await courseService.findById(courseid)
     res.render('vwTeacher/add-chapter', {
-        courseid:courseid,
-        course:course
+        courseid: courseid,
+        course: course
     })
 })
 
-router.post('/addchapter/:id', authWithRequiredPermission(1), async function (req, res){
+router.post('/addchapter/:id', authWithRequiredPermission(1), async function (req, res) {
     const id = v4()
     const courseid = req.params.id
     const chapname = req.body.chapname
     const check = req.body.preview ? true : false
 
     var preview = 0
-    if(check === true){
+    if (check === true) {
         preview = 1
     }
 
-    const chapter ={
-        courseid : courseid,
-        chapterid : id,
-        chaptername: chapname,
-        preview: preview
-    }
+    const timestamp = new Date()
 
-    console.log(chapter)
+    const chapter = {
+        courseid: courseid,
+        chapterid: id,
+        chaptername: chapname,
+        preview: preview,
+        createtime: timestamp,
+    }
 
     await courseService.addchapter(chapter)
     const course = await courseService.findById(courseid)
-    res.render("vwTeacher/add-chapter",{
+    res.render("vwTeacher/add-chapter", {
         courseid: courseid,
-        course:course,
-        msg:'Thêm chương mới thành công'
-      })
+        course: course,
+        msg: 'Thêm chương mới thành công'
+    })
 })
 
-router.get('/addcontent/:courseid/:chapid', authWithRequiredPermission(1), async function (req, res){
+router.get('/addcontent/:courseid/:chapid', authWithRequiredPermission(1), async function (req, res) {
     const courseid = req.params.courseid
     const chapid = req.params.chapid
 
@@ -142,30 +144,30 @@ router.get('/addcontent/:courseid/:chapid', authWithRequiredPermission(1), async
     })
 })
 
-router.post('/addcontent/:courseid/:chapid', authWithRequiredPermission(1), async function (req, res){
+router.post('/addcontent/:courseid/:chapid', authWithRequiredPermission(1), async function (req, res) {
     const id = v4()
     const courseid = req.params.courseid
     const chapid = req.params.chapid
 
     const storage = multer.diskStorage({
         destination: function (req, file, cb) {
-          cb(null, './public/vid/')
+            cb(null, './public/vid/')
         },
         filename: function (req, file, cb) {
-          // const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9)
-          cb(null, id +'.mp4')
+            // const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9)
+            cb(null, id + '.mp4')
         }
     })
 
-      const upload = multer({ storage: storage }) 
-    upload.array('fuMain', 5)(req, res, async function (err){
+    const upload = multer({ storage: storage })
+    upload.array('fuMain', 5)(req, res, async function (err) {
         const contentname = req.body.contentname
-        const contentinf = "/public/vid/" + id +'.mp4' 
-        const chaptercontent ={
-            courseid : courseid,
-            chapterid : chapid,
-            contentid : id,
-            contentname : contentname,
+        const contentinf = "/public/vid/" + id + '.mp4'
+        const chaptercontent = {
+            courseid: courseid,
+            chapterid: chapid,
+            contentid: id,
+            contentname: contentname,
             content: contentinf,
         }
         await courseService.addContent(courseid, chapid, id, contentname, contentinf)
@@ -223,7 +225,7 @@ router.post('/profile', async (req, res) => {
         email: res.locals.authUser.email,
         experience: res.locals.authUser.experience,
         aboutme: res.locals.authUser.aboutme,
-        msg: 'Update successfully',
+        msg: 'Cập nhật thành công',
     })
 })
 
@@ -241,13 +243,13 @@ router.post('/security', async (req, res) => {
     var err_msg
 
     if (ret === false) {
-        err_msg = 'Current password is incorrect'
+        err_msg = 'Sai mật khẩu hiện tại'
     }
     else {
         const salt = bcrypt.genSaltSync(10);
         const hash = bcrypt.hashSync(req.body.newPass, salt);
         await userService.updatePass(req.session.authUser.accountid, hash)
-        msg = 'Change password successfully'
+        msg = 'Đổi mật khẩu thành công'
     }
     res.render('vwTeacher/security', {
         name: res.locals.authUser.name,
