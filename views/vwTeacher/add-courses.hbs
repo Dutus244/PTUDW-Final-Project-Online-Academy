@@ -28,6 +28,15 @@
 
 {{/section}}
 
+{{#if msg}}
+        <div class="alert alert-success alert-dismissible fade show text-center pr-0" role="alert">
+          {{msg}}
+          <button type="button" class="close h-100" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true" class="bg-inherit">&times;</span>
+          </button>
+        </div>
+{{/if}}
+
 <form method="post" id="frmRegister" enctype="multipart/form-data">
     <div class="card mb-3">
         <h4 class="card-header">

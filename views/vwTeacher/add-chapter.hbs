@@ -28,19 +28,36 @@
 
 {{/section}}
 
-<form method="post" id="frmRegister" enctype="multipart/form-data">
+{{#if msg}}
+        <div class="alert alert-success alert-dismissible fade show text-center pr-0" role="alert">
+          {{msg}}
+          <button type="button" class="close h-100" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true" class="bg-inherit">&times;</span>
+          </button>
+        </div>
+{{/if}}
+
+<form method="post" id="frmRegister">
     <div class="form-group">
-            <label for="txtCourse">Khóa học đã tạo</label>
-            <select name="course">
-                {{#each this.courselist}}
-                    <option value="{{courseid}}">{{coursename}}</option>
-                {{/each}}
-            </select>
+            <label for="txtCourse">Khóa học đang được thêm: </label>
+            <span> {{this.course.coursename}} </span>
             <label id="course"></label>
     </div>
 
     <div class="form-group">
         <label for="txtChapname">Tên chương</label>
         <input name="chapname" type="text" class="form-control" id="txtChapname" autofocus>
+    </div>
+
+    <label class="container">Được xem trước
+        <input type="checkbox" name="preview">
+        <span class="checkmark"></span>
+    </label>
+
+    <div class="card-footer text-muted">
+            <button type="submit" class="btn btn-primary">
+                <i class="fa fa-check" aria-hidden="true"></i>
+                Save
+            </button>
     </div>
 </form>

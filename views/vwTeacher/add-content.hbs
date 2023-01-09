@@ -28,7 +28,28 @@
 
 {{/section}}
 
+{{#if msg}}
+        <div class="alert alert-success alert-dismissible fade show text-center pr-0" role="alert">
+          {{msg}}
+          <button type="button" class="close h-100" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true" class="bg-inherit">&times;</span>
+          </button>
+        </div>
+{{/if}}
+
 <form method="post" id="frmRegister" enctype="multipart/form-data">
+    
+    <div class="form-group">
+        <label for="txtCourse">Khóa học đang được thêm: </label>
+        <span> {{this.course.coursename}} </span>
+        <label id="course"></label>
+    </div>
+
+    <div class="form-group">
+        <label for="txtChap">Chương đang được thêm: </label>
+        <span> {{this.chap.chaptername}} </span>
+        <label id="chap"></label>
+    </div>
 
     <div class="form-group">
         <label for="txtContentname">Tên bài giảng</label>

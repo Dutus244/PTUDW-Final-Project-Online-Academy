@@ -56,7 +56,7 @@ router.post('/addcourse', authWithRequiredPermission(1), async function (req, re
         const detail = req.body.coursedetail
         const cat = req.body.coursecat
         const tuition = req.body.courseprice
-        const imagelink = './public/img/' + id + '.png'
+        const imagelink = '/public/img/' + id + '.png'
 
         const course = {
             courseid: id,
@@ -69,39 +69,113 @@ router.post('/addcourse', authWithRequiredPermission(1), async function (req, re
             lecid: res.locals.authUser.accountid
         }
 
-        await courseService.addcourse(course)
-        if (err instanceof multer.MulterError) {
-            // A Multer error occurred when uploading.
-            console.error(err);
-        } else if (err) {
-            // An unknown error occurred when uploading.
-            console.error(err);
-        }
-        res.redirect("/teacher/addchapter")
+        await courseService.addcourse(course)        
+      if (err instanceof multer.MulterError) {
+        // A Multer error occurred when uploading.
+        console.error(err);
+      } else if (err) {
+        // An unknown error occurred when uploading.
+        console.error(err);
+      }
+      const categorylist = await categoryService.findAllForAddCourse()
+      res.render("vwTeacher/add-courses",{
+        categorylist: categorylist,
+        msg:'Thêm khóa học thành công'
+      })
+      
     })
 })
 
-router.get('/addchapter', authWithRequiredPermission(1), async function (req, res) {
-    const courselist = await lecturerService.getTeacherCourses(res.locals.authUser.accountid);
-    console.log(courselist)
+router.get('/addchapter/:id', authWithRequiredPermission(1), async function (req, res){
+    const courseid = req.params.id
+    const course = await courseService.findById(courseid)
     res.render('vwTeacher/add-chapter', {
-        courselist: courselist
+        courseid:courseid,
+        course:course
     })
 })
 
-router.post('/addchapter', authWithRequiredPermission(1), async function (req, res) {
+router.post('/addchapter/:id', authWithRequiredPermission(1), async function (req, res){
+    const id = v4()
+    const courseid = req.params.id
+    const chapname = req.body.chapname
+    const check = req.body.preview ? true : false
+
+    var preview = 0
+    if(check === true){
+        preview = 1
+    }
+
+    const chapter ={
+        courseid : courseid,
+        chapterid : id,
+        chaptername: chapname,
+        preview: preview
+    }
+
+    console.log(chapter)
+
+    await courseService.addchapter(chapter)
+    const course = await courseService.findById(courseid)
+    res.render("vwTeacher/add-chapter",{
+        courseid: courseid,
+        course:course,
+        msg:'Thêm chương mới thành công'
+      })
+})
+
+router.get('/addcontent/:courseid/:chapid', authWithRequiredPermission(1), async function (req, res){
+    const courseid = req.params.courseid
+    const chapid = req.params.chapid
+
+    const courselist = await courseService.findById(courseid)
+    const chaplist = await lecturerService.getCoursesChapter(chapid)
+    console.log(chaplist[0])
+    res.render('vwTeacher/add-content', {
+        courseid: courseid,
+        chapid: chapid,
+        course: courselist,
+        chap: chaplist[0],
+    })
+})
+
+router.post('/addcontent/:courseid/:chapid', authWithRequiredPermission(1), async function (req, res){
+    const id = v4()
+    const courseid = req.params.courseid
+    const chapid = req.params.chapid
+
     const storage = multer.diskStorage({
         destination: function (req, file, cb) {
-            cb(null, './public/img/')
+          cb(null, './public/vid/')
         },
         filename: function (req, file, cb) {
-            // const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9)
-            cb(null, 'test.mp4')
+          // const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9)
+          cb(null, id +'.mp4')
         }
     })
 
-    const upload = multer({ storage: storage })
-    upload.array('fuMain', 5)(req, res, async function (err) {
+      const upload = multer({ storage: storage }) 
+    upload.array('fuMain', 5)(req, res, async function (err){
+        const contentname = req.body.contentname
+        const contentinf = "/public/vid/" + id +'.mp4' 
+        const chaptercontent ={
+            courseid : courseid,
+            chapterid : chapid,
+            contentid : id,
+            contentname : contentname,
+            content: contentinf,
+        }
+        await courseService.addContent(courseid, chapid, id, contentname, contentinf)
+        const courselist = await courseService.findById(courseid)
+        const chaplist = await lecturerService.getCoursesChapter(chapid)
+        console.log(chaplist[0])
+        res.render('vwTeacher/add-content', {
+            courseid: courseid,
+            chapid: chapid,
+            course: courselist,
+            chap: chaplist[0],
+            msg: 'Thêm bài học thành công'
+        })
         if (err instanceof multer.MulterError) {
             // A Multer error occurred when uploading.
             console.error(err);

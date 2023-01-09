@@ -120,4 +120,21 @@ export default {
         }
         return db('accounts').where('accountid', id).update(lecturer);
     },
+
+    async getTeacherCourses(id){
+        const list = await db
+            .select('courseid','coursename')
+            .from('courses')
+            .leftJoin('lecturers','courses.lecid','lecturers.lecid')
+            .where('courses.lecid', id);
+        return list;
+    },
+
+    async getCoursesChapter(id){
+        const list = await db
+            .select('chapterid', 'chaptername')
+            .from('coursechapter')
+            .where('chapterid', id)
+        return list;
+    }
 }

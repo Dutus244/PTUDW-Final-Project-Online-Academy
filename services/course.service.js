@@ -5,6 +5,20 @@ export default {
         return db('courses').insert(entity)
     },
 
+    async addchapter(entity){
+        return db('coursechapter').insert(entity)
+    },
+
+    
+    async addContent(courseid, chapterid, contentid, contentname, content){
+        const sql = `insert into chaptercontent values('${courseid}','${chapterid}','${contentid}','${contentname}','${content}', now())`
+        try{
+            await db.raw(sql)
+        } catch(error){
+            console.log(error)
+        }
+    },
+
     async countAll() {
         const list = await db
             .count({ amount: 'courseid' })
