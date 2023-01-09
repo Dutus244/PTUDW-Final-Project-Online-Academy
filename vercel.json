@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "name": "unicorn-ptudw-project-online-academy_k20",
+  "name": "unicorn-ptudw-project-k20",
   "builds": [
     {
       "src": "app.js",
