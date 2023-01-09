@@ -15,7 +15,7 @@ export default {
     
     async login(email){
         const list = await db('accounts')
-            .select('accountid', 'email', 'pass', 'accounttype as permission')
+            .select('accountid', 'email', 'pass', 'accounttype as permission','lockaccount')
             .where('email', email);
         if(list.length !==0)
             return list[0];

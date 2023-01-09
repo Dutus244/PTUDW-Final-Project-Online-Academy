@@ -46,6 +46,11 @@ router.post('/signin', async (req,res)=>{
         err_message: 'Invalid username or password.'
       });
     }
+    if (user.lockaccount === 1) {
+        return res.render('vwAccount/signin', {
+            err_message: 'Your account is locked.'
+        });
+    }
     
     const ret = bcrypt.compareSync(req.body.password, user.pass.toString());
     if (ret === false) {

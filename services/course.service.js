@@ -9,6 +9,25 @@ export default {
         return db('coursechapter').insert(entity)
     },
 
+    async countStudent(courseid) {
+        const sql = `select count(*) as amount from studentcourses where courseid = ${courseid} group by courseid`
+        try {
+            const list = await db.raw(sql);
+            return list[0][0].amount;
+        } catch (error) {
+            console.log(error);
+        }
+    },
+
+    async updateStudents(courseid,students) {
+        const sql = `update courses set students = ${students} where courseid = ${courseid}`
+        try{
+            await db.raw(sql)
+        } catch(error){
+            console.log(error)
+        }
+    },
+
     
     async addContent(courseid, chapterid, contentid, contentname, content){
         const sql = `insert into chaptercontent values('${courseid}','${chapterid}','${contentid}','${contentname}','${content}', now())`

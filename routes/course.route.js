@@ -129,6 +129,7 @@ router.post('/detail/:id/addToWatchlist', authWithRequiredPermission(0), async (
 router.post('/detail/:id/buy', authWithRequiredPermission(0), async (req, res) => {
     const courseid = req.params.id || '0'
     await courseService.buyCourse(res.locals.authUser.accountid, courseid)
+
     await studentService.removeFromWatchlist(res.locals.authUser.accountid, courseid)
     res.redirect('/course/detail/' + courseid)
 })
