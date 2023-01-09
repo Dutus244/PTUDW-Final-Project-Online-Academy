@@ -6,7 +6,7 @@ import courseService from '../services/course.service.js';
 import { getVisiblePage } from '../utils/helper.js'
 import authWithRequiredPermission from "../middlewares/auth.mdw.js";
 import categoryService from "../services/category.service.js";
-import {v4, v4 as uuidv4} from "uuid";
+import { v4, v4 as uuidv4 } from "uuid";
 import userServices from "../services/user.service.js";
 import multer from 'multer';
 import bodyParser from 'body-parser';
@@ -20,13 +20,13 @@ const router = express.Router()
 // apply them
 
 router.use(bodyParser.json())
-router.use(bodyParser.urlencoded({extended: true}))
+router.use(bodyParser.urlencoded({ extended: true }))
 //router.use(multer().array())
 export const config = {
     api: {
-      bodyParser: false
+        bodyParser: false
     }
-  }
+}
 
 
 router.get('/addcourse', authWithRequiredPermission(1), async function (req, res) {
@@ -35,21 +35,21 @@ router.get('/addcourse', authWithRequiredPermission(1), async function (req, res
         categorylist: categorylist
     })
 })
-    
+
 router.post('/addcourse', authWithRequiredPermission(1), async function (req, res) {
     const id = v4()
 
     const storage = multer.diskStorage({
-      destination: function (req, file, cb) {
-        cb(null, './public/img/')
-      },
-      filename: function (req, file, cb) {
-        // const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9)
-        cb(null, id + '.png')
-      }
+        destination: function (req, file, cb) {
+            cb(null, './public/img/')
+        },
+        filename: function (req, file, cb) {
+            // const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9)
+            cb(null, id + '.png')
+        }
     })
-  
-    const upload = multer({ storage: storage }) 
+
+    const upload = multer({ storage: storage })
     upload.array('fuMain', 5)(req, res, async function (err) {
         const name = req.body.coursename
         const smalldetail = req.body.coursesmalldetail
@@ -69,19 +69,19 @@ router.post('/addcourse', authWithRequiredPermission(1), async function (req, re
             lecid: res.locals.authUser.accountid
         }
 
-        await courseService.addcourse(course)        
-      if (err instanceof multer.MulterError) {
-        // A Multer error occurred when uploading.
-        console.error(err);
-      } else if (err) {
-        // An unknown error occurred when uploading.
-        console.error(err);
-      }
-      res.redirect("/teacher/addchapter")
+        await courseService.addcourse(course)
+        if (err instanceof multer.MulterError) {
+            // A Multer error occurred when uploading.
+            console.error(err);
+        } else if (err) {
+            // An unknown error occurred when uploading.
+            console.error(err);
+        }
+        res.redirect("/teacher/addchapter")
     })
 })
 
-router.get('/addchapter', authWithRequiredPermission(1), async function (req, res){
+router.get('/addchapter', authWithRequiredPermission(1), async function (req, res) {
     const courselist = await lecturerService.getTeacherCourses(res.locals.authUser.accountid);
     console.log(courselist)
     res.render('vwTeacher/add-chapter', {
@@ -89,50 +89,63 @@ router.get('/addchapter', authWithRequiredPermission(1), async function (req, re
     })
 })
 
-router.post('/addchapter', authWithRequiredPermission(1), async function (req, res){
+router.post('/addchapter', authWithRequiredPermission(1), async function (req, res) {
     const storage = multer.diskStorage({
         destination: function (req, file, cb) {
-          cb(null, './public/img/')
+            cb(null, './public/img/')
         },
         filename: function (req, file, cb) {
-          // const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9)
-          cb(null, 'test.mp4')
+            // const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9)
+            cb(null, 'test.mp4')
         }
-      })
+    })
 
-      const upload = multer({ storage: storage }) 
-    upload.array('fuMain', 5)(req, res, async function (err){
+    const upload = multer({ storage: storage })
+    upload.array('fuMain', 5)(req, res, async function (err) {
         if (err instanceof multer.MulterError) {
             // A Multer error occurred when uploading.
             console.error(err);
-          } else if (err) {
+        } else if (err) {
             // An unknown error occurred when uploading.
             console.error(err);
-          }
+        }
     })
 })
 
 router.get('/profile', async (req, res) => {
     const teacher = await lecturerService.getTeacherProfile(res.locals.authUser.accountid)
     if (!res.locals.authUser['name'])
-        res.locals.authUser['name'] = teacher.teachername
+        res.locals.authUser['name'] = teacher.name
+    if (!res.locals.authUser['experience'])
+        res.locals.authUser['experience'] = teacher.experience
+    if (!res.locals.authUser['aboutme'])
+        res.locals.authUser['aboutme'] = teacher.aboutme
 
     res.render('vwTeacher/profile', {
-        name: teacher.teachername,
+        name: teacher.name,
         email: teacher.email,
+        experience: teacher.experience,
+        aboutme: teacher.aboutme,
     })
 })
 
 router.post('/profile', async (req, res) => {
-    const teacher = await lecturerService.updateTeacherProfile(res.locals.authUser.accountid, req.body.name, req.body.email)
+    const teacher = await lecturerService.updateTeacherProfile(
+        res.locals.authUser.accountid, req.body.name, req.body.email, req.body.experience, req.body.aboutme);
     if (req.body.name)
         res.locals.authUser['name'] = req.body.name
     if (req.body.email)
         res.locals.authUser['email'] = req.body.email
+    if (req.body.experience)
+        res.locals.authUser['experience'] = req.body.experience
+    if (req.body.aboutme)
+        res.locals.authUser['aboutme'] = req.body.aboutme
 
     res.render('vwTeacher/profile', {
         name: res.locals.authUser.name,
         email: res.locals.authUser.email,
+        experience: res.locals.authUser.experience,
+        aboutme: res.locals.authUser.aboutme,
         msg: 'Update successfully',
     })
 })
@@ -166,30 +179,6 @@ router.post('/security', async (req, res) => {
     })
 })
 
-router.get('/watchlist', async (req, res) => {
-    // Item per page
-    const limit = 6
-    const curPage = +req.query.page || 1
-    const offset = (curPage - 1) * limit
-
-    const total = await courseService.countByWatchlist(res.locals.authUser.accountid)
-    const totalPages = Math.ceil(total / limit)
-
-    const visiblePages = 5
-    const pages = getVisiblePage(totalPages, visiblePages, curPage)
-
-    const list = await lecturerService.getTeacherWatchlist(res.locals.authUser.accountid, offset, limit)
-
-    res.render('vwTeacher/watchlist', {
-        courses: list,
-        empty: list.length === 0,
-        pages: pages,
-        totalPages: totalPages,
-        prevPage: curPage - 1,
-        nextPage: curPage + 1,
-    })
-})
-
 router.get('/my-courses', async (req, res) => {
     // Item per page
     const limit = 6
@@ -205,6 +194,7 @@ router.get('/my-courses', async (req, res) => {
     const list = await lecturerService.getTeacherCourses(res.locals.authUser.accountid, offset, limit)
 
     res.render('vwTeacher/my-courses', {
+        name: res.locals.authUser.name,
         courses: list,
         empty: list.length === 0,
         pages: pages,
@@ -212,16 +202,6 @@ router.get('/my-courses', async (req, res) => {
         prevPage: curPage - 1,
         nextPage: curPage + 1,
     })
-})
-
-router.post('/removeFromWatchlist/:id', async (req, res) => {
-    const courseid = req.params.id
-    await lecturerService.removeFromWatchlist(res.locals.authUser.accountid, courseid)
-})
-
-router.post('/addToWatchlist', async (req, res) => {
-    // const courseid = '2c5ea4c0-4067-11e9-8bad-9b1deb4d3b7d'
-    // await studentService.addToWatchlist(res.locals.authUser.accountid, courseid)
 })
 
 // Amdin with authWithRequiredPermission
@@ -234,13 +214,13 @@ router.get('/', authWithRequiredPermission(2), async function (req, res) {
     });
 })
 
-router.get('/add', authWithRequiredPermission(2),async function (req, res) {
+router.get('/add', authWithRequiredPermission(2), async function (req, res) {
     res.render('vwAdmin/lecturers/add', {
         layout: 'mainAdmin',
     });
 })
 
-router.post('/add', authWithRequiredPermission(2),async function (req, res) {
+router.post('/add', authWithRequiredPermission(2), async function (req, res) {
     const salt = bcrypt.genSaltSync(10);
     const hash = bcrypt.hashSync(req.body.password, salt);
 
@@ -255,8 +235,8 @@ router.post('/add', authWithRequiredPermission(2),async function (req, res) {
 
     const lecturer = {
         lecid: id,
-        lecname:req.body.lecname,
-        experience:req.body.experience,
+        lecname: req.body.lecname,
+        experience: req.body.experience,
     }
 
     await userServices.add(account)
@@ -302,7 +282,7 @@ router.post('/del', authWithRequiredPermission(2), async function (req, res) {
     res.redirect('/admin/lecturers');
 });
 
-router.post('/patch', authWithRequiredPermission(2),async function (req, res) {
+router.post('/patch', authWithRequiredPermission(2), async function (req, res) {
     const salt = bcrypt.genSaltSync(10);
     const hash = bcrypt.hashSync(req.body.password, salt);
 
@@ -324,7 +304,7 @@ router.post('/patch', authWithRequiredPermission(2),async function (req, res) {
     res.redirect('/admin/lecturers/');
 });
 
-router.get('/courses/del', authWithRequiredPermission(2),async function (req, res) {
+router.get('/courses/del', authWithRequiredPermission(2), async function (req, res) {
     const id = req.query.id || 0;
     await lecturerService.delCourse(id);
     res.redirect('/admin/categories/');

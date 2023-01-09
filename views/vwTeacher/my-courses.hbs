@@ -23,8 +23,8 @@
   <div class="row">
     <div class="col-sm-3">
       <div class="card">
-        <h4 class="card-header profile-item teacher-name">
-          Teacher
+        <h4 class="card-header profile-item student-name">
+          {{this.name}}
         </h4>
         <ul class="list-group list-group-flush">
           <a href="/teacher/profile" class="profile-item">
@@ -54,7 +54,13 @@
           <div class="col-sm-4 mb-4">
             <a href="/course/detail/{{courseid}}">
               <div class="card h-100">
-                <img class="card-img-top" src="{{courseavatar}}" alt="courseAvatar">
+                <div class="img-container">
+                  <img class="card-img-top" src="{{courseavatar}}" alt="courseAvatar">
+                  {{#if complete}}
+                  {{else}}
+                  <i class="bi bi-clipboard2-x complete-icon"></i>
+                  {{/if}}
+                </div>
                 <div class="card-body">
                   <h4 class="card-title mb-0" id="coursename">{{coursename}}</h4>
                   <p class="card-title mb-0 font-italic">{{catname}}</p>

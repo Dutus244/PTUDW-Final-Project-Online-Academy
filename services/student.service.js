@@ -42,7 +42,7 @@ export default {
     return await db('watchlists').where('studentid', studentid).where('courseid', courseid).del()
   },
 
-  async getStudentCourses(id, offset, limit, studentid) {
+  async getStudentCourses(studentid, offset, limit) {
     const list = await db
       .select('complete', 'courseavatar', 'catname', 'coursename', 'lecname', 'rating',
         'reviews', 'courses.courseid')
@@ -50,7 +50,7 @@ export default {
       .join('courses', 'studentcourses.courseid', 'courses.courseid')
       .join('categories', 'courses.catid', 'categories.catid')
       .join('lecturers', 'courses.lecid', 'lecturers.lecid')
-      .where('studentcourses.studentid', id)
+      .where('studentcourses.studentid', studentid)
       .offset(offset)
       .limit(limit)
 

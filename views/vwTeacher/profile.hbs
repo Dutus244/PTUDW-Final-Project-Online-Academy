@@ -11,8 +11,8 @@
     const email = $('#txtEmail').val()
     const experience = $('#txtExperience').val()
     const aboutme = $('#txtAboutMe').val()
-    if (name.length === 0 && email.length === 0) {
-      alert('Please fill in name or email')
+    if (name.length === 0 && email.length === 0 && experience.length === 0 & aboutme.length === 0) {
+      alert('Please fill in at least one field')
       return
     }
     if (email.length === 0) {
@@ -85,7 +85,7 @@
         </div>
         <div class="form-group">
             <label for="txtAboutMe">About Me</label>
-            <input name="experience" type="text" class="form-control text-input" id="txtAboutMe" placeholder="{{this.aboutme}}">
+            <input name="aboutme" type="text" class="form-control text-input" id="txtAboutMe" placeholder="{{this.aboutme}}">
         </div>
 
         <div class="submit-button">

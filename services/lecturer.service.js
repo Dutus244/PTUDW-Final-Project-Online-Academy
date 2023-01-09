@@ -3,7 +3,7 @@ import db from '../utils/db.js';
 export default {
     async getTeacherProfile(id) {
         const teacher = await db
-            .select('LecName', 'email')
+            .select('lecname as name', 'email', 'experience', 'aboutme')
             .from('accounts')
             .join('lecturers', 'AccountID', 'LecID')
             .where('accounts.AccountID', '=', id)
@@ -11,47 +11,60 @@ export default {
         return teacher[0]
     },
 
-    async updateTeacherProfile(id, name, email) {
+    async updateTeacherProfile(id, name, email, experience, aboutme) {
         if (email) {
             await db('accounts')
                 .where('AccountID', '=', id)
                 .update('email', email)
         }
         if (name) {
-            await db('teachers')
+            await db('lecturers')
                 .where('LecID', '=', id)
                 .update('LecName', name)
+        }
+        if (experience) {
+            await db('lecturers')
+                .where('LecID', '=', id)
+                .update('experience', experience)
+        }
+        if (aboutme) {
+            await db('lecturers')
+                .where('LecID', '=', id)
+                .update('aboutme', aboutme)
         }
         return
     },
 
-    async getTeacherCourses(id){
+    async getTeacherCourses(id, offset, limit) {
         const list = await db
-            .select('courseid','coursename')
+            .select('complete', 'courseavatar', 'catname', 'coursename', 'rating',
+                'reviews', 'courses.courseid', 'tuition', 'discount')
             .from('courses')
-            .leftJoin('lecturers','courses.lecid','lecturers.lecid')
-            .where('courses.lecid', id);
+            .join('categories', 'courses.catid', 'categories.catid')
+            .where('courses.lecid', id)
+            .offset(offset)
+            .limit(limit)
         return list;
     },
 
     async findAll() {
         const list = await db
-            .select('lecturers.lecid', 'accounts.email','lecname','experience','aboutme','lockaccount')
-            .count({amount: 'courseid'})
+            .select('lecturers.lecid', 'accounts.email', 'lecname', 'experience', 'aboutme', 'lockaccount')
+            .count({ amount: 'courseid' })
             .from('lecturers')
             .leftJoin('courses', 'courses.lecid', 'lecturers.lecid')
-            .join('accounts','lecturers.lecid','accounts.accountid')
+            .join('accounts', 'lecturers.lecid', 'accounts.accountid')
             .groupBy('lecturers.lecid')
         return list;
     },
 
     async findById(id) {
         const list = await db
-            .select('lecturers.lecid','accounts.email','lecname','experience','aboutme','lockaccount')
-            .count({amount: 'courseid'})
+            .select('lecturers.lecid', 'accounts.email', 'lecname', 'experience', 'aboutme', 'lockaccount')
+            .count({ amount: 'courseid' })
             .from('lecturers')
             .leftJoin('courses', 'courses.lecid', 'lecturers.lecid')
-            .join('accounts','lecturers.lecid','accounts.accountid')
+            .join('accounts', 'lecturers.lecid', 'accounts.accountid')
             .groupBy('lecturers.lecid')
             .where('lecturers.lecid', id);
         if (list.length === 0) {
@@ -62,10 +75,10 @@ export default {
 
     async findAllCoursesByLecID(id) {
         const list = await db
-            .select('courseid','coursename','categories.catname','tinydes','fulldes','rating','reviews','students','tuition','discount','discountinfo','updatetime','lecturers.lecname')
+            .select('courseid', 'coursename', 'categories.catname', 'tinydes', 'fulldes', 'rating', 'reviews', 'students', 'tuition', 'discount', 'discountinfo', 'updatetime', 'lecturers.lecname')
             .from('courses')
-            .leftJoin('categories','categories.catid','courses.catid')
-            .leftJoin('lecturers','courses.lecid','lecturers.lecid')
+            .leftJoin('categories', 'categories.catid', 'courses.catid')
+            .leftJoin('lecturers', 'courses.lecid', 'lecturers.lecid')
             .where('courses.lecid', id);
         return list;
     },
