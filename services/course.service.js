@@ -178,7 +178,7 @@ export default {
 
     async findById(id) {
         const list = await db
-            .select('courses.courseid', 'courseavatar', 'coursename', 'tinydes', 'fulldes', 'lecname', 'rating', 'tuition', 'discount', 'reviews', 'updatetime', 'students', 'experience', 'aboutme', 'chaptername')
+            .select('courses.courseid', 'courseavatar', 'coursename', 'tinydes', 'fulldes', 'lecname', 'rating', 'tuition', 'discount', 'reviews', 'updatetime', 'students', 'experience', 'aboutme', 'chaptername', 'complete')
             .from('courses')
             .leftJoin('lecturers', 'courses.lecid', 'lecturers.lecid')
             .leftJoin('coursechapter', 'coursechapter.courseid', 'courses.courseid')
@@ -213,36 +213,6 @@ export default {
     },
 
     async findSimilarCourses(id) {
-        // const courseid = await db
-        //     .select('course2.courseid')
-        //     .from('courses as course1')
-        //     .join('courses as course2', 'course1.catid', 'course2.catid')
-        //     .where('course1.courseid', id);
-
-        // if (courseid.length === 0) {
-        //     return null;
-        // }
-
-        // var bought = []
-
-        // for (let i in courseid){
-        //     let amount = await this.countByBought(courseid[i])
-        //     bought.push({courseid: courseid[i], amount: amount})
-        // }
-
-        // bought.sort(function(a, b){return b.amount - a.amount});
-
-        // if(bought.length > 5){
-        //     bought = bought.slice(0, 5)
-        // }
-
-        // var courses = []
-
-        // for (let x in bought){
-        //     var list = await this.findAll(bought[x].courseid)
-        //     courses.push(list[0])
-        // }
-
         const sql = `select courseavatar, courseid, coursename, rating, reviews, tuition, discount, lecname from courses 
             join lecturers on courses.lecid = lecturers.lecid
             where catid =
@@ -500,5 +470,18 @@ export default {
             .join('lecturers', 'courses.lecid', 'lecturers.lecid')
             .where('lecturers.lecname',name)
         return list;
+    },
+
+    async isLecturerCourse(courseid, lecid) {
+        const list = await db('courses')
+            .where('courseid', courseid)
+            .andWhere('lecid', lecid)
+        return list.length === 0 ? false : true
+    },
+
+    async markCompleted(courseid) {
+        await db('courses')
+            .where('courseid', courseid)
+            .update('complete', 1)
     },
 }

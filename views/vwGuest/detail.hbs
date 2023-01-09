@@ -130,10 +130,17 @@
         <i class="bi bi-star-fill"></i>
         <p class="text-secondary rating-item">({{this.course.reviews}})</p>
       </div>
-      <form id="formAddToWatchlist" action="/course/detail/{{this.course.courseid}}/addToWatchlist" method="post">
-      </form>
-      <form id="formBuyCourse" action="/course/detail/{{this.course.courseid}}/buy" method="post"></form>
+
       {{#ifEquals authUser.permission 1}}
+      {{#if this.isLecturerCourse}}
+      {{#if this.course.complete}}
+      <a class="btn button disabled" href="#/" role="button">Khóa học đã hoàn thành</a>
+      {{else}}
+      <form id="formMarkCompleted" action="/course/detail/{{this.course.courseid}}/completed" method="post"></form>
+      <a class="btn button" href="javascript: $('#formMarkCompleted').submit();" role="button">Đánh dấu đã hoàn
+        thành</a>
+      {{/if}}
+      {{/if}}
       {{else}}
       {{#if this.isBought}}
       <a class="btn button" href="/course/{{this.course.courseid}}/learn" role="button">Đi đến bài giảng</a>
@@ -141,8 +148,11 @@
       {{#if this.isInWatchlist}}
       <a class="btn button disabled" href="#/" role="button">Đã ở trong watchlist</a>
       {{else}}
+      <form id="formAddToWatchlist" action="/course/detail/{{this.course.courseid}}/addToWatchlist" method="post">
+      </form>
       <a class="btn button" href="javascript: $('#formAddToWatchlist').submit();" role="button">Thêm vào watchlist</a>
       {{/if}}
+      <form id="formBuyCourse" action="/course/detail/{{this.course.courseid}}/buy" method="post"></form>
       <a class="btn button" href="javascript: $('#formBuyCourse').submit();" role="button">Mua ngay</a>
       {{/if}}
       {{/ifEquals}}
@@ -166,7 +176,13 @@
   </div>
 
   <div class="course-menu">
-    <h3 class="header">Đề cương</h3>
+    <h3 class="header m-0 p-0">Đề cương</h3>
+    {{#if this.isLecturerCourse}}
+    {{#if this.course.complete}}
+    {{else}}
+    <a class="btn button m-3" href="/teacher/addchapter/{{this.course.courseid}}" role="button">Thêm chương mới</a>
+    {{/if}}
+    {{/if}}
     <div class="course-content-menu">
       <div id="light">
         <video id="player" playsinline data-poster="/public/img/category/yae.png"></video>
@@ -175,7 +191,7 @@
       {{#each this.coursecontent}}
       <a data-toggle="collapse" href="#chapterid_{{chapterid}}" role="button" aria-expanded="false"
         aria-controls="chapterid_{{chapterid}}">
-        <div class="card-header chapter">
+        <div class="card-header chapter my-3">
           <div class="chapter-name">
             {{chaptername}}
           </div>
@@ -206,10 +222,17 @@
           {{/if}}
         </div>
         {{/each}}
+        {{#if ../this.isLecturerCourse}}
+        {{#if ../this.course.complete}}
+        {{else}}
+        <a class="btn button m-3 ml-5" href="/teacher/addcontent/{{../this.course.courseid}}/{{chapterid}}"
+          role="button">Thêm bài giảng cho
+          chương này</a>
+        {{/if}}
+        {{/if}}
       </div>
       {{/each}}
     </div>
-    <a class="btn button mt-3" href="/teacher/addchapter/{{this.course.courseid}}" role="button">Thêm chương mới</a>
   </div>
 
   <div class="lecturer">
