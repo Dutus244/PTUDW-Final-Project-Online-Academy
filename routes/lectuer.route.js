@@ -269,7 +269,7 @@ router.get('/my-courses', async (req, res) => {
     const pages = getVisiblePage(totalPages, visiblePages, curPage)
 
     const list = await lecturerService.getTeacherCourses(res.locals.authUser.accountid, offset, limit)
-
+    // console.log(list);
     res.render('vwTeacher/my-courses', {
         name: res.locals.authUser.name,
         courses: list,

@@ -80,6 +80,19 @@ a.profile-item {
     font-size: 2rem;
 }
 
+.img-container .complete-icon {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 0 0.5rem;
+    background: transparent;
+    font-size: 2rem;
+}
+
+.bi-clipboard2-x {
+    color: red;
+}
+
 .bi-heart-fill {
     color: rgb(254, 106, 129);
 }
