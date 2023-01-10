@@ -220,3 +220,7 @@ h1{
     font-size: 1.5rem;
     color: orange;
 }
+
+.homecard .card {
+    border-color: rgb(254, 106, 129);
+}

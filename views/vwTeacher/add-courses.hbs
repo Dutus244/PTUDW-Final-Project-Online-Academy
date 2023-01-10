@@ -69,6 +69,19 @@
             return
         }
 
+        
+        const smalldetail = tinyMCE.get('txtCoursesmalldetail').getContent();
+        if(smalldetail.length === 0){
+            alert('Xin hãy nhập phần giới thiệu')
+            return
+        }
+
+        const detail = tinyMCE.get('txtCoursedetail').getContent();
+        if(smalldetail.length === 0){
+            alert('Xin hãy nhập phần chi tiết khóa học')
+            return
+        }
+
         const price = $('#txtCourseprice').val();
         if (price.length === 0) {
             alert('Xin hãy nhập giá tiền')
@@ -82,6 +95,7 @@
             return
         }
         $('#frmRegister').off('submit').submit();
+
     });
 </script>
 

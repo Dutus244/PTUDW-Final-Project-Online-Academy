@@ -41,6 +41,18 @@
         allowedFileExtension: ['mp3', 'mp4'],
 
     });
+
+    $('#frmRegister').on('submit', function (e){
+         e.preventDefault();
+
+        const video = $('#fuMain').val();
+        if (video.length === 0) {
+            alert('Xin hãy upload video')
+            return
+        }
+
+         $('#frmRegister').off('submit').submit();
+    })
 </script>
 
 {{/section}}

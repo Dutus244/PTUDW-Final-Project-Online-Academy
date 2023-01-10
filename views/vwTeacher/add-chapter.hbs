@@ -41,6 +41,14 @@
         allowedFileExtension: ['mp3', 'mp4'],
 
     });
+
+     $('#frmRegister').on('submit', function (e){
+        const chapname = $('#txtChapname').val();
+        if (chapname.length === 0) {
+            alert('Xin hãy nhập tên chương')
+            return
+        }
+     })
 </script>
 
 {{/section}}
