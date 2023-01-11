@@ -135,7 +135,7 @@ router.get('/addcontent/:courseid/:chapid', authWithRequiredPermission(1), async
 
     const courselist = await courseService.findById(courseid)
     const chaplist = await lecturerService.getCoursesChapter(chapid)
-    console.log(chaplist[0])
+
     res.render('vwTeacher/add-content', {
         courseid: courseid,
         chapid: chapid,
@@ -173,7 +173,7 @@ router.post('/addcontent/:courseid/:chapid', authWithRequiredPermission(1), asyn
         await courseService.addContent(courseid, chapid, id, contentname, contentinf)
         const courselist = await courseService.findById(courseid)
         const chaplist = await lecturerService.getCoursesChapter(chapid)
-        console.log(chaplist[0])
+
         res.render('vwTeacher/add-content', {
             courseid: courseid,
             chapid: chapid,
@@ -271,7 +271,7 @@ router.get('/my-courses', async (req, res) => {
     const pages = getVisiblePage(totalPages, visiblePages, curPage)
 
     const list = await lecturerService.getTeacherCourses(res.locals.authUser.accountid, offset, limit)
-    // console.log(list);
+
     res.render('vwTeacher/my-courses', {
         name: res.locals.authUser.name,
         courses: list,

@@ -376,7 +376,6 @@ export default {
             preview: curPreview,
         })
 
-        // console.log(coursecontent);
         return coursecontent
     },
 
@@ -481,7 +480,6 @@ export default {
             .where('studentid', studentid)
             .andWhere('chaptercontent.courseid', courseid)
 
-        // console.log(list);
         return list
     },
 

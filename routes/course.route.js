@@ -105,7 +105,6 @@ router.get('/detail/:id', async function (req, res) {
 
     const views = await courseService.getViews(courseid) + 1
     await courseService.updateViews(courseid, views)
-    // console.log(isLecturerCourse);
 
     if (course === null)
         return res.redirect('/');
