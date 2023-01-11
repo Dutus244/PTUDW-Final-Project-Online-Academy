@@ -79,7 +79,7 @@ export default function (app) {
             const curPage = +req.query.page || 1
             const offset = (curPage - 1) * limit
 
-            const total = await courseService.countByCatName(search)
+            const total = await courseService.countByCatNameSearch(search)
             const totalPages = Math.ceil(total / limit)
 
             const visiblePages = 5
@@ -108,7 +108,7 @@ export default function (app) {
             const curPage = +req.query.page || 1
             const offset = (curPage - 1) * limit
 
-            const total = await courseService.countByCatLevel(search)
+            const total = await courseService.countByCatLevelSearch(search)
             const totalPages = Math.ceil(total / limit)
 
             const visiblePages = 5
@@ -137,7 +137,7 @@ export default function (app) {
             const curPage = +req.query.page || 1
             const offset = (curPage - 1) * limit
 
-            const total = await courseService.countByCourseName(search)
+            const total = await courseService.countByCourseNameSearch(search)
             const totalPages = Math.ceil(total / limit)
 
             const visiblePages = 5
@@ -166,7 +166,36 @@ export default function (app) {
             const curPage = +req.query.page || 1
             const offset = (curPage - 1) * limit
 
-            const total = await courseService.countByLecName(search)
+            const total = await courseService.countByLecNameSearch(search)
+            const totalPages = Math.ceil(total / limit)
+
+            const visiblePages = 5
+            const pages = getVisiblePage(totalPages, visiblePages, curPage)
+            const bestsellerquota = await courseService.getBestSellerMinQuota()
+
+            const list = await courseService.findPageByLecNameSort(search, offset, limit,sortBy,sortTheo)
+            res.render('vwCourse/searchByCat', {
+                courses: list,
+                empty: list.length === 0,
+                sortBy: sortBy,
+                sortTheo: sortTheo,
+                searchBy: searchBy,
+                search: search,
+                searchEmpty: search.length === 0,
+                pages: pages,
+                totalPages: totalPages,
+                prevPage: curPage - 1,
+                nextPage: curPage + 1,
+                bestsellerquota: bestsellerquota,
+            })
+        }
+        else if (searchBy === "Search All") {
+            // Item per page
+            const limit = 6
+            const curPage = +req.query.page || 1
+            const offset = (curPage - 1) * limit
+
+            const total = await courseService.countBySearchAll(search)
             const totalPages = Math.ceil(total / limit)
 
             const visiblePages = 5

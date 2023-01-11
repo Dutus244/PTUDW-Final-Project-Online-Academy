@@ -115,6 +115,16 @@ export default {
         return list[0].amount
     },
 
+    async countByCatNameSearch(name) {
+        const sql = `SELECT count(*) as amount FROM courses join categories on courses.catid=categories.catid WHERE catname LIKE '%${name}%' `;
+        try {
+            const list = await db.raw(sql);
+            return list[0][0].amount;
+        } catch (error) {
+            console.log(error);
+        }
+    },
+
     async countByCatLevel(catlevel) {
         const list = await db
             .count({ amount: 'courseid' })
@@ -125,6 +135,16 @@ export default {
         return list[0].amount
     },
 
+    async countByCatLevelSearch(name) {
+        const sql = `SELECT count(*) as amount FROM courses join categories on courses.catid=categories.catid WHERE catlevel LIKE '%${name}%' `;
+        try {
+            const list = await db.raw(sql);
+            return list[0][0].amount;
+        } catch (error) {
+            console.log(error);
+        }
+    },
+
     async countByLecName(lecname) {
         const list = await db
             .count({ amount: 'courseid' })
@@ -133,6 +153,26 @@ export default {
             .where('lecname', '=', lecname)
 
         return list[0].amount
+    },
+
+    async countByLecNameSearch(name) {
+        const sql = `SELECT count(*) as amount FROM courses join lecturers on courses.lecid=lecturers.lecid WHERE lecname LIKE '%${name}%' `;
+        try {
+            const list = await db.raw(sql);
+            return list[0][0].amount;
+        } catch (error) {
+            console.log(error);
+        }
+    },
+
+    async countBySearchAll(name) {
+        const sql = `SELECT count(*) as amount FROM courses join categories on courses.catid=categories.catid join lecturers on courses.lecid=lecturers.lecid WHERE catname LIKE '%${name}%' OR catlevel LIKE '%${name}%' OR lecname LIKE '%${name}%' OR MATCH (coursename) AGAINST ('${name}' IN NATURAL LANGUAGE MODE)`;
+        try {
+            const list = await db.raw(sql);
+            return list[0][0].amount;
+        } catch (error) {
+            console.log(error);
+        }
     },
 
     async countByWatchlist(studentid) {
@@ -154,7 +194,7 @@ export default {
         return list[0].amount
     },
 
-    async countByCourseName(coursename) {
+    async countByCourseNameSearch(coursename) {
         const sql = `SELECT count(*) as amount FROM courses WHERE MATCH (coursename) AGAINST ('${coursename}' IN NATURAL LANGUAGE MODE)`;
         try {
             const list = await db.raw(sql);
@@ -185,7 +225,7 @@ export default {
     },
 
     async findPageByName(name, offset, limit) {
-        const sql = `SELECT students,courseavatar,catname,coursename,lecname,rating,reviews,tuition,discount,courseid FROM courses join categories on courses.catid=categories.catid join lecturers on courses.lecid=lecturers.lecid  WHERE catname LIKE '%${name}' and disable = 0 limit ${limit} offset ${offset}`;
+        const sql = `SELECT students,courseavatar,catname,coursename,lecname,rating,reviews,tuition,discount,courseid FROM courses join categories on courses.catid=categories.catid join lecturers on courses.lecid=lecturers.lecid  WHERE catname LIKE '%${name}%' and disable = 0 limit ${limit} offset ${offset}`;
         try {
             const list = await db.raw(sql);
             return list[0];
@@ -195,7 +235,7 @@ export default {
     },
 
     async findPageByNameSort(name, offset, limit, sortBy, sortTheo) {
-        const sql = `SELECT students,courseavatar,catname,coursename,lecname,rating,reviews,tuition,discount,courseid FROM courses join categories on courses.catid=categories.catid join lecturers on courses.lecid=lecturers.lecid  WHERE catname LIKE '%${name}' and disable = 0 order by ${sortBy} ${sortTheo} limit ${limit} offset ${offset}`;
+        const sql = `SELECT students,courseavatar,catname,coursename,lecname,rating,reviews,tuition,discount,courseid FROM courses join categories on courses.catid=categories.catid join lecturers on courses.lecid=lecturers.lecid  WHERE catname LIKE '%${name}%' and disable = 0 order by ${sortBy} ${sortTheo} limit ${limit} offset ${offset}`;
         try {
             const list = await db.raw(sql);
             return list[0];
@@ -205,7 +245,7 @@ export default {
     },
 
     async findPageByCatLevel(catlevel, offset, limit) {
-        const sql = `SELECT students,courseavatar,catname,coursename,lecname,rating,reviews,tuition,discount,courseid FROM courses join categories on courses.catid=categories.catid join lecturers on courses.lecid=lecturers.lecid  WHERE catlevel LIKE '%${catlevel}' and disable = 0 limit ${limit} offset ${offset}`;
+        const sql = `SELECT students,courseavatar,catname,coursename,lecname,rating,reviews,tuition,discount,courseid FROM courses join categories on courses.catid=categories.catid join lecturers on courses.lecid=lecturers.lecid  WHERE catlevel LIKE '%${catlevel}%' and disable = 0 limit ${limit} offset ${offset}`;
         try {
             const list = await db.raw(sql);
             return list[0];
@@ -215,7 +255,7 @@ export default {
     },
 
     async findPageByCatLevelSort(catlevel, offset, limit, sortBy, sortTheo) {
-        const sql = `SELECT students,courseavatar,catname,coursename,lecname,rating,reviews,tuition,discount,courseid FROM courses join categories on courses.catid=categories.catid join lecturers on courses.lecid=lecturers.lecid  WHERE catlevel LIKE '%${catlevel}' and disable = 0 order by ${sortBy} ${sortTheo} limit ${limit} offset ${offset}`;
+        const sql = `SELECT students,courseavatar,catname,coursename,lecname,rating,reviews,tuition,discount,courseid FROM courses join categories on courses.catid=categories.catid join lecturers on courses.lecid=lecturers.lecid  WHERE catlevel LIKE '%${catlevel}%' and disable = 0 order by ${sortBy} ${sortTheo} limit ${limit} offset ${offset}`;
         try {
             const list = await db.raw(sql);
             return list[0];
@@ -225,7 +265,7 @@ export default {
     },
 
     async findPageByLecName(lecname, offset, limit) {
-        const sql = `SELECT students,courseavatar,catname,coursename,lecname,rating,reviews,tuition,discount,courseid FROM courses join categories on courses.catid=categories.catid join lecturers on courses.lecid=lecturers.lecid  WHERE lecname LIKE '%${lecname}' and disable = 0 limit ${limit} offset ${offset}`;
+        const sql = `SELECT students,courseavatar,catname,coursename,lecname,rating,reviews,tuition,discount,courseid FROM courses join categories on courses.catid=categories.catid join lecturers on courses.lecid=lecturers.lecid  WHERE lecname LIKE '%${lecname}%' and disable = 0 limit ${limit} offset ${offset}`;
         try {
             const list = await db.raw(sql);
             return list[0];
@@ -235,7 +275,7 @@ export default {
     },
 
     async findPageByLecNameSort(lecname, offset, limit, sortBy, sortTheo) {
-        const sql = `SELECT students,courseavatar,catname,coursename,lecname,rating,reviews,tuition,discount,courseid FROM courses join categories on courses.catid=categories.catid join lecturers on courses.lecid=lecturers.lecid  WHERE lecname LIKE '%${lecname}' and disable = 0 order by ${sortBy} ${sortTheo} limit ${limit} offset ${offset}`;
+        const sql = `SELECT students,courseavatar,catname,coursename,lecname,rating,reviews,tuition,discount,courseid FROM courses join categories on courses.catid=categories.catid join lecturers on courses.lecid=lecturers.lecid  WHERE lecname LIKE '%${lecname}%' and disable = 0 order by ${sortBy} ${sortTheo} limit ${limit} offset ${offset}`;
         try {
             const list = await db.raw(sql);
             return list[0];
@@ -246,6 +286,16 @@ export default {
 
     async findPageByCourseNameSort(coursename, offset, limit, sortBy, sortTheo) {
         const sql = `SELECT students,courseavatar,catname,coursename,lecname,rating,reviews,tuition,discount,courseid FROM courses join categories on courses.catid=categories.catid join lecturers on courses.lecid=lecturers.lecid  WHERE MATCH (coursename) AGAINST ('${coursename}' IN NATURAL LANGUAGE MODE) and disable = 0 order by ${sortBy} ${sortTheo} limit ${limit} offset ${offset}`;
+        try {
+            const list = await db.raw(sql);
+            return list[0];
+        } catch (error) {
+            console.log(error);
+        }
+    },
+
+    async findPageBySearchAll(name, offset, limit) {
+        const sql = `SELECT students,courseavatar,catname,coursename,lecname,rating,reviews,tuition,discount,courseid FROM courses join categories on courses.catid=categories.catid join lecturers on courses.lecid=lecturers.lecid  WHERE (catname LIKE '%${name}%' OR catlevel LIKE '%${name}%' OR lecname LIKE '%${name}%' OR MATCH (coursename) AGAINST ('${name}' IN NATURAL LANGUAGE MODE)) and disable = 0 limit ${limit} offset ${offset}`;
         try {
             const list = await db.raw(sql);
             return list[0];
