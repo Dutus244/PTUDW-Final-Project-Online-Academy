@@ -65,516 +65,536 @@
 </div>
 
 <h1>Khóa học mới đăng gần đây</h1>
-  <div class="homecard">
-    <div class="card-body">
-      <div class="row pb-2">
-        <div class="col">
-          {{#if this.created.[0]}}
-          <a href="/course/detail/{{this.created.[0].CourseID}}">
-            <div class="card h-100">
-              <img class="card-img-top" height="200" src="{{this.created.[0].CourseAvatar}}" alt="courseAvatar">
-              <div class="card-body">
-                <h4 class="card-title mb-0" id="coursename">{{this.created.[0].CourseName}}</h4>
-                <p class="card-text text-secondary mb-0">{{this.created.[0].LecName}}</p>
-                <div class="rating">
-                  <p class="rating-item">{{this.created.[0].Rating}}</p>
-                  <i class="bi bi-star-fill"></i>
-                  <p class="text-secondary rating-item">({{this.created.[0].Reviews}})</p>
-                </div>
-                {{#if this.created.[0].Discount}}
-                <h5 class="card-text mb-0 discount-text">₫{{format_number this.created.[0].Discount}}</h5>
-                <del class="text-secondary">₫{{format_number this.created.[0].Tuition}}</del>
-                {{else}}
-                <h5 class="card-text mb-0">₫{{format_number this.created.[0].Tuition}}</h5>
-                {{/if}}
+<div class="homecard">
+  <div class="card-body">
+    <div class="row pb-2">
+      <div class="col">
+        {{#if this.created.[0]}}
+        <a href="/course/detail/{{this.created.[0].CourseID}}">
+          <div class="card h-100">
+            <img class="card-img-top" height="200" src="{{this.created.[0].CourseAvatar}}" alt="courseAvatar">
+            <div class="card-body">
+              <h4 class="card-title mb-0" id="coursename">{{this.created.[0].CourseName}}</h4>
+              <p class="card-title mb-0 font-italic">{{this.created.[0].CatName}}</p>
+              <p class="card-text text-secondary mb-0">{{this.created.[0].LecName}}</p>
+              <div class="rating">
+                <p class="rating-item">{{this.created.[0].Rating}}</p>
+                <i class="bi bi-star-fill"></i>
+                <p class="text-secondary rating-item">({{this.created.[0].Reviews}})</p>
               </div>
+              {{#if this.created.[0].Discount}}
+              <h5 class="card-text mb-0 discount-text">₫{{format_number this.created.[0].Discount}}</h5>
+              <del class="text-secondary">₫{{format_number this.created.[0].Tuition}}</del>
+              {{else}}
+              <h5 class="card-text mb-0">₫{{format_number this.created.[0].Tuition}}</h5>
+              {{/if}}
             </div>
-          </a>
-          {{/if}}
-        </div>
-        <div class="col">
-          {{#if this.created.[1]}}
-          <a href="/course/detail/{{this.created.[1].CourseID}}">
-            <div class="card h-100">
-              <img class="card-img-top" height="200" src="{{this.created.[1].CourseAvatar}}" alt="courseAvatar">
-              <div class="card-body">
-                <h4 class="card-title mb-0" id="coursename">{{this.created.[1].CourseName}}</h4>
-                <p class="card-text text-secondary mb-0">{{this.created.[1].LecName}}</p>
-                <div class="rating">
-                  <p class="rating-item">{{this.created.[1].Rating}}</p>
-                  <i class="bi bi-star-fill"></i>
-                  <p class="text-secondary rating-item">({{this.created.[1].Reviews}})</p>
-                </div>
-                {{#if this.created.[1].Discount}}
-                <h5 class="card-text mb-0 discount-text">₫{{format_number this.created.[1].Discount}}</h5>
-                <del class="text-secondary">₫{{format_number this.created.[1].Tuition}}</del>
-                {{else}}
-                <h5 class="card-text mb-0">₫{{format_number this.created.[1].Tuition}}</h5>
-                {{/if}}
+          </div>
+        </a>
+        {{/if}}
+      </div>
+      <div class="col">
+        {{#if this.created.[1]}}
+        <a href="/course/detail/{{this.created.[1].CourseID}}">
+          <div class="card h-100">
+            <img class="card-img-top" height="200" src="{{this.created.[1].CourseAvatar}}" alt="courseAvatar">
+            <div class="card-body">
+              <h4 class="card-title mb-0" id="coursename">{{this.created.[1].CourseName}}</h4>
+              <p class="card-title mb-0 font-italic">{{this.created.[1].CatName}}</p>
+              <p class="card-text text-secondary mb-0">{{this.created.[1].LecName}}</p>
+              <div class="rating">
+                <p class="rating-item">{{this.created.[1].Rating}}</p>
+                <i class="bi bi-star-fill"></i>
+                <p class="text-secondary rating-item">({{this.created.[1].Reviews}})</p>
               </div>
+              {{#if this.created.[1].Discount}}
+              <h5 class="card-text mb-0 discount-text">₫{{format_number this.created.[1].Discount}}</h5>
+              <del class="text-secondary">₫{{format_number this.created.[1].Tuition}}</del>
+              {{else}}
+              <h5 class="card-text mb-0">₫{{format_number this.created.[1].Tuition}}</h5>
+              {{/if}}
             </div>
-          </a>
-          {{/if}}
-        </div>
-        <div class="col">
-          {{#if this.created.[2]}}
-          <a href="/course/detail/{{this.created.[2].CourseID}}">
-            <div class="card h-100">
-              <img class="card-img-top" height="200" src="{{this.created.[2].CourseAvatar}}" alt="courseAvatar">
-              <div class="card-body">
-                <h4 class="card-title mb-0" id="coursename">{{this.created.[2].CourseName}}</h4>
-                <p class="card-text text-secondary mb-0">{{this.created.[2].LecName}}</p>
-                <div class="rating">
-                  <p class="rating-item">{{this.created.[2].Rating}}</p>
-                  <i class="bi bi-star-fill"></i>
-                  <p class="text-secondary rating-item">({{this.created.[2].Reviews}})</p>
-                </div>
-                {{#if this.created.[2].Discount}}
-                <h5 class="card-text mb-0 discount-text">₫{{format_number this.created.[2].Discount}}</h5>
-                <del class="text-secondary">₫{{format_number this.created.[2].Tuition}}</del>
-                {{else}}
-                <h5 class="card-text mb-0">₫{{format_number this.created.[2].Tuition}}</h5>
-                {{/if}}
+          </div>
+        </a>
+        {{/if}}
+      </div>
+      <div class="col">
+        {{#if this.created.[2]}}
+        <a href="/course/detail/{{this.created.[2].CourseID}}">
+          <div class="card h-100">
+            <img class="card-img-top" height="200" src="{{this.created.[2].CourseAvatar}}" alt="courseAvatar">
+            <div class="card-body">
+              <h4 class="card-title mb-0" id="coursename">{{this.created.[2].CourseName}}</h4>
+              <p class="card-title mb-0 font-italic">{{this.created.[2].CatName}}</p>
+              <p class="card-text text-secondary mb-0">{{this.created.[2].LecName}}</p>
+              <div class="rating">
+                <p class="rating-item">{{this.created.[2].Rating}}</p>
+                <i class="bi bi-star-fill"></i>
+                <p class="text-secondary rating-item">({{this.created.[2].Reviews}})</p>
               </div>
+              {{#if this.created.[2].Discount}}
+              <h5 class="card-text mb-0 discount-text">₫{{format_number this.created.[2].Discount}}</h5>
+              <del class="text-secondary">₫{{format_number this.created.[2].Tuition}}</del>
+              {{else}}
+              <h5 class="card-text mb-0">₫{{format_number this.created.[2].Tuition}}</h5>
+              {{/if}}
             </div>
-          </a>
-          {{/if}}
-        </div>
-        <div class="col">
-          {{#if this.created.[3]}}
-          <a href="/course/detail/{{this.created.[3].CourseID}}">
-            <div class="card h-100">
-              <img class="card-img-top" height="200" src="{{this.created.[3].CourseAvatar}}" alt="courseAvatar">
-              <div class="card-body">
-                <h4 class="card-title mb-0" id="coursename">{{this.created.[3].CourseName}}</h4>
-                <p class="card-text text-secondary mb-0">{{this.created.[3].LecName}}</p>
-                <div class="rating">
-                  <p class="rating-item">{{this.created.[3].Rating}}</p>
-                  <i class="bi bi-star-fill"></i>
-                  <p class="text-secondary rating-item">({{this.created.[3].Reviews}})</p>
-                </div>
-                {{#if this.created.[3].Discount}}
-                <h5 class="card-text mb-0 discount-text">₫{{format_number this.created.[3].Discount}}</h5>
-                <del class="text-secondary">₫{{format_number this.created.[3].Tuition}}</del>
-                {{else}}
-                <h5 class="card-text mb-0">₫{{format_number this.created.[3].Tuition}}</h5>
-                {{/if}}
+          </div>
+        </a>
+        {{/if}}
+      </div>
+      <div class="col">
+        {{#if this.created.[3]}}
+        <a href="/course/detail/{{this.created.[3].CourseID}}">
+          <div class="card h-100">
+            <img class="card-img-top" height="200" src="{{this.created.[3].CourseAvatar}}" alt="courseAvatar">
+            <div class="card-body">
+              <h4 class="card-title mb-0" id="coursename">{{this.created.[3].CourseName}}</h4>
+              <p class="card-title mb-0 font-italic">{{this.created.[3].CatName}}</p>
+              <p class="card-text text-secondary mb-0">{{this.created.[3].LecName}}</p>
+              <div class="rating">
+                <p class="rating-item">{{this.created.[3].Rating}}</p>
+                <i class="bi bi-star-fill"></i>
+                <p class="text-secondary rating-item">({{this.created.[3].Reviews}})</p>
               </div>
+              {{#if this.created.[3].Discount}}
+              <h5 class="card-text mb-0 discount-text">₫{{format_number this.created.[3].Discount}}</h5>
+              <del class="text-secondary">₫{{format_number this.created.[3].Tuition}}</del>
+              {{else}}
+              <h5 class="card-text mb-0">₫{{format_number this.created.[3].Tuition}}</h5>
+              {{/if}}
             </div>
-          </a>
-          {{/if}}
-        </div>
-        <div class="col">
-          {{#if this.created.[4]}}
-          <a href="/course/detail/{{this.created.[4].CourseID}}">
-            <div class="card h-100">
-              <img class="card-img-top" height="200" src="{{this.created.[4].CourseAvatar}}" alt="courseAvatar">
-              <div class="card-body">
-                <h4 class="card-title mb-0" id="coursename">{{this.created.[4].CourseName}}</h4>
-                <p class="card-text text-secondary mb-0">{{this.created.[4].LecName}}</p>
-                <div class="rating">
-                  <p class="rating-item">{{this.created.[4].Rating}}</p>
-                  <i class="bi bi-star-fill"></i>
-                  <p class="text-secondary rating-item">({{this.created.[4].Reviews}})</p>
-                </div>
-                {{#if this.created.[4].Discount}}
-                <h5 class="card-text mb-0 discount-text">₫{{format_number this.created.[4].Discount}}</h5>
-                <del class="text-secondary">₫{{format_number this.created.[4].Tuition}}</del>
-                {{else}}
-                <h5 class="card-text mb-0">₫{{format_number this.created.[4].Tuition}}</h5>
-                {{/if}}
+          </div>
+        </a>
+        {{/if}}
+      </div>
+      <div class="col">
+        {{#if this.created.[4]}}
+        <a href="/course/detail/{{this.created.[4].CourseID}}">
+          <div class="card h-100">
+            <img class="card-img-top" height="200" src="{{this.created.[4].CourseAvatar}}" alt="courseAvatar">
+            <div class="card-body">
+              <h4 class="card-title mb-0" id="coursename">{{this.created.[4].CourseName}}</h4>
+              <p class="card-title mb-0 font-italic">{{this.created.[4].CatName}}</p>
+              <p class="card-text text-secondary mb-0">{{this.created.[4].LecName}}</p>
+              <div class="rating">
+                <p class="rating-item">{{this.created.[4].Rating}}</p>
+                <i class="bi bi-star-fill"></i>
+                <p class="text-secondary rating-item">({{this.created.[4].Reviews}})</p>
               </div>
+              {{#if this.created.[4].Discount}}
+              <h5 class="card-text mb-0 discount-text">₫{{format_number this.created.[4].Discount}}</h5>
+              <del class="text-secondary">₫{{format_number this.created.[4].Tuition}}</del>
+              {{else}}
+              <h5 class="card-text mb-0">₫{{format_number this.created.[4].Tuition}}</h5>
+              {{/if}}
             </div>
-          </a>
-          {{/if}}
-        </div>
+          </div>
+        </a>
+        {{/if}}
       </div>
     </div>
   </div>
+</div>
 
-    <div class="homecard">
-    <div class="card-body">
-      <div class="row pb-2">
-        <div class="col">
-          {{#if this.created.[5]}}
-          <a href="/course/detail/{{this.created.[5].CourseID}}">
-            <div class="card h-100">
-              <img class="card-img-top" height="200" src="{{this.created.[5].CourseAvatar}}" alt="courseAvatar">
-              <div class="card-body">
-                <h4 class="card-title mb-0" id="coursename">{{this.created.[5].CourseName}}</h4>
-                <p class="card-text text-secondary mb-0">{{this.created.[5].LecName}}</p>
-                <div class="rating">
-                  <p class="rating-item">{{this.created.[5].Rating}}</p>
-                  <i class="bi bi-star-fill"></i>
-                  <p class="text-secondary rating-item">({{this.created.[5].Reviews}})</p>
-                </div>
-                {{#if this.created.[5].Discount}}
-                <h5 class="card-text mb-0 discount-text">₫{{format_number this.created.[5].Discount}}</h5>
-                <del class="text-secondary">₫{{format_number this.created.[5].Tuition}}</del>
-                {{else}}
-                <h5 class="card-text mb-0">₫{{format_number this.created.[5].Tuition}}</h5>
-                {{/if}}
+<div class="homecard">
+  <div class="card-body">
+    <div class="row pb-2">
+      <div class="col">
+        {{#if this.created.[5]}}
+        <a href="/course/detail/{{this.created.[5].CourseID}}">
+          <div class="card h-100">
+            <img class="card-img-top" height="200" src="{{this.created.[5].CourseAvatar}}" alt="courseAvatar">
+            <div class="card-body">
+              <h4 class="card-title mb-0" id="coursename">{{this.created.[5].CourseName}}</h4>
+              <p class="card-title mb-0 font-italic">{{this.created.[5].CatName}}</p>
+              <p class="card-text text-secondary mb-0">{{this.created.[5].LecName}}</p>
+              <div class="rating">
+                <p class="rating-item">{{this.created.[5].Rating}}</p>
+                <i class="bi bi-star-fill"></i>
+                <p class="text-secondary rating-item">({{this.created.[5].Reviews}})</p>
               </div>
+              {{#if this.created.[5].Discount}}
+              <h5 class="card-text mb-0 discount-text">₫{{format_number this.created.[5].Discount}}</h5>
+              <del class="text-secondary">₫{{format_number this.created.[5].Tuition}}</del>
+              {{else}}
+              <h5 class="card-text mb-0">₫{{format_number this.created.[5].Tuition}}</h5>
+              {{/if}}
             </div>
-          </a>
-          {{/if}}
-        </div>
-        <div class="col">
-          {{#if this.created.[6]}}
-          <a href="/course/detail/{{this.created.[6].CourseID}}">
-            <div class="card h-100">
-              <img class="card-img-top" height="200" src="{{this.created.[6].CourseAvatar}}" alt="courseAvatar">
-              <div class="card-body">
-                <h4 class="card-title mb-0" id="coursename">{{this.created.[6].CourseName}}</h4>
-                <p class="card-text text-secondary mb-0">{{this.created.[6].LecName}}</p>
-                <div class="rating">
-                  <p class="rating-item">{{this.created.[6].Rating}}</p>
-                  <i class="bi bi-star-fill"></i>
-                  <p class="text-secondary rating-item">({{this.created.[6].Reviews}})</p>
-                </div>
-                {{#if this.created.[6].Discount}}
-                <h5 class="card-text mb-0 discount-text">₫{{format_number this.created.[6].Discount}}</h5>
-                <del class="text-secondary">₫{{format_number this.created.[6].Tuition}}</del>
-                {{else}}
-                <h5 class="card-text mb-0">₫{{format_number this.created.[6].Tuition}}</h5>
-                {{/if}}
+          </div>
+        </a>
+        {{/if}}
+      </div>
+      <div class="col">
+        {{#if this.created.[6]}}
+        <a href="/course/detail/{{this.created.[6].CourseID}}">
+          <div class="card h-100">
+            <img class="card-img-top" height="200" src="{{this.created.[6].CourseAvatar}}" alt="courseAvatar">
+            <div class="card-body">
+              <h4 class="card-title mb-0" id="coursename">{{this.created.[6].CourseName}}</h4>
+              <p class="card-title mb-0 font-italic">{{this.created.[6].CatName}}</p>
+              <p class="card-text text-secondary mb-0">{{this.created.[6].LecName}}</p>
+              <div class="rating">
+                <p class="rating-item">{{this.created.[6].Rating}}</p>
+                <i class="bi bi-star-fill"></i>
+                <p class="text-secondary rating-item">({{this.created.[6].Reviews}})</p>
               </div>
+              {{#if this.created.[6].Discount}}
+              <h5 class="card-text mb-0 discount-text">₫{{format_number this.created.[6].Discount}}</h5>
+              <del class="text-secondary">₫{{format_number this.created.[6].Tuition}}</del>
+              {{else}}
+              <h5 class="card-text mb-0">₫{{format_number this.created.[6].Tuition}}</h5>
+              {{/if}}
             </div>
-          </a>
-          {{/if}}
-        </div>
-        <div class="col">
-          {{#if this.created.[7]}}
-          <a href="/course/detail/{{this.created.[7].CourseID}}">
-            <div class="card h-100">
-              <img class="card-img-top" height="200" src="{{this.created.[7].CourseAvatar}}" alt="courseAvatar">
-              <div class="card-body">
-                <h4 class="card-title mb-0" id="coursename">{{this.created.[7].CourseName}}</h4>
-                <p class="card-text text-secondary mb-0">{{this.created.[7].LecName}}</p>
-                <div class="rating">
-                  <p class="rating-item">{{this.created.[7].Rating}}</p>
-                  <i class="bi bi-star-fill"></i>
-                  <p class="text-secondary rating-item">({{this.created.[7].Reviews}})</p>
-                </div>
-                {{#if this.created.[7].Discount}}
-                <h5 class="card-text mb-0 discount-text">₫{{format_number this.created.[7].Discount}}</h5>
-                <del class="text-secondary">₫{{format_number this.created.[7].Tuition}}</del>
-                {{else}}
-                <h5 class="card-text mb-0">₫{{format_number this.created.[7].Tuition}}</h5>
-                {{/if}}
+          </div>
+        </a>
+        {{/if}}
+      </div>
+      <div class="col">
+        {{#if this.created.[7]}}
+        <a href="/course/detail/{{this.created.[7].CourseID}}">
+          <div class="card h-100">
+            <img class="card-img-top" height="200" src="{{this.created.[7].CourseAvatar}}" alt="courseAvatar">
+            <div class="card-body">
+              <h4 class="card-title mb-0" id="coursename">{{this.created.[7].CourseName}}</h4>
+              <p class="card-title mb-0 font-italic">{{this.created.[7].CatName}}</p>
+              <p class="card-text text-secondary mb-0">{{this.created.[7].LecName}}</p>
+              <div class="rating">
+                <p class="rating-item">{{this.created.[7].Rating}}</p>
+                <i class="bi bi-star-fill"></i>
+                <p class="text-secondary rating-item">({{this.created.[7].Reviews}})</p>
               </div>
+              {{#if this.created.[7].Discount}}
+              <h5 class="card-text mb-0 discount-text">₫{{format_number this.created.[7].Discount}}</h5>
+              <del class="text-secondary">₫{{format_number this.created.[7].Tuition}}</del>
+              {{else}}
+              <h5 class="card-text mb-0">₫{{format_number this.created.[7].Tuition}}</h5>
+              {{/if}}
             </div>
-          </a>
-          {{/if}}
-        </div>
-        <div class="col">
-          {{#if this.created.[8]}}
-          <a href="/course/detail/{{this.created.[8].CourseID}}">
-            <div class="card h-100">
-              <img class="card-img-top" height="200" src="{{this.created.[8].CourseAvatar}}" alt="courseAvatar">
-              <div class="card-body">
-                <h4 class="card-title mb-0" id="coursename">{{this.created.[8].CourseName}}</h4>
-                <p class="card-text text-secondary mb-0">{{this.created.[8].LecName}}</p>
-                <div class="rating">
-                  <p class="rating-item">{{this.created.[8].Rating}}</p>
-                  <i class="bi bi-star-fill"></i>
-                  <p class="text-secondary rating-item">({{this.created.[8].Reviews}})</p>
-                </div>
-                {{#if this.created.[8].Discount}}
-                <h5 class="card-text mb-0 discount-text">₫{{format_number this.created.[8].Discount}}</h5>
-                <del class="text-secondary">₫{{format_number this.created.[8].Tuition}}</del>
-                {{else}}
-                <h5 class="card-text mb-0">₫{{format_number this.created.[8].Tuition}}</h5>
-                {{/if}}
+          </div>
+        </a>
+        {{/if}}
+      </div>
+      <div class="col">
+        {{#if this.created.[8]}}
+        <a href="/course/detail/{{this.created.[8].CourseID}}">
+          <div class="card h-100">
+            <img class="card-img-top" height="200" src="{{this.created.[8].CourseAvatar}}" alt="courseAvatar">
+            <div class="card-body">
+              <h4 class="card-title mb-0" id="coursename">{{this.created.[8].CourseName}}</h4>
+              <p class="card-title mb-0 font-italic">{{this.created.[8].CatName}}</p>
+              <p class="card-text text-secondary mb-0">{{this.created.[8].LecName}}</p>
+              <div class="rating">
+                <p class="rating-item">{{this.created.[8].Rating}}</p>
+                <i class="bi bi-star-fill"></i>
+                <p class="text-secondary rating-item">({{this.created.[8].Reviews}})</p>
               </div>
+              {{#if this.created.[8].Discount}}
+              <h5 class="card-text mb-0 discount-text">₫{{format_number this.created.[8].Discount}}</h5>
+              <del class="text-secondary">₫{{format_number this.created.[8].Tuition}}</del>
+              {{else}}
+              <h5 class="card-text mb-0">₫{{format_number this.created.[8].Tuition}}</h5>
+              {{/if}}
             </div>
-          </a>
-          {{/if}}
-        </div>
-        <div class="col">
-          {{#if this.created.[9]}}
-          <a href="/course/detail/{{this.created.[9].CourseID}}">
-            <div class="card h-100">
-              <img class="card-img-top" height="200" src="{{this.created.[9].CourseAvatar}}" alt="courseAvatar">
-              <div class="card-body">
-                <h4 class="card-title mb-0" id="coursename">{{this.created.[9].CourseName}}</h4>
-                <p class="card-text text-secondary mb-0">{{this.created.[9].LecName}}</p>
-                <div class="rating">
-                  <p class="rating-item">{{this.created.[9].Rating}}</p>
-                  <i class="bi bi-star-fill"></i>
-                  <p class="text-secondary rating-item">({{this.created.[9].Reviews}})</p>
-                </div>
-                {{#if this.created.[9].Discount}}
-                <h5 class="card-text mb-0 discount-text">₫{{format_number this.created.[9].Discount}}</h5>
-                <del class="text-secondary">₫{{format_number this.created.[9].Tuition}}</del>
-                {{else}}
-                <h5 class="card-text mb-0">₫{{format_number this.created.[9].Tuition}}</h5>
-                {{/if}}
+          </div>
+        </a>
+        {{/if}}
+      </div>
+      <div class="col">
+        {{#if this.created.[9]}}
+        <a href="/course/detail/{{this.created.[9].CourseID}}">
+          <div class="card h-100">
+            <img class="card-img-top" height="200" src="{{this.created.[9].CourseAvatar}}" alt="courseAvatar">
+            <div class="card-body">
+              <h4 class="card-title mb-0" id="coursename">{{this.created.[9].CourseName}}</h4>
+              <p class="card-title mb-0 font-italic">{{this.created.[9].CatName}}</p>
+              <p class="card-text text-secondary mb-0">{{this.created.[9].LecName}}</p>
+              <div class="rating">
+                <p class="rating-item">{{this.created.[9].Rating}}</p>
+                <i class="bi bi-star-fill"></i>
+                <p class="text-secondary rating-item">({{this.created.[9].Reviews}})</p>
               </div>
+              {{#if this.created.[9].Discount}}
+              <h5 class="card-text mb-0 discount-text">₫{{format_number this.created.[9].Discount}}</h5>
+              <del class="text-secondary">₫{{format_number this.created.[9].Tuition}}</del>
+              {{else}}
+              <h5 class="card-text mb-0">₫{{format_number this.created.[9].Tuition}}</h5>
+              {{/if}}
             </div>
-          </a>
-          {{/if}}
-        </div>
+          </div>
+        </a>
+        {{/if}}
       </div>
     </div>
   </div>
+</div>
 
 <br>
 
 <h1>Khóa học xem nhiều nhất</h1>
-  <div class="homecard">
-    <div class="card-body">
-      <div class="row pb-2">
-        <div class="col">
-          {{#if this.viewed.[0]}}
-          <a href="/course/detail/{{this.viewed.[0].CourseID}}">
-            <div class="card h-100">
-              <img class="card-img-top" height="200" src="{{this.viewed.[0].CourseAvatar}}" alt="courseAvatar">
-              <div class="card-body">
-                <h4 class="card-title mb-0" id="coursename">{{this.viewed.[0].CourseName}}</h4>
-                <p class="card-text text-secondary mb-0">{{this.viewed.[0].LecName}}</p>
-                <div class="rating">
-                  <p class="rating-item">{{this.viewed.[0].Rating}}</p>
-                  <i class="bi bi-star-fill"></i>
-                  <p class="text-secondary rating-item">({{this.viewed.[0].Reviews}})</p>
-                </div>
-                {{#if this.viewed.[0].Discount}}
-                <h5 class="card-text mb-0 discount-text">₫{{format_number this.viewed.[0].Discount}}</h5>
-                <del class="text-secondary">₫{{format_number this.viewed.[0].Tuition}}</del>
-                {{else}}
-                <h5 class="card-text mb-0">₫{{format_number this.viewed.[0].Tuition}}</h5>
-                {{/if}}
+<div class="homecard">
+  <div class="card-body">
+    <div class="row pb-2">
+      <div class="col">
+        {{#if this.viewed.[0]}}
+        <a href="/course/detail/{{this.viewed.[0].CourseID}}">
+          <div class="card h-100">
+            <img class="card-img-top" height="200" src="{{this.viewed.[0].CourseAvatar}}" alt="courseAvatar">
+            <div class="card-body">
+              <h4 class="card-title mb-0" id="coursename">{{this.viewed.[0].CourseName}}</h4>
+              <p class="card-title mb-0 font-italic">{{this.viewed.[0].CatName}}</p>
+              <p class="card-text text-secondary mb-0">{{this.viewed.[0].LecName}}</p>
+              <div class="rating">
+                <p class="rating-item">{{this.viewed.[0].Rating}}</p>
+                <i class="bi bi-star-fill"></i>
+                <p class="text-secondary rating-item">({{this.viewed.[0].Reviews}})</p>
               </div>
+              {{#if this.viewed.[0].Discount}}
+              <h5 class="card-text mb-0 discount-text">₫{{format_number this.viewed.[0].Discount}}</h5>
+              <del class="text-secondary">₫{{format_number this.viewed.[0].Tuition}}</del>
+              {{else}}
+              <h5 class="card-text mb-0">₫{{format_number this.viewed.[0].Tuition}}</h5>
+              {{/if}}
             </div>
-          </a>
-          {{/if}}
-        </div>
-        <div class="col">
-          {{#if this.viewed.[1]}}
-          <a href="/course/detail/{{this.viewed.[1].CourseID}}">
-            <div class="card h-100">
-              <img class="card-img-top" height="200" src="{{this.viewed.[1].CourseAvatar}}" alt="courseAvatar">
-              <div class="card-body">
-                <h4 class="card-title mb-0" id="coursename">{{this.viewed.[1].CourseName}}</h4>
-                <p class="card-text text-secondary mb-0">{{this.viewed.[1].LecName}}</p>
-                <div class="rating">
-                  <p class="rating-item">{{this.viewed.[1].Rating}}</p>
-                  <i class="bi bi-star-fill"></i>
-                  <p class="text-secondary rating-item">({{this.viewed.[1].Reviews}})</p>
-                </div>
-                {{#if this.viewed.[1].Discount}}
-                <h5 class="card-text mb-0 discount-text">₫{{format_number this.viewed.[1].Discount}}</h5>
-                <del class="text-secondary">₫{{format_number this.viewed.[1].Tuition}}</del>
-                {{else}}
-                <h5 class="card-text mb-0">₫{{format_number this.viewed.[1].Tuition}}</h5>
-                {{/if}}
+          </div>
+        </a>
+        {{/if}}
+      </div>
+      <div class="col">
+        {{#if this.viewed.[1]}}
+        <a href="/course/detail/{{this.viewed.[1].CourseID}}">
+          <div class="card h-100">
+            <img class="card-img-top" height="200" src="{{this.viewed.[1].CourseAvatar}}" alt="courseAvatar">
+            <div class="card-body">
+              <h4 class="card-title mb-0" id="coursename">{{this.viewed.[1].CourseName}}</h4>
+              <p class="card-title mb-0 font-italic">{{this.viewed.[1].CatName}}</p>
+              <p class="card-text text-secondary mb-0">{{this.viewed.[1].LecName}}</p>
+              <div class="rating">
+                <p class="rating-item">{{this.viewed.[1].Rating}}</p>
+                <i class="bi bi-star-fill"></i>
+                <p class="text-secondary rating-item">({{this.viewed.[1].Reviews}})</p>
               </div>
+              {{#if this.viewed.[1].Discount}}
+              <h5 class="card-text mb-0 discount-text">₫{{format_number this.viewed.[1].Discount}}</h5>
+              <del class="text-secondary">₫{{format_number this.viewed.[1].Tuition}}</del>
+              {{else}}
+              <h5 class="card-text mb-0">₫{{format_number this.viewed.[1].Tuition}}</h5>
+              {{/if}}
             </div>
-          </a>
-          {{/if}}
-        </div>
-        <div class="col">
-          {{#if this.viewed.[2]}}
-          <a href="/course/detail/{{this.viewed.[2].CourseID}}">
-            <div class="card h-100">
-              <img class="card-img-top" height="200" src="{{this.viewed.[2].CourseAvatar}}" alt="courseAvatar">
-              <div class="card-body">
-                <h4 class="card-title mb-0" id="coursename">{{this.viewed.[2].CourseName}}</h4>
-                <p class="card-text text-secondary mb-0">{{this.viewed.[2].LecName}}</p>
-                <div class="rating">
-                  <p class="rating-item">{{this.viewed.[2].Rating}}</p>
-                  <i class="bi bi-star-fill"></i>
-                  <p class="text-secondary rating-item">({{this.viewed.[2].Reviews}})</p>
-                </div>
-                {{#if this.viewed.[2].Discount}}
-                <h5 class="card-text mb-0 discount-text">₫{{format_number this.viewed.[2].Discount}}</h5>
-                <del class="text-secondary">₫{{format_number this.viewed.[2].Tuition}}</del>
-                {{else}}
-                <h5 class="card-text mb-0">₫{{format_number this.viewed.[2].Tuition}}</h5>
-                {{/if}}
+          </div>
+        </a>
+        {{/if}}
+      </div>
+      <div class="col">
+        {{#if this.viewed.[2]}}
+        <a href="/course/detail/{{this.viewed.[2].CourseID}}">
+          <div class="card h-100">
+            <img class="card-img-top" height="200" src="{{this.viewed.[2].CourseAvatar}}" alt="courseAvatar">
+            <div class="card-body">
+              <h4 class="card-title mb-0" id="coursename">{{this.viewed.[2].CourseName}}</h4>
+              <p class="card-title mb-0 font-italic">{{this.viewed.[2].CatName}}</p>
+              <p class="card-text text-secondary mb-0">{{this.viewed.[2].LecName}}</p>
+              <div class="rating">
+                <p class="rating-item">{{this.viewed.[2].Rating}}</p>
+                <i class="bi bi-star-fill"></i>
+                <p class="text-secondary rating-item">({{this.viewed.[2].Reviews}})</p>
               </div>
+              {{#if this.viewed.[2].Discount}}
+              <h5 class="card-text mb-0 discount-text">₫{{format_number this.viewed.[2].Discount}}</h5>
+              <del class="text-secondary">₫{{format_number this.viewed.[2].Tuition}}</del>
+              {{else}}
+              <h5 class="card-text mb-0">₫{{format_number this.viewed.[2].Tuition}}</h5>
+              {{/if}}
             </div>
-          </a>
-          {{/if}}
-        </div>
-        <div class="col">
-          {{#if this.viewed.[3]}}
-          <a href="/course/detail/{{this.viewed.[3].CourseID}}">
-            <div class="card h-100">
-              <img class="card-img-top" height="200" src="{{this.viewed.[3].CourseAvatar}}" alt="courseAvatar">
-              <div class="card-body">
-                <h4 class="card-title mb-0" id="coursename">{{this.viewed.[3].CourseName}}</h4>
-                <p class="card-text text-secondary mb-0">{{this.viewed.[3].LecName}}</p>
-                <div class="rating">
-                  <p class="rating-item">{{this.viewed.[3].Rating}}</p>
-                  <i class="bi bi-star-fill"></i>
-                  <p class="text-secondary rating-item">({{this.viewed.[3].Reviews}})</p>
-                </div>
-                {{#if this.viewed.[3].Discount}}
-                <h5 class="card-text mb-0 discount-text">₫{{format_number this.viewed.[3].Discount}}</h5>
-                <del class="text-secondary">₫{{format_number this.viewed.[3].Tuition}}</del>
-                {{else}}
-                <h5 class="card-text mb-0">₫{{format_number this.viewed.[3].Tuition}}</h5>
-                {{/if}}
+          </div>
+        </a>
+        {{/if}}
+      </div>
+      <div class="col">
+        {{#if this.viewed.[3]}}
+        <a href="/course/detail/{{this.viewed.[3].CourseID}}">
+          <div class="card h-100">
+            <img class="card-img-top" height="200" src="{{this.viewed.[3].CourseAvatar}}" alt="courseAvatar">
+            <div class="card-body">
+              <h4 class="card-title mb-0" id="coursename">{{this.viewed.[3].CourseName}}</h4>
+              <p class="card-title mb-0 font-italic">{{this.viewed.[3].CatName}}</p>
+              <p class="card-text text-secondary mb-0">{{this.viewed.[3].LecName}}</p>
+              <div class="rating">
+                <p class="rating-item">{{this.viewed.[3].Rating}}</p>
+                <i class="bi bi-star-fill"></i>
+                <p class="text-secondary rating-item">({{this.viewed.[3].Reviews}})</p>
               </div>
+              {{#if this.viewed.[3].Discount}}
+              <h5 class="card-text mb-0 discount-text">₫{{format_number this.viewed.[3].Discount}}</h5>
+              <del class="text-secondary">₫{{format_number this.viewed.[3].Tuition}}</del>
+              {{else}}
+              <h5 class="card-text mb-0">₫{{format_number this.viewed.[3].Tuition}}</h5>
+              {{/if}}
             </div>
-          </a>
-          {{/if}}
-        </div>
-        <div class="col">
-          {{#if this.viewed.[4]}}
-          <a href="/course/detail/{{this.viewed.[4].CourseID}}">
-            <div class="card h-100">
-              <img class="card-img-top" height="200" src="{{this.viewed.[4].CourseAvatar}}" alt="courseAvatar">
-              <div class="card-body">
-                <h4 class="card-title mb-0" id="coursename">{{this.viewed.[4].CourseName}}</h4>
-                <p class="card-text text-secondary mb-0">{{this.viewed.[4].LecName}}</p>
-                <div class="rating">
-                  <p class="rating-item">{{this.viewed.[4].Rating}}</p>
-                  <i class="bi bi-star-fill"></i>
-                  <p class="text-secondary rating-item">({{this.viewed.[4].Reviews}})</p>
-                </div>
-                {{#if this.viewed.[4].Discount}}
-                <h5 class="card-text mb-0 discount-text">₫{{format_number this.viewed.[4].Discount}}</h5>
-                <del class="text-secondary">₫{{format_number this.viewed.[4].Tuition}}</del>
-                {{else}}
-                <h5 class="card-text mb-0">₫{{format_number this.viewed.[4].Tuition}}</h5>
-                {{/if}}
+          </div>
+        </a>
+        {{/if}}
+      </div>
+      <div class="col">
+        {{#if this.viewed.[4]}}
+        <a href="/course/detail/{{this.viewed.[4].CourseID}}">
+          <div class="card h-100">
+            <img class="card-img-top" height="200" src="{{this.viewed.[4].CourseAvatar}}" alt="courseAvatar">
+            <div class="card-body">
+              <h4 class="card-title mb-0" id="coursename">{{this.viewed.[4].CourseName}}</h4>
+              <p class="card-title mb-0 font-italic">{{this.viewed.[4].CatName}}</p>
+              <p class="card-text text-secondary mb-0">{{this.viewed.[4].LecName}}</p>
+              <div class="rating">
+                <p class="rating-item">{{this.viewed.[4].Rating}}</p>
+                <i class="bi bi-star-fill"></i>
+                <p class="text-secondary rating-item">({{this.viewed.[4].Reviews}})</p>
               </div>
+              {{#if this.viewed.[4].Discount}}
+              <h5 class="card-text mb-0 discount-text">₫{{format_number this.viewed.[4].Discount}}</h5>
+              <del class="text-secondary">₫{{format_number this.viewed.[4].Tuition}}</del>
+              {{else}}
+              <h5 class="card-text mb-0">₫{{format_number this.viewed.[4].Tuition}}</h5>
+              {{/if}}
             </div>
-          </a>
-          {{/if}}
-        </div>
+          </div>
+        </a>
+        {{/if}}
       </div>
     </div>
   </div>
+</div>
 
-    <div class="homecard">
-    <div class="card-body">
-      <div class="row pb-2">
-        <div class="col">
-          {{#if this.viewed.[5]}}
-          <a href="/course/detail/{{this.viewed.[5].CourseID}}">
-            <div class="card h-100">
-              <img class="card-img-top" height="200" src="{{this.viewed.[5].CourseAvatar}}" alt="courseAvatar">
-              <div class="card-body">
-                <h4 class="card-title mb-0" id="coursename">{{this.viewed.[5].CourseName}}</h4>
-                <p class="card-text text-secondary mb-0">{{this.viewed.[5].LecName}}</p>
-                <div class="rating">
-                  <p class="rating-item">{{this.viewed.[5].Rating}}</p>
-                  <i class="bi bi-star-fill"></i>
-                  <p class="text-secondary rating-item">({{this.viewed.[5].Reviews}})</p>
-                </div>
-                {{#if this.viewed.[5].Discount}}
-                <h5 class="card-text mb-0 discount-text">₫{{format_number this.viewed.[5].Discount}}</h5>
-                <del class="text-secondary">₫{{format_number this.viewed.[5].Tuition}}</del>
-                {{else}}
-                <h5 class="card-text mb-0">₫{{format_number this.viewed.[5].Tuition}}</h5>
-                {{/if}}
+<div class="homecard">
+  <div class="card-body">
+    <div class="row pb-2">
+      <div class="col">
+        {{#if this.viewed.[5]}}
+        <a href="/course/detail/{{this.viewed.[5].CourseID}}">
+          <div class="card h-100">
+            <img class="card-img-top" height="200" src="{{this.viewed.[5].CourseAvatar}}" alt="courseAvatar">
+            <div class="card-body">
+              <h4 class="card-title mb-0" id="coursename">{{this.viewed.[5].CourseName}}</h4>
+              <p class="card-title mb-0 font-italic">{{this.viewed.[5].CatName}}</p>
+              <p class="card-text text-secondary mb-0">{{this.viewed.[5].LecName}}</p>
+              <div class="rating">
+                <p class="rating-item">{{this.viewed.[5].Rating}}</p>
+                <i class="bi bi-star-fill"></i>
+                <p class="text-secondary rating-item">({{this.viewed.[5].Reviews}})</p>
               </div>
+              {{#if this.viewed.[5].Discount}}
+              <h5 class="card-text mb-0 discount-text">₫{{format_number this.viewed.[5].Discount}}</h5>
+              <del class="text-secondary">₫{{format_number this.viewed.[5].Tuition}}</del>
+              {{else}}
+              <h5 class="card-text mb-0">₫{{format_number this.viewed.[5].Tuition}}</h5>
+              {{/if}}
             </div>
-          </a>
-          {{/if}}
-        </div>
-        <div class="col">
-          {{#if this.viewed.[6]}}
-          <a href="/course/detail/{{this.viewed.[6].CourseID}}">
-            <div class="card h-100">
-              <img class="card-img-top" height="200" src="{{this.viewed.[6].CourseAvatar}}" alt="courseAvatar">
-              <div class="card-body">
-                <h4 class="card-title mb-0" id="coursename">{{this.viewed.[6].CourseName}}</h4>
-                <p class="card-text text-secondary mb-0">{{this.viewed.[6].LecName}}</p>
-                <div class="rating">
-                  <p class="rating-item">{{this.viewed.[6].Rating}}</p>
-                  <i class="bi bi-star-fill"></i>
-                  <p class="text-secondary rating-item">({{this.viewed.[6].Reviews}})</p>
-                </div>
-                {{#if this.viewed.[6].Discount}}
-                <h5 class="card-text mb-0 discount-text">₫{{format_number this.viewed.[6].Discount}}</h5>
-                <del class="text-secondary">₫{{format_number this.viewed.[6].Tuition}}</del>
-                {{else}}
-                <h5 class="card-text mb-0">₫{{format_number this.viewed.[6].Tuition}}</h5>
-                {{/if}}
+          </div>
+        </a>
+        {{/if}}
+      </div>
+      <div class="col">
+        {{#if this.viewed.[6]}}
+        <a href="/course/detail/{{this.viewed.[6].CourseID}}">
+          <div class="card h-100">
+            <img class="card-img-top" height="200" src="{{this.viewed.[6].CourseAvatar}}" alt="courseAvatar">
+            <div class="card-body">
+              <h4 class="card-title mb-0" id="coursename">{{this.viewed.[6].CourseName}}</h4>
+              <p class="card-title mb-0 font-italic">{{this.viewed.[6].CatName}}</p>
+              <p class="card-text text-secondary mb-0">{{this.viewed.[6].LecName}}</p>
+              <div class="rating">
+                <p class="rating-item">{{this.viewed.[6].Rating}}</p>
+                <i class="bi bi-star-fill"></i>
+                <p class="text-secondary rating-item">({{this.viewed.[6].Reviews}})</p>
               </div>
+              {{#if this.viewed.[6].Discount}}
+              <h5 class="card-text mb-0 discount-text">₫{{format_number this.viewed.[6].Discount}}</h5>
+              <del class="text-secondary">₫{{format_number this.viewed.[6].Tuition}}</del>
+              {{else}}
+              <h5 class="card-text mb-0">₫{{format_number this.viewed.[6].Tuition}}</h5>
+              {{/if}}
             </div>
-          </a>
-          {{/if}}
-        </div>
-        <div class="col">
-          {{#if this.viewed.[7]}}
-          <a href="/course/detail/{{this.viewed.[7].CourseID}}">
-            <div class="card h-100">
-              <img class="card-img-top" height="200" src="{{this.viewed.[7].CourseAvatar}}" alt="courseAvatar">
-              <div class="card-body">
-                <h4 class="card-title mb-0" id="coursename">{{this.viewed.[7].CourseName}}</h4>
-                <p class="card-text text-secondary mb-0">{{this.viewed.[7].LecName}}</p>
-                <div class="rating">
-                  <p class="rating-item">{{this.viewed.[7].Rating}}</p>
-                  <i class="bi bi-star-fill"></i>
-                  <p class="text-secondary rating-item">({{this.viewed.[7].Reviews}})</p>
-                </div>
-                {{#if this.viewed.[7].Discount}}
-                <h5 class="card-text mb-0 discount-text">₫{{format_number this.viewed.[7].Discount}}</h5>
-                <del class="text-secondary">₫{{format_number this.viewed.[7].Tuition}}</del>
-                {{else}}
-                <h5 class="card-text mb-0">₫{{format_number this.viewed.[7].Tuition}}</h5>
-                {{/if}}
+          </div>
+        </a>
+        {{/if}}
+      </div>
+      <div class="col">
+        {{#if this.viewed.[7]}}
+        <a href="/course/detail/{{this.viewed.[7].CourseID}}">
+          <div class="card h-100">
+            <img class="card-img-top" height="200" src="{{this.viewed.[7].CourseAvatar}}" alt="courseAvatar">
+            <div class="card-body">
+              <h4 class="card-title mb-0" id="coursename">{{this.viewed.[7].CourseName}}</h4>
+              <p class="card-title mb-0 font-italic">{{this.viewed.[7].CatName}}</p>
+              <p class="card-text text-secondary mb-0">{{this.viewed.[7].LecName}}</p>
+              <div class="rating">
+                <p class="rating-item">{{this.viewed.[7].Rating}}</p>
+                <i class="bi bi-star-fill"></i>
+                <p class="text-secondary rating-item">({{this.viewed.[7].Reviews}})</p>
               </div>
+              {{#if this.viewed.[7].Discount}}
+              <h5 class="card-text mb-0 discount-text">₫{{format_number this.viewed.[7].Discount}}</h5>
+              <del class="text-secondary">₫{{format_number this.viewed.[7].Tuition}}</del>
+              {{else}}
+              <h5 class="card-text mb-0">₫{{format_number this.viewed.[7].Tuition}}</h5>
+              {{/if}}
             </div>
-          </a>
-          {{/if}}
-        </div>
-        <div class="col">
-          {{#if this.viewed.[8]}}
-          <a href="/course/detail/{{this.viewed.[8].CourseID}}">
-            <div class="card h-100">
-              <img class="card-img-top" height="200" src="{{this.viewed.[8].CourseAvatar}}" alt="courseAvatar">
-              <div class="card-body">
-                <h4 class="card-title mb-0" id="coursename">{{this.viewed.[8].CourseName}}</h4>
-                <p class="card-text text-secondary mb-0">{{this.viewed.[8].LecName}}</p>
-                <div class="rating">
-                  <p class="rating-item">{{this.viewed.[8].Rating}}</p>
-                  <i class="bi bi-star-fill"></i>
-                  <p class="text-secondary rating-item">({{this.viewed.[8].Reviews}})</p>
-                </div>
-                {{#if this.viewed.[8].Discount}}
-                <h5 class="card-text mb-0 discount-text">₫{{format_number this.viewed.[8].Discount}}</h5>
-                <del class="text-secondary">₫{{format_number this.viewed.[8].Tuition}}</del>
-                {{else}}
-                <h5 class="card-text mb-0">₫{{format_number this.viewed.[8].Tuition}}</h5>
-                {{/if}}
+          </div>
+        </a>
+        {{/if}}
+      </div>
+      <div class="col">
+        {{#if this.viewed.[8]}}
+        <a href="/course/detail/{{this.viewed.[8].CourseID}}">
+          <div class="card h-100">
+            <img class="card-img-top" height="200" src="{{this.viewed.[8].CourseAvatar}}" alt="courseAvatar">
+            <div class="card-body">
+              <h4 class="card-title mb-0" id="coursename">{{this.viewed.[8].CourseName}}</h4>
+              <p class="card-title mb-0 font-italic">{{this.viewed.[8].CatName}}</p>
+              <p class="card-text text-secondary mb-0">{{this.viewed.[8].LecName}}</p>
+              <div class="rating">
+                <p class="rating-item">{{this.viewed.[8].Rating}}</p>
+                <i class="bi bi-star-fill"></i>
+                <p class="text-secondary rating-item">({{this.viewed.[8].Reviews}})</p>
               </div>
+              {{#if this.viewed.[8].Discount}}
+              <h5 class="card-text mb-0 discount-text">₫{{format_number this.viewed.[8].Discount}}</h5>
+              <del class="text-secondary">₫{{format_number this.viewed.[8].Tuition}}</del>
+              {{else}}
+              <h5 class="card-text mb-0">₫{{format_number this.viewed.[8].Tuition}}</h5>
+              {{/if}}
             </div>
-          </a>
-          {{/if}}
-        </div>
-        <div class="col">
-          {{#if this.viewed.[9]}}
-          <a href="/course/detail/{{this.viewed.[9].CourseID}}">
-            <div class="card h-100">
-              <img class="card-img-top" height="200" src="{{this.viewed.[9].CourseAvatar}}" alt="courseAvatar">
-              <div class="card-body">
-                <h4 class="card-title mb-0" id="coursename">{{this.viewed.[9].CourseName}}</h4>
-                <p class="card-text text-secondary mb-0">{{this.viewed.[9].LecName}}</p>
-                <div class="rating">
-                  <p class="rating-item">{{this.viewed.[9].Rating}}</p>
-                  <i class="bi bi-star-fill"></i>
-                  <p class="text-secondary rating-item">({{this.viewed.[9].Reviews}})</p>
-                </div>
-                {{#if this.viewed.[9].Discount}}
-                <h5 class="card-text mb-0 discount-text">₫{{format_number this.viewed.[9].Discount}}</h5>
-                <del class="text-secondary">₫{{format_number this.viewed.[9].Tuition}}</del>
-                {{else}}
-                <h5 class="card-text mb-0">₫{{format_number this.viewed.[9].Tuition}}</h5>
-                {{/if}}
+          </div>
+        </a>
+        {{/if}}
+      </div>
+      <div class="col">
+        {{#if this.viewed.[9]}}
+        <a href="/course/detail/{{this.viewed.[9].CourseID}}">
+          <div class="card h-100">
+            <img class="card-img-top" height="200" src="{{this.viewed.[9].CourseAvatar}}" alt="courseAvatar">
+            <div class="card-body">
+              <h4 class="card-title mb-0" id="coursename">{{this.viewed.[9].CourseName}}</h4>
+              <p class="card-title mb-0 font-italic">{{this.viewed.[9].CatName}}</p>
+              <p class="card-text text-secondary mb-0">{{this.viewed.[9].LecName}}</p>
+              <div class="rating">
+                <p class="rating-item">{{this.viewed.[9].Rating}}</p>
+                <i class="bi bi-star-fill"></i>
+                <p class="text-secondary rating-item">({{this.viewed.[9].Reviews}})</p>
               </div>
+              {{#if this.viewed.[9].Discount}}
+              <h5 class="card-text mb-0 discount-text">₫{{format_number this.viewed.[9].Discount}}</h5>
+              <del class="text-secondary">₫{{format_number this.viewed.[9].Tuition}}</del>
+              {{else}}
+              <h5 class="card-text mb-0">₫{{format_number this.viewed.[9].Tuition}}</h5>
+              {{/if}}
             </div>
-          </a>
-          {{/if}}
-        </div>
+          </div>
+        </a>
+        {{/if}}
       </div>
     </div>
   </div>
+</div>
 
 <br>
 <h1>Danh sách lĩnh vực được đăng ký học nhiều nhất trong tuần qua</h1>
@@ -584,55 +604,55 @@
       <div class="col">
         {{#if this.mostBoughtCategories.[0]}}
         <a href="/course/byCat/{{this.mostBoughtCategories.[0].catname}}">
-        <div class="card h-100">
-          <div class="card-body">
-            <h4 class="card-title mb-0" id="coursename">{{this.mostBoughtCategories.[0].catname}}</h4>
+          <div class="card h-100">
+            <div class="card-body">
+              <h4 class="card-title mb-0" id="coursename">{{this.mostBoughtCategories.[0].catname}}</h4>
+            </div>
           </div>
-        </div>
         </a>
         {{/if}}
       </div>
       <div class="col">
         {{#if this.mostBoughtCategories.[1]}}
         <a href="/course/byCat/{{this.mostBoughtCategories.[1].catname}}">
-        <div class="card h-100">
-          <div class="card-body">
-            <h4 class="card-title mb-0" id="coursename">{{this.mostBoughtCategories.[1].catname}}</h4>
+          <div class="card h-100">
+            <div class="card-body">
+              <h4 class="card-title mb-0" id="coursename">{{this.mostBoughtCategories.[1].catname}}</h4>
+            </div>
           </div>
-        </div>
         </a>
         {{/if}}
       </div>
       <div class="col">
         {{#if this.mostBoughtCategories.[2]}}
         <a href="/course/byCat/{{this.mostBoughtCategories.[2].catname}}">
-        <div class="card h-100">
-          <div class="card-body">
-            <h4 class="card-title mb-0" id="coursename">{{this.mostBoughtCategories.[2].catname}}</h4>
+          <div class="card h-100">
+            <div class="card-body">
+              <h4 class="card-title mb-0" id="coursename">{{this.mostBoughtCategories.[2].catname}}</h4>
+            </div>
           </div>
-        </div>
         </a>
         {{/if}}
       </div>
       <div class="col">
         {{#if this.mostBoughtCategories.[3]}}
         <a href="/course/byCat/{{this.mostBoughtCategories.[3].catname}}">
-        <div class="card h-100">
-          <div class="card-body">
-            <h4 class="card-title mb-0" id="coursename">{{this.mostBoughtCategories.[3].catname}}</h4>
+          <div class="card h-100">
+            <div class="card-body">
+              <h4 class="card-title mb-0" id="coursename">{{this.mostBoughtCategories.[3].catname}}</h4>
+            </div>
           </div>
-        </div>
         </a>
         {{/if}}
       </div>
       <div class="col">
         {{#if this.mostBoughtCategories.[4]}}
         <a href="/course/byCat/{{this.mostBoughtCategories.[4].catname}}">
-        <div class="card h-100">
-          <div class="card-body">
-            <h4 class="card-title mb-0" id="coursename">{{this.mostBoughtCategories.[4].catname}}</h4>
+          <div class="card h-100">
+            <div class="card-body">
+              <h4 class="card-title mb-0" id="coursename">{{this.mostBoughtCategories.[4].catname}}</h4>
+            </div>
           </div>
-        </div>
         </a>
         {{/if}}
       </div>
