@@ -224,3 +224,8 @@ h1{
 .homecard .card {
     border-color: rgb(254, 106, 129);
 }
+
+.homecat .card {
+    border-color: rgb(254, 106, 129);
+    background-color: pink;
+}

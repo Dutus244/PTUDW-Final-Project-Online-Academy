@@ -1,0 +1,43 @@
+.btn-newchap{
+    display: inline-block;
+    font-size: 1.25rem;
+    color: black;
+    background-color: pink;
+    cursor: pointer;
+    padding: .4rem 1.5rem;
+    border-radius: .5rem;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+  }
+  
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    padding: 12px 16px;
+    z-index: 1;
+  }
+  
+  .dropdown:hover .dropdown-content {
+    display: block;
+  }
+
+  main {
+    display: flex;
+    height: 92vh;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    background-image: url(https://lh4.googleusercontent.com/-XplyTa1Za-I/VMSgIyAYkHI/AAAAAAAADxM/oL-rD6VP4ts/w1184-h666/Android-Lollipop-wallpapers-Google-Now-Wallpaper-2.png);
+    background-size: cover;
+}
+
+  .formdes{
+    padding-top: 15px;
+    width: 80%;
+  }

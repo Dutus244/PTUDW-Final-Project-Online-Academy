@@ -1,5 +1,5 @@
 {{#section 'css'}}
-<link rel="stylesheet" href="../../public/CSS/vwTeacher/add.css">
+<link rel="stylesheet" href="../../public/CSS/vwTeacher/addchapter.css">
 <link rel="stylesheet"
     href="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.min.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.5.2/css/fileinput.min.css"
@@ -43,17 +43,19 @@
     });
 
      $('#frmRegister').on('submit', function (e){
+        e.preventDefault();
         const chapname = $('#txtChapname').val();
         if (chapname.length === 0) {
             alert('Xin hãy nhập tên chương')
             return
         }
+        $('#frmRegister').off('submit').submit();
      })
 </script>
 
 {{/section}}
-
-<div class="p-5">
+<main>
+<div class="formdes">
     {{#if msg}}
     <div class="alert alert-success alert-dismissible fade show text-center pr-0" role="alert">
         {{msg}}
@@ -64,33 +66,41 @@
     {{/if}}
 
     <form method="post" id="frmRegister">
-        <div class="form-group">
-            <label for="txtCourse">Khóa học đang được thêm: </label>
-            <span> <b>{{this.course.coursename}}</b> </span>
-            <label id="course"></label>
-        </div>
+        <div class="card mb-3">
+            <h4 class="card-header">
+                Thêm chương mới
+            </h4>
+            <div class="card-body">
+                <div class="form-group">
+                    <label for="txtCourse">Khóa học đang được thêm: </label>
+                    <span> <b>{{this.course.coursename}}</b> </span>
+                    <label id="course"></label>
+                </div>
 
-        <div class="form-group">
-            <label for="txtChapname">Tên chương</label>
-            <input name="chapname" type="text" class="form-control" id="txtChapname" autofocus>
-        </div>
+                <div class="form-group">
+                    <label for="txtChapname">Tên chương</label>
+                    <input name="chapname" type="text" class="form-control" id="txtChapname" autofocus>
+                </div>
 
-        <label class="container">Được xem trước
-            <input type="checkbox" name="preview">
-            <span class="checkmark"></span>
-        </label>
+                <label class="container">Được xem trước
+                    <input type="checkbox" name="preview">
+                    <span class="checkmark"></span>
+                </label>
 
-        <div class="card-footer text-muted">
-            <button type="submit" class="btn btn-primary">
-                <i class="fa fa-check" aria-hidden="true"></i>
-                Save
-            </button>
-            <a href="/course/detail/{{courseid}}">
-                <button type="button" class="btn btn-primary">
-                    <i class="fa fa-check" aria-hidden="true"></i>
-                    Back to course
-                </button>
-            </a>
+                <div class="card-footer text-muted">
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fa fa-check" aria-hidden="true"></i>
+                        Save
+                    </button>
+                    <a href="/course/detail/{{courseid}}">
+                        <button type="button" class="btn btn-primary">
+                            <i class="fa fa-check" aria-hidden="true"></i>
+                            Back to course
+                        </button>
+                    </a>
+                </div>
+            </div>
         </div>
     </form>
 </div>
+</main>

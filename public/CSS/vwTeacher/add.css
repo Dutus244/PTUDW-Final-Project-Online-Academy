@@ -26,3 +26,17 @@
   .dropdown:hover .dropdown-content {
     display: block;
   }
+
+  main {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    background-image: url(https://lh4.googleusercontent.com/-XplyTa1Za-I/VMSgIyAYkHI/AAAAAAAADxM/oL-rD6VP4ts/w1184-h666/Android-Lollipop-wallpapers-Google-Now-Wallpaper-2.png);
+    background-size: cover;
+}
+
+  .formdes{
+    padding-top: 15px;
+    width: 80%;
+  }
