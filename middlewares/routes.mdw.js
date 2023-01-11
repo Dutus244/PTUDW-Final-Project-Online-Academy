@@ -202,7 +202,7 @@ export default function (app) {
             const pages = getVisiblePage(totalPages, visiblePages, curPage)
             const bestsellerquota = await courseService.getBestSellerMinQuota()
 
-            const list = await courseService.findPageByLecNameSort(search, offset, limit,sortBy,sortTheo)
+            const list = await courseService.findPageBySearchAll(search, offset, limit,sortBy,sortTheo)
             res.render('vwCourse/searchByCat', {
                 courses: list,
                 empty: list.length === 0,
